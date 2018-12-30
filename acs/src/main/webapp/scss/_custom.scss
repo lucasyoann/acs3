@@ -1,0 +1,184 @@
+// Here you can add other styles
+$orange-stg: #F7901E;
+$vert-stg:	#006341;
+
+// Couleur checkbox angular material
+.mat-checkbox-checked.mat-accent .mat-checkbox-background, .mat-checkbox-indeterminate.mat-accent .mat-checkbox-background, .mat-accent .mat-pseudo-checkbox-checked, .mat-accent .mat-pseudo-checkbox-indeterminate, .mat-pseudo-checkbox-checked, .mat-pseudo-checkbox-indeterminate {
+    background-color: $orange-stg !important; 
+}
+
+label{
+	margin-right: 10px;
+}
+
+// Couleur texte sélectionné angular material select
+.mat-primary .mat-option.mat-selected:not(.mat-option-disabled){
+	color: $vert-stg;
+}
+
+// Déplacement liste préférence affichage vers le bas
+.cdk-overlay-pane{
+	transform: translateX(-10px) translateY(+20px)!important;
+}
+
+.row{
+	display: flex !important;
+	flex-direction: row;
+	margin:0;
+}
+// Bouton orange (précédent, annuler, reintialiser)
+.btn-primary {
+    color: #fff;
+    background-color: $orange-stg;
+    border-color: $orange-stg;
+    border-radius: 4px;
+    height: 35px;
+}
+.btn-primary:hover {
+    color: #fff;
+    background-color: #c7761b;
+    border-color: #966024;
+}
+// Bouton vert (valider)
+.btn-success{
+	background-color: #016241;
+    border-color: #014930;
+    border-radius: 4px;
+    height: 35px;
+}
+.btn-success:hover{
+	background-color: black;
+    border-color: #014930;
+}
+
+// Bouton transparent texte orange(annuler, fermer)
+.btn-link, .btn-link:hover{
+    color: $orange-stg;
+    width: 70px;
+    height: 35px;
+    margin-left: auto;
+ }
+.right{
+	margin-left: auto;
+}
+.margin-left-15{
+	margin-left: 15px;
+}
+
+.messageError{
+	color: red;
+	margin-left: auto;
+	font-size: 18px;
+}	
+// Taille minimal pour les colonnes les plus larges
+.mat-column-motifCCF{
+	min-width: 18em;
+}
+
+.mat-column-libelleArticle{
+	min-width: 12em;
+}
+
+.mat-column-select{
+	max-width: 5em;
+	.mat-header-cell{
+		margin-right: 15px;
+	}
+}
+.mat-column-action, .mat-column-code{
+	width: 8em;
+	.mat-header-cell{
+		margin-right: 15px;
+	}
+}
+
+.mat-table {
+    display: table;
+    width: 100%;
+
+    > .mat-header-row, > .mat-row {
+        display: table-row;
+        padding: 0;
+        border: none;
+
+        > .mat-header-cell, > .mat-cell {
+            display: table-cell;
+            height: 48px;
+            vertical-align: middle;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+        }
+       
+       > .mat-cell {
+       	 border-left: 1px solid rgba(0, 0, 0, 0.12);
+       	 padding-left: 5px;
+       }
+      
+      > .mat-cell:first-child {
+      	padding-left: 24px;
+      }
+    }
+}
+
+.hidden{
+	visibility:hidden;
+}
+
+// Ligne entre les colonnes
+ mat-cell {
+//  	border-left: 1px solid #e0e0e0;
+}
+
+ mat-header-cell.mat-column-select, mat-header-cell.mat-column-action{
+// 	margin-right: 10px;
+}
+
+mat-header-cell{
+	//padding-left: 5px;
+	//border-left: 1px solid #e0e0e0;
+}
+
+.pad-left-0{
+    padding-left: 0px;
+}
+
+.nowrap{
+	flex-wrap: nowrap!important;
+}
+.floatright{
+	margin-top:10px;
+	float:right;
+}
+.margin-bottom-10{
+	margin-bottom: 10px;
+}
+
+.jaune{
+	 //background-color:  yellow;
+	border-bottom: solid 4px #ffe000!important;
+}
+
+.vert{
+	 //background-color: $vert-stg;
+	border-bottom: solid 4px $vert-stg!important;
+}
+.orange{
+	border-bottom: solid 4px $orange-stg!important;
+	//background-color: orange;
+}
+
+.transparent{
+	background-color: transparent;
+}
+.text-orange-stg{
+    color: $orange-stg;
+    background-color: transparent;
+}
+.color-vert-stg{
+	color:$vert-stg;
+}
+.rouge{
+	color: red;
+}
+.content{
+	    display: contents;
+}

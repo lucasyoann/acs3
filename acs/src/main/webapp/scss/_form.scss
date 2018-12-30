@@ -1,0 +1,25 @@
+form {
+  .dropdown button {
+    width: 100% !important;
+    text-align: left;
+    height: 34px;
+    .caret {
+      float: right;
+      margin-top: 7px;
+    }
+  }
+}
+
+.form-group input + input {
+  margin-top: 5px;
+}
+
+.form-search input, .form-search .dropdown button {
+    width: 100% !important;
+    text-align: left;
+    height: 34px;
+}
+
+.form-control{
+	border-radius: 4px;
+}
