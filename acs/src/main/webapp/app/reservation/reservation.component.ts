@@ -16,6 +16,10 @@ export class ReservationComponent implements OnInit {
     constructor(public dialog: MatDialog, private reservationService:ReservationService){}
     
     ngOnInit() { 
+        
+        this.reservationService.getReservation().subscribe(data =>{
+            console.log(data);
+        });
         // Changement langue de anglais vers français
         const sld: SchedulerLocaleDate = {
             month_full: ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"],

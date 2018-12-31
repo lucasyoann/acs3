@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 
 import { Event } from '../shared/reservation/event';
+import { Reservation } from "src/main/webapp/app/shared/reservation/reservation.entity";
 
 @Injectable()
 export class ReservationService {
@@ -15,8 +16,10 @@ export class ReservationService {
         ]);
     }
     
-    getReservation(): Observable<Litige[]> {
-        return this.httpClient.get( `acs/reservations`,
-            { params: this.commonService.toHttpParams(page, sort, criteria) }) as Observable<Litige[]>;
+    getReservation(): Observable<Reservation[]> {
+        let params = new HttpParams();
+        params = params.append('debut', "10/12/2018");
+        params = params.append('fin', "31/12/2018");
+        return this.httpClient.get( `acs/reservations/`, { params: params }) as Observable<Reservation[]>;
     }
 }

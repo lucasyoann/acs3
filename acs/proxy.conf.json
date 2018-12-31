@@ -1,9 +1,10 @@
 {
-	"/acs": {
-		"target": "http://localhost:8080/acs",
+	"/acs/*": {
+		"target": "http://localhost:8080",
 		"secure": false,
+		 "logLevel": "debug",
 		"pathRewrite": {
-			"^/acs": ""
+			"^/acs": "/acs"
 		}
 	}
 }
