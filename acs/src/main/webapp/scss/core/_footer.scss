@@ -1,0 +1,23 @@
+.app-footer {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    padding: 0 $spacer;
+    color: $footer-color;
+    background: #e52f2e;
+    @include borders($footer-borders);
+    a {
+        color: $footer-color;
+    }
+}
+
+.footer-brand {
+    display: inline-block;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: $footer-logo-size;
+    width: $footer-logo-width;
+    height: 25px;
+    margin-right: 0;
+    padding: $navbar-padding-y $navbar-padding-x;
+}

@@ -1,0 +1,50 @@
+.side-menu {
+  // width: $menuWidth;
+  // height: calc(100vh - #{$headerHeight});
+  background: #fff;
+  border-right: solid 1px gray;
+  position: fixed;
+  left: 0;
+  z-index: 9;
+  ul {
+    margin: 0; padding: 0;
+    a {
+      padding: 20px 20px 20px 40px;
+    }
+    li {
+      list-style: none;
+      ul {
+        background: #292633;
+        color: #fff;
+        transition: all .3s ease-in-out;
+        a { color: #fff; padding-left: 70px; text-transform:none; }
+      }
+    }
+    > li {
+      text-transform: uppercase;
+      > a {
+        color: #000;
+        text-decoration: none;
+        display: block;
+        position: relative;
+        svg {
+          position: absolute;
+          bottom: 0; top: 0;
+          margin: auto;
+          height: 16px; width: auto;
+        }
+        span {
+          padding-left: 25px;
+        }
+        &.active {
+          background: #1F1D26;
+          color: $yellow;
+          svg { fill: $yellow; }
+        }
+      }
+      img {
+        margin-right: 10px;
+      }
+    }
+  }
+}
