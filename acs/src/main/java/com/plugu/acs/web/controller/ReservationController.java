@@ -29,7 +29,7 @@ public class ReservationController {
 	ReservationService reservationService;
 	
 	@GetMapping(value="/")
-    public List<ReservationDTO> listeReservations(@RequestParam String debut, @RequestParam String fin) throws ParseException {
+    public List<ReservationDTO> listeReservations(@RequestParam("debut") String debut, @RequestParam("fin") String fin) throws ParseException {
 		return reservationService.listerResa(debut, fin);
     }
 	
