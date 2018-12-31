@@ -1,36 +1,56 @@
 package com.plugu.acs.data.reservations;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+
+import com.plugu.acs.data.articles.ArticleDTO;
 
 public class ReservationDTO {
 	
-	private long id;
-	private int quantite;
+	private int id;
 	private Date dateEmprunt;
 	private Date dateRestitution;
 	private Date creerLe;
 	private String creerPar;
 	private Date valideLe;
 	private String validePar;
-	private int clientId;
+	private String nom;
+	private String prenom;
+	private String asso;
 	
-	public long getId() {
+	private List<ArticleDTO> articles= new ArrayList<>();
+	
+	
+	public List<ArticleDTO> getArticles() {
+		return articles;
+	}
+	public void setArticles(List<ArticleDTO> articles) {
+		this.articles = articles;
+	}
+	public String getNom() {
+		return nom;
+	}
+	public void setNom(String nom) {
+		this.nom = nom;
+	}
+	public String getPrenom() {
+		return prenom;
+	}
+	public void setPrenom(String prenom) {
+		this.prenom = prenom;
+	}
+	public String getAsso() {
+		return asso;
+	}
+	public void setAsso(String asso) {
+		this.asso = asso;
+	}
+	public int getId() {
 		return id;
 	}
-	public int getClientId() {
-		return clientId;
-	}
-	public void setClientId(int clientId) {
-		this.clientId = clientId;
-	}
-	public void setId(long id) {
+	public void setId(int id) {
 		this.id = id;
-	}
-	public int getQuantite() {
-		return quantite;
-	}
-	public void setQuantite(int quantite) {
-		this.quantite = quantite;
 	}
 	public Date getDateEmprunt() {
 		return dateEmprunt;

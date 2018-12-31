@@ -44,5 +44,18 @@ public class ArticleDTO {
 	public void setQuantite(int quantite) {
 		this.quantite = quantite;
 	}
+	public ArticleDTO() {
+		
+	}
+	
+	public ArticleDTO(int id, String type, String intitule,
+			String description, int quantite, String destinataire) {
+		this.description=description;
+		this.destinataire=destinataire;
+		this.id=id;
+		this.intitule=intitule;
+		this.quantite=quantite;
+		this.type=type;
+	}
 
 }
