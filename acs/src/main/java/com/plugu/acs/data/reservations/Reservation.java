@@ -25,9 +25,6 @@ public class Reservation {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
 	
-	@Column (name="QUANTITE")
-	private int quantite;
-	
 	@Column (name="DATE_EMPRUNT")
 	private Date dateEmprunt;
 	
@@ -46,24 +43,46 @@ public class Reservation {
 	@Column (name="VALIDE_PAR")
 	private String validePar;
 	
-	@Column(name="CLIENT_ID")
-	private int clientId;
+	@Column(name="NOM")
+	private String nom;
+	
+	@Column(name="PRENOM")
+	private String prenom;
+	
+	@Column(name="ASSO")
+	private String asso;
 
 	
+	public String getNom() {
+		return nom;
+	}
+
+	public void setNom(String nom) {
+		this.nom = nom;
+	}
+
+	public String getPrenom() {
+		return prenom;
+	}
+
+	public void setPrenom(String prenom) {
+		this.prenom = prenom;
+	}
+
+	public String getAsso() {
+		return asso;
+	}
+
+	public void setAsso(String asso) {
+		this.asso = asso;
+	}
+
 	public int getId() {
 		return id;
 	}
 
 	public void setId(int id) {
 		this.id = id;
-	}
-
-	public int getClientId() {
-		return clientId;
-	}
-
-	public void setClientId(int clientId) {
-		this.clientId = clientId;
 	}
 
 	public Date getCreerLe() {
@@ -98,29 +117,13 @@ public class Reservation {
 		this.validePar = validePar;
 	}
 
-//	public Client getClient() {
-//		return client;
-//	}
-//
-//	public void setClient(Client client) {
-//		this.client = client;
-//	}
-
-	public int getQuantite() {
-		return quantite;
+	public List<Article> getArticles() {
+		return articles;
 	}
 
-	public void setQuantite(int quantite) {
-		this.quantite = quantite;
+	public void setArticles(List<Article> articles) {
+		this.articles = articles;
 	}
-
-//	public List<Article> getArticles() {
-//		return articles;
-//	}
-//
-//	public void setArticles(List<Article> articles) {
-//		this.articles = articles;
-//	}
 
 	public Date getDateEmprunt() {
 		return dateEmprunt;
@@ -142,8 +145,4 @@ public class Reservation {
 	@JoinColumn(name = "ARTICLE_ID")
 	private List<Article> articles = new ArrayList<>();
 	
-//	@ManyToOne(cascade = CascadeType.ALL)
-//	@JoinColumn(name="ID")
-//	private Client client;
-//	
 }

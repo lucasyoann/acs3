@@ -12,14 +12,15 @@ public class ReservationMapper {
 		}
 		ReservationDTO reservationDto = new ReservationDTO();
 		reservationDto.setId(reservation.getId());
-		reservationDto.setQuantite(reservation.getQuantite());
 		reservationDto.setDateEmprunt(reservation.getDateEmprunt());
 		reservationDto.setDateRestitution(reservation.getDateRestitution());
 		reservationDto.setCreerPar(reservation.getCreerPar());
 		reservationDto.setCreerLe(reservation.getCreerLe());
 		reservationDto.setValideLe(reservation.getValideLe());
 		reservationDto.setValidePar(reservation.getValidePar());
-		reservationDto.setClientId(reservation.getClientId());
+		reservationDto.setNom(reservation.getNom());
+		reservationDto.setPrenom(reservation.getPrenom());
+		reservationDto.setAsso(reservation.getAsso());
 		
 		
 		return reservationDto;
@@ -31,14 +32,15 @@ public class ReservationMapper {
 			return null;
 		}
 		
-		reservation.setQuantite(reservationDto.getQuantite());
 		reservation.setDateEmprunt(reservationDto.getDateEmprunt());
 		reservation.setDateRestitution(reservationDto.getDateRestitution());
 		reservation.setCreerPar(reservationDto.getCreerPar());
 		reservation.setCreerLe(reservationDto.getCreerLe());
 		reservation.setValideLe(reservationDto.getValideLe());
 		reservation.setValidePar(reservationDto.getValidePar());
-		reservation.setClientId(reservationDto.getClientId());
+		reservation.setNom(reservationDto.getNom());
+		reservation.setPrenom(reservationDto.getPrenom());
+		reservation.setAsso(reservationDto.getAsso());
 	
 		return reservation;
 		
