@@ -14,4 +14,9 @@ export class ReservationService {
             {id: 2, start_date: "2018-12-13 00:00", end_date: "2018-12-14 13:00", text: "Event 2"},
         ]);
     }
+    
+    getReservation(): Observable<Litige[]> {
+        return this.httpClient.get( `acs/reservations`,
+            { params: this.commonService.toHttpParams(page, sort, criteria) }) as Observable<Litige[]>;
+    }
 }

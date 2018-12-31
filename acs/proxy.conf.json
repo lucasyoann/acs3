@@ -1,0 +1,9 @@
+{
+	"/acs": {
+		"target": "http://localhost:8080/acs",
+		"secure": false,
+		"pathRewrite": {
+			"^/acs": ""
+		}
+	}
+}

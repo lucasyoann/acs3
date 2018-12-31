@@ -2,6 +2,8 @@ import {Component, ElementRef, OnInit, ViewChild, ViewEncapsulation } from "@ang
 import "dhtmlx-scheduler";
 
 import { ReservationService } from './reservation.service';
+import { MatDialog } from '@angular/material';
+import { ModalAjoutComponent } from './modal/modal-ajout.component';
 
 @Component( {
     encapsulation: ViewEncapsulation.None,
@@ -11,7 +13,7 @@ import { ReservationService } from './reservation.service';
 export class ReservationComponent implements OnInit {
     @ViewChild("scheduler_here") schedulerContainer: ElementRef;
     
-    constructor(private reservationService:ReservationService){}
+    constructor(public dialog: MatDialog, private reservationService:ReservationService){}
     
     ngOnInit() { 
         // Changement langue de anglais vers français
@@ -50,6 +52,16 @@ export class ReservationComponent implements OnInit {
         this.reservationService.get()
             .then((data) => {
                  scheduler.parse(data, "json");
+        });
+        
+        // Custom modal for add/update event
+        scheduler.showLightbox = function(id) {
+            var lightbox_event = scheduler.getEvent(id);
+            scheduler.startLightbox(id, null); 
+            scheduler.hideCover();
+            const dialogRef = this.dialog.open(ModalAjoutComponent, {
+                data: {}
             });
+        }
     }
 }

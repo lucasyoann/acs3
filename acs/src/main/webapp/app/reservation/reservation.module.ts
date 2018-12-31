@@ -9,14 +9,20 @@ import { ReservationService } from './reservation.service';
 import { Http } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
 
+
+import { ModalAjoutComponent } from './modal/modal-ajout.component';
+import { MatDialogModule } from '@angular/material';
+
 @NgModule({
     imports: [
       CommonModule,
       FormsModule,
       HttpClientModule,
-      ReservationRoutingModule
+      ReservationRoutingModule,
+      MatDialogModule
     ],
-    declarations:[ReservationComponent],
+    declarations:[ReservationComponent,ModalAjoutComponent],
+    entryComponents:[ModalAjoutComponent],
     providers: [ReservationService, Http]
 })
 export class ReservationModule{}
