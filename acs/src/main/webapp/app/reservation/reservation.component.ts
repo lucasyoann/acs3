@@ -13,7 +13,8 @@ export class ReservationComponent implements OnInit {
     
     constructor(private reservationService:ReservationService){}
     
-    ngOnInit() {         
+    ngOnInit() { 
+        // Changement langue de anglais vers français
         const sld: SchedulerLocaleDate = {
             month_full: ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"],
             month_short: ["Jan", "Fév", "Mar", "Avr", "Mai", "Juin", "Juil", "Aoû", "Sep", "Oct", "Nov", "Déc"],
@@ -42,9 +43,9 @@ export class ReservationComponent implements OnInit {
                 labels: sll
         }
         scheduler.locale = locale;
-        scheduler.init(this.schedulerContainer.nativeElement, new Date());
+        // Vue moi par défault
+        scheduler.init(this.schedulerContainer.nativeElement, new Date(),"month");
         scheduler.config.xml_date = "%Y-%m-%d %H:%i";
-        scheduler.init(this.schedulerContainer.nativeElement);
         
         this.reservationService.get()
             .then((data) => {
