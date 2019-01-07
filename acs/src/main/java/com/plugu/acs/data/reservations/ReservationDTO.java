@@ -17,7 +17,7 @@ public class ReservationDTO {
 	private String validePar;
 	private String nom;
 	private String prenom;
-	private String asso;
+	private Boolean asso;
 	
 	private List<ArticleDTO> articles= new ArrayList<>();
 	
@@ -40,10 +40,10 @@ public class ReservationDTO {
 	public void setPrenom(String prenom) {
 		this.prenom = prenom;
 	}
-	public String getAsso() {
+	public Boolean getAsso() {
 		return asso;
 	}
-	public void setAsso(String asso) {
+	public void setAsso(Boolean asso) {
 		this.asso = asso;
 	}
 	public int getId() {

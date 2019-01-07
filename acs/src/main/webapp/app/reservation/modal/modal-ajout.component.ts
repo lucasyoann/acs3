@@ -11,5 +11,6 @@ export class ModalAjoutComponent implements OnInit {
     }
     
     ngOnInit() {
+        console.log("modal");
     }
 }

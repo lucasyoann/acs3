@@ -1,7 +1,7 @@
 export class Reservation {
+    id: number;
     dateEmprunt: Date;
     dateRestitution: Date;
-    id: number;
     creerLe: Date;
     creerPar: string;
     valideLe: Date;
