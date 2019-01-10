@@ -1,5 +1,23 @@
 <h2 mat-dialog-title class="color-vert-stg row">Ajout</h2>
 <mat-dialog-content>
+	<div class="row">
+    	<div class="form-group">
+      		<label>Raison sociale</label>
+	        <input matInput id="rs" name="rs" placeholder="Nom pr&eacute;nom, raison sociale..."/>
+	    </div>
+	</div>
+	<div class="row">
+    	<mat-form-field>
+		  <input matInput [matDatepicker]="dateDebut" placeholder="Date de d&eacute;but" >
+		  <mat-datepicker-toggle matSuffix [for]="dateDebut"></mat-datepicker-toggle>
+		  <mat-datepicker #dateDebut></mat-datepicker>
+		</mat-form-field>
+		<mat-form-field>
+		  <input matInput [matDatepicker]="dateFin" placeholder="Date de fin">
+		  <mat-datepicker-toggle matSuffix [for]="dateFin"></mat-datepicker-toggle>
+		  <mat-datepicker #dateFin></mat-datepicker>
+		</mat-form-field>
+	</div>
 </mat-dialog-content>
 <mat-dialog-actions>
     <button class="btn btn-link"(click)="dialogRef.close()">Annuler</button>

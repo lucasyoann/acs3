@@ -11,7 +11,8 @@ import { HttpClientModule } from '@angular/common/http';
 
 
 import { ModalAjoutComponent } from './modal/modal-ajout.component';
-import { MatDialogModule } from '@angular/material';
+import { MatDialogModule, MatFormFieldModule, MatNativeDateModule, MatInputModule } from '@angular/material';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 @NgModule({
     imports: [
@@ -19,7 +20,11 @@ import { MatDialogModule } from '@angular/material';
       FormsModule,
       HttpClientModule,
       ReservationRoutingModule,
-      MatDialogModule
+      MatDialogModule,
+      MatFormFieldModule,
+      MatNativeDateModule,
+      MatInputModule, 
+      MatDatepickerModule
     ],
     declarations:[ReservationComponent,ModalAjoutComponent],
     entryComponents:[ModalAjoutComponent],

@@ -58,6 +58,7 @@ export class ReservationComponent implements OnInit {
                  scheduler.parse(data, "json");
         });
         // Custom modal for add/update event
+        // bind(this) permet de conserver le this comme etant le component et non la fonction
         scheduler.showLightbox = function(id) {
             var lightbox_event = scheduler.getEvent(id);
             scheduler.startLightbox(id, null); 
@@ -66,6 +67,12 @@ export class ReservationComponent implements OnInit {
                 data: {}
             });
         }.bind(this);
+    }
+    
+    addResa(){
+        const dialogRef = this.dialog.open(ModalAjoutComponent, {
+            data: {}
+        });
     }
 
 }
