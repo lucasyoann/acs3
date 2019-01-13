@@ -57,7 +57,6 @@ export class ReservationComponent implements OnInit {
             .then((data) => {
                  scheduler.parse(data, "json");
         });
-        
         // Custom modal for add/update event
         scheduler.showLightbox = function(id) {
             var lightbox_event = scheduler.getEvent(id);
@@ -66,6 +65,7 @@ export class ReservationComponent implements OnInit {
             const dialogRef = this.dialog.open(ModalAjoutComponent, {
                 data: {}
             });
-        }
+        }.bind(this);
     }
+
 }

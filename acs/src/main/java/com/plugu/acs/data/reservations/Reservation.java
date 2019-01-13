@@ -52,7 +52,7 @@ public class Reservation {
 	private String prenom;
 	
 	@Column(name="ASSO")
-	private String asso;
+	private Boolean asso;
 	
 	@OneToMany(
 	        mappedBy = "ARTICLE",
@@ -60,6 +60,7 @@ public class Reservation {
 	        orphanRemoval = true
 	    )
 	private List<ReservationArticle> articles = new ArrayList<>();
+
 
 	
 	public String getNom() {
@@ -78,11 +79,11 @@ public class Reservation {
 		this.prenom = prenom;
 	}
 
-	public String getAsso() {
+	public Boolean getAsso() {
 		return asso;
 	}
 
-	public void setAsso(String asso) {
+	public void setAsso(Boolean asso) {
 		this.asso = asso;
 	}
 
