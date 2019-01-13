@@ -1,14 +1,27 @@
-<h2 mat-dialog-title class="color-vert-stg row">Ajout</h2>
+<div class="row" style="justify-content: space-between">
+<h2 mat-dialog-title class="color-vert-stg row">{{titre}} </h2>
+<mat-checkbox color="warn" style="float:right;" [(ngModel)] = "reservationAdd.asso">Associtation</mat-checkbox>
+</div>
 <mat-dialog-content>
 	<div class="row">
-    	<div class="form-group">
-      		<label>Raison sociale</label>
-	        <input matInput id="rs" name="rs" placeholder="Nom pr&eacute;nom, raison sociale..."/>
+    	<div class="form-group" *ngIf="reservationAdd.asso" style=" border-bottom: 1px solid #959595;">
+    		<label>Raison sociale </label>
+	        <input matInput id="rs" name="rs" [(ngModel)] = "reservationAdd.nom"/>
+	    </div>
+	    <div class="form-group row" *ngIf="!reservationAdd.asso">
+	    	<div class="column matinput">
+	    		<label>Nom </label>
+	    		<input matInput id="nom" name="nom" [(ngModel)] = "reservationAdd.nom" />
+	    	</div>
+	    	<div class="column matinput">
+	    		<label>Pr&eacute;nom </label>
+	    		<input matInput id="prenom" name="prenom" [(ngModel)] = "reservationAdd.prenom"/>
+	    	</div>
 	    </div>
 	</div>
 	<div class="row">
     	<mat-form-field>
-		  <input matInput [matDatepicker]="dateDebut" placeholder="Date de d&eacute;but" >
+		  <input matInput [matDatepicker]="dateDebut" placeholder="Date de d&eacute;but"  [(ngModel)] = "reservationAdd.dateEmprunt">
 		  <mat-datepicker-toggle matSuffix [for]="dateDebut"></mat-datepicker-toggle>
 		  <mat-datepicker #dateDebut></mat-datepicker>
 		</mat-form-field>
@@ -21,5 +34,5 @@
 </mat-dialog-content>
 <mat-dialog-actions>
     <button class="btn btn-link"(click)="dialogRef.close()">Annuler</button>
-    <button class="btn btn-success"(click)="save()">Modifier</button>
+    <button class="btn btn-success"(click)="save()">{{labelBouton}}</button>
 </mat-dialog-actions>

@@ -176,9 +176,6 @@ mat-header-cell{
 .color-vert-stg{
 	color:$vert-stg;
 }
-.rouge{
-	color: red;
-}
 .content{
 	    display: contents;
 }
@@ -194,4 +191,14 @@ mat-header-cell{
 	background-color: #353046;
 	float: right;
 	margin:5px 0;
+}
+
+.matinput{
+    width: 40%;
+    border-bottom: 1px solid #959595;
+    margin: 0 5px;
+}
+
+.rouge{
+	color: #e52f2e;;
 }

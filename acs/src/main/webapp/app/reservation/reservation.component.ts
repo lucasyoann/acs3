@@ -4,6 +4,7 @@ import "dhtmlx-scheduler";
 import { ReservationService } from './reservation.service';
 import { MatDialog } from '@angular/material';
 import { ModalAjoutComponent } from './modal/modal-ajout.component';
+import { Reservation } from "src/main/webapp/app/shared/reservation/reservation.entity";
 
 @Component( {
     encapsulation: ViewEncapsulation.None,
@@ -61,10 +62,13 @@ export class ReservationComponent implements OnInit {
         // bind(this) permet de conserver le this comme etant le component et non la fonction
         scheduler.showLightbox = function(id) {
             var lightbox_event = scheduler.getEvent(id);
+            console.log(lightbox_event);
             scheduler.startLightbox(id, null); 
             scheduler.hideCover();
+            var reservation = new Reservation();
+            reservation.dateEmprunt = lightbox_event.start_date;
             const dialogRef = this.dialog.open(ModalAjoutComponent, {
-                data: {}
+                data: {reservation: reservation}
             });
         }.bind(this);
     }
