@@ -11,7 +11,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.plugu.acs.data.articles.Article;
@@ -51,6 +53,14 @@ public class Reservation {
 	
 	@Column(name="ASSO")
 	private Boolean asso;
+	
+	@OneToMany(
+	        mappedBy = "ARTICLE",
+	        cascade = CascadeType.ALL,
+	        orphanRemoval = true
+	    )
+	private List<ReservationArticle> articles = new ArrayList<>();
+
 
 	
 	public String getNom() {
@@ -141,8 +151,88 @@ public class Reservation {
 		this.dateRestitution = dateRestitution;
 	}
 
-	@ManyToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name = "ARTICLE_ID")
-	private List<Article> articles = new ArrayList<>();
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((articles == null) ? 0 : articles.hashCode());
+		result = prime * result + ((asso == null) ? 0 : asso.hashCode());
+		result = prime * result + ((creerLe == null) ? 0 : creerLe.hashCode());
+		result = prime * result + ((creerPar == null) ? 0 : creerPar.hashCode());
+		result = prime * result + ((dateEmprunt == null) ? 0 : dateEmprunt.hashCode());
+		result = prime * result + ((dateRestitution == null) ? 0 : dateRestitution.hashCode());
+		result = prime * result + id;
+		result = prime * result + ((nom == null) ? 0 : nom.hashCode());
+		result = prime * result + ((prenom == null) ? 0 : prenom.hashCode());
+		result = prime * result + ((valideLe == null) ? 0 : valideLe.hashCode());
+		result = prime * result + ((validePar == null) ? 0 : validePar.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Reservation other = (Reservation) obj;
+		if (articles == null) {
+			if (other.articles != null)
+				return false;
+		} else if (!articles.equals(other.articles))
+			return false;
+		if (asso == null) {
+			if (other.asso != null)
+				return false;
+		} else if (!asso.equals(other.asso))
+			return false;
+		if (creerLe == null) {
+			if (other.creerLe != null)
+				return false;
+		} else if (!creerLe.equals(other.creerLe))
+			return false;
+		if (creerPar == null) {
+			if (other.creerPar != null)
+				return false;
+		} else if (!creerPar.equals(other.creerPar))
+			return false;
+		if (dateEmprunt == null) {
+			if (other.dateEmprunt != null)
+				return false;
+		} else if (!dateEmprunt.equals(other.dateEmprunt))
+			return false;
+		if (dateRestitution == null) {
+			if (other.dateRestitution != null)
+				return false;
+		} else if (!dateRestitution.equals(other.dateRestitution))
+			return false;
+		if (id != other.id)
+			return false;
+		if (nom == null) {
+			if (other.nom != null)
+				return false;
+		} else if (!nom.equals(other.nom))
+			return false;
+		if (prenom == null) {
+			if (other.prenom != null)
+				return false;
+		} else if (!prenom.equals(other.prenom))
+			return false;
+		if (valideLe == null) {
+			if (other.valideLe != null)
+				return false;
+		} else if (!valideLe.equals(other.valideLe))
+			return false;
+		if (validePar == null) {
+			if (other.validePar != null)
+				return false;
+		} else if (!validePar.equals(other.validePar))
+			return false;
+		return true;
+	}
+	
+	
 	
 }
