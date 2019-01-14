@@ -1,8 +1,6 @@
 package com.plugu.acs.data.reservations;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -14,7 +12,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.plugu.acs.data.articles.Article;
@@ -55,11 +52,14 @@ public class Reservation {
 	@Column(name="ASSO")
 	private Boolean asso;
 	
-	private Set<Article> articles;
+	
 	 @ManyToMany(cascade = CascadeType.ALL)
 	    @JoinTable(name = "RESERVATION_ARTICLE", 
 	    	joinColumns = @JoinColumn(name = "ID_RESERVATION", referencedColumnName = "ID"), 
 	    	inverseJoinColumns = @JoinColumn(name = "ID_ARTICLE", referencedColumnName = "ID"))
+	 private Set<Article> articles;
+	 
+	 
 	public Set<Article> getArticles() {
 	        return articles;
 	}
