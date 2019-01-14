@@ -2,6 +2,7 @@ package com.plugu.acs.data.articles;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -10,7 +11,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Table;
 
-import com.plugu.acs.data.reservationarticle.ReservationArticle;
 import com.plugu.acs.data.reservations.Reservation;
 
 import javax.persistence.ManyToMany;
@@ -40,12 +40,15 @@ public class Article {
 	@Column(name="DESTINATAIRE")
 	private String destinataire;
 	
-	@OneToMany(
-	        mappedBy = "RESERVATION",
-	        cascade = CascadeType.ALL,
-	        orphanRemoval = true
-	    )
-	private List<ReservationArticle> reservations = new ArrayList<>();
+	private Set<Reservation> reservations;
+	@ManyToMany(mappedBy = "articles")
+    public Set<Reservation> getReservations() {
+        return reservations;
+    }
+	
+	public void setReservations(Set<Reservation> reservations) {
+        this.reservations = reservations;
+    }
 
 	public int getId() {
 		return id;

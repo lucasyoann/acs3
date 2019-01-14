@@ -1,5 +1,9 @@
 package com.plugu.acs.data.articles;
 
+import java.util.Set;
+
+import com.plugu.acs.data.reservations.ReservationDTO;
+
 public class ArticleDTO {
 
 	private int id;
@@ -8,6 +12,8 @@ public class ArticleDTO {
 	private String description;
 	private int quantite;
 	private String destinataire;
+	private Set<ReservationDTO> reservations;
+	
 	public int getId() {
 		return id;
 	}
@@ -43,6 +49,13 @@ public class ArticleDTO {
 	}
 	public void setQuantite(int quantite) {
 		this.quantite = quantite;
+	}
+	
+	public Set<ReservationDTO> getReservations() {
+		return reservations;
+	}
+	public void setReservations(Set<ReservationDTO> reservations) {
+		this.reservations = reservations;
 	}
 	public ArticleDTO() {
 		

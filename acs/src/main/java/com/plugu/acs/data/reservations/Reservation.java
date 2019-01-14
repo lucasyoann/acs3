@@ -3,6 +3,7 @@ package com.plugu.acs.data.reservations;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -54,14 +55,18 @@ public class Reservation {
 	@Column(name="ASSO")
 	private Boolean asso;
 	
-	@OneToMany(
-	        mappedBy = "ARTICLE",
-	        cascade = CascadeType.ALL,
-	        orphanRemoval = true
-	    )
-	private List<ReservationArticle> articles = new ArrayList<>();
+	private Set<Article> articles;
+	 @ManyToMany(cascade = CascadeType.ALL)
+	    @JoinTable(name = "RESERVATION_ARTICLE", 
+	    	joinColumns = @JoinColumn(name = "ID_RESERVATION", referencedColumnName = "ID"), 
+	    	inverseJoinColumns = @JoinColumn(name = "ID_ARTICLE", referencedColumnName = "ID"))
+	public Set<Article> getArticles() {
+	        return articles;
+	}
 
-
+	public void setArticles(Set<Article> articles) {
+	        this.articles = articles;
+	}
 	
 	public String getNom() {
 		return nom;
@@ -125,14 +130,6 @@ public class Reservation {
 
 	public void setValidePar(String validePar) {
 		this.validePar = validePar;
-	}
-
-	public List<Article> getArticles() {
-		return articles;
-	}
-
-	public void setArticles(List<Article> articles) {
-		this.articles = articles;
 	}
 
 	public Date getDateEmprunt() {

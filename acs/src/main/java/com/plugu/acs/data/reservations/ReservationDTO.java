@@ -3,6 +3,7 @@ package com.plugu.acs.data.reservations;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 import com.plugu.acs.data.articles.ArticleDTO;
 
@@ -19,13 +20,13 @@ public class ReservationDTO {
 	private String prenom;
 	private Boolean asso;
 	
-	private List<ArticleDTO> articles= new ArrayList<>();
+	private Set<ArticleDTO> articles;
 	
 	
-	public List<ArticleDTO> getArticles() {
+	public Set<ArticleDTO> getArticles() {
 		return articles;
 	}
-	public void setArticles(List<ArticleDTO> articles) {
+	public void setArticles(Set<ArticleDTO> articles) {
 		this.articles = articles;
 	}
 	public String getNom() {
