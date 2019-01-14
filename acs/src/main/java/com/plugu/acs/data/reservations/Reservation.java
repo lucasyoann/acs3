@@ -55,11 +55,13 @@ public class Reservation {
 	@Column(name="ASSO")
 	private Boolean asso;
 	
-	private Set<Article> articles;
-	 @ManyToMany(cascade = CascadeType.ALL)
+	
+	@ManyToMany(cascade = CascadeType.ALL)
 	    @JoinTable(name = "RESERVATION_ARTICLE", 
 	    	joinColumns = @JoinColumn(name = "ID_RESERVATION", referencedColumnName = "ID"), 
 	    	inverseJoinColumns = @JoinColumn(name = "ID_ARTICLE", referencedColumnName = "ID"))
+	private Set<Article> articles;
+	 
 	public Set<Article> getArticles() {
 	        return articles;
 	}

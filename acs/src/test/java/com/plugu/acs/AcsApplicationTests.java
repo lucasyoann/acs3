@@ -27,8 +27,8 @@ import com.plugu.acs.web.controller.ReservationController;
 import com.plugu.acs.web.service.ReservationService;
 
 //@DataJpaTest
-@RunWith(SpringRunner.class)
-@SpringBootTest
+//@RunWith(SpringRunner.class)
+//@SpringBootTest
 public class AcsApplicationTests {
 
 //	@Test

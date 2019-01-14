@@ -40,8 +40,10 @@ public class Article {
 	@Column(name="DESTINATAIRE")
 	private String destinataire;
 	
-	private Set<Reservation> reservations;
+	
 	@ManyToMany(mappedBy = "articles")
+	private Set<Reservation> reservations;
+	
     public Set<Reservation> getReservations() {
         return reservations;
     }
