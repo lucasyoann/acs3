@@ -33,10 +33,10 @@ public class ReservationController {
 		return reservationService.listerResa(debut, fin);
     }
 	
-	@PostMapping(value="/")
-	public String createOrUpdateResa(@RequestBody ReservationDTO reservationDto) {
-		return reservationService.createOrUpdateResa(reservationDto);
-	}
+//	@PostMapping(value="/")
+//	public String createOrUpdateResa(@RequestBody ReservationDTO reservationDto) {
+//		return reservationService.createOrUpdateResa(reservationDto);
+//	}
 	
 	
 }

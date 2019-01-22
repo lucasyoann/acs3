@@ -16,13 +16,13 @@ import com.plugu.acs.web.service.ArticleService;
 @RequestMapping("/articles")
 public class ArticleController {
 	
-//	@Autowired
-//	ArticleService articleService;
-//
-//	@GetMapping("/articledispo")
-//	public List<ArticleDispoDTO> getArticleDispos(@RequestParam String debut, @RequestParam String fin) throws ParseException {
-//		
-//		////récupération liste des articles disponibles
-//		return articleService.listerArticleDispo(debut, fin);
-//	}
+	@Autowired
+	ArticleService articleService;
+
+	@GetMapping("/articledispo")
+	public List<ArticleDispoDTO> getArticleDispos(@RequestParam String debut, @RequestParam String fin) throws ParseException {
+		
+		////récupération liste des articles disponibles
+		return articleService.listerArticleDispo(debut, fin);
+	}
 }

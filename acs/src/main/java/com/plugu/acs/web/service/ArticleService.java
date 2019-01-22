@@ -4,6 +4,7 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,19 +29,21 @@ public class ArticleService {
 		List<ArticleDispoDTO> result= new ArrayList<>();
 		//on parcourt l'ensemble des resa à ces dates et on établit une liste des articles réservés
 		for(ReservationDTO resa : reservationService.listerResa(dateDebut, dateRetour)) {
-			for(ArticleDTO article :  resa.getArticles()) {
-				boolean alreadyListe = false;
-				for(ArticleDTO articleliste : listArticleReserv) {
-					//si l'article est déjà présent parmi les articles réservés alors on additionne les quantités
-					if(article.getId()==articleliste.getId()) {
-						alreadyListe=true;
-						articleliste.setQuantite(articleliste.getQuantite() + article.getQuantite());
-						break;
+			if(resa.getArticles() != null) {
+				for(ArticleDTO article :  resa.getArticles()) {
+					boolean alreadyListe = false;
+					for(ArticleDTO articleliste : listArticleReserv) {
+						//si l'article est déjà présent parmi les articles réservés alors on additionne les quantités
+						if(article.getId()==articleliste.getId()) {
+							alreadyListe=true;
+							articleliste.setQuantite(articleliste.getQuantite() + article.getQuantite());
+							break;
+						}
 					}
-				}
-				//si l'article n'est pas déjà listé alors on l'ajoute à la liste
-				if(!alreadyListe) {
-					listArticleReserv.add(article);
+					//si l'article n'est pas déjà listé alors on l'ajoute à la liste
+					if(!alreadyListe) {
+						listArticleReserv.add(article);
+					}
 				}
 			}
 		}
@@ -58,4 +61,13 @@ public class ArticleService {
 		return result;
 	}
 
+	
+	public Article getArticleById(int id) {
+		Optional<Article> article = articleRepository.findById(id);
+		if(article.isPresent()) {
+			return article.get();
+		}else {
+			return null;
+		}
+	}
 }

@@ -1,6 +1,15 @@
 package com.plugu.acs.data.reservations;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import com.plugu.acs.data.articles.ArticleDTO;
+import com.plugu.acs.data.articles.ArticleMapper;
+import com.plugu.acs.data.reservationarticle.ReservationArticle;
+
 public class ReservationMapper {
+	
+	private ArticleMapper articleMapper = new ArticleMapper();
 	
 	public ReservationMapper() {
 		super();
@@ -11,6 +20,7 @@ public class ReservationMapper {
 			return null;
 		}
 		ReservationDTO reservationDto = new ReservationDTO();
+		Set<ArticleDTO> listArticlesDto = new HashSet<>();
 		reservationDto.setId(reservation.getId());
 		reservationDto.setDateEmprunt(reservation.getDateEmprunt());
 		reservationDto.setDateRestitution(reservation.getDateRestitution());
@@ -21,8 +31,10 @@ public class ReservationMapper {
 		reservationDto.setNom(reservation.getNom());
 		reservationDto.setPrenom(reservation.getPrenom());
 		reservationDto.setAsso(reservation.getAsso());
-		
-		
+		for(ReservationArticle reservationArticle : reservation.getReservationArticle()) {
+			listArticlesDto.add(articleMapper.articleToArticleDTO(reservationArticle.getArticle()));
+		}
+		reservationDto.setArticles(listArticlesDto);
 		return reservationDto;
 		
 	}
@@ -41,6 +53,8 @@ public class ReservationMapper {
 		reservation.setNom(reservationDto.getNom());
 		reservation.setPrenom(reservationDto.getPrenom());
 		reservation.setAsso(reservationDto.getAsso());
+		ReservationArticle reservationArticle = new ReservationArticle();
+		//reservation.setReservationArticle(articles);
 	
 		return reservation;
 		
