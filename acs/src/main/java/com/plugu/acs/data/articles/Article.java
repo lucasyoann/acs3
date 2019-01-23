@@ -94,16 +94,15 @@ public class Article {
 	public void setIntitule(String intitule) {
 		this.intitule = intitule;
 	}
+	
+	public Set<ReservationArticle> getReservationArticles() {
+		return reservationArticles;
+	}
 
-	
-    public Set<ReservationArticle> getReservationArticles() {
-        return reservationArticles;
-    }
- 
-    public void setUserGroups(Set<ReservationArticle> articles) {
-        this.reservationArticles = articles;
-    }
-	
+	public void setReservationArticles(Set<ReservationArticle> reservationArticles) {
+		this.reservationArticles = reservationArticles;
+	}
+
 	public void addReservationArticle(ReservationArticle reservationArticle) {
 		this.reservationArticles.add(reservationArticle);
 	}

@@ -19,6 +19,7 @@ public class ReservationDTO {
 	private String nom;
 	private String prenom;
 	private Boolean asso;
+	private Boolean active;
 	
 	private Set<ArticleDTO> articles;
 	
@@ -89,5 +90,11 @@ public class ReservationDTO {
 	public void setValidePar(String validePar) {
 		this.validePar = validePar;
 	}
-
+	public Boolean getActive() {
+		return active;
+	}
+	public void setActive(Boolean active) {
+		this.active = active;
+	}
+	
 }

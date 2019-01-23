@@ -2,6 +2,7 @@ package com.plugu.acs.data.reservations;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -18,6 +19,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.plugu.acs.data.articles.Article;
+import com.plugu.acs.data.reservationarticle.ReservationArticle;
 
 @Entity
 @Table(name="RESERVATION")
@@ -55,20 +57,13 @@ public class Reservation {
 	@Column(name="ASSO")
 	private Boolean asso;
 	
+	@Column(name="ACTIVE")
+	private Boolean active;
 	
-	@ManyToMany(cascade = CascadeType.ALL)
-	    @JoinTable(name = "RESERVATION_ARTICLE", 
-	    	joinColumns = @JoinColumn(name = "ID_RESERVATION", referencedColumnName = "ID"), 
-	    	inverseJoinColumns = @JoinColumn(name = "ID_ARTICLE", referencedColumnName = "ID"))
-	private Set<Article> articles;
-	 
-	public Set<Article> getArticles() {
-	        return articles;
-	}
-
-	public void setArticles(Set<Article> articles) {
-	        this.articles = articles;
-	}
+	
+	@OneToMany(mappedBy = "primaryKey.reservation",
+            cascade = CascadeType.ALL)
+	private Set<ReservationArticle> reservationArticles = new HashSet<ReservationArticle>();
 	
 	public String getNom() {
 		return nom;
@@ -150,87 +145,26 @@ public class Reservation {
 		this.dateRestitution = dateRestitution;
 	}
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((articles == null) ? 0 : articles.hashCode());
-		result = prime * result + ((asso == null) ? 0 : asso.hashCode());
-		result = prime * result + ((creerLe == null) ? 0 : creerLe.hashCode());
-		result = prime * result + ((creerPar == null) ? 0 : creerPar.hashCode());
-		result = prime * result + ((dateEmprunt == null) ? 0 : dateEmprunt.hashCode());
-		result = prime * result + ((dateRestitution == null) ? 0 : dateRestitution.hashCode());
-		result = prime * result + id;
-		result = prime * result + ((nom == null) ? 0 : nom.hashCode());
-		result = prime * result + ((prenom == null) ? 0 : prenom.hashCode());
-		result = prime * result + ((valideLe == null) ? 0 : valideLe.hashCode());
-		result = prime * result + ((validePar == null) ? 0 : validePar.hashCode());
-		return result;
+	public void setReservationArticles(Set<ReservationArticle> reservationArticles) {
+		this.reservationArticles = reservationArticles;
+	} 
+	
+	public Set<ReservationArticle> getReservationArticles() {
+        return reservationArticles;
+    }
+	
+	public void addReservationArticle(ReservationArticle reservationArticle) {
+		this.reservationArticles.add(reservationArticle);
 	}
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Reservation other = (Reservation) obj;
-		if (articles == null) {
-			if (other.articles != null)
-				return false;
-		} else if (!articles.equals(other.articles))
-			return false;
-		if (asso == null) {
-			if (other.asso != null)
-				return false;
-		} else if (!asso.equals(other.asso))
-			return false;
-		if (creerLe == null) {
-			if (other.creerLe != null)
-				return false;
-		} else if (!creerLe.equals(other.creerLe))
-			return false;
-		if (creerPar == null) {
-			if (other.creerPar != null)
-				return false;
-		} else if (!creerPar.equals(other.creerPar))
-			return false;
-		if (dateEmprunt == null) {
-			if (other.dateEmprunt != null)
-				return false;
-		} else if (!dateEmprunt.equals(other.dateEmprunt))
-			return false;
-		if (dateRestitution == null) {
-			if (other.dateRestitution != null)
-				return false;
-		} else if (!dateRestitution.equals(other.dateRestitution))
-			return false;
-		if (id != other.id)
-			return false;
-		if (nom == null) {
-			if (other.nom != null)
-				return false;
-		} else if (!nom.equals(other.nom))
-			return false;
-		if (prenom == null) {
-			if (other.prenom != null)
-				return false;
-		} else if (!prenom.equals(other.prenom))
-			return false;
-		if (valideLe == null) {
-			if (other.valideLe != null)
-				return false;
-		} else if (!valideLe.equals(other.valideLe))
-			return false;
-		if (validePar == null) {
-			if (other.validePar != null)
-				return false;
-		} else if (!validePar.equals(other.validePar))
-			return false;
-		return true;
+	public Boolean getActive() {
+		return active;
 	}
+
+	public void setActive(Boolean active) {
+		this.active = active;
+	}
+
 	
 	
 	
