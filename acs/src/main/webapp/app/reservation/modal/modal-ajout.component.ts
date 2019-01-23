@@ -44,4 +44,8 @@ export class ModalAjoutComponent implements OnInit {
         
         
     }
+    
+    dateChanged(){
+        console.log("dateChnaed",this.reservationAdd.dateRestitution);
+    }
 }

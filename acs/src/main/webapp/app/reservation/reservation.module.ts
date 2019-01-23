@@ -14,6 +14,8 @@ import { ModalAjoutComponent } from './modal/modal-ajout.component';
 import { MatDialogModule, MatFormFieldModule, MatNativeDateModule, MatInputModule,MatCheckboxModule } from '@angular/material';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 
+import { DatePipe } from '@angular/common';
+
 @NgModule({
     imports: [
       CommonModule,
@@ -29,6 +31,6 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
     ],
     declarations:[ReservationComponent,ModalAjoutComponent],
     entryComponents:[ModalAjoutComponent],
-    providers: [ReservationService, Http]
+    providers: [ReservationService, Http, DatePipe]
 })
 export class ReservationModule{}

@@ -1,8 +1,7 @@
 package com.plugu.acs.data.reservations;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -11,13 +10,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.plugu.acs.data.articles.Article;
+import com.plugu.acs.data.reservationarticle.ReservationArticle;
 
 @Entity
 @Table(name="RESERVATION")
@@ -55,21 +51,10 @@ public class Reservation {
 	@Column(name="ASSO")
 	private Boolean asso;
 	
-	
-	@ManyToMany(cascade = CascadeType.ALL)
-	    @JoinTable(name = "RESERVATION_ARTICLE", 
-	    	joinColumns = @JoinColumn(name = "ID_RESERVATION", referencedColumnName = "ID"), 
-	    	inverseJoinColumns = @JoinColumn(name = "ID_ARTICLE", referencedColumnName = "ID"))
-	private Set<Article> articles;
-	 
-	public Set<Article> getArticles() {
-	        return articles;
-	}
-
-	public void setArticles(Set<Article> articles) {
-	        this.articles = articles;
-	}
-	
+	@OneToMany(mappedBy = "primaryKey.reservation",
+            cascade = CascadeType.ALL)
+	private Set<ReservationArticle> reservationArticles = new HashSet<ReservationArticle>();
+		
 	public String getNom() {
 		return nom;
 	}
@@ -154,7 +139,6 @@ public class Reservation {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((articles == null) ? 0 : articles.hashCode());
 		result = prime * result + ((asso == null) ? 0 : asso.hashCode());
 		result = prime * result + ((creerLe == null) ? 0 : creerLe.hashCode());
 		result = prime * result + ((creerPar == null) ? 0 : creerPar.hashCode());
@@ -177,11 +161,6 @@ public class Reservation {
 		if (getClass() != obj.getClass())
 			return false;
 		Reservation other = (Reservation) obj;
-		if (articles == null) {
-			if (other.articles != null)
-				return false;
-		} else if (!articles.equals(other.articles))
-			return false;
 		if (asso == null) {
 			if (other.asso != null)
 				return false;
@@ -230,6 +209,14 @@ public class Reservation {
 		} else if (!validePar.equals(other.validePar))
 			return false;
 		return true;
+	}
+
+	public Set<ReservationArticle> getReservationArticles() {
+		return reservationArticles;
+	}
+
+	public void setReservationArticles(Set<ReservationArticle> reservationArticles) {
+		this.reservationArticles = reservationArticles;
 	}
 	
 	

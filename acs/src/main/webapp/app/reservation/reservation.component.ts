@@ -1,10 +1,11 @@
-import {Component, ElementRef, OnInit, ViewChild, ViewEncapsulation } from "@angular/core";
+import {Component, ElementRef, OnInit, ViewChild, ViewEncapsulation, SimpleChanges } from "@angular/core";
 import "dhtmlx-scheduler";
 
 import { ReservationService } from './reservation.service';
 import { MatDialog } from '@angular/material';
 import { ModalAjoutComponent } from './modal/modal-ajout.component';
 import { Reservation } from "src/main/webapp/app/shared/reservation/reservation.entity";
+import { DatePipe } from '@angular/common'
 
 @Component( {
     encapsulation: ViewEncapsulation.None,
@@ -14,13 +15,15 @@ import { Reservation } from "src/main/webapp/app/shared/reservation/reservation.
 export class ReservationComponent implements OnInit {
     @ViewChild("scheduler_here") schedulerContainer: ElementRef;
     
-    constructor(public dialog: MatDialog, private reservationService:ReservationService){}
+    constructor(public dialog: MatDialog, private reservationService:ReservationService, public datepipe: DatePipe){}
+    
+    ngOnChanges(changes: SimpleChanges) {
+        // changes.prop contains the old and the new value...
+      }
+    
     
     ngOnInit() { 
         
-        this.reservationService.getReservation().subscribe(data =>{
-            console.log(data);
-        });
         // Changement langue de anglais vers français
         const sld: SchedulerLocaleDate = {
             month_full: ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"],
@@ -54,10 +57,8 @@ export class ReservationComponent implements OnInit {
         scheduler.init(this.schedulerContainer.nativeElement, new Date(),"month");
         scheduler.config.xml_date = "%Y-%m-%d %H:%i";
         
-        this.reservationService.get()
-            .then((data) => {
-                 scheduler.parse(data, "json");
-        });
+       this.chargedResas();
+        
         // Custom modal for add/update event
         // bind(this) permet de conserver le this comme etant le component et non la fonction
         scheduler.showLightbox = function(id) {
@@ -71,6 +72,20 @@ export class ReservationComponent implements OnInit {
                 data: {reservation: reservation}
             });
         }.bind(this);
+        
+        //Event permettant de gerer le changement de mois pour la recuperation des resas visibles
+        scheduler.attachEvent("onViewChange", function (){
+            this.chargedResas();
+        }.bind(this));
+        
+    }
+    
+    chargedResas(){
+        this.reservationService.getReservation(this.datepipe.transform(scheduler.getState().min_date, 'dd/MM/yyyy'),this.datepipe.transform(scheduler.getState().max_date, 'dd/MM/yyyy')).subscribe(data =>{
+            this.reservationService.transformedReservationToSchedulerEvent(data).then((data) => {
+                scheduler.parse(data, "json");
+            });
+        });
     }
     
     addResa(){

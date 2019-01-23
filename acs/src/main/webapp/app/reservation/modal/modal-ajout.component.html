@@ -21,12 +21,12 @@
 	</div>
 	<div class="row">
     	<mat-form-field>
-		  <input matInput [matDatepicker]="dateDebut" placeholder="Date de d&eacute;but"  [(ngModel)] = "reservationAdd.dateEmprunt">
+		  <input matInput [matDatepicker]="dateDebut" placeholder="Date de d&eacute;but"  [(ngModel)] = "reservationAdd.dateEmprunt" onchange="dateChanged()">
 		  <mat-datepicker-toggle matSuffix [for]="dateDebut"></mat-datepicker-toggle>
 		  <mat-datepicker #dateDebut></mat-datepicker>
 		</mat-form-field>
 		<mat-form-field>
-		  <input matInput [matDatepicker]="dateFin" placeholder="Date de fin">
+		  <input matInput [matDatepicker]="dateFin" placeholder="Date de fin" onchange="dateChanged()" [(ngModel)] = "reservationAdd.dateRestitution">
 		  <mat-datepicker-toggle matSuffix [for]="dateFin"></mat-datepicker-toggle>
 		  <mat-datepicker #dateFin></mat-datepicker>
 		</mat-form-field>
