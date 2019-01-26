@@ -3,13 +3,21 @@ package com.plugu.acs.data.reservations;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.plugu.acs.data.articles.Article;
 import com.plugu.acs.data.articles.ArticleDTO;
 import com.plugu.acs.data.articles.ArticleMapper;
+import com.plugu.acs.data.articles.ArticleResaDTO;
 import com.plugu.acs.data.reservationarticle.ReservationArticle;
+import com.plugu.acs.web.service.ArticleService;
 
 public class ReservationMapper {
 	
 	private ArticleMapper articleMapper = new ArticleMapper();
+	
+	@Autowired
+	private ArticleService articleService;
 	
 	public ReservationMapper() {
 		super();
@@ -44,7 +52,9 @@ public class ReservationMapper {
 		if(reservationDto == null || reservation == null) {
 			return null;
 		}
-		
+		if(reservation.getId()!=0) {
+			reservation.setId(reservationDto.getId());
+		}
 		reservation.setDateEmprunt(reservationDto.getDateEmprunt());
 		reservation.setDateRestitution(reservationDto.getDateRestitution());
 		reservation.setCreerPar(reservationDto.getCreerPar());
@@ -55,8 +65,17 @@ public class ReservationMapper {
 		reservation.setPrenom(reservationDto.getPrenom());
 		reservation.setAsso(reservationDto.getAsso());
 		reservation.setActive(reservationDto.getActive());
-		ReservationArticle reservationArticle = new ReservationArticle();
-		//reservation.setReservationArticle(articles);
+		for(ArticleResaDTO articleResaDto : reservationDto.getArticleResaDto()) {
+			ReservationArticle reservationArticle = new ReservationArticle();
+			Article article = articleService.getArticleById(articleResaDto.getArticleId());
+			if(article==null) {
+				throw new IllegalStateException("Article inconnu dans les stocks");
+			}
+			reservationArticle.setArticle(article);
+			reservationArticle.setReservation(reservation);
+			reservationArticle.setQuantite(articleResaDto.getQuantite());
+			reservation.addReservationArticle(reservationArticle);
+		}
 	
 		return reservation;
 		

@@ -27,6 +27,9 @@ public class ArticleMapper {
 		if(articleDto == null || article == null) {
 			return null;
 		}
+		if(article.getId()!=0) {
+			article.setId(articleDto.getId());
+		}
 		article.setDescription(articleDto.getDescription());
 		article.setDestinataire(article.getDestinataire());
 		article.setIntitule(articleDto.getIntitule());

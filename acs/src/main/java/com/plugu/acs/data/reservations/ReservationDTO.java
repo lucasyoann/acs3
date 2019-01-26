@@ -1,11 +1,11 @@
 package com.plugu.acs.data.reservations;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
 import com.plugu.acs.data.articles.ArticleDTO;
+import com.plugu.acs.data.articles.ArticleResaDTO;
 
 public class ReservationDTO {
 	
@@ -23,6 +23,7 @@ public class ReservationDTO {
 	
 	private Set<ArticleDTO> articles;
 	
+	private List<ArticleResaDTO> articleResaDto;
 	
 	public Set<ArticleDTO> getArticles() {
 		return articles;
@@ -95,6 +96,12 @@ public class ReservationDTO {
 	}
 	public void setActive(Boolean active) {
 		this.active = active;
+	}
+	public List<ArticleResaDTO> getArticleResaDto() {
+		return articleResaDto;
+	}
+	public void setArticleResaDto(List<ArticleResaDTO> articleResaDto) {
+		this.articleResaDto = articleResaDto;
 	}
 	
 }
