@@ -40,6 +40,7 @@ public class ReservationMapper {
 		reservationDto.setPrenom(reservation.getPrenom());
 		reservationDto.setAsso(reservation.getAsso());
 		reservationDto.setActive(reservation.getActive());
+		reservationDto.setCommentaire(reservation.getCommentaire());
 		for(ReservationArticle reservationArticle : reservation.getReservationArticles()) {
 			listArticlesDto.add(articleMapper.articleToArticleDTO(reservationArticle.getArticle()));
 		}
@@ -65,6 +66,7 @@ public class ReservationMapper {
 		reservation.setPrenom(reservationDto.getPrenom());
 		reservation.setAsso(reservationDto.getAsso());
 		reservation.setActive(reservationDto.getActive());
+		reservation.setCommentaire(reservationDto.getCommentaire());
 		for(ArticleResaDTO articleResaDto : reservationDto.getArticleResaDto()) {
 			ReservationArticle reservationArticle = new ReservationArticle();
 			Article article = articleService.getArticleById(articleResaDto.getArticleId());

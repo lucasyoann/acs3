@@ -54,6 +54,9 @@ public class Reservation {
 	@Column(name="ACTIVE")
 	private Boolean active;
 	
+	@Column(name="COMMENTAIRE")
+	private String commentaire;
+	
 	@OneToMany(mappedBy = "primaryKey.reservation",
             cascade = CascadeType.ALL)
 	private Set<ReservationArticle> reservationArticles = new HashSet<ReservationArticle>();
@@ -138,11 +141,41 @@ public class Reservation {
 		this.dateRestitution = dateRestitution;
 	}
 
+	public Set<ReservationArticle> getReservationArticles() {
+		return reservationArticles;
+	}
+
+	public void setReservationArticles(Set<ReservationArticle> reservationArticles) {
+		this.reservationArticles = reservationArticles;
+	}
+	
+	public void addReservationArticle(ReservationArticle reservationArticle) {
+		this.reservationArticles.add(reservationArticle);
+	}
+
+	public Boolean getActive() {
+		return active;
+	}
+
+	public void setActive(Boolean active) {
+		this.active = active;
+	}
+
+	public String getCommentaire() {
+		return commentaire;
+	}
+
+	public void setCommentaire(String commentaire) {
+		this.commentaire = commentaire;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((active == null) ? 0 : active.hashCode());
 		result = prime * result + ((asso == null) ? 0 : asso.hashCode());
+		result = prime * result + ((commentaire == null) ? 0 : commentaire.hashCode());
 		result = prime * result + ((creerLe == null) ? 0 : creerLe.hashCode());
 		result = prime * result + ((creerPar == null) ? 0 : creerPar.hashCode());
 		result = prime * result + ((dateEmprunt == null) ? 0 : dateEmprunt.hashCode());
@@ -150,6 +183,7 @@ public class Reservation {
 		result = prime * result + id;
 		result = prime * result + ((nom == null) ? 0 : nom.hashCode());
 		result = prime * result + ((prenom == null) ? 0 : prenom.hashCode());
+		result = prime * result + ((reservationArticles == null) ? 0 : reservationArticles.hashCode());
 		result = prime * result + ((valideLe == null) ? 0 : valideLe.hashCode());
 		result = prime * result + ((validePar == null) ? 0 : validePar.hashCode());
 		return result;
@@ -164,10 +198,20 @@ public class Reservation {
 		if (getClass() != obj.getClass())
 			return false;
 		Reservation other = (Reservation) obj;
+		if (active == null) {
+			if (other.active != null)
+				return false;
+		} else if (!active.equals(other.active))
+			return false;
 		if (asso == null) {
 			if (other.asso != null)
 				return false;
 		} else if (!asso.equals(other.asso))
+			return false;
+		if (commentaire == null) {
+			if (other.commentaire != null)
+				return false;
+		} else if (!commentaire.equals(other.commentaire))
 			return false;
 		if (creerLe == null) {
 			if (other.creerLe != null)
@@ -201,6 +245,11 @@ public class Reservation {
 				return false;
 		} else if (!prenom.equals(other.prenom))
 			return false;
+		if (reservationArticles == null) {
+			if (other.reservationArticles != null)
+				return false;
+		} else if (!reservationArticles.equals(other.reservationArticles))
+			return false;
 		if (valideLe == null) {
 			if (other.valideLe != null)
 				return false;
@@ -212,26 +261,6 @@ public class Reservation {
 		} else if (!validePar.equals(other.validePar))
 			return false;
 		return true;
-	}
-
-	public Set<ReservationArticle> getReservationArticles() {
-		return reservationArticles;
-	}
-
-	public void setReservationArticles(Set<ReservationArticle> reservationArticles) {
-		this.reservationArticles = reservationArticles;
-	}
-	
-	public void addReservationArticle(ReservationArticle reservationArticle) {
-		this.reservationArticles.add(reservationArticle);
-	}
-
-	public Boolean getActive() {
-		return active;
-	}
-
-	public void setActive(Boolean active) {
-		this.active = active;
 	}	
 	
 }

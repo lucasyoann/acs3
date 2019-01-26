@@ -20,6 +20,7 @@ public class ReservationDTO {
 	private String prenom;
 	private Boolean asso;
 	private Boolean active;
+	private String commentaire;
 	
 	private Set<ArticleDTO> articles;
 	
@@ -102,6 +103,12 @@ public class ReservationDTO {
 	}
 	public void setArticleResaDto(List<ArticleResaDTO> articleResaDto) {
 		this.articleResaDto = articleResaDto;
+	}
+	public String getCommentaire() {
+		return commentaire;
+	}
+	public void setCommentaire(String commentaire) {
+		this.commentaire = commentaire;
 	}
 	
 }
