@@ -31,24 +31,28 @@
 		  <mat-datepicker #dateFin></mat-datepicker>
 		</mat-form-field>
 	</div>
-	<div class="row" *ngIf="typeDispo && typeDispo.length != 0">
-		<div class="column">
-			<mat-form-field>
-			  <mat-select placeholder="Type de mat&eacute;riel" [(value)]="typeChoisit" (selectionChange)="changementArticle()">
-			    <mat-option *ngFor="let type of typeDispo" [value]="type">
-			      {{type}}
-			    </mat-option>
-			  </mat-select>
-			</mat-form-field>
-		</div>
-		<div class="column">
-			<mat-form-field>
-			  <mat-select placeholder="Mat&eacute;riel">
-			    <mat-option *ngFor="let article of listeArticleSelect" [value]="article.id">
-			      {{article.description}}
-			    </mat-option>
-			  </mat-select>
-			</mat-form-field>
+	<div *ngIf="typeDispo && typeDispo.length != 0">
+		<hr/>
+		<h5>S&eacute;lection du mat&eacute;riel</h5>
+		<div class="row">
+			<div class="column">
+				<mat-form-field>
+				  <mat-select placeholder="Type de mat&eacute;riel" [(value)]="typeChoisit" (selectionChange)="changementArticle()">
+				    <mat-option *ngFor="let type of typeDispo" [value]="type">
+				      {{type}}
+				    </mat-option>
+				  </mat-select>
+				</mat-form-field>
+			</div>
+			<div class="column">
+				<mat-form-field>
+				  <mat-select placeholder="Mat&eacute;riel">
+				    <mat-option *ngFor="let article of listeArticleSelect" [value]="article.id">
+				      {{article.description}}
+				    </mat-option>
+				  </mat-select>
+				</mat-form-field>
+			</div>
 		</div>
 	</div>
 </mat-dialog-content>
