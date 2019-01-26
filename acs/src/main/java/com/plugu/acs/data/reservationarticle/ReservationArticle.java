@@ -60,4 +60,5 @@ public class ReservationArticle {
 	public void setQuantite(int quantite) {
 		this.quantite = quantite;
 	}
+
 }
