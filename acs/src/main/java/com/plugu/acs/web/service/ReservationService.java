@@ -25,11 +25,11 @@ public class ReservationService {
 	private ReservationMapper reservationMapper = new ReservationMapper();
 	
 	public List<ReservationDTO> listerResa(String dateEmprunt, String dateRetour) throws ParseException{
-		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
-		Date datedebut = new Date();
-		Date datefin = new Date();
-		datedebut = simpleDateFormat.parse(dateEmprunt);
-		datefin = simpleDateFormat.parse(dateRetour);
+		dateEmprunt = dateEmprunt.concat(" 12:00:01");
+		dateRetour = dateRetour.concat(" 11:59:59");
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		Date datedebut = simpleDateFormat.parse(dateEmprunt);
+		Date datefin = simpleDateFormat.parse(dateRetour);
 		List<ReservationDTO> result = new ArrayList<>();
         for(Reservation reserv : reservationRepository.findBetweenDate(datedebut,datefin)) {
         	result.add(reservationMapper.reservationToReservationDTO(reserv));

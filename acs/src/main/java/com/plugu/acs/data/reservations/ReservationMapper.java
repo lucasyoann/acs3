@@ -1,5 +1,8 @@
 package com.plugu.acs.data.reservations;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -55,12 +58,33 @@ public class ReservationMapper {
 		}
 		if(reservation.getId()!=0) {
 			reservation.setId(reservationDto.getId());
+			reservation.setCreerLe(reservationDto.getCreerLe());
+			reservation.setValideLe(reservationDto.getValideLe());
+		}else {
+			Date timestamp = Calendar.getInstance().getTime();
+			reservation.setCreerLe(timestamp);
+			reservation.setValideLe(timestamp);
+			
 		}
-		reservation.setDateEmprunt(reservationDto.getDateEmprunt());
-		reservation.setDateRestitution(reservationDto.getDateRestitution());
+		Date dateEmprunt = reservationDto.getDateEmprunt();
+		Calendar cal = Calendar.getInstance();  
+        cal.setTime(dateEmprunt);  
+        cal.set(Calendar.HOUR_OF_DAY, 12);  
+        cal.set(Calendar.MINUTE, 1);  
+        cal.set(Calendar.SECOND, 1);
+        dateEmprunt = cal.getTime();
+        
+        Date dateRestitution = reservationDto.getDateRestitution();
+        cal.setTime(dateRestitution);
+        cal.set(Calendar.HOUR_OF_DAY, 11);  
+        cal.set(Calendar.MINUTE, 59);  
+        cal.set(Calendar.SECOND, 58);
+        dateRestitution = cal.getTime();
+        
+		reservation.setDateEmprunt(dateEmprunt);
+		reservation.setDateRestitution(dateRestitution);
 		reservation.setCreerPar(reservationDto.getCreerPar());
-		reservation.setCreerLe(reservationDto.getCreerLe());
-		reservation.setValideLe(reservationDto.getValideLe());
+		
 		reservation.setValidePar(reservationDto.getValidePar());
 		reservation.setNom(reservationDto.getNom());
 		reservation.setPrenom(reservationDto.getPrenom());
