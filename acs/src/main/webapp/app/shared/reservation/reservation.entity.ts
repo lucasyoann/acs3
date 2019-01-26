@@ -1,3 +1,5 @@
+import { ArticleDispo } from "src/main/webapp/app/shared/reservation/articleDispo.entity";
+
 export class Reservation {
     id: number;
     dateEmprunt: Date;
@@ -9,4 +11,5 @@ export class Reservation {
     nom: string;
     prenom: string;
     asso: boolean;
+    articleDispo: ArticleDispo[];
 }

@@ -21,15 +21,35 @@
 	</div>
 	<div class="row">
     	<mat-form-field>
-		  <input matInput [matDatepicker]="dateDebut" placeholder="Date de d&eacute;but"  [(ngModel)] = "reservationAdd.dateEmprunt" onchange="dateChanged()">
+		  <input matInput [matDatepicker]="dateDebut" placeholder="Date de d&eacute;but"  [(ngModel)] = "reservationAdd.dateEmprunt" (dateChange)="dateChanged()">
 		  <mat-datepicker-toggle matSuffix [for]="dateDebut"></mat-datepicker-toggle>
 		  <mat-datepicker #dateDebut></mat-datepicker>
 		</mat-form-field>
 		<mat-form-field>
-		  <input matInput [matDatepicker]="dateFin" placeholder="Date de fin" onchange="dateChanged()" [(ngModel)] = "reservationAdd.dateRestitution">
+		  <input matInput [matDatepicker]="dateFin" placeholder="Date de fin" [(ngModel)] = "reservationAdd.dateRestitution" (dateChange)="dateChanged()">
 		  <mat-datepicker-toggle matSuffix [for]="dateFin"></mat-datepicker-toggle>
 		  <mat-datepicker #dateFin></mat-datepicker>
 		</mat-form-field>
+	</div>
+	<div class="row" *ngIf="typeDispo && typeDispo.length != 0">
+		<div class="column">
+			<mat-form-field>
+			  <mat-select placeholder="Type de mat&eacute;riel" [(value)]="typeChoisit" (selectionChange)="changementArticle()">
+			    <mat-option *ngFor="let type of typeDispo" [value]="type">
+			      {{type}}
+			    </mat-option>
+			  </mat-select>
+			</mat-form-field>
+		</div>
+		<div class="column">
+			<mat-form-field>
+			  <mat-select placeholder="Mat&eacute;riel">
+			    <mat-option *ngFor="let article of listeArticleSelect" [value]="article.id">
+			      {{article.description}}
+			    </mat-option>
+			  </mat-select>
+			</mat-form-field>
+		</div>
 	</div>
 </mat-dialog-content>
 <mat-dialog-actions>

@@ -11,7 +11,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 
 import { ModalAjoutComponent } from './modal/modal-ajout.component';
-import { MatDialogModule, MatFormFieldModule, MatNativeDateModule, MatInputModule,MatCheckboxModule } from '@angular/material';
+import { MatDialogModule, MatFormFieldModule, MatNativeDateModule, MatInputModule,MatCheckboxModule, MatSelectModule } from '@angular/material';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 
 import { DatePipe } from '@angular/common';
@@ -27,6 +27,7 @@ import { DatePipe } from '@angular/common';
       MatNativeDateModule,
       MatInputModule, 
       MatCheckboxModule,
+      MatSelectModule,
       MatDatepickerModule
     ],
     declarations:[ReservationComponent,ModalAjoutComponent],

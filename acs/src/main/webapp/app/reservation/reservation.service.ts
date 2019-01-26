@@ -5,6 +5,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Event } from '../shared/reservation/event';
 import { Reservation } from "src/main/webapp/app/shared/reservation/reservation.entity";
 import { DatePipe } from '@angular/common'
+import { ArticleDispo } from "src/main/webapp/app/shared/reservation/articleDispo.entity";
 
 @Injectable()
 export class ReservationService {
@@ -34,5 +35,14 @@ export class ReservationService {
             eventList.push(evt);
         }.bind(this));        
         return Promise.resolve(eventList);
+    }
+    
+    
+    /** appel permettant de récupérer la liste des articles disponibles entre 2 dates et leur nombre */
+    getArticlesDispo(dateDebut, dateFin): Observable<ArticleDispo[]> {
+        let params = new HttpParams();
+        params = params.append('debut', dateDebut);
+        params = params.append('fin', dateFin);
+        return this.httpClient.get( `acs/articles/articledispo`, { params: params }) as Observable<ArticleDispo[]>;
     }
 }
