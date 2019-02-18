@@ -26,7 +26,11 @@ export const routes: Routes = [
       {
           path: 'reservations',
           loadChildren: './reservation/reservation.module#ReservationModule'
-        }
+        },
+       {
+            path: 'user',
+            loadChildren: './auth/user/user/user.module#UserModule'
+       }
     ]
   }
 ];

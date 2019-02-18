@@ -4,10 +4,13 @@ import { NgModule } from '@angular/core';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { AppComponent } from './app.component';
 import { ModalModule } from 'ngx-bootstrap';
+import { FormsModule } from '@angular/forms';
 
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 //Import http interceptors
 import { AuthExpiredInterceptor, XhrInterceptor } from './blocks';
+import { httpInterceptorProviders } from './auth/auth-interceptor';
+
 
 //Import containers
 import {
@@ -70,27 +73,34 @@ import { defineLocale } from 'ngx-bootstrap/chronos';
 import { frLocale } from 'ngx-bootstrap/locale';
 defineLocale('fr', frLocale);
 
+import { MatDialogModule } from '@angular/material';
+
 import { ReservationModule } from './reservation/reservation.module';
+import { UserModule } from './auth/user/user/user.module';
+import { ModalConnexion } from './coreui/components/app-header/modal/modal-connexion.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ...APP_CONTAINERS,
     ...APP_COMPONENTS,
-    ...APP_DIRECTIVES
+    ...APP_DIRECTIVES,
+    ModalConnexion
   ],
   imports: [
         BrowserModule,
         BrowserAnimationsModule,
         AppRoutingModule,
         ReservationModule,
+        UserModule,
+        MatDialogModule,
+        FormsModule,
         BsDropdownModule.forRoot(),
         TabsModule.forRoot(),
         ModalModule.forRoot(),
   ],
-  providers: [
-              { provide: HTTP_INTERCEPTORS, useClass: AuthExpiredInterceptor, multi: true },
-              { provide: HTTP_INTERCEPTORS, useClass: XhrInterceptor, multi: true }],
-  bootstrap: [AppComponent]
+  providers: [httpInterceptorProviders],
+  bootstrap: [AppComponent],
+  entryComponents:[ModalConnexion],
 })
 export class AppModule { }

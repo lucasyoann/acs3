@@ -36,3 +36,6 @@ VALUES(
 ('PERCO','PERCOLATEUR','Percolateur de 10 litres','1','ALL'),
 ('MALAXEUR','MALAXEUR','1 malaxeur professionnel pour la réalisation de pâte à crêpes',
 '1','ALL');
+
+INSERT INTO ROLE(name) VALUES('ROLE_USER');
+INSERT INTO ROLE(name) VALUES('ROLE_ADMIN');

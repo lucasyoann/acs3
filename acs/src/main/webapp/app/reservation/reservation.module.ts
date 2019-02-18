@@ -9,6 +9,8 @@ import { ReservationService } from './reservation.service';
 import { Http } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
 
+import { httpInterceptorProviders } from 'src/main/webapp/app/auth/auth-interceptor';
+
 
 import { ModalAjoutComponent } from './modal/modal-ajout.component';
 import { MatDialogModule, MatFormFieldModule, MatNativeDateModule, MatInputModule,MatCheckboxModule, MatSelectModule } from '@angular/material';
@@ -32,6 +34,6 @@ import { DatePipe } from '@angular/common';
     ],
     declarations:[ReservationComponent,ModalAjoutComponent],
     entryComponents:[ModalAjoutComponent],
-    providers: [ReservationService, Http, DatePipe]
+    providers: [ReservationService, Http, DatePipe,httpInterceptorProviders]
 })
 export class ReservationModule{}

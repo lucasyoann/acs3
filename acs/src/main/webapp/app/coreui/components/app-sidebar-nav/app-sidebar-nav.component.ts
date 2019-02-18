@@ -1,14 +1,26 @@
 import { Component, ElementRef, Input, OnInit, Renderer2 } from '@angular/core';
 
 // Import navigation elements
-import { navigation } from './../../../_nav';
+import { navigation_user, navigation_disconnect } from './../../../_nav';
+import { TokenStorageService } from 'src/main/webapp/app/auth/token-storage.service';
 
 @Component({
   selector: 'app-sidebar-nav',
   template: `
     <nav class="sidebar-nav">
-      <ul class="nav" >
-        <ng-template ngFor let-navitem [ngForOf]="navigation">
+      <ul *ngIf="info.token" class="nav" >
+        <ng-template ngFor let-navitem [ngForOf]="navigation_user">
+          <li *ngIf="isDivider(navitem)" class="nav-divider"></li>
+          <ng-template [ngIf]="isTitle(navitem)">
+            <app-sidebar-nav-title [title]='navitem'></app-sidebar-nav-title>
+          </ng-template>
+          <ng-template [ngIf]="!isDivider(navitem)&&!isTitle(navitem)">
+            <app-sidebar-nav-item [item]='navitem'></app-sidebar-nav-item>
+          </ng-template>
+        </ng-template>
+       </ul>
+       <ul *ngIf="!info.token" class="nav" >
+        <ng-template ngFor let-navitem [ngForOf]="navigation_disconnect">
           <li *ngIf="isDivider(navitem)" class="nav-divider"></li>
           <ng-template [ngIf]="isTitle(navitem)">
             <app-sidebar-nav-title [title]='navitem'></app-sidebar-nav-title>
@@ -22,17 +34,30 @@ import { navigation } from './../../../_nav';
 })
 export class AppSidebarNavComponent {
 
-  public navigation = navigation;
+    info: any;  
+  
+    public navigation_user = navigation_user;
+  
+    public navigation_disconnect = navigation_disconnect;
 
-  public isDivider(item) {
-    return item.divider ? true : false;
+    public isDivider(item) {
+        return item.divider ? true : false;
+    }
+
+    public isTitle(item) {
+        return item.title ? true : false;
+    }
+
+    constructor(private token : TokenStorageService) { }
+  
+    ngOnInit() {
+        this.info = {
+              token:this.token.getToken(),
+              username: this.token.getUsername(),
+              authorities: this.token.getAuthorities()
+      
+      };
   }
-
-  public isTitle(item) {
-    return item.title ? true : false;
-  }
-
-  constructor() { }
 }
 
 import { Router } from '@angular/router';
