@@ -9,11 +9,9 @@
 @import "bootstrap-variables";
 
 // Import Bootstrap source files
-@import "node_modules/bootstrap/scss/bootstrap";
+@import "node_modules/bootstrap/scss/bootstrap.scss";
 // Import angular theme
 @import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
-// Override core variables
-@import "core-variables";
 
 // Import core styles
 @import "core/core";
@@ -27,7 +25,6 @@
 @import "breadcrumb";
 @import "table";
 @import "side-panel";
-@import "form";
 @import "tabs";
 @import "stepwizard";
 

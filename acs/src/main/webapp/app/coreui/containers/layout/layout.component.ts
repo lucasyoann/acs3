@@ -11,7 +11,7 @@ export class FullLayoutComponent {
         document.getElementById('div').className = 'alert alert-success transition ';
         this.span = document.getElementById('span');
         this.span.innerText = message;
-        this.span.className = 'color-vert-stg bold transition ';
+        this.span.className = 'color-bleu bold transition ';
     }    
     
     afficherError(message: string){

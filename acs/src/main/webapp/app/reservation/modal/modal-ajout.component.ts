@@ -83,4 +83,8 @@ export class ModalAjoutComponent implements OnInit {
         });
         this.listeArticleSelect = listeArticle;
     }
+    
+    save(){
+        console.log("coucoou");
+    }
 }
