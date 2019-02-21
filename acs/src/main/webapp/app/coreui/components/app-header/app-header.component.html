@@ -6,9 +6,12 @@
   <button class="navbar-toggler d-md-down-none mr-auto" type="button" appSidebarToggler>
     <span class="navbar-toggler-icon"></span>
   </button>
-  <!--  <div *ngIf="user" class="flex end">
-	{{user.login}}
-	<button class="btn oi oi-power-standby text-orange-stg"
-		(click)="logout()" title="D&eacute;connexion"></button>
-	</div>-->
+  <div  *ngIf="!info.token" class="flex end">
+	<button class="btn btn-success"
+		(click)="signin()" title="Connexion">Connexion</button>
+	</div>
+	<div  *ngIf="info.token" class="flex end">
+	<button class="btn btn-success"
+		(click)="logout()" title="D&eacute;connexion">D&eacute;connexion</button>
+	</div>
 </header>
