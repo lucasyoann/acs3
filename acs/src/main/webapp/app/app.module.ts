@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { AppComponent } from './app.component';
 import { ModalModule } from 'ngx-bootstrap';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -98,6 +99,7 @@ import { ModalConnexion } from './coreui/components/app-header/modal/modal-conne
         BsDropdownModule.forRoot(),
         TabsModule.forRoot(),
         ModalModule.forRoot(),
+        NgbModule
   ],
   providers: [httpInterceptorProviders],
   bootstrap: [AppComponent],

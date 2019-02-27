@@ -1,6 +1,10 @@
-<div class="row" style="justify-content: space-between">
+<div class="row" style="justify-content: space-between;height: 40px;">
 <h2 mat-dialog-title class="color-vert-stg row">Connexion </h2>
-
+</div>
+<div *ngIf="isLoginFailed">
+	<ngb-alert>
+    	Erreur d'autentification
+  </ngb-alert>
 </div>
 <mat-dialog-content>
 	<div class="row">
