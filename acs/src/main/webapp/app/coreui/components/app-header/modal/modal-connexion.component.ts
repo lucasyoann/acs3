@@ -23,7 +23,7 @@ const ALERT: Alert = {
     templateUrl: './modal-connexion.component.html',
     providers: [
                 {provide: MAT_DATE_LOCALE, useValue: 'fr-FR'},
-                NgbAlertConfig,
+                NgbAlertConfig
               ],
 } )
 

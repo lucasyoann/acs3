@@ -11,5 +11,6 @@ export class Reservation {
     nom: string;
     prenom: string;
     asso: boolean;
-    articleDispo: ArticleDispo[];
+    commentaire: string;
+    articleDispo: ArticleDispo[]= new Array();
 }

@@ -13,6 +13,11 @@
 // Import angular theme
 @import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
 
+//$candy-app-primary: mat-palette($indigo);
+//$candy-app-accent:  mat-palette($pink, A200, A100, A400);
+//$candy-app-theme:   mat-light-theme($candy-app-primary, $candy-app-accent);
+@import '~@angular/material/_theming.scss';
+//@include mat-input-theme($candy-app-theme);
 // Import core styles
 @import "core/core";
 
