@@ -1,4 +1,4 @@
-import { ArticleDispo } from "src/main/webapp/app/shared/reservation/articleDispo.entity";
+import { ReservationArticle } from "src/main/webapp/app/shared/reservation/reservationArticle.entity";
 
 export class Reservation {
     id: number;
@@ -12,5 +12,5 @@ export class Reservation {
     prenom: string;
     asso: boolean;
     commentaire: string;
-    articleDispo: ArticleDispo[]= new Array();
+    articleResaDto: ReservationArticle[]= new Array();
 }

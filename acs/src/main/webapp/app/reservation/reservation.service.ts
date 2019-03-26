@@ -1,21 +1,31 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 
 import { Event } from '../shared/reservation/event';
 import { Reservation } from "src/main/webapp/app/shared/reservation/reservation.entity";
 import { DatePipe } from '@angular/common'
 import { ArticleDispo } from "src/main/webapp/app/shared/reservation/articleDispo.entity";
+import { ReservationArticle } from "src/main/webapp/app/shared/reservation/reservationArticle.entity";
+
+const httpOptions = {
+        headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+      };
 
 @Injectable()
 export class ReservationService {
+    
+    private reservationUrl = 'acs/reservations/';
+    private validReservationUrl = 'acs/articles/validate';
+    private getReservationByIdUrl = 'acs/reservations/id'
+    
     constructor(private httpClient: HttpClient, public datepipe: DatePipe) {}
        
     getReservation(dateDebut, dateFin): Observable<Reservation[]> {
         let params = new HttpParams();
         params = params.append('debut', dateDebut);
         params = params.append('fin', dateFin);
-        return this.httpClient.get( `acs/reservations/`, { params: params }) as Observable<Reservation[]>;
+        return this.httpClient.get( this.reservationUrl, { params: params }) as Observable<Reservation[]>;
     }
     
     transformedReservationToSchedulerEvent(reservations): Promise<Event[]>{
@@ -44,5 +54,21 @@ export class ReservationService {
         params = params.append('debut', dateDebut);
         params = params.append('fin', dateFin);
         return this.httpClient.get( `acs/articles/articledispo`, { params: params }) as Observable<ArticleDispo[]>;
+    }
+    
+    saveReservation(reservation: Reservation){
+        return this.httpClient.post<string>(this.reservationUrl, reservation, httpOptions);
+    }
+    
+    //méthode de validation de la réservation (accès concurrent)
+    
+    validerArticles(reservation: Reservation){
+        return this.httpClient.post( this.validReservationUrl, reservation, httpOptions) as Observable<boolean>;
+    }
+    
+    getReservationById(id): Observable<Reservation> {
+        let params = new HttpParams();
+        params = params.append('id', id);
+        return this.httpClient.get( this.getReservationByIdUrl,  { params: params }) as Observable<Reservation>;
     }
 }

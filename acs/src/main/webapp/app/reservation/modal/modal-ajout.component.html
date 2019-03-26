@@ -3,13 +3,13 @@
 <mat-checkbox color="warn" style="float:right;" [(ngModel)] = "reservationAdd.asso">Association</mat-checkbox>
 </div>
 
-<ngb-alert *ngIf="saveFailed || dateFailed">
+<ngb-alert *ngIf="!valid || saveFailed || dateFailed">
     	{{message}}
   </ngb-alert>
 <form (ngSubmit)="save()" ngNativeValidate>
 	<mat-dialog-content>
 		<div class="row">
-    		<div class="form-group" *ngIf="reservationAdd.asso">
+    		<div class="form-group" *ngIf="reservationAdd.asso"> 
 	        	<mat-form-field>
 		  			<input matInput placeholder="Raison sociale" id="rs" name="rs" [(ngModel)] = "reservationAdd.nom">
 				</mat-form-field>
@@ -27,22 +27,55 @@
 	    		</div>
 	    	</div>
 		</div>
-		<div class="row">
+		<div class="row" *ngIf="!modif">
     		<mat-form-field>
 		  		<input matInput [matDatepicker]="dateDebut" required placeholder="Date de d&eacute;but" name="dateEmprunt" [(ngModel)] = "reservationAdd.dateEmprunt" (dateChange)="dateChanged()">
 		  		<mat-datepicker-toggle matSuffix [for]="dateDebut"></mat-datepicker-toggle>
 				<mat-datepicker #dateDebut></mat-datepicker>
 			</mat-form-field>
 			<mat-form-field>
-				<input matInput [matDatepicker]="dateFin" required placeholder="Date de fin" name="dateRestitution" [(ngModel)] = "reservationAdd.dateRestitution" (dateChange)="dateChanged()">
+				<input matInput [matDatepicker]="dateFin" required placeholder="Date de fin"  name="dateRestitution" [(ngModel)] = "reservationAdd.dateRestitution" (dateChange)="dateChanged()">
 				<mat-datepicker-toggle matSuffix [for]="dateFin"></mat-datepicker-toggle>
 				<mat-datepicker #dateFin></mat-datepicker>
 			</mat-form-field>
 		</div>
-		<div *ngIf="typeDispo && typeDispo.length != 0">
+		<div class="row" *ngIf="modif">
+			<div class="column">
+    			<mat-form-field>
+	  				<input matInput readonly placeholder="Date de d&eacute;but" name="dateEmprunt" [(ngModel)] = "dateEmprunt">
+				</mat-form-field>
+	    	</div>
+	    	<div class="column">
+	    		<mat-form-field>
+	  				<input matInput readonly placeholder="Date de fin" name="dateRestitution" [(ngModel)] = "dateRestitution">
+				</mat-form-field>
+	    	</div>
+		</div>
+		<div *ngIf="modif">
+		<hr/>
+			<h5>Article s&eacute;lectionn&eacute;s</h5>
+			<div class="row" *ngFor="let articlechoisi of reservationAdd.articleResaDto; index as i">
+				<div class="column">
+    			<mat-form-field>
+	  				<input matInput readonly placeholder="Type de mat&eacute;riel" name="Type de mat&eacute;riel" [(ngModel)] = "articlechoisi.type">
+				</mat-form-field>
+	    	</div>
+	    	<div class="column">
+	    		<mat-form-field>
+	  				<input matInput readonly placeholder="Mat&eacute;riel" name="Mat&eacute;riel" [(ngModel)] = "articlechoisi.nom">
+				</mat-form-field>
+			</div>
+			<div class="column">
+	    		<mat-form-field>
+	  				<input matInput readonly placeholder="Quantit&eacute;" name="Quantit&eacute;" [(ngModel)] = "articlechoisi.quantite">
+				</mat-form-field>
+			</div>
+			</div>
+		</div>
+		<div *ngIf="(typeDispo && typeDispo.length != 0) && !modif">
 			<hr/>
 			<h5>S&eacute;lection du mat&eacute;riel</h5>
-			<ref-article  *ngFor="let articlechoisi of reservationAdd.articleDispo; index as i"
+			<ref-article  *ngFor="let articlechoisi of reservationAdd.articleResaDto; index as i"
 				[listeArticlesDispo]="listeArticlesDispo"
 				[typeDispo]="typeDispo" [reservationAdd]="reservationAdd" [index]="i"
 				(reservationUpdated) = "getReservationUpdate($event)">	

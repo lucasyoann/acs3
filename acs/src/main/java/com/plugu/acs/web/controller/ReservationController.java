@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -35,10 +36,19 @@ public class ReservationController {
 		return reservationService.listerResa(debut, fin);
     }
 	
-//	@PostMapping(value="/")
-//	public String createOrUpdateResa(@RequestBody ReservationDTO reservationDto) {
-//		return reservationService.createOrUpdateResa(reservationDto);
-//	}
+	@PostMapping(value="/")
+	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+	public ResponseEntity<?> createOrUpdateResa(@RequestBody ReservationDTO reservationDto) {
+		return reservationService.createOrUpdateResa(reservationDto);
+	}
+	
+	@GetMapping(value="/id")
+	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+    public ReservationDTO getReservationById(@RequestParam("id") int id) {
+		return reservationService.getReservationById(id);
+    }
+	
+	
 	
 	
 }

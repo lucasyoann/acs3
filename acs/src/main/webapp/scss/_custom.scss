@@ -2,6 +2,10 @@ label{
 	margin-right: 10px;
 }
 
+input:read-only{
+	cursor: not-allowed;
+}
+
 // Déplacement liste préférence affichage vers le bas
 .cdk-overlay-pane{
 	transform: translateX(-10px) translateY(+20px)!important;

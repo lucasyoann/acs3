@@ -4,9 +4,12 @@ import {FormControl} from '@angular/forms';
 import { Reservation } from "src/main/webapp/app/shared/reservation/reservation.entity";
 import { ReservationService } from "src/main/webapp/app/reservation/reservation.service";
 import { DatePipe } from "@angular/common";
+import { ReservationArticle } from "src/main/webapp/app/shared/reservation/reservationArticle.entity";
 import { ArticleDispo } from "src/main/webapp/app/shared/reservation/articleDispo.entity";
 import {NgbAlertConfig} from '@ng-bootstrap/ng-bootstrap';
 import { TokenStorageService } from 'src/main/webapp/app/auth/token-storage.service';
+import { formatDate } from "@angular/common";
+import * as moment from 'moment';
 
 @Component( {
     selector: 'ref-modal-ajout',
@@ -29,12 +32,17 @@ export class ModalAjoutComponent implements OnInit {
     
     typeDispo: string[];
     typeChoisit: string[];
-    saveFailed=false;
+    valid=true;
     dateFailed=false;
+    saveFailed=false;
+    modif=false;
     articleId : number;
     message : string;
-    article: ArticleDispo = new ArticleDispo();
+    article: ReservationArticle = new ReservationArticle();
     user:string;
+    
+    dateEmprunt: string;
+    dateRestitution: string;
     
     listeArticlesDispo: ArticleDispo[];
     
@@ -49,17 +57,27 @@ export class ModalAjoutComponent implements OnInit {
     ngOnInit() {
         //changement langue pour affichage chiffre datepicker
         this.adapter.setLocale('fr');
-        
         if(this.data.reservation){
-            this.reservationAdd = this.data.reservation
+            console.log("Test reservation",this.data.reservation);
+            this.reservationAdd = this.data.reservation;
+            this.dateEmprunt = moment(this.reservationAdd.dateEmprunt).format('DD/MM/YYYY');
+            console.log("moment 1",this.dateEmprunt);
+            console.log("moment 2",moment(this.reservationAdd.dateEmprunt));
+            
+            this.dateRestitution = moment(this.reservationAdd.dateRestitution).format('DD/MM/YYYY');
+            this.modif=true;
+//            this.reservationAdd.dateEmprunt=(moment(this.reservationAdd.dateEmprunt).format('dd/MM/yyyy'));
             
         }else{
             this.reservationAdd = new Reservation();
-            this.reservationAdd.articleDispo.push(this.article);
+            this.reservationAdd.asso=false;
+            this.modif=false;
+            this.reservationAdd.articleResaDto.push(this.article);
         }
         if(this.reservationAdd.id != null){
             this.titre = "Modification d'une réservation";
             this.labelBouton = "Modifier";
+            this.dateChanged();
         }else{
             this.titre = "Ajout d'une réservation";
             this.labelBouton = "Ajouter";
@@ -69,18 +87,24 @@ export class ModalAjoutComponent implements OnInit {
     
     // Changement de date, recherche des articles dispos
     dateChanged(){
+        
 
         if( this.reservationAdd.dateEmprunt && this.reservationAdd.dateRestitution){
+            if(this.listeArticlesDispo!=null){
+                console.log("vidage de la liste des articles");
+                this.reservationAdd.articleResaDto.splice(0, this.reservationAdd.articleResaDto.length);
+                this.reservationAdd.articleResaDto.push(new ReservationArticle());
+            }
             const dateDFormat = (this.datepipe.transform(this.reservationAdd.dateEmprunt, 'dd/MM/yyyy'));
             const dateFFormat = (this.datepipe.transform(this.reservationAdd.dateRestitution, 'dd/MM/yyyy'));
             console.log("Date de début",dateDFormat);
             console.log("Date de fin",dateFFormat);
-            if(dateDFormat>dateFFormat){
-                console.log("essai");
+            if(this.reservationAdd.dateEmprunt>this.reservationAdd.dateRestitution){
                 this.dateFailed=true;
                 this.message = "Veuillez choisir une date de retour supérieure à la date d'emprunt";
             }else{
                 this.dateFailed=false;
+                
                 this.reservationService.getArticlesDispo( dateDFormat, dateFFormat).subscribe(data =>{
                     const typeDispoInter: string[] =[];
                     data.forEach(function (articleDispo) {
@@ -97,7 +121,7 @@ export class ModalAjoutComponent implements OnInit {
     }
     
     ajoutArticle(){
-        this.reservationAdd.articleDispo.push(new ArticleDispo());
+        this.reservationAdd.articleResaDto.push(new ReservationArticle());
     }
     
     getReservationUpdate($event){
@@ -108,19 +132,48 @@ export class ModalAjoutComponent implements OnInit {
         
         if(!this.dateFailed){
             console.log("Reservation",this.reservationAdd);
-            for(let i =0; i<this.reservationAdd.articleDispo.length; i++){
-                if(!this.reservationAdd.articleDispo[i].quantiteMax){
-                    this.reservationAdd.articleDispo.splice(i,1);
+            for(let i =0; i<this.reservationAdd.articleResaDto.length; i++){
+                if(!this.reservationAdd.articleResaDto[i].quantite){
+                    this.reservationAdd.articleResaDto.splice(i,1);
                 }
             }
         
-            if(this.reservationAdd.articleDispo.length===0){
+            if(this.reservationAdd.articleResaDto.length===0){
                 this.saveFailed=true;
                 this.message = "Veuillez ajouter au moins un article à la réservation";
                 console.log("Réservation sans article");
             }else{
                 this.saveFailed=false;
+                this.reservationAdd.creerPar=this.user;
                 console.log("Réservation en cours...");
+                console.log(this.reservationAdd);
+                this.reservationService.validerArticles(this.reservationAdd).subscribe(
+                        data=>{
+                                this.valid=data;
+                                if(this.valid){
+                                    this.reservationService.saveReservation(this.reservationAdd).subscribe(
+                                            data=>{
+                                                this.dialogRef.close();
+                                                window.location.reload();
+                                            },
+                                            error => {
+                                                console.log(error);
+                                                this.message="Erreur d'enregistrement de la réservation";
+                                                this.saveFailed=true;
+                                            }
+                                        );
+                                }else{
+                                    this.valid=false;
+                                    this.message="Les quantités désirées ne sont plus disponibles, veuillez recharger la page";
+                                }
+                                
+                            },
+                        error=>{
+                            console.log(error);
+                            this.message="Erreur de validation de la réservation";
+                            this.valid=false;
+                        });
+                    
             }
         }else{
             console.log("Date incorrecte");
