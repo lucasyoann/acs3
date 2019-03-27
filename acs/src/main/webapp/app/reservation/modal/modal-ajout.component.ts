@@ -40,11 +40,13 @@ export class ModalAjoutComponent implements OnInit {
     message : string;
     article: ReservationArticle = new ReservationArticle();
     user:string;
+    indexModif:number;
     
     dateEmprunt: string;
     dateRestitution: string;
     
     listeArticlesDispo: ArticleDispo[];
+    listeResaArticleAjoutes : ReservationArticle[]=[];
     
     
     constructor(public dialogRef: MatDialogRef<ModalAjoutComponent>,private reservationService:ReservationService,
@@ -58,26 +60,23 @@ export class ModalAjoutComponent implements OnInit {
         //changement langue pour affichage chiffre datepicker
         this.adapter.setLocale('fr');
         if(this.data.reservation){
-            console.log("Test reservation",this.data.reservation);
             this.reservationAdd = this.data.reservation;
             this.dateEmprunt = moment(this.reservationAdd.dateEmprunt).format('DD/MM/YYYY');
-            console.log("moment 1",this.dateEmprunt);
-            console.log("moment 2",moment(this.reservationAdd.dateEmprunt));
             
             this.dateRestitution = moment(this.reservationAdd.dateRestitution).format('DD/MM/YYYY');
             this.modif=true;
-//            this.reservationAdd.dateEmprunt=(moment(this.reservationAdd.dateEmprunt).format('dd/MM/yyyy'));
             
         }else{
             this.reservationAdd = new Reservation();
             this.reservationAdd.asso=false;
             this.modif=false;
-            this.reservationAdd.articleResaDto.push(this.article);
+            this.ajoutArticle();
         }
         if(this.reservationAdd.id != null){
             this.titre = "Modification d'une réservation";
             this.labelBouton = "Modifier";
             this.dateChanged();
+          
         }else{
             this.titre = "Ajout d'une réservation";
             this.labelBouton = "Ajouter";
@@ -93,12 +92,10 @@ export class ModalAjoutComponent implements OnInit {
             if(this.listeArticlesDispo!=null){
                 console.log("vidage de la liste des articles");
                 this.reservationAdd.articleResaDto.splice(0, this.reservationAdd.articleResaDto.length);
-                this.reservationAdd.articleResaDto.push(new ReservationArticle());
+                this.ajoutArticle();
             }
             const dateDFormat = (this.datepipe.transform(this.reservationAdd.dateEmprunt, 'dd/MM/yyyy'));
             const dateFFormat = (this.datepipe.transform(this.reservationAdd.dateRestitution, 'dd/MM/yyyy'));
-            console.log("Date de début",dateDFormat);
-            console.log("Date de fin",dateFFormat);
             if(this.reservationAdd.dateEmprunt>this.reservationAdd.dateRestitution){
                 this.dateFailed=true;
                 this.message = "Veuillez choisir une date de retour supérieure à la date d'emprunt";
@@ -121,7 +118,10 @@ export class ModalAjoutComponent implements OnInit {
     }
     
     ajoutArticle(){
-        this.reservationAdd.articleResaDto.push(new ReservationArticle());
+        let newArticle = new ReservationArticle();
+        newArticle.newArticle=true;
+        this.reservationAdd.articleResaDto.push(Object.assign({},newArticle));
+        
     }
     
     getReservationUpdate($event){
@@ -178,6 +178,10 @@ export class ModalAjoutComponent implements OnInit {
         }else{
             console.log("Date incorrecte");
         }
+    }
+
+    supprimerArticle(){
+        this.reservationAdd.articleResaDto.splice(this.indexModif,1);
     }
    
 }

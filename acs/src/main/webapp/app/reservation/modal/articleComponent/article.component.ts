@@ -17,15 +17,15 @@ export class ArticleComponent implements OnInit {
     @Input() listeArticlesDispo: ArticleDispo[];
     @Input() typeDispo: string[];
     @Input() reservationAdd : Reservation;
-    @Input() index : number;
+    @Input() indexAjout : number;
     @Output() reservationUpdated = new EventEmitter<Reservation>();
-    //@Input() article: ArticleDispo;
     
     
     quantiteMax : string;
     quantiteChoisie : string;
     quantmaxchargee : boolean;
     typeArticleChargee : boolean;
+    etatQ:number=0;
     
 
     listeArticleSelect: ArticleDispo[];
@@ -33,8 +33,14 @@ export class ArticleComponent implements OnInit {
     article: ArticleDispo = new ArticleDispo();
 
     ngOnInit() {
-        console.log("index debut" +this.index);
-        console.log(this.reservationAdd.articleResaDto);
+        if(this.reservationAdd.articleResaDto[this.indexAjout].articleId){
+            this.article.description = this.reservationAdd.articleResaDto[this.indexAjout].nom;
+            this.article.type = this.reservationAdd.articleResaDto[this.indexAjout].type;
+            this.article.id = this.reservationAdd.articleResaDto[this.indexAjout].articleId;
+            this.article.quantiteMax = this.reservationAdd.articleResaDto[this.indexAjout].quantite;
+            this.changementArticle();
+            this.getQuantiteMax();
+        }
         
     }
 // Changement Type d'article -> filtrage et création liste des articles dispo 
@@ -58,7 +64,7 @@ export class ArticleComponent implements OnInit {
     getQuantiteMax(){
         const articlechoisit = this.article.id;
         var quantMax;
-        this.reservationAdd.articleResaDto[this.index].articleId= articlechoisit;
+        this.reservationAdd.articleResaDto[this.indexAjout].articleId= articlechoisit;
         this.listeArticleSelect.forEach(function (articleDispo){
             if(articleDispo.id==articlechoisit){
                 quantMax = articleDispo.quantiteMax;
@@ -72,31 +78,55 @@ export class ArticleComponent implements OnInit {
         this.quantmaxchargee=true;
         
     }
+                
+    saveEtat(){
+                this.getQuantiteMax();
+                if(!this.article.quantiteMax){
+                    this.etatQ =0;
+                }else{
+                
+                    this.etatQ = this.article.quantiteMax;
+                }
+                console.log("saveEtat", this.etatQ);
+    }
     
     saveQuantite(){
        
         const quantite =this.article.quantiteMax;
-        console.log("quantite saisie",quantite);
-        console.log("quantite max", this.quantiteMax);
-        if(quantite>parseInt(this.quantiteMax)){
-            console.log("essai");
-            this.article.quantiteMax=parseInt(this.quantiteMax);
-            this.reservationAdd.articleResaDto[this.index].quantite=parseInt(this.quantiteMax);
-        }else if(quantite<0){
-            console.log("essai12");
+        
+        if(quantite>parseInt(this.quantiteMax+this.etatQ)){
+
+            this.article.quantiteMax=parseInt(this.quantiteMax)+this.etatQ;
+            this.reservationAdd.articleResaDto[this.indexAjout].quantite=parseInt(this.quantiteMax)+this.etatQ;
+        }else if(!quantite || quantite<0){
             this.article.quantiteMax=0;
-            this.reservationAdd.articleResaDto[this.index].quantite=0;
+            this.reservationAdd.articleResaDto[this.indexAjout].quantite=0;
         }else{
-            console.log("essai1");
-            this.reservationAdd.articleResaDto[this.index].quantite=quantite;
+            this.reservationAdd.articleResaDto[this.indexAjout].quantite=quantite;
         }
+        this.listeArticlesDispo.forEach(function (articleDispo) {
+                if( this.reservationAdd.articleResaDto[this.indexAjout].articleId===articleDispo.id){
+                    console.log("etat", this.etatQ);
+                    console.log("q", this.reservationAdd.articleResaDto[this.indexAjout].quantite);
+                    articleDispo.quantiteMax = articleDispo.quantiteMax -this.reservationAdd.articleResaDto[this.indexAjout].quantite + this.etatQ;
+                    this.quantiteMax = articleDispo.quantiteMax;
+                }
+        }.bind(this)); 
         
         
     }
     
     supprimerArticle(){
+        this.listeArticlesDispo.forEach(function (articleDispo) {
+            if(this.reservationAdd.articleResaDto[this.indexAjout].quantite && this.reservationAdd.articleResaDto[this.indexAjout].articleId===articleDispo.id){
+               
+                articleDispo.quantiteMax = articleDispo.quantiteMax +this.reservationAdd.articleResaDto[this.indexAjout].quantite;
+                this.quantiteMax = articleDispo.quantiteMax;
+                
+            }
+        }.bind(this)); 
         
-        this.reservationAdd.articleResaDto.splice(this.index,1);
+        this.reservationAdd.articleResaDto.splice(this.indexAjout,1);
         this.reservationUpdated.emit(this.reservationAdd);
     }
 }  

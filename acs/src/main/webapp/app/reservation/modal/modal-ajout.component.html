@@ -51,39 +51,20 @@
 				</mat-form-field>
 	    	</div>
 		</div>
-		<div *ngIf="modif">
-		<hr/>
-			<h5>Article s&eacute;lectionn&eacute;s</h5>
-			<div class="row" *ngFor="let articlechoisi of reservationAdd.articleResaDto; index as i">
-				<div class="column">
-    			<mat-form-field>
-	  				<input matInput readonly placeholder="Type de mat&eacute;riel" name="Type de mat&eacute;riel" [(ngModel)] = "articlechoisi.type">
-				</mat-form-field>
-	    	</div>
-	    	<div class="column">
-	    		<mat-form-field>
-	  				<input matInput readonly placeholder="Mat&eacute;riel" name="Mat&eacute;riel" [(ngModel)] = "articlechoisi.nom">
-				</mat-form-field>
-			</div>
-			<div class="column">
-	    		<mat-form-field>
-	  				<input matInput readonly placeholder="Quantit&eacute;" name="Quantit&eacute;" [(ngModel)] = "articlechoisi.quantite">
-				</mat-form-field>
-			</div>
-			</div>
-		</div>
-		<div *ngIf="(typeDispo && typeDispo.length != 0) && !modif">
+		<div *ngIf="(typeDispo && typeDispo.length != 0)">
 			<hr/>
 			<h5>S&eacute;lection du mat&eacute;riel</h5>
-			<ref-article  *ngFor="let articlechoisi of reservationAdd.articleResaDto; index as i"
-				[listeArticlesDispo]="listeArticlesDispo"
-				[typeDispo]="typeDispo" [reservationAdd]="reservationAdd" [index]="i"
-				(reservationUpdated) = "getReservationUpdate($event)">	
-			</ref-article>
+			<div *ngFor="let articlechoisi of reservationAdd.articleResaDto; index as i">
+				<ref-article  
+					[listeArticlesDispo]="listeArticlesDispo"
+					[typeDispo]="typeDispo" [reservationAdd]="reservationAdd" [indexAjout]="i"
+					(reservationUpdated) = "getReservationUpdate($event)">	
+				</ref-article>
+			</div>	
 			<div class = "row" style="align-items:flex-start; justify-content:space-between" >
 				<div class="column">
-			        <button type="button" class="btn btn-success" (click)="ajoutArticle()">Ajout article</button>
-			    </div>
+		        	<button type="button" class="btn btn-success" (click)="ajoutArticle()">Ajout article</button>
+		    	</div>
 			</div>
 		</div>
 		<hr/>

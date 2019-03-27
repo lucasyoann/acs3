@@ -3,4 +3,5 @@ export class ReservationArticle {
     quantite: number;
     type: string;
     nom: string;
+    newArticle: boolean;
 }

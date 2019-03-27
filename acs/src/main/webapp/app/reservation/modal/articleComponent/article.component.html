@@ -19,7 +19,7 @@
 	</div>
 	<div class="column" *ngIf="quantmaxchargee">
 		<mat-form-field>
-			<input matInput placeholder="Quantit&eacute; ({{quantiteMax}} max dispo)" type="number" min ="0" max="quantiteMax" name="quantite" [(ngModel)] = "article.quantiteMax" (change)="saveQuantite()">
+			<input matInput placeholder="Quantit&eacute; (Reste : {{quantiteMax}})" type="number" min ="0" max="quantiteMax" name="quantite" [(ngModel)] = "article.quantiteMax" (click)="saveEtat()" (focusout)="saveQuantite()">
 		</mat-form-field>
 	</div>
 	<i (click)="supprimerArticle()" class="fas fa-trash" style="margin-left:15px; float:right"></i>
