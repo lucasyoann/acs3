@@ -58,7 +58,7 @@ public class Reservation {
 	private String commentaire;
 	
 	@OneToMany(mappedBy = "primaryKey.reservation",
-            cascade = CascadeType.ALL)
+			cascade= CascadeType.ALL)
 	private Set<ReservationArticle> reservationArticles = new HashSet<ReservationArticle>();
 	
 	public String getNom() {

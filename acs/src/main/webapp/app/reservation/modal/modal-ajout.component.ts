@@ -66,21 +66,19 @@ export class ModalAjoutComponent implements OnInit {
             this.dateRestitution = moment(this.reservationAdd.dateRestitution).format('DD/MM/YYYY');
             this.modif=true;
             
+            this.titre = "Modification d'une réservation";
+            this.labelBouton = "Modifier";
+            this.dateChanged();
+            
         }else{
+            this.titre = "Ajout d'une réservation";
+            this.labelBouton = "Ajouter";
             this.reservationAdd = new Reservation();
             this.reservationAdd.asso=false;
             this.modif=false;
             this.ajoutArticle();
         }
-        if(this.reservationAdd.id != null){
-            this.titre = "Modification d'une réservation";
-            this.labelBouton = "Modifier";
-            this.dateChanged();
-          
-        }else{
-            this.titre = "Ajout d'une réservation";
-            this.labelBouton = "Ajouter";
-        }
+
         this.user=this.token.getUsername();
     }
     
@@ -133,7 +131,7 @@ export class ModalAjoutComponent implements OnInit {
         if(!this.dateFailed){
             console.log("Reservation",this.reservationAdd);
             for(let i =0; i<this.reservationAdd.articleResaDto.length; i++){
-                if(!this.reservationAdd.articleResaDto[i].quantite){
+                if(!this.reservationAdd.articleResaDto[i].quantite || this.reservationAdd.articleResaDto[i].quantite===0){
                     this.reservationAdd.articleResaDto.splice(i,1);
                 }
             }
@@ -141,12 +139,9 @@ export class ModalAjoutComponent implements OnInit {
             if(this.reservationAdd.articleResaDto.length===0){
                 this.saveFailed=true;
                 this.message = "Veuillez ajouter au moins un article à la réservation";
-                console.log("Réservation sans article");
             }else{
                 this.saveFailed=false;
                 this.reservationAdd.creerPar=this.user;
-                console.log("Réservation en cours...");
-                console.log(this.reservationAdd);
                 this.reservationService.validerArticles(this.reservationAdd).subscribe(
                         data=>{
                                 this.valid=data;

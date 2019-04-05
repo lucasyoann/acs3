@@ -36,7 +36,7 @@
 			<mat-form-field>
 				<input matInput [matDatepicker]="dateFin" required placeholder="Date de fin"  name="dateRestitution" [(ngModel)] = "reservationAdd.dateRestitution" (dateChange)="dateChanged()">
 				<mat-datepicker-toggle matSuffix [for]="dateFin"></mat-datepicker-toggle>
-				<mat-datepicker #dateFin></mat-datepicker>
+				<mat-datepicker #dateFin [startAt]="reservationAdd.dateEmprunt"></mat-datepicker>
 			</mat-form-field>
 		</div>
 		<div class="row" *ngIf="modif">

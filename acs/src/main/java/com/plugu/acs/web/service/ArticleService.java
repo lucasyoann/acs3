@@ -61,6 +61,7 @@ public class ArticleService {
 			if(articlesReservation.getQuantite() > listArticleReserv.get(articlesReservation.getArticleId())) {
 				valid=false;
 			}
+			listArticleReserv.replace(articlesReservation.getArticleId(), listArticleReserv.get(articlesReservation.getArticleId()) - articlesReservation.getQuantite());
 		}
 		return valid;
 	}
@@ -154,5 +155,32 @@ public class ArticleService {
 			result.put(articleEnStock.getId(), articleEnStock.getQuantite());
 		}
 		return result;
+	}
+	
+	public List<ArticleResaDTO> listArticleToCheck(ReservationDTO reservation){
+		List<ArticleResaDTO> listeArticleTemp = new ArrayList<>();
+		ReservationDTO resaEnBase = reservationService.getReservationById(reservation.getId());
+		if(resaEnBase!=null) {
+			for(ArticleResaDTO articleResaDemande : reservation.getArticleResaDto()) {
+				boolean toSave=true;
+				for(ArticleResaDTO articleResaEnBase : resaEnBase.getArticleResaDto()) {
+					if(articleResaEnBase.getArticleId()== articleResaDemande.getArticleId()) {
+						if(articleResaEnBase.getQuantite()>=articleResaDemande.getQuantite()) {
+							toSave=false;
+						}else {
+							articleResaDemande.setQuantite(articleResaDemande.getQuantite() - articleResaEnBase.getQuantite());
+						}
+					}
+							
+				}
+				if(toSave) {
+					listeArticleTemp.add(articleResaDemande);
+				}
+			}
+			return listeArticleTemp;
+		}else {
+			return reservation.getArticleResaDto();
+		}
+		
 	}
 }
