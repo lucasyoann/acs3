@@ -77,6 +77,7 @@
 	</mat-dialog-content>
 	<mat-dialog-actions>
 		<button type="button" class="btn btn-link" (click)="dialogRef.close()">Annuler</button>
+		<button type="button" *ngIf="modif" class="btn btn-success" (click)="supprimerReservation()">Supprimer</button>
 		<button type="submit" class="btn btn-success">{{labelBouton}}</button>
 	</mat-dialog-actions>
 </form>

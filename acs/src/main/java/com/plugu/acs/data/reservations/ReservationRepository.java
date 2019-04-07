@@ -10,8 +10,8 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ReservationRepository extends CrudRepository<Reservation,Integer>{
 	
-	@Query("select r from Reservation r where (r.dateEmprunt between :debut and :fin)"
-			+ "or (r.dateRestitution between :debut and :fin)")
+	@Query("select r from Reservation r where ((r.dateEmprunt between :debut and :fin)"
+			+ "or (r.dateRestitution between :debut and :fin)) and r.active=true")
 	List<Reservation> findBetweenDate(Date debut, Date fin);
 
 }

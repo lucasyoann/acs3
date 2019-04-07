@@ -127,4 +127,17 @@ public class ReservationService {
 			return null;
 		}
 	}
+	
+	public ResponseEntity<?> updateStatutReservation(ReservationDTO reservationDto){
+		Optional<Reservation> resaOptional = reservationRepository.findById(reservationDto.getId());
+		if(resaOptional.isPresent()) {
+			Reservation resa = resaOptional.get();
+			resa.setActive(false);
+			reservationRepository.save(resa);
+			return ResponseEntity.ok(reservationMapper.reservationToReservationDTO(resa));
+		}else {
+			return new ResponseEntity<>(new ResponseMessage("Fail -> Reservation doesn't exist!"),
+					HttpStatus.BAD_REQUEST);
+		}
+	}
 }

@@ -67,8 +67,10 @@ export class ReservationComponent implements OnInit {
             scheduler.startLightbox(id, null); 
             scheduler.hideCover();
             if( id> 1000000000000){
+                var reservation = new Reservation();
+                reservation.dateEmprunt = lightbox_event.start_date;
                 const dialogRef = this.dialog.open(ModalAjoutComponent, {
-                    data: {reservation: null}
+                    data: {reservation: reservation}
                 });
             }else{
                 this.reservationService.getReservationById(id).subscribe(data=>{
