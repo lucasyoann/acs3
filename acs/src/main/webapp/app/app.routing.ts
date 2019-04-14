@@ -39,7 +39,11 @@ export const routes: Routes = [
         },
        {
             path: 'user',
-            loadChildren: './auth/user/user/user.module#UserModule'
+            loadChildren: './user/user.module#UserModule'
+       },
+       {
+           path: 'myProfile',
+           loadChildren: './myProfile/myProfile.module#MyProfileModule'
        }
     ]
   }

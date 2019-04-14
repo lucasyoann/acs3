@@ -80,11 +80,11 @@ public class AuthRestAPIs {
 			return new ResponseEntity<>(new ResponseMessage("Fail -> Username is already taken!"),
 					HttpStatus.BAD_REQUEST);
 		}
- 
-		if (userRepository.existsByEmail(signUpRequest.getEmail())) {
-			return new ResponseEntity<>(new ResponseMessage("Fail -> Email is already in use!"),
-					HttpStatus.BAD_REQUEST);
-		}
+// 
+//		if (userRepository.existsByEmail(signUpRequest.getEmail())) {
+//			return new ResponseEntity<>(new ResponseMessage("Fail -> Email is already in use!"),
+//					HttpStatus.BAD_REQUEST);
+//		}
  
 		// Creating user's account
 		User user = new User(signUpRequest.getUsername(), signUpRequest.getEmail(),

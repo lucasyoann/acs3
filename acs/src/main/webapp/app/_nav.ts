@@ -8,12 +8,17 @@ export const navigation_disconnect = [
 
 export const navigation_user = [
   {
+    name: 'Mon Profil',
+    url: '/myProfile',
+    icon: 'icon-people'
+  },
+  {
       name: 'Gestion réservation',
       url: '/reservations',
       icon: 'icon-calendar'
   },
   {
-      name: 'user',
+      name: 'Gestion des utilisateurs',
       url: '/user',
       icon: 'icon-calendar'
   }
