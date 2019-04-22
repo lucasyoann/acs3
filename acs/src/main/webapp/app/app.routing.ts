@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { RouteGuard } from 'src/main/webapp/app/auth/route.guard';
 
 // Import Containers
 import {
@@ -13,16 +14,25 @@ export const routes: Routes = [
     pathMatch: 'full',
   },
   {
+      path: '',
+      component: FullLayoutComponent,
+      data: {
+        title: ''
+      },
+      children: [
+  {
+      path: 'dashboard',
+      loadChildren: './coreui/views/dashboard/dashboard.module#DashboardModule'
+  }]},
+  {
     path: '',
     component: FullLayoutComponent,
+    canActivate: [RouteGuard],
     data: {
       title: ''
     },
     children: [
-      {
-        path: 'dashboard',
-        loadChildren: './coreui/views/dashboard/dashboard.module#DashboardModule'
-      },
+      
       {
           path: 'reservations',
           loadChildren: './reservation/reservation.module#ReservationModule'

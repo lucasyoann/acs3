@@ -1,17 +1,23 @@
-<div class="row" style="justify-content: space-between">
+<div class="row" style="justify-content: space-between;height: 40px;">
 <h2 mat-dialog-title class="color-vert-stg row">Connexion </h2>
-
+</div>
+<div *ngIf="isLoginFailed">
+	<ngb-alert>
+    	Erreur d'autentification
+  </ngb-alert>
 </div>
 <mat-dialog-content>
 	<div class="row">
     	<div class="form-group column" >
     		<div class="row">
-    			<label>Identifiant de connexion</label>
-    			<input style="border:none; border-bottom: 1px solid #959595;" id="nomconnexion" name="nomconnexion" [(ngModel)] = "form.username"/>
+    			<mat-form-field>
+		  			<input matInput placeholder="Identifiant de connexion" id="nomconnexion" name="nomconnexion" [(ngModel)] = "form.username">
+				</mat-form-field>
     		</div>
-    		<div class="row" style="justify-content: space-between; ">
-    			<label>Mot de passe</label>
-    			<input style="border:none; border-bottom: 1px solid #959595;" type="password" id="motdepasse" name="motdepasse" [(ngModel)] = "form.password"/>
+    		<div class="row">
+    			<mat-form-field>
+		  			<input matInput placeholder="Mot de passe" type="password" id="motdepasse" name="motdepasse" [(ngModel)] = "form.password">
+				</mat-form-field>
     		</div>
 	    </div>
 

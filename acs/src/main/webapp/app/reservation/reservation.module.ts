@@ -15,6 +15,8 @@ import { httpInterceptorProviders } from 'src/main/webapp/app/auth/auth-intercep
 import { ModalAjoutComponent } from './modal/modal-ajout.component';
 import { MatDialogModule, MatFormFieldModule, MatNativeDateModule, MatInputModule,MatCheckboxModule, MatSelectModule } from '@angular/material';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ArticleComponent } from './modal/articleComponent/article.component';
 
 import { DatePipe } from '@angular/common';
 
@@ -30,9 +32,10 @@ import { DatePipe } from '@angular/common';
       MatInputModule, 
       MatCheckboxModule,
       MatSelectModule,
-      MatDatepickerModule
+      MatDatepickerModule,
+      NgbModule
     ],
-    declarations:[ReservationComponent,ModalAjoutComponent],
+    declarations:[ReservationComponent,ModalAjoutComponent,ArticleComponent],
     entryComponents:[ModalAjoutComponent],
     providers: [ReservationService, Http, DatePipe,httpInterceptorProviders]
 })

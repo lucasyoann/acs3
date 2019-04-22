@@ -1,0 +1,26 @@
+<div class="row" style="align-items : baseline">
+	<div class="column">
+		<mat-form-field>
+			<mat-select placeholder="Type de mat&eacute;riel" [(value)]="article.type" (selectionChange)="changementArticle()">
+			<mat-option *ngFor="let type of typeDispo" [value]="type">
+	    		{{type}}
+			</mat-option>
+			</mat-select>
+		</mat-form-field>
+	</div>
+	<div class="column" *ngIf="typeArticleChargee">
+		<mat-form-field>
+			<mat-select placeholder="Mat&eacute;riel" [(value)]="article.id" (selectionChange)="getQuantiteMax()">
+			<mat-option *ngFor="let articleid of listeArticleSelect" [value]="articleid.id" >
+			  	  {{articleid.description}}
+			</mat-option>
+			</mat-select>
+		</mat-form-field>
+	</div>
+	<div class="column" *ngIf="quantmaxchargee">
+		<mat-form-field>
+			<input matInput placeholder="Quantit&eacute; (Reste : {{quantiteMax}})" type="number" min ="0" max="quantiteMax" name="quantite" [(ngModel)] = "article.quantiteMax" (click)="saveEtat()" (focusout)="saveQuantite()">
+		</mat-form-field>
+	</div>
+	<i (click)="supprimerArticle()" class="fas fa-trash" style="margin-left:15px; float:right"></i>
+</div>

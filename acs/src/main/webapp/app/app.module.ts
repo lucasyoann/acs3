@@ -4,8 +4,8 @@ import { NgModule } from '@angular/core';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { AppComponent } from './app.component';
 import { ModalModule } from 'ngx-bootstrap';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
-
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 //Import http interceptors
 import { AuthExpiredInterceptor, XhrInterceptor } from './blocks';
@@ -73,7 +73,7 @@ import { defineLocale } from 'ngx-bootstrap/chronos';
 import { frLocale } from 'ngx-bootstrap/locale';
 defineLocale('fr', frLocale);
 
-import { MatDialogModule } from '@angular/material';
+import { MatDialogModule, MatFormFieldModule, MatNativeDateModule, MatInputModule,MatCheckboxModule, MatSelectModule } from '@angular/material';
 
 import { ReservationModule } from './reservation/reservation.module';
 import { UserModule } from './auth/user/user/user.module';
@@ -95,9 +95,15 @@ import { ModalConnexion } from './coreui/components/app-header/modal/modal-conne
         UserModule,
         MatDialogModule,
         FormsModule,
+        MatFormFieldModule,
+        MatNativeDateModule,
+        MatInputModule,
+        MatCheckboxModule,
+        MatSelectModule,
         BsDropdownModule.forRoot(),
         TabsModule.forRoot(),
         ModalModule.forRoot(),
+        NgbModule
   ],
   providers: [httpInterceptorProviders],
   bootstrap: [AppComponent],

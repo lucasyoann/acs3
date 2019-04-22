@@ -1,9 +1,11 @@
 package com.plugu.acs.data.reservations;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +21,6 @@ public class ReservationMapper {
 	
 	private ArticleMapper articleMapper = new ArticleMapper();
 	
-	@Autowired
-	private ArticleService articleService;
 	
 	public ReservationMapper() {
 		super();
@@ -32,6 +32,8 @@ public class ReservationMapper {
 		}
 		ReservationDTO reservationDto = new ReservationDTO();
 		Set<ArticleDTO> listArticlesDto = new HashSet<>();
+		List<ArticleResaDTO> listArticleResa = new ArrayList<>();
+		
 		reservationDto.setId(reservation.getId());
 		reservationDto.setDateEmprunt(reservation.getDateEmprunt());
 		reservationDto.setDateRestitution(reservation.getDateRestitution());
@@ -47,7 +49,12 @@ public class ReservationMapper {
 		for(ReservationArticle reservationArticle : reservation.getReservationArticles()) {
 			listArticlesDto.add(articleMapper.articleToArticleDTO(reservationArticle.getArticle()));
 		}
+		for(ReservationArticle reservationArticle : reservation.getReservationArticles()) {
+			listArticleResa.add(new ArticleResaDTO(reservationArticle.getPrimaryKey().getArticle().getId(), reservationArticle.getQuantite(),
+					reservationArticle.getPrimaryKey().getArticle().getType(), reservationArticle.getPrimaryKey().getArticle().getIntitule()));
+		}
 		reservationDto.setArticles(listArticlesDto);
+		reservationDto.setArticleResaDto(listArticleResa);
 		return reservationDto;
 		
 	}
@@ -69,14 +76,14 @@ public class ReservationMapper {
 		Date dateEmprunt = reservationDto.getDateEmprunt();
 		Calendar cal = Calendar.getInstance();  
         cal.setTime(dateEmprunt);  
-        cal.set(Calendar.HOUR_OF_DAY, 12);  
+        cal.set(Calendar.HOUR_OF_DAY, 13);  
         cal.set(Calendar.MINUTE, 1);  
         cal.set(Calendar.SECOND, 1);
         dateEmprunt = cal.getTime();
         
         Date dateRestitution = reservationDto.getDateRestitution();
         cal.setTime(dateRestitution);
-        cal.set(Calendar.HOUR_OF_DAY, 11);  
+        cal.set(Calendar.HOUR_OF_DAY, 12);  
         cal.set(Calendar.MINUTE, 59);  
         cal.set(Calendar.SECOND, 58);
         dateRestitution = cal.getTime();
@@ -91,17 +98,7 @@ public class ReservationMapper {
 		reservation.setAsso(reservationDto.getAsso());
 		reservation.setActive(reservationDto.getActive());
 		reservation.setCommentaire(reservationDto.getCommentaire());
-		for(ArticleResaDTO articleResaDto : reservationDto.getArticleResaDto()) {
-			ReservationArticle reservationArticle = new ReservationArticle();
-			Article article = articleService.getArticleById(articleResaDto.getArticleId());
-			if(article==null) {
-				throw new IllegalStateException("Article inconnu dans les stocks");
-			}
-			reservationArticle.setArticle(article);
-			reservationArticle.setReservation(reservation);
-			reservationArticle.setQuantite(articleResaDto.getQuantite());
-			reservation.addReservationArticle(reservationArticle);
-		}
+		
 	
 		return reservation;
 		

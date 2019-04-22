@@ -3,12 +3,13 @@ import { Component, ElementRef, Input, OnInit, Renderer2 } from '@angular/core';
 // Import navigation elements
 import { navigation_user, navigation_disconnect } from './../../../_nav';
 import { TokenStorageService } from 'src/main/webapp/app/auth/token-storage.service';
+import {AuthService} from 'src/main/webapp/app/auth/auth.service';
 
 @Component({
   selector: 'app-sidebar-nav',
   template: `
     <nav class="sidebar-nav">
-      <ul *ngIf="info.token" class="nav" >
+      <ul *ngIf="info.token && testAuth" class="nav" >
         <ng-template ngFor let-navitem [ngForOf]="navigation_user">
           <li *ngIf="isDivider(navitem)" class="nav-divider"></li>
           <ng-template [ngIf]="isTitle(navitem)">
@@ -19,7 +20,7 @@ import { TokenStorageService } from 'src/main/webapp/app/auth/token-storage.serv
           </ng-template>
         </ng-template>
        </ul>
-       <ul *ngIf="!info.token" class="nav" >
+       <ul *ngIf="!info.token || !testAuth" class="nav" >
         <ng-template ngFor let-navitem [ngForOf]="navigation_disconnect">
           <li *ngIf="isDivider(navitem)" class="nav-divider"></li>
           <ng-template [ngIf]="isTitle(navitem)">
@@ -34,7 +35,8 @@ import { TokenStorageService } from 'src/main/webapp/app/auth/token-storage.serv
 })
 export class AppSidebarNavComponent {
 
-    info: any;  
+    info: any; 
+    testAuth: boolean= false;
   
     public navigation_user = navigation_user;
   
@@ -48,7 +50,7 @@ export class AppSidebarNavComponent {
         return item.title ? true : false;
     }
 
-    constructor(private token : TokenStorageService) { }
+    constructor(private token : TokenStorageService, private authService : AuthService) { }
   
     ngOnInit() {
         this.info = {
@@ -57,6 +59,17 @@ export class AppSidebarNavComponent {
               authorities: this.token.getAuthorities()
       
       };
+        if(this.info.token !=null){
+            this.authService.validateToken(this.info.token).subscribe(data =>{
+                this.testAuth = data;
+                if(!this.testAuth){
+                    console.log("token expiré");
+                    this.token.signOut();
+                }
+            });
+            
+        }
+       
   }
 }
 

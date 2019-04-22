@@ -120,6 +120,12 @@ public class AuthRestAPIs {
 		return new ResponseEntity<>(new ResponseMessage("User registered successfully!"), HttpStatus.OK);
 	}
 
+	@GetMapping("/validate")
+	public boolean validateToken(String token) {
+		boolean result = jwtProvider.validateJwtToken(token);
+		return result;
+	}
+	
 	@GetMapping("/logout")
 	public String logoutPage(HttpServletRequest request, HttpServletResponse response) {
 	    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -128,4 +134,5 @@ public class AuthRestAPIs {
 	    }
 	    return "redirect:/login?logout";//You can redirect wherever you want, but generally it's a good practice to show login screen again.
 	}
+	
 }

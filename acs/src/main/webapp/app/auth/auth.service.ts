@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
  
 import { JwtResponse } from './jwt-response';
@@ -17,6 +17,8 @@ export class AuthService {
  
   private loginUrl = 'acs/auth/signin';
   private signupUrl = 'acs/auth/signup';
+  private valToken = 'acs/auth/validate';
+  private signout = 'acs/auth/signout';
  
   constructor(private http: HttpClient) {
   }
@@ -24,8 +26,15 @@ export class AuthService {
   attemptAuth(credentials: AuthLoginInfo): Observable<JwtResponse> {
     return this.http.post<JwtResponse>(this.loginUrl, credentials, httpOptions);
   }
+  
+  validateToken(token : string): Observable<boolean> {
+      let params = new HttpParams();
+      params = params.append('token', token);
+      return this.http.get( this.valToken, { params: params }) as Observable<boolean>;
+  }
  
   signUp(info: SignUpInfo): Observable<string> {
     return this.http.post<string>(this.signupUrl, info, httpOptions);
   }
+  
 }

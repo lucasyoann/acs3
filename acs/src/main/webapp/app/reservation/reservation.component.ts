@@ -62,15 +62,19 @@ export class ReservationComponent implements OnInit {
         // Custom modal for add/update event
         // bind(this) permet de conserver le this comme etant le component et non la fonction
         scheduler.showLightbox = function(id) {
+            console.log("IDDDDD : ",id);
             var lightbox_event = scheduler.getEvent(id);
             console.log(lightbox_event);
             scheduler.startLightbox(id, null); 
             scheduler.hideCover();
             var reservation = new Reservation();
-            reservation.dateEmprunt = lightbox_event.start_date;
-            const dialogRef = this.dialog.open(ModalAjoutComponent, {
-                data: {reservation: reservation}
+            this.reservationService.getReservationById(id).subscribe(data=>{
+                reservation=data;
+                const dialogRef = this.dialog.open(ModalAjoutComponent, {
+                    data: {reservation: reservation}
+                });
             });
+            
         }.bind(this);
         
         //Event permettant de gerer le changement de mois pour la recuperation des resas visibles
