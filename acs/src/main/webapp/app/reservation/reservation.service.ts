@@ -17,7 +17,8 @@ export class ReservationService {
     
     private reservationUrl = 'acs/reservations/';
     private validReservationUrl = 'acs/articles/validate';
-    private getReservationByIdUrl = 'acs/reservations/id'
+    private getReservationByIdUrl = 'acs/reservations/id';
+    private deleteReservation = 'acs/reservations/delete';
     
     constructor(private httpClient: HttpClient, public datepipe: DatePipe) {}
        
@@ -70,5 +71,9 @@ export class ReservationService {
         let params = new HttpParams();
         params = params.append('id', id);
         return this.httpClient.get( this.getReservationByIdUrl,  { params: params }) as Observable<Reservation>;
+    }
+    
+    supprimerReservation(reservation: Reservation){
+        return this.httpClient.post( this.deleteReservation, reservation, httpOptions) as Observable<boolean>;
     }
 }

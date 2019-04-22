@@ -71,7 +71,7 @@ public class ReservationMapper {
 			Date timestamp = Calendar.getInstance().getTime();
 			reservation.setCreerLe(timestamp);
 			reservation.setValideLe(timestamp);
-			
+			reservation.setActive(true);
 		}
 		Date dateEmprunt = reservationDto.getDateEmprunt();
 		Calendar cal = Calendar.getInstance();  

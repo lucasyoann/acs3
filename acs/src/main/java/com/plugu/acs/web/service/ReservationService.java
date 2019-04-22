@@ -11,22 +11,28 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.plugu.acs.data.articles.Article;
 import com.plugu.acs.data.articles.ArticleResaDTO;
 import com.plugu.acs.data.reservationarticle.ReservationArticle;
+import com.plugu.acs.data.reservationarticle.ReservationArticleId;
+import com.plugu.acs.data.reservationarticle.ReservationArticleRepository;
 import com.plugu.acs.data.reservations.Reservation;
 import com.plugu.acs.data.reservations.ReservationDTO;
 import com.plugu.acs.data.reservations.ReservationMapper;
 import com.plugu.acs.data.reservations.ReservationRepository;
-import com.plugu.acs.security.message.response.JwtResponse;
 import com.plugu.acs.security.message.response.ResponseMessage;
 
 @Service
+@Transactional
 public class ReservationService {
 	
 	@Autowired
 	private ReservationRepository reservationRepository;
+	
+	@Autowired
+	private ReservationArticleRepository reservationArticleRepository;
 	
 	@Autowired
 	private ArticleService articleService;
@@ -64,6 +70,7 @@ public class ReservationService {
 			resa = resaOptional.get();
 		}
 		Reservation reservationWithArticle = reservationMapper.updateReservationwithReservationDTO(resa, reservationDto);
+		List<ReservationArticleId> ListArticle = new ArrayList<>();
 		for(ArticleResaDTO articleResaDto : reservationDto.getArticleResaDto()) {
 			ReservationArticle reservationArticle = new ReservationArticle();
 			Article article = articleService.getArticleById(articleResaDto.getArticleId());
@@ -74,7 +81,39 @@ public class ReservationService {
 			reservationArticle.setArticle(article);
 			reservationArticle.setReservation(reservationWithArticle);
 			reservationArticle.setQuantite(articleResaDto.getQuantite());
-			reservationWithArticle.addReservationArticle(reservationArticle);
+			reservationRepository.save(reservationWithArticle);
+			
+			Optional<ReservationArticle> reservationArticleOpt = reservationArticleRepository.findById(reservationArticle.getPrimaryKey());
+			//cas de l'ajout d"un article
+			if(!reservationArticleOpt.isPresent()) {
+				ReservationArticle ajoutAjout = reservationArticleRepository.save(reservationArticle);
+				ListArticle.add(ajoutAjout.getPrimaryKey());
+				reservationWithArticle.addReservationArticle(reservationArticle);
+			//cas de la modification d'un article
+			}else {
+				ReservationArticle resaArticle = reservationArticleOpt.get();
+				if(ListArticle.contains(resaArticle.getPrimaryKey())) {
+					resaArticle.setQuantite(resaArticle.getQuantite() + reservationArticle.getQuantite());
+					reservationArticleRepository.save(resaArticle);
+				}else if(resaArticle.getQuantite()!=reservationArticle.getQuantite()) {
+					resaArticle.setQuantite(reservationArticle.getQuantite());
+					reservationArticleRepository.save(resaArticle);
+					
+				}
+				ListArticle.add(resaArticle.getPrimaryKey());
+			}
+			
+		}
+		
+		//articles a supprimer
+		if(resa!=null) {
+
+			for(ReservationArticle resaArticleEnBase : resa.getReservationArticles()) {
+				if(!ListArticle.contains(resaArticleEnBase.getPrimaryKey())){
+					reservationArticleRepository.deleteReservationArticle(resaArticleEnBase.getPrimaryKey().getArticle().getId(),resaArticleEnBase.getPrimaryKey().getReservation().getId());
+
+				}
+			}
 		}
 		reservationRepository.save(reservationWithArticle);
 		return ResponseEntity.ok(reservationMapper.reservationToReservationDTO(reservationWithArticle));
@@ -86,6 +125,19 @@ public class ReservationService {
 			return reservationMapper.reservationToReservationDTO(reservation.get());
 		}else {
 			return null;
+		}
+	}
+	
+	public ResponseEntity<?> updateStatutReservation(ReservationDTO reservationDto){
+		Optional<Reservation> resaOptional = reservationRepository.findById(reservationDto.getId());
+		if(resaOptional.isPresent()) {
+			Reservation resa = resaOptional.get();
+			resa.setActive(false);
+			reservationRepository.save(resa);
+			return ResponseEntity.ok(reservationMapper.reservationToReservationDTO(resa));
+		}else {
+			return new ResponseEntity<>(new ResponseMessage("Fail -> Reservation doesn't exist!"),
+					HttpStatus.BAD_REQUEST);
 		}
 	}
 }

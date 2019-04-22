@@ -59,28 +59,32 @@ export class ModalAjoutComponent implements OnInit {
     ngOnInit() {
         //changement langue pour affichage chiffre datepicker
         this.adapter.setLocale('fr');
+
         if(this.data.reservation){
             this.reservationAdd = this.data.reservation;
             this.dateEmprunt = moment(this.reservationAdd.dateEmprunt).format('DD/MM/YYYY');
-            
-            this.dateRestitution = moment(this.reservationAdd.dateRestitution).format('DD/MM/YYYY');
-            this.modif=true;
-            
+        
+            if(this.data.reservation.id){          
+                this.dateRestitution = moment(this.reservationAdd.dateRestitution).format('DD/MM/YYYY');
+                this.modif=true;
+                this.titre = "Modification d'une réservation";
+                this.labelBouton = "Modifier";
+                this.dateChanged();
+            }else{
+                this.titre = "Ajout d'une réservation";
+                this.labelBouton = "Ajouter";
+                this.reservationAdd.asso=false;
+                this.modif=false;
+                this.ajoutArticle();
+            }
+        
         }else{
             this.reservationAdd = new Reservation();
-            this.reservationAdd.asso=false;
-            this.modif=false;
-            this.ajoutArticle();
-        }
-        if(this.reservationAdd.id != null){
-            this.titre = "Modification d'une réservation";
-            this.labelBouton = "Modifier";
-            this.dateChanged();
-          
-        }else{
             this.titre = "Ajout d'une réservation";
             this.labelBouton = "Ajouter";
+            this.modif=false;
         }
+
         this.user=this.token.getUsername();
     }
     
@@ -133,7 +137,7 @@ export class ModalAjoutComponent implements OnInit {
         if(!this.dateFailed){
             console.log("Reservation",this.reservationAdd);
             for(let i =0; i<this.reservationAdd.articleResaDto.length; i++){
-                if(!this.reservationAdd.articleResaDto[i].quantite){
+                if(!this.reservationAdd.articleResaDto[i].quantite || this.reservationAdd.articleResaDto[i].quantite===0){
                     this.reservationAdd.articleResaDto.splice(i,1);
                 }
             }
@@ -141,12 +145,9 @@ export class ModalAjoutComponent implements OnInit {
             if(this.reservationAdd.articleResaDto.length===0){
                 this.saveFailed=true;
                 this.message = "Veuillez ajouter au moins un article à la réservation";
-                console.log("Réservation sans article");
             }else{
                 this.saveFailed=false;
                 this.reservationAdd.creerPar=this.user;
-                console.log("Réservation en cours...");
-                console.log(this.reservationAdd);
                 this.reservationService.validerArticles(this.reservationAdd).subscribe(
                         data=>{
                                 this.valid=data;
@@ -182,6 +183,18 @@ export class ModalAjoutComponent implements OnInit {
 
     supprimerArticle(){
         this.reservationAdd.articleResaDto.splice(this.indexModif,1);
+    }
+    supprimerReservation(){
+        this.reservationService.supprimerReservation(this.reservationAdd).subscribe(
+                data=>{
+                    this.dialogRef.close();
+                    window.location.reload();
+                },
+                error => {
+                    console.log(error);
+                    this.message="Erreur de suppression de la réservation";
+                }
+            );
     }
    
 }

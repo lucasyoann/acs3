@@ -41,7 +41,7 @@ public class ArticleController {
 		SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
 		String debut = formatter.format(reservation.getDateEmprunt());
 		String fin =formatter.format(reservation.getDateRestitution());
-		List<ArticleResaDTO> articles = reservation.getArticleResaDto();
+		List<ArticleResaDTO> articles = articleService.listArticleToCheck(reservation);
 		return ResponseEntity.ok(articleService.verifierArticles(debut, fin, articles));
     }
 }

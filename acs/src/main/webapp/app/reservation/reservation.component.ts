@@ -16,12 +16,7 @@ export class ReservationComponent implements OnInit {
     @ViewChild("scheduler_here") schedulerContainer: ElementRef;
     
     constructor(public dialog: MatDialog, private reservationService:ReservationService, public datepipe: DatePipe){}
-    
-    ngOnChanges(changes: SimpleChanges) {
-        // changes.prop contains the old and the new value...
-      }
-    
-    
+       
     ngOnInit() { 
         
         // Changement langue de anglais vers français
@@ -57,24 +52,35 @@ export class ReservationComponent implements OnInit {
         scheduler.init(this.schedulerContainer.nativeElement, new Date(),"month");
         scheduler.config.xml_date = "%Y-%m-%d %H:%i";
         
+        //Disabled drag
+        scheduler.config.drag_resize = false;
+        scheduler.config.drag_move = false;
+        scheduler.config.drag_create = false;
+        
        this.chargedResas();
         
         // Custom modal for add/update event
         // bind(this) permet de conserver le this comme etant le component et non la fonction
         scheduler.showLightbox = function(id) {
-            console.log("IDDDDD : ",id);
             var lightbox_event = scheduler.getEvent(id);
-            console.log(lightbox_event);
+         
             scheduler.startLightbox(id, null); 
             scheduler.hideCover();
-            var reservation = new Reservation();
-            this.reservationService.getReservationById(id).subscribe(data=>{
-                reservation=data;
+            if( id> 1000000000000){
+                var reservation = new Reservation();
+                reservation.dateEmprunt = lightbox_event.start_date;
                 const dialogRef = this.dialog.open(ModalAjoutComponent, {
                     data: {reservation: reservation}
                 });
-            });
-            
+            }else{
+                this.reservationService.getReservationById(id).subscribe(data=>{
+                    var reservation=data;
+                    const dialogRef = this.dialog.open(ModalAjoutComponent, {
+                        data: {reservation: reservation}
+                    });
+                });
+            }
+           
         }.bind(this);
         
         //Event permettant de gerer le changement de mois pour la recuperation des resas visibles
