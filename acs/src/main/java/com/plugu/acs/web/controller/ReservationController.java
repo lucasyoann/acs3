@@ -24,25 +24,25 @@ public class ReservationController {
 	ReservationService reservationService;
 	
 	@GetMapping(value="/")
-	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+	@PreAuthorize("hasRole('USER') or hasRole('ADMIN') or hasRole('SUPER_ADMIN')")
     public List<ReservationDTO> listeReservations(@RequestParam("debut") String debut, @RequestParam("fin") String fin) throws ParseException {
 		return reservationService.listerResa(debut, fin);
     }
 	
 	@PostMapping(value="/")
-	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+	@PreAuthorize("hasRole('USER') or hasRole('ADMIN') or hasRole('SUPER_ADMIN')")
 	public ResponseEntity<?> createOrUpdateResa(@RequestBody ReservationDTO reservationDto) {
 		return reservationService.createOrUpdateResa(reservationDto);
 	}
 	
 	@GetMapping(value="/id")
-	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+	@PreAuthorize("hasRole('USER') or hasRole('ADMIN') or hasRole('SUPER_ADMIN')")
     public ReservationDTO getReservationById(@RequestParam("id") int id) {
 		return reservationService.getReservationById(id);
     }
 	
 	@PostMapping(value="/delete")
-	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+	@PreAuthorize("hasRole('USER') or hasRole('ADMIN') or hasRole('SUPER_ADMIN')")
 	public ResponseEntity<?> deleteResa(@RequestBody ReservationDTO reservationDto){
 		return reservationService.updateStatutReservation(reservationDto);
 	}

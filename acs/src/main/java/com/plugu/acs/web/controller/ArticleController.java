@@ -28,7 +28,7 @@ public class ArticleController {
 	ArticleService articleService;
 
 	@GetMapping("/articledispo")
-	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+	@PreAuthorize("hasRole('USER') or hasRole('ADMIN') or hasRole('SUPER_ADMIN')")
 	public List<ArticleDispoDTO> getArticleDispos(@RequestParam String debut, @RequestParam String fin) throws ParseException {
 		
 		////récupération liste des articles disponibles
@@ -36,7 +36,7 @@ public class ArticleController {
 	}
 	
 	@PostMapping(value="/validate")
-	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+	@PreAuthorize("hasRole('USER') or hasRole('ADMIN') or hasRole('SUPER_ADMIN')")
     public ResponseEntity<Boolean> validerArticles(@RequestBody ReservationDTO reservation) throws ParseException {
 		SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
 		String debut = formatter.format(reservation.getDateEmprunt());

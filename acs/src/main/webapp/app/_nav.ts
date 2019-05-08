@@ -1,16 +1,29 @@
-export const navigation_disconnect = [
-  {
-      name: 'user',
-      url: '/user',
-      icon: 'icon-calendar'
-  }
-  ];
+//export const navigation_disconnect = [
+//  
+//  ];
 
 export const navigation_user = [
   {
     name: 'Mon Profil',
     url: '/myProfile',
-    icon: 'icon-people'
+    icon: 'icon-user'
+  },
+  {
+      name: 'Gestion réservation',
+      url: '/reservations',
+      icon: 'icon-calendar'
+  },
+  {
+      name: 'Vérifier les disponibilités',
+      url: '/checkdispo',
+      icon: 'icon-calculator'
+  }
+  ];
+export const navigation_super_admin = [
+  {
+    name: 'Mon Profil',
+    url: '/myProfile',
+    icon: 'icon-user'
   },
   {
       name: 'Gestion réservation',
@@ -20,7 +33,14 @@ export const navigation_user = [
   {
       name: 'Gestion des utilisateurs',
       url: '/user',
-      icon: 'icon-calendar'
+      icon: 'icon-people'
+  },
+  {
+      name: 'Vérifier les disponibilités',
+      url: '/checkdispo',
+      icon: 'icon-drawer'
   }
   ];
+
+
 

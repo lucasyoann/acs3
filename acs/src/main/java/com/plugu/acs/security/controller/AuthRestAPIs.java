@@ -1,6 +1,7 @@
 package com.plugu.acs.security.controller;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
@@ -10,6 +11,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -80,11 +82,6 @@ public class AuthRestAPIs {
 			return new ResponseEntity<>(new ResponseMessage("Fail -> Username is already taken!"),
 					HttpStatus.BAD_REQUEST);
 		}
-// 
-//		if (userRepository.existsByEmail(signUpRequest.getEmail())) {
-//			return new ResponseEntity<>(new ResponseMessage("Fail -> Email is already in use!"),
-//					HttpStatus.BAD_REQUEST);
-//		}
  
 		// Creating user's account
 		User user = new User(signUpRequest.getUsername(), signUpRequest.getEmail(),
@@ -94,20 +91,11 @@ public class AuthRestAPIs {
 		Set<Role> roles = new HashSet<>();
  
 		strRoles.forEach(role -> {
-			switch (role) {
-			case "admin":
+			if("ROLE_ADMIN".equalsIgnoreCase(role)) {
 				Role adminRole = roleRepository.findByName(RoleName.ROLE_ADMIN)
 						.orElseThrow(() -> new RuntimeException("Fail! -> Cause: User Role not find."));
 				roles.add(adminRole);
- 
-				break;
-			case "pm":
-				Role pmRole = roleRepository.findByName(RoleName.ROLE_PM)
-						.orElseThrow(() -> new RuntimeException("Fail! -> Cause: User Role not find."));
-				roles.add(pmRole);
- 
-				break;
-			default:
+			}else {
 				Role userRole = roleRepository.findByName(RoleName.ROLE_USER)
 						.orElseThrow(() -> new RuntimeException("Fail! -> Cause: User Role not find."));
 				roles.add(userRole);
@@ -119,7 +107,38 @@ public class AuthRestAPIs {
  
 		return new ResponseEntity<>(new ResponseMessage("User registered successfully!"), HttpStatus.OK);
 	}
-
+	
+	@PostMapping("/checkpassword")
+	@PreAuthorize("hasRole('USER') or hasRole('ADMIN') or hasRole('SUPER_ADMIN')")
+	public boolean checkPassword(@RequestBody LoginForm loginRequest) {
+		Authentication authentication = authenticationManager.authenticate(
+				new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
+		if(authentication.isAuthenticated()) {
+			return true;
+		}else {
+			return false;
+		}
+		
+	}
+	
+	
+	@PostMapping("/changepassword")
+	@PreAuthorize("hasRole('USER') or hasRole('ADMIN') or hasRole('SUPER_ADMIN')")
+	public ResponseEntity<?> changePassword(@RequestBody LoginForm loginRequest) {
+		
+		Optional<User> userOptional = userRepository.findByUsername(loginRequest.getUsername());
+		
+		if(userOptional.get()==null) {
+			throw new RuntimeException("Fail! -> Cause: L'utilisatuer n'existe pas");
+		}
+		User user = userOptional.get();
+		user.setPassword(encoder.encode(loginRequest.getPassword()));
+		
+		userRepository.save(user);
+ 
+		return new ResponseEntity<>(new ResponseMessage("Mot de passe modifié avec succès"), HttpStatus.OK);
+	}
+	
 	@GetMapping("/validate")
 	public boolean validateToken(String token) {
 		boolean result = jwtProvider.validateJwtToken(token);

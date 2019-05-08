@@ -44,7 +44,11 @@ export const routes: Routes = [
        {
            path: 'myProfile',
            loadChildren: './myProfile/myProfile.module#MyProfileModule'
-       }
+       },
+       {
+           path: 'checkdispo',
+           loadChildren: './checkdispo/checkdispo.module#CheckDispoModule'
+      }
     ]
   }
 ];

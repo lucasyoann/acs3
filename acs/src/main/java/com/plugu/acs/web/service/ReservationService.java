@@ -69,6 +69,7 @@ public class ReservationService {
 			//Cas d'une création
 			resa = resaOptional.get();
 		}
+		
 		Reservation reservationWithArticle = reservationMapper.updateReservationwithReservationDTO(resa, reservationDto);
 		List<ReservationArticleId> ListArticle = new ArrayList<>();
 		for(ArticleResaDTO articleResaDto : reservationDto.getArticleResaDto()) {
@@ -115,6 +116,7 @@ public class ReservationService {
 				}
 			}
 		}
+		reservationWithArticle.setActive(true);
 		reservationRepository.save(reservationWithArticle);
 		return ResponseEntity.ok(reservationMapper.reservationToReservationDTO(reservationWithArticle));
 	}

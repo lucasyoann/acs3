@@ -23,7 +23,7 @@ import com.plugu.acs.security.repository.UserRepository;
 @SpringBootApplication
 public class AcsApplication extends SpringBootServletInitializer{
 	
-	private static final Set<String> USER_ADMIN_ROLES = new HashSet<>(Arrays.asList("admin", "user"));
+	private static final Set<String> USER_ADMIN_ROLES = new HashSet<>(Arrays.asList("admin", "user","super_admin"));
 	
 	@Value("${userAdmin.name}")
 	private String userName;
@@ -65,8 +65,8 @@ public class AcsApplication extends SpringBootServletInitializer{
 					roles.add(adminRole);
 	 
 					break;
-				case "pm":
-					Role pmRole = roleRepository.findByName(RoleName.ROLE_PM)
+				case "super_admin":
+					Role pmRole = roleRepository.findByName(RoleName.ROLE_SUPER_ADMIN)
 							.orElseThrow(() -> new RuntimeException("Fail! -> Cause: User Role not find."));
 					roles.add(pmRole);
 	 

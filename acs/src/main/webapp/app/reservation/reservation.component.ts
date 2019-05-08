@@ -4,9 +4,12 @@ import "dhtmlx-scheduler";
 import { ReservationService } from './reservation.service';
 import { MatDialog } from '@angular/material';
 import { ModalAjoutComponent } from './modal/modal-ajout.component';
+import { ModalConsultationReservationComponent } from './modal/modal-consultation-reservation.component';
 import { Reservation } from "src/main/webapp/app/shared/reservation/reservation.entity";
-import { DatePipe } from '@angular/common'
-
+import { DatePipe } from '@angular/common';
+import { TokenStorageService } from '../auth/token-storage.service';
+import {UserService} from '../user/user.service';
+import {UserFonctionnel} from '../shared/user/userFonctionnel.entity';
 @Component( {
     encapsulation: ViewEncapsulation.None,
     selector: 'ref-reservations',
@@ -14,10 +17,37 @@ import { DatePipe } from '@angular/common'
 } )
 export class ReservationComponent implements OnInit {
     @ViewChild("scheduler_here") schedulerContainer: ElementRef;
+    username:string;
+    user : UserFonctionnel=new UserFonctionnel();
+    saveFailed : boolean =false;
+    message : string;
     
-    constructor(public dialog: MatDialog, private reservationService:ReservationService, public datepipe: DatePipe){}
+    
+    constructor(public dialog: MatDialog, private reservationService:ReservationService, public datepipe: DatePipe,
+            private token : TokenStorageService,private userService: UserService){}
        
     ngOnInit() { 
+        
+        this.username=this.token.getUsername();
+        this.userService.getUser(this.username).subscribe(
+                data=>{
+                    this.user=data;
+                    this.user.administrateur=false;
+                    this.user.superAdministrateur =false;
+                    this.user.roles.forEach(function(role : string){
+                        if(role==="ROLE_ADMIN"){
+                            this.user.administrateur=true;
+                        }else if(role==="ROLE_SUPER_ADMIN"){
+                            this.user.superAdministrateur=true;
+                        }
+                    }.bind(this));  
+                },
+                error=>{
+                    this.message="Erreur de récupération de l'utilisateur";
+                    this.saveFailed=true;
+                }
+        
+        );
         
         // Changement langue de anglais vers français
         const sld: SchedulerLocaleDate = {
@@ -66,16 +96,26 @@ export class ReservationComponent implements OnInit {
          
             scheduler.startLightbox(id, null); 
             scheduler.hideCover();
-            if( id> 1000000000000){
+            if( id> 1000000000000 && this.user.administrateur){
                 var reservation = new Reservation();
                 reservation.dateEmprunt = lightbox_event.start_date;
                 const dialogRef = this.dialog.open(ModalAjoutComponent, {
+                    width: '650px',
                     data: {reservation: reservation}
+                });
+            }else if (this.user.administrateur){
+                this.reservationService.getReservationById(id).subscribe(data=>{
+                    var reservation=data;
+                    const dialogRef = this.dialog.open(ModalAjoutComponent, {
+                        width: '650px',
+                        data: {reservation: reservation}
+                    });
                 });
             }else{
                 this.reservationService.getReservationById(id).subscribe(data=>{
                     var reservation=data;
-                    const dialogRef = this.dialog.open(ModalAjoutComponent, {
+                    const dialogRef = this.dialog.open(ModalConsultationReservationComponent, {
+                        width: '650px',
                         data: {reservation: reservation}
                     });
                 });

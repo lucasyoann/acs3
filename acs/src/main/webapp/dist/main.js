@@ -8,15 +8,19 @@
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
-	"./auth/user/user/user.module": [
-		"./webapp/app/auth/user/user/user.module.ts"
-	],
 	"./coreui/views/dashboard/dashboard.module": [
 		"./webapp/app/coreui/views/dashboard/dashboard.module.ts",
 		"coreui-views-dashboard-dashboard-module"
 	],
+	"./myProfile/myProfile.module": [
+		"./webapp/app/myProfile/myProfile.module.ts",
+		"myProfile-myProfile-module"
+	],
 	"./reservation/reservation.module": [
 		"./webapp/app/reservation/reservation.module.ts"
+	],
+	"./user/user.module": [
+		"./webapp/app/user/user.module.ts"
 	]
 };
 function webpackAsyncContext(req) {
@@ -38,6 +42,293 @@ webpackAsyncContext.keys = function webpackAsyncContextKeys() {
 };
 webpackAsyncContext.id = "../../$$_lazy_route_resource lazy recursive";
 module.exports = webpackAsyncContext;
+
+/***/ }),
+
+/***/ "../../node_modules/moment/locale sync recursive ^\\.\\/.*$":
+/*!*********************************************************************************************!*\
+  !*** C:/Users/lucas/Desktop/acs/workspace_acs/acs/node_modules/moment/locale sync ^\.\/.*$ ***!
+  \*********************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var map = {
+	"./af": "../../node_modules/moment/locale/af.js",
+	"./af.js": "../../node_modules/moment/locale/af.js",
+	"./ar": "../../node_modules/moment/locale/ar.js",
+	"./ar-dz": "../../node_modules/moment/locale/ar-dz.js",
+	"./ar-dz.js": "../../node_modules/moment/locale/ar-dz.js",
+	"./ar-kw": "../../node_modules/moment/locale/ar-kw.js",
+	"./ar-kw.js": "../../node_modules/moment/locale/ar-kw.js",
+	"./ar-ly": "../../node_modules/moment/locale/ar-ly.js",
+	"./ar-ly.js": "../../node_modules/moment/locale/ar-ly.js",
+	"./ar-ma": "../../node_modules/moment/locale/ar-ma.js",
+	"./ar-ma.js": "../../node_modules/moment/locale/ar-ma.js",
+	"./ar-sa": "../../node_modules/moment/locale/ar-sa.js",
+	"./ar-sa.js": "../../node_modules/moment/locale/ar-sa.js",
+	"./ar-tn": "../../node_modules/moment/locale/ar-tn.js",
+	"./ar-tn.js": "../../node_modules/moment/locale/ar-tn.js",
+	"./ar.js": "../../node_modules/moment/locale/ar.js",
+	"./az": "../../node_modules/moment/locale/az.js",
+	"./az.js": "../../node_modules/moment/locale/az.js",
+	"./be": "../../node_modules/moment/locale/be.js",
+	"./be.js": "../../node_modules/moment/locale/be.js",
+	"./bg": "../../node_modules/moment/locale/bg.js",
+	"./bg.js": "../../node_modules/moment/locale/bg.js",
+	"./bm": "../../node_modules/moment/locale/bm.js",
+	"./bm.js": "../../node_modules/moment/locale/bm.js",
+	"./bn": "../../node_modules/moment/locale/bn.js",
+	"./bn.js": "../../node_modules/moment/locale/bn.js",
+	"./bo": "../../node_modules/moment/locale/bo.js",
+	"./bo.js": "../../node_modules/moment/locale/bo.js",
+	"./br": "../../node_modules/moment/locale/br.js",
+	"./br.js": "../../node_modules/moment/locale/br.js",
+	"./bs": "../../node_modules/moment/locale/bs.js",
+	"./bs.js": "../../node_modules/moment/locale/bs.js",
+	"./ca": "../../node_modules/moment/locale/ca.js",
+	"./ca.js": "../../node_modules/moment/locale/ca.js",
+	"./cs": "../../node_modules/moment/locale/cs.js",
+	"./cs.js": "../../node_modules/moment/locale/cs.js",
+	"./cv": "../../node_modules/moment/locale/cv.js",
+	"./cv.js": "../../node_modules/moment/locale/cv.js",
+	"./cy": "../../node_modules/moment/locale/cy.js",
+	"./cy.js": "../../node_modules/moment/locale/cy.js",
+	"./da": "../../node_modules/moment/locale/da.js",
+	"./da.js": "../../node_modules/moment/locale/da.js",
+	"./de": "../../node_modules/moment/locale/de.js",
+	"./de-at": "../../node_modules/moment/locale/de-at.js",
+	"./de-at.js": "../../node_modules/moment/locale/de-at.js",
+	"./de-ch": "../../node_modules/moment/locale/de-ch.js",
+	"./de-ch.js": "../../node_modules/moment/locale/de-ch.js",
+	"./de.js": "../../node_modules/moment/locale/de.js",
+	"./dv": "../../node_modules/moment/locale/dv.js",
+	"./dv.js": "../../node_modules/moment/locale/dv.js",
+	"./el": "../../node_modules/moment/locale/el.js",
+	"./el.js": "../../node_modules/moment/locale/el.js",
+	"./en-SG": "../../node_modules/moment/locale/en-SG.js",
+	"./en-SG.js": "../../node_modules/moment/locale/en-SG.js",
+	"./en-au": "../../node_modules/moment/locale/en-au.js",
+	"./en-au.js": "../../node_modules/moment/locale/en-au.js",
+	"./en-ca": "../../node_modules/moment/locale/en-ca.js",
+	"./en-ca.js": "../../node_modules/moment/locale/en-ca.js",
+	"./en-gb": "../../node_modules/moment/locale/en-gb.js",
+	"./en-gb.js": "../../node_modules/moment/locale/en-gb.js",
+	"./en-ie": "../../node_modules/moment/locale/en-ie.js",
+	"./en-ie.js": "../../node_modules/moment/locale/en-ie.js",
+	"./en-il": "../../node_modules/moment/locale/en-il.js",
+	"./en-il.js": "../../node_modules/moment/locale/en-il.js",
+	"./en-nz": "../../node_modules/moment/locale/en-nz.js",
+	"./en-nz.js": "../../node_modules/moment/locale/en-nz.js",
+	"./eo": "../../node_modules/moment/locale/eo.js",
+	"./eo.js": "../../node_modules/moment/locale/eo.js",
+	"./es": "../../node_modules/moment/locale/es.js",
+	"./es-do": "../../node_modules/moment/locale/es-do.js",
+	"./es-do.js": "../../node_modules/moment/locale/es-do.js",
+	"./es-us": "../../node_modules/moment/locale/es-us.js",
+	"./es-us.js": "../../node_modules/moment/locale/es-us.js",
+	"./es.js": "../../node_modules/moment/locale/es.js",
+	"./et": "../../node_modules/moment/locale/et.js",
+	"./et.js": "../../node_modules/moment/locale/et.js",
+	"./eu": "../../node_modules/moment/locale/eu.js",
+	"./eu.js": "../../node_modules/moment/locale/eu.js",
+	"./fa": "../../node_modules/moment/locale/fa.js",
+	"./fa.js": "../../node_modules/moment/locale/fa.js",
+	"./fi": "../../node_modules/moment/locale/fi.js",
+	"./fi.js": "../../node_modules/moment/locale/fi.js",
+	"./fo": "../../node_modules/moment/locale/fo.js",
+	"./fo.js": "../../node_modules/moment/locale/fo.js",
+	"./fr": "../../node_modules/moment/locale/fr.js",
+	"./fr-ca": "../../node_modules/moment/locale/fr-ca.js",
+	"./fr-ca.js": "../../node_modules/moment/locale/fr-ca.js",
+	"./fr-ch": "../../node_modules/moment/locale/fr-ch.js",
+	"./fr-ch.js": "../../node_modules/moment/locale/fr-ch.js",
+	"./fr.js": "../../node_modules/moment/locale/fr.js",
+	"./fy": "../../node_modules/moment/locale/fy.js",
+	"./fy.js": "../../node_modules/moment/locale/fy.js",
+	"./ga": "../../node_modules/moment/locale/ga.js",
+	"./ga.js": "../../node_modules/moment/locale/ga.js",
+	"./gd": "../../node_modules/moment/locale/gd.js",
+	"./gd.js": "../../node_modules/moment/locale/gd.js",
+	"./gl": "../../node_modules/moment/locale/gl.js",
+	"./gl.js": "../../node_modules/moment/locale/gl.js",
+	"./gom-latn": "../../node_modules/moment/locale/gom-latn.js",
+	"./gom-latn.js": "../../node_modules/moment/locale/gom-latn.js",
+	"./gu": "../../node_modules/moment/locale/gu.js",
+	"./gu.js": "../../node_modules/moment/locale/gu.js",
+	"./he": "../../node_modules/moment/locale/he.js",
+	"./he.js": "../../node_modules/moment/locale/he.js",
+	"./hi": "../../node_modules/moment/locale/hi.js",
+	"./hi.js": "../../node_modules/moment/locale/hi.js",
+	"./hr": "../../node_modules/moment/locale/hr.js",
+	"./hr.js": "../../node_modules/moment/locale/hr.js",
+	"./hu": "../../node_modules/moment/locale/hu.js",
+	"./hu.js": "../../node_modules/moment/locale/hu.js",
+	"./hy-am": "../../node_modules/moment/locale/hy-am.js",
+	"./hy-am.js": "../../node_modules/moment/locale/hy-am.js",
+	"./id": "../../node_modules/moment/locale/id.js",
+	"./id.js": "../../node_modules/moment/locale/id.js",
+	"./is": "../../node_modules/moment/locale/is.js",
+	"./is.js": "../../node_modules/moment/locale/is.js",
+	"./it": "../../node_modules/moment/locale/it.js",
+	"./it-ch": "../../node_modules/moment/locale/it-ch.js",
+	"./it-ch.js": "../../node_modules/moment/locale/it-ch.js",
+	"./it.js": "../../node_modules/moment/locale/it.js",
+	"./ja": "../../node_modules/moment/locale/ja.js",
+	"./ja.js": "../../node_modules/moment/locale/ja.js",
+	"./jv": "../../node_modules/moment/locale/jv.js",
+	"./jv.js": "../../node_modules/moment/locale/jv.js",
+	"./ka": "../../node_modules/moment/locale/ka.js",
+	"./ka.js": "../../node_modules/moment/locale/ka.js",
+	"./kk": "../../node_modules/moment/locale/kk.js",
+	"./kk.js": "../../node_modules/moment/locale/kk.js",
+	"./km": "../../node_modules/moment/locale/km.js",
+	"./km.js": "../../node_modules/moment/locale/km.js",
+	"./kn": "../../node_modules/moment/locale/kn.js",
+	"./kn.js": "../../node_modules/moment/locale/kn.js",
+	"./ko": "../../node_modules/moment/locale/ko.js",
+	"./ko.js": "../../node_modules/moment/locale/ko.js",
+	"./ku": "../../node_modules/moment/locale/ku.js",
+	"./ku.js": "../../node_modules/moment/locale/ku.js",
+	"./ky": "../../node_modules/moment/locale/ky.js",
+	"./ky.js": "../../node_modules/moment/locale/ky.js",
+	"./lb": "../../node_modules/moment/locale/lb.js",
+	"./lb.js": "../../node_modules/moment/locale/lb.js",
+	"./lo": "../../node_modules/moment/locale/lo.js",
+	"./lo.js": "../../node_modules/moment/locale/lo.js",
+	"./lt": "../../node_modules/moment/locale/lt.js",
+	"./lt.js": "../../node_modules/moment/locale/lt.js",
+	"./lv": "../../node_modules/moment/locale/lv.js",
+	"./lv.js": "../../node_modules/moment/locale/lv.js",
+	"./me": "../../node_modules/moment/locale/me.js",
+	"./me.js": "../../node_modules/moment/locale/me.js",
+	"./mi": "../../node_modules/moment/locale/mi.js",
+	"./mi.js": "../../node_modules/moment/locale/mi.js",
+	"./mk": "../../node_modules/moment/locale/mk.js",
+	"./mk.js": "../../node_modules/moment/locale/mk.js",
+	"./ml": "../../node_modules/moment/locale/ml.js",
+	"./ml.js": "../../node_modules/moment/locale/ml.js",
+	"./mn": "../../node_modules/moment/locale/mn.js",
+	"./mn.js": "../../node_modules/moment/locale/mn.js",
+	"./mr": "../../node_modules/moment/locale/mr.js",
+	"./mr.js": "../../node_modules/moment/locale/mr.js",
+	"./ms": "../../node_modules/moment/locale/ms.js",
+	"./ms-my": "../../node_modules/moment/locale/ms-my.js",
+	"./ms-my.js": "../../node_modules/moment/locale/ms-my.js",
+	"./ms.js": "../../node_modules/moment/locale/ms.js",
+	"./mt": "../../node_modules/moment/locale/mt.js",
+	"./mt.js": "../../node_modules/moment/locale/mt.js",
+	"./my": "../../node_modules/moment/locale/my.js",
+	"./my.js": "../../node_modules/moment/locale/my.js",
+	"./nb": "../../node_modules/moment/locale/nb.js",
+	"./nb.js": "../../node_modules/moment/locale/nb.js",
+	"./ne": "../../node_modules/moment/locale/ne.js",
+	"./ne.js": "../../node_modules/moment/locale/ne.js",
+	"./nl": "../../node_modules/moment/locale/nl.js",
+	"./nl-be": "../../node_modules/moment/locale/nl-be.js",
+	"./nl-be.js": "../../node_modules/moment/locale/nl-be.js",
+	"./nl.js": "../../node_modules/moment/locale/nl.js",
+	"./nn": "../../node_modules/moment/locale/nn.js",
+	"./nn.js": "../../node_modules/moment/locale/nn.js",
+	"./pa-in": "../../node_modules/moment/locale/pa-in.js",
+	"./pa-in.js": "../../node_modules/moment/locale/pa-in.js",
+	"./pl": "../../node_modules/moment/locale/pl.js",
+	"./pl.js": "../../node_modules/moment/locale/pl.js",
+	"./pt": "../../node_modules/moment/locale/pt.js",
+	"./pt-br": "../../node_modules/moment/locale/pt-br.js",
+	"./pt-br.js": "../../node_modules/moment/locale/pt-br.js",
+	"./pt.js": "../../node_modules/moment/locale/pt.js",
+	"./ro": "../../node_modules/moment/locale/ro.js",
+	"./ro.js": "../../node_modules/moment/locale/ro.js",
+	"./ru": "../../node_modules/moment/locale/ru.js",
+	"./ru.js": "../../node_modules/moment/locale/ru.js",
+	"./sd": "../../node_modules/moment/locale/sd.js",
+	"./sd.js": "../../node_modules/moment/locale/sd.js",
+	"./se": "../../node_modules/moment/locale/se.js",
+	"./se.js": "../../node_modules/moment/locale/se.js",
+	"./si": "../../node_modules/moment/locale/si.js",
+	"./si.js": "../../node_modules/moment/locale/si.js",
+	"./sk": "../../node_modules/moment/locale/sk.js",
+	"./sk.js": "../../node_modules/moment/locale/sk.js",
+	"./sl": "../../node_modules/moment/locale/sl.js",
+	"./sl.js": "../../node_modules/moment/locale/sl.js",
+	"./sq": "../../node_modules/moment/locale/sq.js",
+	"./sq.js": "../../node_modules/moment/locale/sq.js",
+	"./sr": "../../node_modules/moment/locale/sr.js",
+	"./sr-cyrl": "../../node_modules/moment/locale/sr-cyrl.js",
+	"./sr-cyrl.js": "../../node_modules/moment/locale/sr-cyrl.js",
+	"./sr.js": "../../node_modules/moment/locale/sr.js",
+	"./ss": "../../node_modules/moment/locale/ss.js",
+	"./ss.js": "../../node_modules/moment/locale/ss.js",
+	"./sv": "../../node_modules/moment/locale/sv.js",
+	"./sv.js": "../../node_modules/moment/locale/sv.js",
+	"./sw": "../../node_modules/moment/locale/sw.js",
+	"./sw.js": "../../node_modules/moment/locale/sw.js",
+	"./ta": "../../node_modules/moment/locale/ta.js",
+	"./ta.js": "../../node_modules/moment/locale/ta.js",
+	"./te": "../../node_modules/moment/locale/te.js",
+	"./te.js": "../../node_modules/moment/locale/te.js",
+	"./tet": "../../node_modules/moment/locale/tet.js",
+	"./tet.js": "../../node_modules/moment/locale/tet.js",
+	"./tg": "../../node_modules/moment/locale/tg.js",
+	"./tg.js": "../../node_modules/moment/locale/tg.js",
+	"./th": "../../node_modules/moment/locale/th.js",
+	"./th.js": "../../node_modules/moment/locale/th.js",
+	"./tl-ph": "../../node_modules/moment/locale/tl-ph.js",
+	"./tl-ph.js": "../../node_modules/moment/locale/tl-ph.js",
+	"./tlh": "../../node_modules/moment/locale/tlh.js",
+	"./tlh.js": "../../node_modules/moment/locale/tlh.js",
+	"./tr": "../../node_modules/moment/locale/tr.js",
+	"./tr.js": "../../node_modules/moment/locale/tr.js",
+	"./tzl": "../../node_modules/moment/locale/tzl.js",
+	"./tzl.js": "../../node_modules/moment/locale/tzl.js",
+	"./tzm": "../../node_modules/moment/locale/tzm.js",
+	"./tzm-latn": "../../node_modules/moment/locale/tzm-latn.js",
+	"./tzm-latn.js": "../../node_modules/moment/locale/tzm-latn.js",
+	"./tzm.js": "../../node_modules/moment/locale/tzm.js",
+	"./ug-cn": "../../node_modules/moment/locale/ug-cn.js",
+	"./ug-cn.js": "../../node_modules/moment/locale/ug-cn.js",
+	"./uk": "../../node_modules/moment/locale/uk.js",
+	"./uk.js": "../../node_modules/moment/locale/uk.js",
+	"./ur": "../../node_modules/moment/locale/ur.js",
+	"./ur.js": "../../node_modules/moment/locale/ur.js",
+	"./uz": "../../node_modules/moment/locale/uz.js",
+	"./uz-latn": "../../node_modules/moment/locale/uz-latn.js",
+	"./uz-latn.js": "../../node_modules/moment/locale/uz-latn.js",
+	"./uz.js": "../../node_modules/moment/locale/uz.js",
+	"./vi": "../../node_modules/moment/locale/vi.js",
+	"./vi.js": "../../node_modules/moment/locale/vi.js",
+	"./x-pseudo": "../../node_modules/moment/locale/x-pseudo.js",
+	"./x-pseudo.js": "../../node_modules/moment/locale/x-pseudo.js",
+	"./yo": "../../node_modules/moment/locale/yo.js",
+	"./yo.js": "../../node_modules/moment/locale/yo.js",
+	"./zh-cn": "../../node_modules/moment/locale/zh-cn.js",
+	"./zh-cn.js": "../../node_modules/moment/locale/zh-cn.js",
+	"./zh-hk": "../../node_modules/moment/locale/zh-hk.js",
+	"./zh-hk.js": "../../node_modules/moment/locale/zh-hk.js",
+	"./zh-tw": "../../node_modules/moment/locale/zh-tw.js",
+	"./zh-tw.js": "../../node_modules/moment/locale/zh-tw.js"
+};
+
+
+function webpackContext(req) {
+	var id = webpackContextResolve(req);
+	return __webpack_require__(id);
+}
+function webpackContextResolve(req) {
+	var id = map[req];
+	if(!(id + 1)) { // check for number or string
+		var e = new Error("Cannot find module '" + req + "'");
+		e.code = 'MODULE_NOT_FOUND';
+		throw e;
+	}
+	return id;
+}
+webpackContext.keys = function webpackContextKeys() {
+	return Object.keys(map);
+};
+webpackContext.resolve = webpackContextResolve;
+module.exports = webpackContext;
+webpackContext.id = "../../node_modules/moment/locale sync recursive ^\\.\\/.*$";
 
 /***/ }),
 
@@ -109,12 +400,17 @@ var navigation_disconnect = [
 ];
 var navigation_user = [
     {
+        name: 'Mon Profil',
+        url: '/myProfile',
+        icon: 'icon-people'
+    },
+    {
         name: 'Gestion réservation',
         url: '/reservations',
         icon: 'icon-calendar'
     },
     {
-        name: 'user',
+        name: 'Gestion des utilisateurs',
         url: '/user',
         icon: 'icon-calendar'
     }
@@ -200,20 +496,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ "../../node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./app.component */ "./webapp/app/app.component.ts");
 /* harmony import */ var ngx_bootstrap__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ngx-bootstrap */ "../../node_modules/ngx-bootstrap/esm5/ngx-bootstrap.js");
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/forms */ "../../node_modules/@angular/forms/fesm5/forms.js");
-/* harmony import */ var _auth_auth_interceptor__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./auth/auth-interceptor */ "./webapp/app/auth/auth-interceptor.ts");
-/* harmony import */ var _coreui_containers__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./coreui/containers */ "./webapp/app/coreui/containers/index.ts");
-/* harmony import */ var _coreui_components__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./coreui/components */ "./webapp/app/coreui/components/index.ts");
-/* harmony import */ var _coreui_directives__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./coreui/directives */ "./webapp/app/coreui/directives/index.ts");
-/* harmony import */ var _app_routing__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./app.routing */ "./webapp/app/app.routing.ts");
-/* harmony import */ var ngx_bootstrap_dropdown__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ngx-bootstrap/dropdown */ "../../node_modules/ngx-bootstrap/dropdown/fesm5/ngx-bootstrap-dropdown.js");
-/* harmony import */ var ngx_bootstrap_tabs__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ngx-bootstrap/tabs */ "../../node_modules/ngx-bootstrap/tabs/fesm5/ngx-bootstrap-tabs.js");
-/* harmony import */ var ngx_bootstrap_chronos__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ngx-bootstrap/chronos */ "../../node_modules/ngx-bootstrap/chronos/fesm5/ngx-bootstrap-chronos.js");
-/* harmony import */ var ngx_bootstrap_locale__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ngx-bootstrap/locale */ "../../node_modules/ngx-bootstrap/locale/fesm5/ngx-bootstrap-locale.js");
-/* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! @angular/material */ "../../node_modules/@angular/material/esm5/material.es5.js");
-/* harmony import */ var _reservation_reservation_module__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./reservation/reservation.module */ "./webapp/app/reservation/reservation.module.ts");
-/* harmony import */ var _auth_user_user_user_module__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./auth/user/user/user.module */ "./webapp/app/auth/user/user/user.module.ts");
-/* harmony import */ var _coreui_components_app_header_modal_modal_connexion_component__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./coreui/components/app-header/modal/modal-connexion.component */ "./webapp/app/coreui/components/app-header/modal/modal-connexion.component.ts");
+/* harmony import */ var _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ng-bootstrap/ng-bootstrap */ "../../node_modules/@ng-bootstrap/ng-bootstrap/fesm5/ng-bootstrap.js");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/forms */ "../../node_modules/@angular/forms/fesm5/forms.js");
+/* harmony import */ var _auth_auth_interceptor__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./auth/auth-interceptor */ "./webapp/app/auth/auth-interceptor.ts");
+/* harmony import */ var _coreui_containers__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./coreui/containers */ "./webapp/app/coreui/containers/index.ts");
+/* harmony import */ var _coreui_components__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./coreui/components */ "./webapp/app/coreui/components/index.ts");
+/* harmony import */ var _coreui_directives__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./coreui/directives */ "./webapp/app/coreui/directives/index.ts");
+/* harmony import */ var _app_routing__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./app.routing */ "./webapp/app/app.routing.ts");
+/* harmony import */ var ngx_bootstrap_dropdown__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ngx-bootstrap/dropdown */ "../../node_modules/ngx-bootstrap/dropdown/fesm5/ngx-bootstrap-dropdown.js");
+/* harmony import */ var ngx_bootstrap_tabs__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ngx-bootstrap/tabs */ "../../node_modules/ngx-bootstrap/tabs/fesm5/ngx-bootstrap-tabs.js");
+/* harmony import */ var ngx_bootstrap_chronos__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ngx-bootstrap/chronos */ "../../node_modules/ngx-bootstrap/chronos/fesm5/ngx-bootstrap-chronos.js");
+/* harmony import */ var ngx_bootstrap_locale__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ngx-bootstrap/locale */ "../../node_modules/ngx-bootstrap/locale/fesm5/ngx-bootstrap-locale.js");
+/* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! @angular/material */ "../../node_modules/@angular/material/esm5/material.es5.js");
+/* harmony import */ var _reservation_reservation_module__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./reservation/reservation.module */ "./webapp/app/reservation/reservation.module.ts");
+/* harmony import */ var _user_user_module__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./user/user.module */ "./webapp/app/user/user.module.ts");
+/* harmony import */ var _coreui_components_app_header_modal_modal_connexion_component__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./coreui/components/app-header/modal/modal-connexion.component */ "./webapp/app/coreui/components/app-header/modal/modal-connexion.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -227,32 +524,33 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 
 
 
+
 //Import containers
 
 var APP_CONTAINERS = [
-    _coreui_containers__WEBPACK_IMPORTED_MODULE_7__["FullLayoutComponent"]
+    _coreui_containers__WEBPACK_IMPORTED_MODULE_8__["FullLayoutComponent"]
 ];
 //Import components
 
 var APP_COMPONENTS = [
-    _coreui_components__WEBPACK_IMPORTED_MODULE_8__["AppAsideComponent"],
-    _coreui_components__WEBPACK_IMPORTED_MODULE_8__["AppBreadcrumbsComponent"],
-    _coreui_components__WEBPACK_IMPORTED_MODULE_8__["AppFooterComponent"],
-    _coreui_components__WEBPACK_IMPORTED_MODULE_8__["AppHeaderComponent"],
-    _coreui_components__WEBPACK_IMPORTED_MODULE_8__["AppSidebarComponent"],
-    _coreui_components__WEBPACK_IMPORTED_MODULE_8__["AppSidebarFooterComponent"],
-    _coreui_components__WEBPACK_IMPORTED_MODULE_8__["AppSidebarFormComponent"],
-    _coreui_components__WEBPACK_IMPORTED_MODULE_8__["AppSidebarHeaderComponent"],
-    _coreui_components__WEBPACK_IMPORTED_MODULE_8__["AppSidebarMinimizerComponent"],
-    _coreui_components__WEBPACK_IMPORTED_MODULE_8__["APP_SIDEBAR_NAV"]
+    _coreui_components__WEBPACK_IMPORTED_MODULE_9__["AppAsideComponent"],
+    _coreui_components__WEBPACK_IMPORTED_MODULE_9__["AppBreadcrumbsComponent"],
+    _coreui_components__WEBPACK_IMPORTED_MODULE_9__["AppFooterComponent"],
+    _coreui_components__WEBPACK_IMPORTED_MODULE_9__["AppHeaderComponent"],
+    _coreui_components__WEBPACK_IMPORTED_MODULE_9__["AppSidebarComponent"],
+    _coreui_components__WEBPACK_IMPORTED_MODULE_9__["AppSidebarFooterComponent"],
+    _coreui_components__WEBPACK_IMPORTED_MODULE_9__["AppSidebarFormComponent"],
+    _coreui_components__WEBPACK_IMPORTED_MODULE_9__["AppSidebarHeaderComponent"],
+    _coreui_components__WEBPACK_IMPORTED_MODULE_9__["AppSidebarMinimizerComponent"],
+    _coreui_components__WEBPACK_IMPORTED_MODULE_9__["APP_SIDEBAR_NAV"]
 ];
 //Import directives
 
 var APP_DIRECTIVES = [
-    _coreui_directives__WEBPACK_IMPORTED_MODULE_9__["AsideToggleDirective"],
-    _coreui_directives__WEBPACK_IMPORTED_MODULE_9__["NAV_DROPDOWN_DIRECTIVES"],
-    _coreui_directives__WEBPACK_IMPORTED_MODULE_9__["ReplaceDirective"],
-    _coreui_directives__WEBPACK_IMPORTED_MODULE_9__["SIDEBAR_TOGGLE_DIRECTIVES"]
+    _coreui_directives__WEBPACK_IMPORTED_MODULE_10__["AsideToggleDirective"],
+    _coreui_directives__WEBPACK_IMPORTED_MODULE_10__["NAV_DROPDOWN_DIRECTIVES"],
+    _coreui_directives__WEBPACK_IMPORTED_MODULE_10__["ReplaceDirective"],
+    _coreui_directives__WEBPACK_IMPORTED_MODULE_10__["SIDEBAR_TOGGLE_DIRECTIVES"]
 ];
 //Import routing module
 
@@ -261,7 +559,7 @@ var APP_DIRECTIVES = [
 
 
 
-Object(ngx_bootstrap_chronos__WEBPACK_IMPORTED_MODULE_13__["defineLocale"])('fr', ngx_bootstrap_locale__WEBPACK_IMPORTED_MODULE_14__["frLocale"]);
+Object(ngx_bootstrap_chronos__WEBPACK_IMPORTED_MODULE_14__["defineLocale"])('fr', ngx_bootstrap_locale__WEBPACK_IMPORTED_MODULE_15__["frLocale"]);
 
 
 
@@ -274,23 +572,29 @@ var AppModule = /** @class */ (function () {
             declarations: [
                 _app_component__WEBPACK_IMPORTED_MODULE_3__["AppComponent"]
             ].concat(APP_CONTAINERS, APP_COMPONENTS, APP_DIRECTIVES, [
-                _coreui_components_app_header_modal_modal_connexion_component__WEBPACK_IMPORTED_MODULE_18__["ModalConnexion"]
+                _coreui_components_app_header_modal_modal_connexion_component__WEBPACK_IMPORTED_MODULE_19__["ModalConnexion"]
             ]),
             imports: [
                 _angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__["BrowserModule"],
                 _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_1__["BrowserAnimationsModule"],
-                _app_routing__WEBPACK_IMPORTED_MODULE_10__["AppRoutingModule"],
-                _reservation_reservation_module__WEBPACK_IMPORTED_MODULE_16__["ReservationModule"],
-                _auth_user_user_user_module__WEBPACK_IMPORTED_MODULE_17__["UserModule"],
-                _angular_material__WEBPACK_IMPORTED_MODULE_15__["MatDialogModule"],
-                _angular_forms__WEBPACK_IMPORTED_MODULE_5__["FormsModule"],
-                ngx_bootstrap_dropdown__WEBPACK_IMPORTED_MODULE_11__["BsDropdownModule"].forRoot(),
-                ngx_bootstrap_tabs__WEBPACK_IMPORTED_MODULE_12__["TabsModule"].forRoot(),
+                _app_routing__WEBPACK_IMPORTED_MODULE_11__["AppRoutingModule"],
+                _reservation_reservation_module__WEBPACK_IMPORTED_MODULE_17__["ReservationModule"],
+                _user_user_module__WEBPACK_IMPORTED_MODULE_18__["UserModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_16__["MatDialogModule"],
+                _angular_forms__WEBPACK_IMPORTED_MODULE_6__["FormsModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_16__["MatFormFieldModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_16__["MatNativeDateModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_16__["MatInputModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_16__["MatCheckboxModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_16__["MatSelectModule"],
+                ngx_bootstrap_dropdown__WEBPACK_IMPORTED_MODULE_12__["BsDropdownModule"].forRoot(),
+                ngx_bootstrap_tabs__WEBPACK_IMPORTED_MODULE_13__["TabsModule"].forRoot(),
                 ngx_bootstrap__WEBPACK_IMPORTED_MODULE_4__["ModalModule"].forRoot(),
+                _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_5__["NgbModule"]
             ],
-            providers: [_auth_auth_interceptor__WEBPACK_IMPORTED_MODULE_6__["httpInterceptorProviders"]],
+            providers: [_auth_auth_interceptor__WEBPACK_IMPORTED_MODULE_7__["httpInterceptorProviders"]],
             bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_3__["AppComponent"]],
-            entryComponents: [_coreui_components_app_header_modal_modal_connexion_component__WEBPACK_IMPORTED_MODULE_18__["ModalConnexion"]],
+            entryComponents: [_coreui_components_app_header_modal_modal_connexion_component__WEBPACK_IMPORTED_MODULE_19__["ModalConnexion"]],
         })
     ], AppModule);
     return AppModule;
@@ -313,13 +617,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AppRoutingModule", function() { return AppRoutingModule; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "../../node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/router */ "../../node_modules/@angular/router/fesm5/router.js");
-/* harmony import */ var _coreui_containers__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./coreui/containers */ "./webapp/app/coreui/containers/index.ts");
+/* harmony import */ var src_main_webapp_app_auth_route_guard__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/main/webapp/app/auth/route.guard */ "./webapp/app/auth/route.guard.ts");
+/* harmony import */ var _coreui_containers__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./coreui/containers */ "./webapp/app/coreui/containers/index.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 // Import Containers
@@ -332,7 +638,7 @@ var routes = [
     },
     {
         path: '',
-        component: _coreui_containers__WEBPACK_IMPORTED_MODULE_2__["FullLayoutComponent"],
+        component: _coreui_containers__WEBPACK_IMPORTED_MODULE_3__["FullLayoutComponent"],
         data: {
             title: ''
         },
@@ -340,14 +646,28 @@ var routes = [
             {
                 path: 'dashboard',
                 loadChildren: './coreui/views/dashboard/dashboard.module#DashboardModule'
-            },
+            }
+        ]
+    },
+    {
+        path: '',
+        component: _coreui_containers__WEBPACK_IMPORTED_MODULE_3__["FullLayoutComponent"],
+        canActivate: [src_main_webapp_app_auth_route_guard__WEBPACK_IMPORTED_MODULE_2__["RouteGuard"]],
+        data: {
+            title: ''
+        },
+        children: [
             {
                 path: 'reservations',
                 loadChildren: './reservation/reservation.module#ReservationModule'
             },
             {
                 path: 'user',
-                loadChildren: './auth/user/user/user.module#UserModule'
+                loadChildren: './user/user.module#UserModule'
+            },
+            {
+                path: 'myProfile',
+                loadChildren: './myProfile/myProfile.module#MyProfileModule'
             }
         ]
     }
@@ -453,9 +773,16 @@ var AuthService = /** @class */ (function () {
         this.http = http;
         this.loginUrl = 'acs/auth/signin';
         this.signupUrl = 'acs/auth/signup';
+        this.valToken = 'acs/auth/validate';
+        this.signout = 'acs/auth/signout';
     }
     AuthService.prototype.attemptAuth = function (credentials) {
         return this.http.post(this.loginUrl, credentials, httpOptions);
+    };
+    AuthService.prototype.validateToken = function (token) {
+        var params = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpParams"]();
+        params = params.append('token', token);
+        return this.http.get(this.valToken, { params: params });
     };
     AuthService.prototype.signUp = function (info) {
         return this.http.post(this.signupUrl, info, httpOptions);
@@ -467,6 +794,86 @@ var AuthService = /** @class */ (function () {
         __metadata("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"]])
     ], AuthService);
     return AuthService;
+}());
+
+
+
+/***/ }),
+
+/***/ "./webapp/app/auth/route.guard.ts":
+/*!****************************************!*\
+  !*** ./webapp/app/auth/route.guard.ts ***!
+  \****************************************/
+/*! exports provided: RouteGuard */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RouteGuard", function() { return RouteGuard; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "../../node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/router */ "../../node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs */ "../../node_modules/rxjs/_esm5/index.js");
+/* harmony import */ var src_main_webapp_app_auth_token_storage_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/main/webapp/app/auth/token-storage.service */ "./webapp/app/auth/token-storage.service.ts");
+/* harmony import */ var src_main_webapp_app_auth_auth_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/main/webapp/app/auth/auth.service */ "./webapp/app/auth/auth.service.ts");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+var RouteGuard = /** @class */ (function () {
+    function RouteGuard(router, tokenStorage, authService) {
+        this.router = router;
+        this.tokenStorage = tokenStorage;
+        this.authService = authService;
+    }
+    RouteGuard.prototype.canActivate = function (next, state) {
+        var _this = this;
+        console.log('canActivate');
+        //let test = this.checkLogin( state );
+        console.log('checkLogin');
+        return new rxjs__WEBPACK_IMPORTED_MODULE_2__["Observable"](function (observer) {
+            if (_this.tokenStorage.getToken()) {
+                var tets = null;
+                _this.authService.validateToken(_this.tokenStorage.getToken()).subscribe(function (data) {
+                    if (!data) {
+                        _this.tokenStorage.signOut();
+                        _this.router.navigate(['/dashboard'], {
+                            queryParams: { origin: state.url }
+                        });
+                        _this.result = false;
+                        observer.next(false);
+                    }
+                    else {
+                        _this.result = true;
+                        observer.next(true);
+                    }
+                });
+            }
+            else {
+                console.log('not athenticated');
+                _this.router.navigate(['/dashboard'], {
+                    queryParams: { origin: state.url }
+                });
+                observer.next(false);
+            }
+        });
+    };
+    RouteGuard = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({ providedIn: 'root' }),
+        __metadata("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"],
+            src_main_webapp_app_auth_token_storage_service__WEBPACK_IMPORTED_MODULE_3__["TokenStorageService"],
+            src_main_webapp_app_auth_auth_service__WEBPACK_IMPORTED_MODULE_4__["AuthService"]])
+    ], RouteGuard);
+    return RouteGuard;
 }());
 
 
@@ -539,228 +946,6 @@ var TokenStorageService = /** @class */ (function () {
         __metadata("design:paramtypes", [])
     ], TokenStorageService);
     return TokenStorageService;
-}());
-
-
-
-/***/ }),
-
-/***/ "./webapp/app/auth/user/user.service.ts":
-/*!**********************************************!*\
-  !*** ./webapp/app/auth/user/user.service.ts ***!
-  \**********************************************/
-/*! exports provided: UserService */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UserService", function() { return UserService; });
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "../../node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common/http */ "../../node_modules/@angular/common/fesm5/http.js");
-var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (undefined && undefined.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-var UserService = /** @class */ (function () {
-    function UserService(http) {
-        this.http = http;
-        this.userUrl = 'acs/test/user';
-        this.pmUrl = 'acs/test/pm';
-        this.adminUrl = 'acs/test/admin';
-    }
-    UserService.prototype.getUserBoard = function () {
-        console.log("user service");
-        return this.http.get(this.userUrl, { responseType: 'text' });
-    };
-    UserService.prototype.getPMBoard = function () {
-        return this.http.get(this.pmUrl, { responseType: 'text' });
-    };
-    UserService.prototype.getAdminBoard = function () {
-        return this.http.get(this.adminUrl, { responseType: 'text' });
-    };
-    UserService = __decorate([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
-            providedIn: 'root'
-        }),
-        __metadata("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"]])
-    ], UserService);
-    return UserService;
-}());
-
-
-
-/***/ }),
-
-/***/ "./webapp/app/auth/user/user/user-routing.module.ts":
-/*!**********************************************************!*\
-  !*** ./webapp/app/auth/user/user/user-routing.module.ts ***!
-  \**********************************************************/
-/*! exports provided: UserRoutingModule */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UserRoutingModule", function() { return UserRoutingModule; });
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "../../node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/router */ "../../node_modules/@angular/router/fesm5/router.js");
-/* harmony import */ var _user_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./user.component */ "./webapp/app/auth/user/user/user.component.ts");
-var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-
-
-
-var routes = [
-    {
-        path: '',
-        component: _user_component__WEBPACK_IMPORTED_MODULE_2__["UserComponent"],
-        data: {
-            title: 'Module user'
-        }
-    }
-];
-var UserRoutingModule = /** @class */ (function () {
-    function UserRoutingModule() {
-    }
-    UserRoutingModule = __decorate([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["NgModule"])({
-            imports: [
-                _angular_router__WEBPACK_IMPORTED_MODULE_1__["RouterModule"].forChild(routes)
-            ],
-            exports: [_angular_router__WEBPACK_IMPORTED_MODULE_1__["RouterModule"]]
-        })
-    ], UserRoutingModule);
-    return UserRoutingModule;
-}());
-
-
-
-/***/ }),
-
-/***/ "./webapp/app/auth/user/user/user.component.html":
-/*!*******************************************************!*\
-  !*** ./webapp/app/auth/user/user/user.component.html ***!
-  \*******************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "<h4>Content from Server</h4>\r\n{{board}}\r\n{{errorMessage}}"
-
-/***/ }),
-
-/***/ "./webapp/app/auth/user/user/user.component.ts":
-/*!*****************************************************!*\
-  !*** ./webapp/app/auth/user/user/user.component.ts ***!
-  \*****************************************************/
-/*! exports provided: UserComponent */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UserComponent", function() { return UserComponent; });
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "../../node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _user_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../user.service */ "./webapp/app/auth/user/user.service.ts");
-var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (undefined && undefined.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-var UserComponent = /** @class */ (function () {
-    function UserComponent(userService) {
-        this.userService = userService;
-    }
-    UserComponent.prototype.ngOnInit = function () {
-        var _this = this;
-        this.userService.getUserBoard().subscribe(function (data) {
-            _this.board = data;
-            console.log("userService OK");
-        }, function (error) {
-            console.log("userService KO");
-            _this.errorMessage = error.status + ": " + JSON.parse(error.error).message;
-            console.log(_this.errorMessage);
-        });
-    };
-    UserComponent = __decorate([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
-            selector: 'app-user',
-            template: __webpack_require__(/*! ./user.component.html */ "./webapp/app/auth/user/user/user.component.html")
-        }),
-        __metadata("design:paramtypes", [_user_service__WEBPACK_IMPORTED_MODULE_1__["UserService"]])
-    ], UserComponent);
-    return UserComponent;
-}());
-
-
-
-/***/ }),
-
-/***/ "./webapp/app/auth/user/user/user.module.ts":
-/*!**************************************************!*\
-  !*** ./webapp/app/auth/user/user/user.module.ts ***!
-  \**************************************************/
-/*! exports provided: UserModule */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UserModule", function() { return UserModule; });
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "../../node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common */ "../../node_modules/@angular/common/fesm5/common.js");
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/forms */ "../../node_modules/@angular/forms/fesm5/forms.js");
-/* harmony import */ var _user_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./user.component */ "./webapp/app/auth/user/user/user.component.ts");
-/* harmony import */ var _user_routing_module__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./user-routing.module */ "./webapp/app/auth/user/user/user-routing.module.ts");
-/* harmony import */ var _angular_http__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/http */ "../../node_modules/@angular/http/fesm5/http.js");
-/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/common/http */ "../../node_modules/@angular/common/fesm5/http.js");
-/* harmony import */ var src_main_webapp_app_auth_user_user_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! src/main/webapp/app/auth/user/user.service */ "./webapp/app/auth/user/user.service.ts");
-/* harmony import */ var src_main_webapp_app_auth_auth_interceptor__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! src/main/webapp/app/auth/auth-interceptor */ "./webapp/app/auth/auth-interceptor.ts");
-var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-
-
-
-
-
-
-
-
-
-var UserModule = /** @class */ (function () {
-    function UserModule() {
-    }
-    UserModule = __decorate([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["NgModule"])({
-            imports: [
-                _angular_common__WEBPACK_IMPORTED_MODULE_1__["CommonModule"],
-                _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormsModule"],
-                _angular_common_http__WEBPACK_IMPORTED_MODULE_6__["HttpClientModule"],
-                _user_routing_module__WEBPACK_IMPORTED_MODULE_4__["UserRoutingModule"]
-            ],
-            declarations: [_user_component__WEBPACK_IMPORTED_MODULE_3__["UserComponent"]],
-            entryComponents: [],
-            providers: [_angular_http__WEBPACK_IMPORTED_MODULE_5__["Http"], src_main_webapp_app_auth_user_user_service__WEBPACK_IMPORTED_MODULE_7__["UserService"], src_main_webapp_app_auth_auth_interceptor__WEBPACK_IMPORTED_MODULE_8__["httpInterceptorProviders"]]
-        })
-    ], UserModule);
-    return UserModule;
 }());
 
 
@@ -1002,7 +1187,7 @@ module.exports = ".version{\r\n    margin-right: 10px;\r\n}\r\n/*# sourceMapping
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<header class=\"app-header navbar\">\r\n  <button class=\"navbar-toggler d-lg-none\" type=\"button\" appMobileSidebarToggler>\r\n    <span class=\"navbar-toggler-icon\"></span>\r\n  </button>\r\n    <a class=\"navbar-brand\" href=\"#\"></a>\r\n  <button class=\"navbar-toggler d-md-down-none mr-auto\" type=\"button\" appSidebarToggler>\r\n    <span class=\"navbar-toggler-icon\"></span>\r\n  </button>\r\n  <div  *ngIf=\"!info.token\" class=\"flex end\">\r\n\t<button class=\"btn btn-success\"\r\n\t\t(click)=\"signin()\" title=\"Connexion\">Connexion</button>\r\n\t</div>\r\n\t<div  *ngIf=\"info.token\" class=\"flex end\">\r\n\t<button class=\"btn btn-success\"\r\n\t\t(click)=\"logout()\" title=\"D&eacute;connexion\">D&eacute;connexion</button>\r\n\t</div>\r\n</header>"
+module.exports = "<header class=\"app-header navbar\">\r\n  <button class=\"navbar-toggler d-lg-none\" type=\"button\" appMobileSidebarToggler>\r\n    <span class=\"navbar-toggler-icon\"></span>\r\n  </button>\r\n    <a class=\"navbar-brand\" href=\"#\"></a>\r\n  <button class=\"navbar-toggler d-md-down-none mr-auto\" type=\"button\" appSidebarToggler>\r\n    <span class=\"navbar-toggler-icon\"></span>\r\n  </button>\r\n  <div  *ngIf=\"!info.token || !testAuth\" class=\"flex end\">\r\n\t<button class=\"btn btn-success\" style=\"margin-right:15px\"\r\n\t\t(click)=\"signin()\" title=\"Connexion\">Connexion</button>\r\n\t</div>\r\n\t<div  *ngIf=\"info.token && testAuth\" class=\"flex end\">\r\n\t<button class=\"btn btn-success\" style=\"margin-right:15px\"\r\n\t\t(click)=\"logout()\" title=\"D&eacute;connexion\">D&eacute;connexion</button>\r\n\t</div>\r\n</header>"
 
 /***/ }),
 
@@ -1020,6 +1205,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/material */ "../../node_modules/@angular/material/esm5/material.es5.js");
 /* harmony import */ var _modal_modal_connexion_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modal/modal-connexion.component */ "./webapp/app/coreui/components/app-header/modal/modal-connexion.component.ts");
 /* harmony import */ var src_main_webapp_app_auth_token_storage_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/main/webapp/app/auth/token-storage.service */ "./webapp/app/auth/token-storage.service.ts");
+/* harmony import */ var src_main_webapp_app_auth_auth_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/main/webapp/app/auth/auth.service */ "./webapp/app/auth/auth.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1033,17 +1219,34 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
 var AppHeaderComponent = /** @class */ (function () {
-    function AppHeaderComponent(dialog, token) {
+    function AppHeaderComponent(dialog, token, authService) {
         this.dialog = dialog;
         this.token = token;
+        this.authService = authService;
+        this.testAuth = false;
     }
     AppHeaderComponent.prototype.ngOnInit = function () {
+        var _this = this;
         this.info = {
             token: this.token.getToken(),
             username: this.token.getUsername(),
             authorities: this.token.getAuthorities()
         };
+        console.log("token3 " + this.info.token);
+        if (this.info.token != null) {
+            console.log("token :" + this.info.token);
+            this.authService.validateToken(this.info.token).subscribe(function (data) {
+                _this.testAuth = data;
+                console.log("data : " + data);
+                console.log("testAuth : " + _this.testAuth);
+                if (!_this.testAuth) {
+                    console.log("token expiré");
+                    _this.token.signOut();
+                }
+            });
+        }
     };
     AppHeaderComponent.prototype.signin = function () {
         var dialogRef = this.dialog.open(_modal_modal_connexion_component__WEBPACK_IMPORTED_MODULE_2__["ModalConnexion"], {
@@ -1060,7 +1263,8 @@ var AppHeaderComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./app-header.component.html */ "./webapp/app/coreui/components/app-header/app-header.component.html"),
             styles: [__webpack_require__(/*! ./app-header.component.css */ "./webapp/app/coreui/components/app-header/app-header.component.css")]
         }),
-        __metadata("design:paramtypes", [_angular_material__WEBPACK_IMPORTED_MODULE_1__["MatDialog"], src_main_webapp_app_auth_token_storage_service__WEBPACK_IMPORTED_MODULE_3__["TokenStorageService"]])
+        __metadata("design:paramtypes", [_angular_material__WEBPACK_IMPORTED_MODULE_1__["MatDialog"], src_main_webapp_app_auth_token_storage_service__WEBPACK_IMPORTED_MODULE_3__["TokenStorageService"],
+            src_main_webapp_app_auth_auth_service__WEBPACK_IMPORTED_MODULE_4__["AuthService"]])
     ], AppHeaderComponent);
     return AppHeaderComponent;
 }());
@@ -1093,7 +1297,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\" style=\"justify-content: space-between\">\r\n<h2 mat-dialog-title class=\"color-vert-stg row\">Connexion </h2>\r\n\r\n</div>\r\n<mat-dialog-content>\r\n\t<div class=\"row\">\r\n    \t<div class=\"form-group column\" >\r\n    \t\t<div class=\"row\">\r\n    \t\t\t<label>Identifiant de connexion</label>\r\n    \t\t\t<input style=\"border:none; border-bottom: 1px solid #959595;\" id=\"nomconnexion\" name=\"nomconnexion\" [(ngModel)] = \"form.username\"/>\r\n    \t\t</div>\r\n    \t\t<div class=\"row\" style=\"justify-content: space-between; \">\r\n    \t\t\t<label>Mot de passe</label>\r\n    \t\t\t<input style=\"border:none; border-bottom: 1px solid #959595;\" type=\"password\" id=\"motdepasse\" name=\"motdepasse\" [(ngModel)] = \"form.password\"/>\r\n    \t\t</div>\r\n\t    </div>\r\n\r\n\t</div>\r\n</mat-dialog-content>\r\n<mat-dialog-actions>\r\n    <button class=\"btn btn-link\"(click)=\"dialogRef.close()\">Annuler</button>\r\n    <button class=\"btn btn-success\"(click)=\"onSubmit()\">Connexion</button>\r\n</mat-dialog-actions>"
+module.exports = "<div class=\"row\" style=\"justify-content: space-between;height: 40px;\">\r\n<h2 mat-dialog-title class=\"color-vert-stg row\">Connexion </h2>\r\n</div>\r\n<div *ngIf=\"isLoginFailed\">\r\n\t<ngb-alert>\r\n    \tErreur d'autentification\r\n  </ngb-alert>\r\n</div>\r\n<mat-dialog-content>\r\n\t<div class=\"row\">\r\n    \t<div class=\"form-group column\" >\r\n    \t\t<div class=\"row\">\r\n    \t\t\t<mat-form-field>\r\n\t\t  \t\t\t<input matInput placeholder=\"Identifiant de connexion\" id=\"nomconnexion\" name=\"nomconnexion\" [(ngModel)] = \"form.username\">\r\n\t\t\t\t</mat-form-field>\r\n    \t\t</div>\r\n    \t\t<div class=\"row\">\r\n    \t\t\t<mat-form-field>\r\n\t\t  \t\t\t<input matInput placeholder=\"Mot de passe\" type=\"password\" id=\"motdepasse\" name=\"motdepasse\" [(ngModel)] = \"form.password\">\r\n\t\t\t\t</mat-form-field>\r\n    \t\t</div>\r\n\t    </div>\r\n\r\n\t</div>\r\n</mat-dialog-content>\r\n<mat-dialog-actions>\r\n    <button class=\"btn btn-link\"(click)=\"dialogRef.close()\">Annuler</button>\r\n    <button class=\"btn btn-success\"(click)=\"onSubmit()\">Connexion</button>\r\n</mat-dialog-actions>"
 
 /***/ }),
 
@@ -1109,9 +1313,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ModalConnexion", function() { return ModalConnexion; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "../../node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/material */ "../../node_modules/@angular/material/esm5/material.es5.js");
-/* harmony import */ var src_main_webapp_app_auth_auth_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/main/webapp/app/auth/auth.service */ "./webapp/app/auth/auth.service.ts");
-/* harmony import */ var src_main_webapp_app_auth_token_storage_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/main/webapp/app/auth/token-storage.service */ "./webapp/app/auth/token-storage.service.ts");
-/* harmony import */ var src_main_webapp_App_auth_login_info__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/main/webapp/App/auth/login-info */ "./webapp/App/auth/login-info.ts");
+/* harmony import */ var _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ng-bootstrap/ng-bootstrap */ "../../node_modules/@ng-bootstrap/ng-bootstrap/fesm5/ng-bootstrap.js");
+/* harmony import */ var src_main_webapp_app_auth_auth_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/main/webapp/app/auth/auth.service */ "./webapp/app/auth/auth.service.ts");
+/* harmony import */ var src_main_webapp_app_auth_token_storage_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/main/webapp/app/auth/token-storage.service */ "./webapp/app/auth/token-storage.service.ts");
+/* harmony import */ var src_main_webapp_App_auth_login_info__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/main/webapp/App/auth/login-info */ "./webapp/App/auth/login-info.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1126,15 +1331,23 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
+var ALERT = {
+    type: 'success',
+    message: 'This is an success alert',
+};
 var ModalConnexion = /** @class */ (function () {
-    function ModalConnexion(authService, tokenStorage) {
+    function ModalConnexion(authService, tokenStorage, alertConfig, dialogRef) {
         this.authService = authService;
         this.tokenStorage = tokenStorage;
+        this.dialogRef = dialogRef;
         this.form = {};
         this.isLoggedIn = false;
         this.isLoginFailed = false;
         this.errorMessage = '';
         this.roles = [];
+        alertConfig.type = 'danger';
+        alertConfig.dismissible = false;
     }
     ModalConnexion.prototype.ngOnInit = function () {
         if (this.tokenStorage.getToken()) {
@@ -1145,7 +1358,7 @@ var ModalConnexion = /** @class */ (function () {
     ModalConnexion.prototype.onSubmit = function () {
         var _this = this;
         console.log("connexion");
-        this.loginInfo = new src_main_webapp_App_auth_login_info__WEBPACK_IMPORTED_MODULE_4__["AuthLoginInfo"](this.form.username, this.form.password);
+        this.loginInfo = new src_main_webapp_App_auth_login_info__WEBPACK_IMPORTED_MODULE_5__["AuthLoginInfo"](this.form.username, this.form.password);
         this.authService.attemptAuth(this.loginInfo).subscribe(function (data) {
             _this.tokenStorage.saveToken(data.accessToken);
             _this.tokenStorage.saveUsername(data.username);
@@ -1169,9 +1382,11 @@ var ModalConnexion = /** @class */ (function () {
             template: __webpack_require__(/*! ./modal-connexion.component.html */ "./webapp/app/coreui/components/app-header/modal/modal-connexion.component.html"),
             providers: [
                 { provide: _angular_material__WEBPACK_IMPORTED_MODULE_1__["MAT_DATE_LOCALE"], useValue: 'fr-FR' },
+                _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_2__["NgbAlertConfig"]
             ],
         }),
-        __metadata("design:paramtypes", [src_main_webapp_app_auth_auth_service__WEBPACK_IMPORTED_MODULE_2__["AuthService"], src_main_webapp_app_auth_token_storage_service__WEBPACK_IMPORTED_MODULE_3__["TokenStorageService"]])
+        __metadata("design:paramtypes", [src_main_webapp_app_auth_auth_service__WEBPACK_IMPORTED_MODULE_3__["AuthService"], src_main_webapp_app_auth_token_storage_service__WEBPACK_IMPORTED_MODULE_4__["TokenStorageService"],
+            _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_2__["NgbAlertConfig"], _angular_material__WEBPACK_IMPORTED_MODULE_1__["MatDialogRef"]])
     ], ModalConnexion);
     return ModalConnexion;
 }());
@@ -1475,7 +1690,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "../../node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _nav__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../../../_nav */ "./webapp/app/_nav.ts");
 /* harmony import */ var src_main_webapp_app_auth_token_storage_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/main/webapp/app/auth/token-storage.service */ "./webapp/app/auth/token-storage.service.ts");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "../../node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var src_main_webapp_app_auth_auth_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/main/webapp/app/auth/auth.service */ "./webapp/app/auth/auth.service.ts");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ "../../node_modules/@angular/router/fesm5/router.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1489,9 +1705,12 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 // Import navigation elements
 
 
+
 var AppSidebarNavComponent = /** @class */ (function () {
-    function AppSidebarNavComponent(token) {
+    function AppSidebarNavComponent(token, authService) {
         this.token = token;
+        this.authService = authService;
+        this.testAuth = false;
         this.navigation_user = _nav__WEBPACK_IMPORTED_MODULE_1__["navigation_user"];
         this.navigation_disconnect = _nav__WEBPACK_IMPORTED_MODULE_1__["navigation_disconnect"];
     }
@@ -1502,18 +1721,28 @@ var AppSidebarNavComponent = /** @class */ (function () {
         return item.title ? true : false;
     };
     AppSidebarNavComponent.prototype.ngOnInit = function () {
+        var _this = this;
         this.info = {
             token: this.token.getToken(),
             username: this.token.getUsername(),
             authorities: this.token.getAuthorities()
         };
+        if (this.info.token != null) {
+            this.authService.validateToken(this.info.token).subscribe(function (data) {
+                _this.testAuth = data;
+                if (!_this.testAuth) {
+                    console.log("token expiré");
+                    _this.token.signOut();
+                }
+            });
+        }
     };
     AppSidebarNavComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
             selector: 'app-sidebar-nav',
-            template: "\n    <nav class=\"sidebar-nav\">\n      <ul *ngIf=\"info.token\" class=\"nav\" >\n        <ng-template ngFor let-navitem [ngForOf]=\"navigation_user\">\n          <li *ngIf=\"isDivider(navitem)\" class=\"nav-divider\"></li>\n          <ng-template [ngIf]=\"isTitle(navitem)\">\n            <app-sidebar-nav-title [title]='navitem'></app-sidebar-nav-title>\n          </ng-template>\n          <ng-template [ngIf]=\"!isDivider(navitem)&&!isTitle(navitem)\">\n            <app-sidebar-nav-item [item]='navitem'></app-sidebar-nav-item>\n          </ng-template>\n        </ng-template>\n       </ul>\n       <ul *ngIf=\"!info.token\" class=\"nav\" >\n        <ng-template ngFor let-navitem [ngForOf]=\"navigation_disconnect\">\n          <li *ngIf=\"isDivider(navitem)\" class=\"nav-divider\"></li>\n          <ng-template [ngIf]=\"isTitle(navitem)\">\n            <app-sidebar-nav-title [title]='navitem'></app-sidebar-nav-title>\n          </ng-template>\n          <ng-template [ngIf]=\"!isDivider(navitem)&&!isTitle(navitem)\">\n            <app-sidebar-nav-item [item]='navitem'></app-sidebar-nav-item>\n          </ng-template>\n        </ng-template>\n      </ul>\n    </nav>"
+            template: "\n    <nav class=\"sidebar-nav\">\n      <ul *ngIf=\"info.token && testAuth\" class=\"nav\" >\n        <ng-template ngFor let-navitem [ngForOf]=\"navigation_user\">\n          <li *ngIf=\"isDivider(navitem)\" class=\"nav-divider\"></li>\n          <ng-template [ngIf]=\"isTitle(navitem)\">\n            <app-sidebar-nav-title [title]='navitem'></app-sidebar-nav-title>\n          </ng-template>\n          <ng-template [ngIf]=\"!isDivider(navitem)&&!isTitle(navitem)\">\n            <app-sidebar-nav-item [item]='navitem'></app-sidebar-nav-item>\n          </ng-template>\n        </ng-template>\n       </ul>\n       <ul *ngIf=\"!info.token || !testAuth\" class=\"nav\" >\n        <ng-template ngFor let-navitem [ngForOf]=\"navigation_disconnect\">\n          <li *ngIf=\"isDivider(navitem)\" class=\"nav-divider\"></li>\n          <ng-template [ngIf]=\"isTitle(navitem)\">\n            <app-sidebar-nav-title [title]='navitem'></app-sidebar-nav-title>\n          </ng-template>\n          <ng-template [ngIf]=\"!isDivider(navitem)&&!isTitle(navitem)\">\n            <app-sidebar-nav-item [item]='navitem'></app-sidebar-nav-item>\n          </ng-template>\n        </ng-template>\n      </ul>\n    </nav>"
         }),
-        __metadata("design:paramtypes", [src_main_webapp_app_auth_token_storage_service__WEBPACK_IMPORTED_MODULE_2__["TokenStorageService"]])
+        __metadata("design:paramtypes", [src_main_webapp_app_auth_token_storage_service__WEBPACK_IMPORTED_MODULE_2__["TokenStorageService"], src_main_webapp_app_auth_auth_service__WEBPACK_IMPORTED_MODULE_3__["AuthService"]])
     ], AppSidebarNavComponent);
     return AppSidebarNavComponent;
 }());
@@ -1544,7 +1773,7 @@ var AppSidebarNavItemComponent = /** @class */ (function () {
             selector: 'app-sidebar-nav-item',
             template: "\n    <li *ngIf=\"!isDropdown(); else dropdown\" [ngClass]=\"hasClass() ? 'nav-item ' + item.class : 'nav-item'\">\n      <app-sidebar-nav-link [link]='item'></app-sidebar-nav-link>\n    </li>\n    <ng-template #dropdown>\n      <li [ngClass]=\"hasClass() ? 'nav-item nav-dropdown ' + item.class : 'nav-item nav-dropdown'\"\n          [class.open]=\"isActive()\"\n          routerLinkActive=\"open\"\n          appNavDropdown>\n        <app-sidebar-nav-dropdown [link]='item'></app-sidebar-nav-dropdown>\n      </li>\n    </ng-template>\n    "
         }),
-        __metadata("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"]])
+        __metadata("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"]])
     ], AppSidebarNavItemComponent);
     return AppSidebarNavItemComponent;
 }());
@@ -2368,6 +2597,167 @@ var SIDEBAR_TOGGLE_DIRECTIVES = [
 
 /***/ }),
 
+/***/ "./webapp/app/reservation/modal/articleComponent/article.component.html":
+/*!******************************************************************************!*\
+  !*** ./webapp/app/reservation/modal/articleComponent/article.component.html ***!
+  \******************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"row\" style=\"align-items : baseline\">\r\n\t<div class=\"column\">\r\n\t\t<mat-form-field>\r\n\t\t\t<mat-select placeholder=\"Type de mat&eacute;riel\" [(value)]=\"article.type\" (selectionChange)=\"changementArticle()\">\r\n\t\t\t<mat-option *ngFor=\"let type of typeDispo\" [value]=\"type\">\r\n\t    \t\t{{type}}\r\n\t\t\t</mat-option>\r\n\t\t\t</mat-select>\r\n\t\t</mat-form-field>\r\n\t</div>\r\n\t<div class=\"column\" *ngIf=\"typeArticleChargee\">\r\n\t\t<mat-form-field>\r\n\t\t\t<mat-select placeholder=\"Mat&eacute;riel\" [(value)]=\"article.id\" (selectionChange)=\"getQuantiteMax()\">\r\n\t\t\t<mat-option *ngFor=\"let articleid of listeArticleSelect\" [value]=\"articleid.id\" >\r\n\t\t\t  \t  {{articleid.description}}\r\n\t\t\t</mat-option>\r\n\t\t\t</mat-select>\r\n\t\t</mat-form-field>\r\n\t</div>\r\n\t<div class=\"column\" *ngIf=\"quantmaxchargee\">\r\n\t\t<mat-form-field>\r\n\t\t\t<input matInput placeholder=\"Quantit&eacute; (Reste : {{quantiteMax}})\" type=\"number\" min =\"0\" max=\"quantiteMax\" name=\"quantite\" [(ngModel)] = \"article.quantiteMax\" (click)=\"saveEtat()\" (focusout)=\"saveQuantite()\">\r\n\t\t</mat-form-field>\r\n\t</div>\r\n\t<i (click)=\"supprimerArticle()\" class=\"fas fa-trash\" style=\"margin-left:15px; float:right\"></i>\r\n</div>"
+
+/***/ }),
+
+/***/ "./webapp/app/reservation/modal/articleComponent/article.component.ts":
+/*!****************************************************************************!*\
+  !*** ./webapp/app/reservation/modal/articleComponent/article.component.ts ***!
+  \****************************************************************************/
+/*! exports provided: ArticleComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ArticleComponent", function() { return ArticleComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "../../node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var src_main_webapp_app_shared_reservation_reservation_entity__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! src/main/webapp/app/shared/reservation/reservation.entity */ "./webapp/app/shared/reservation/reservation.entity.ts");
+/* harmony import */ var src_main_webapp_app_shared_reservation_articleDispo_entity__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/main/webapp/app/shared/reservation/articleDispo.entity */ "./webapp/app/shared/reservation/articleDispo.entity.ts");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+//import { ModalAjoutComponent } from "src/main/webapp/app/reservation/modal/modal-ajout.component";
+var ArticleComponent = /** @class */ (function () {
+    function ArticleComponent() {
+        this.reservationUpdated = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
+        this.etatQ = 0;
+        this.article = new src_main_webapp_app_shared_reservation_articleDispo_entity__WEBPACK_IMPORTED_MODULE_2__["ArticleDispo"]();
+    }
+    ArticleComponent.prototype.ngOnInit = function () {
+        if (this.reservationAdd.articleResaDto[this.indexAjout].articleId) {
+            this.article.description = this.reservationAdd.articleResaDto[this.indexAjout].nom;
+            this.article.type = this.reservationAdd.articleResaDto[this.indexAjout].type;
+            this.article.id = this.reservationAdd.articleResaDto[this.indexAjout].articleId;
+            this.article.quantiteMax = this.reservationAdd.articleResaDto[this.indexAjout].quantite;
+            this.changementArticle();
+            this.getQuantiteMax();
+        }
+    };
+    // Changement Type d'article -> filtrage et création liste des articles dispo 
+    ArticleComponent.prototype.changementArticle = function () {
+        var typeChoisit = this.article.type;
+        var listeArticle = [];
+        this.listeArticlesDispo.forEach(function (articleDispo) {
+            if (articleDispo.type == typeChoisit) {
+                listeArticle.push(articleDispo);
+            }
+        });
+        this.listeArticleSelect = listeArticle;
+        this.typeArticleChargee = true;
+        this.quantiteMax = '';
+        this.quantiteChoisie = '';
+        if (this.quantmaxchargee == true) {
+            this.quantmaxchargee = false;
+        }
+    };
+    ArticleComponent.prototype.getQuantiteMax = function () {
+        var articlechoisit = this.article.id;
+        var quantMax;
+        this.reservationAdd.articleResaDto[this.indexAjout].articleId = articlechoisit;
+        this.listeArticleSelect.forEach(function (articleDispo) {
+            if (articleDispo.id == articlechoisit) {
+                quantMax = articleDispo.quantiteMax;
+            }
+        });
+        this.quantiteMax = quantMax;
+        if (parseInt(this.quantiteMax) < 0) {
+            this.quantiteMax = "0";
+        }
+        this.quantmaxchargee = true;
+    };
+    ArticleComponent.prototype.saveEtat = function () {
+        this.getQuantiteMax();
+        if (!this.article.quantiteMax) {
+            this.etatQ = 0;
+        }
+        else {
+            this.etatQ = this.article.quantiteMax;
+        }
+        console.log("saveEtat", this.etatQ);
+    };
+    ArticleComponent.prototype.saveQuantite = function () {
+        var quantite = this.article.quantiteMax;
+        if (quantite > parseInt(this.quantiteMax + this.etatQ)) {
+            this.article.quantiteMax = parseInt(this.quantiteMax) + this.etatQ;
+            this.reservationAdd.articleResaDto[this.indexAjout].quantite = parseInt(this.quantiteMax) + this.etatQ;
+        }
+        else if (!quantite || quantite < 0) {
+            this.article.quantiteMax = 0;
+            this.reservationAdd.articleResaDto[this.indexAjout].quantite = 0;
+        }
+        else {
+            this.reservationAdd.articleResaDto[this.indexAjout].quantite = quantite;
+        }
+        this.listeArticlesDispo.forEach(function (articleDispo) {
+            if (this.reservationAdd.articleResaDto[this.indexAjout].articleId === articleDispo.id) {
+                console.log("etat", this.etatQ);
+                console.log("q", this.reservationAdd.articleResaDto[this.indexAjout].quantite);
+                articleDispo.quantiteMax = articleDispo.quantiteMax - this.reservationAdd.articleResaDto[this.indexAjout].quantite + this.etatQ;
+                this.quantiteMax = articleDispo.quantiteMax;
+            }
+        }.bind(this));
+    };
+    ArticleComponent.prototype.supprimerArticle = function () {
+        this.listeArticlesDispo.forEach(function (articleDispo) {
+            if (this.reservationAdd.articleResaDto[this.indexAjout].quantite && this.reservationAdd.articleResaDto[this.indexAjout].articleId === articleDispo.id) {
+                articleDispo.quantiteMax = articleDispo.quantiteMax + this.reservationAdd.articleResaDto[this.indexAjout].quantite;
+                this.quantiteMax = articleDispo.quantiteMax;
+            }
+        }.bind(this));
+        this.reservationAdd.articleResaDto.splice(this.indexAjout, 1);
+        this.reservationUpdated.emit(this.reservationAdd);
+    };
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
+        __metadata("design:type", Array)
+    ], ArticleComponent.prototype, "listeArticlesDispo", void 0);
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
+        __metadata("design:type", Array)
+    ], ArticleComponent.prototype, "typeDispo", void 0);
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
+        __metadata("design:type", src_main_webapp_app_shared_reservation_reservation_entity__WEBPACK_IMPORTED_MODULE_1__["Reservation"])
+    ], ArticleComponent.prototype, "reservationAdd", void 0);
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
+        __metadata("design:type", Number)
+    ], ArticleComponent.prototype, "indexAjout", void 0);
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Output"])(),
+        __metadata("design:type", Object)
+    ], ArticleComponent.prototype, "reservationUpdated", void 0);
+    ArticleComponent = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+            selector: 'ref-article',
+            template: __webpack_require__(/*! ./article.component.html */ "./webapp/app/reservation/modal/articleComponent/article.component.html"),
+            providers: [],
+        })
+    ], ArticleComponent);
+    return ArticleComponent;
+}());
+
+
+
+/***/ }),
+
 /***/ "./webapp/app/reservation/modal/modal-ajout.component.html":
 /*!*****************************************************************!*\
   !*** ./webapp/app/reservation/modal/modal-ajout.component.html ***!
@@ -2375,7 +2765,7 @@ var SIDEBAR_TOGGLE_DIRECTIVES = [
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<<<<<<< HEAD\r\n<div class=\"row\" style=\"justify-content: space-between\">\r\n<h2 mat-dialog-title class=\"color-bleu row\">{{titre}} </h2>\r\n<mat-checkbox color=\"warn\" style=\"float:right;\" [(ngModel)] = \"reservationAdd.asso\">Association</mat-checkbox>\r\n</div>\r\n<mat-dialog-content>\r\n\t<div class=\"row\">\r\n    \t<div class=\"form-group\" *ngIf=\"reservationAdd.asso\" style=\" border-bottom: 1px solid #959595;\">\r\n    \t\t<label>Raison sociale </label>\r\n\t        <input matInput id=\"rs\" name=\"rs\" [(ngModel)] = \"reservationAdd.nom\"/>\r\n\t    </div>\r\n\t    <div class=\"form-group row\" *ngIf=\"!reservationAdd.asso\">\r\n\t    \t<div class=\"column matinput\">\r\n\t    \t\t<label>Nom </label>\r\n\t    \t\t<input matInput id=\"nom\" name=\"nom\" [(ngModel)] = \"reservationAdd.nom\" />\r\n\t    \t</div>\r\n\t    \t<div class=\"column matinput\">\r\n\t    \t\t<label>Pr&eacute;nom </label>\r\n\t    \t\t<input matInput id=\"prenom\" name=\"prenom\" [(ngModel)] = \"reservationAdd.prenom\"/>\r\n\t    \t</div>\r\n\t    </div>\r\n\t</div>\r\n\t<div class=\"row\">\r\n    \t<mat-form-field>\r\n\t\t  <input matInput [matDatepicker]=\"dateDebut\" placeholder=\"Date de d&eacute;but\"  [(ngModel)] = \"reservationAdd.dateEmprunt\" (dateChange)=\"dateChanged()\">\r\n\t\t  <mat-datepicker-toggle matSuffix [for]=\"dateDebut\"></mat-datepicker-toggle>\r\n\t\t  <mat-datepicker #dateDebut></mat-datepicker>\r\n\t\t</mat-form-field>\r\n\t\t<mat-form-field>\r\n\t\t  <input matInput [matDatepicker]=\"dateFin\" placeholder=\"Date de fin\" [(ngModel)] = \"reservationAdd.dateRestitution\" (dateChange)=\"dateChanged()\">\r\n\t\t  <mat-datepicker-toggle matSuffix [for]=\"dateFin\"></mat-datepicker-toggle>\r\n\t\t  <mat-datepicker #dateFin></mat-datepicker>\r\n\t\t</mat-form-field>\r\n\t</div>\r\n\t<div *ngIf=\"typeDispo && typeDispo.length != 0\">\r\n\t\t<hr/>\r\n\t\t<h5>S&eacute;lection du mat&eacute;riel</h5>\r\n\t\t<div class=\"row\">\r\n\t\t\t<div class=\"column\">\r\n\t\t\t\t<mat-form-field>\r\n\t\t\t\t  <mat-select placeholder=\"Type de mat&eacute;riel\" [(value)]=\"typeChoisit\" (selectionChange)=\"changementArticle()\">\r\n\t\t\t\t    <mat-option *ngFor=\"let type of typeDispo\" [value]=\"type\">\r\n\t\t\t\t      {{type}}\r\n\t\t\t\t    </mat-option>\r\n\t\t\t\t  </mat-select>\r\n\t\t\t\t</mat-form-field>\r\n\t\t\t</div>\r\n\t\t\t<div class=\"column\">\r\n\t\t\t\t<mat-form-field>\r\n\t\t\t\t  <mat-select placeholder=\"Mat&eacute;riel\">\r\n\t\t\t\t    <mat-option *ngFor=\"let article of listeArticleSelect\" [value]=\"article.id\">\r\n\t\t\t\t      {{article.description}}\r\n\t\t\t\t    </mat-option>\r\n\t\t\t\t  </mat-select>\r\n\t\t\t\t</mat-form-field>\r\n\t\t\t</div>\r\n\t\t</div>\r\n\t</div>\r\n</mat-dialog-content>\r\n<mat-dialog-actions>\r\n    <button class=\"btn btn-link\"(click)=\"dialogRef.close()\">Annuler</button>\r\n    <button class=\"btn btn-success\"(click)=\"save()\">{{labelBouton}}</button>\r\n</mat-dialog-actions>"
+module.exports = "<div class=\"row\" style=\"justify-content: space-between\">\r\n<h2 mat-dialog-title class=\"color-bleu row\">{{titre}} </h2>\r\n<mat-checkbox color=\"warn\" style=\"float:right;\" [(ngModel)] = \"reservationAdd.asso\">Association</mat-checkbox>\r\n</div>\r\n\r\n<ngb-alert *ngIf=\"!valid || saveFailed || dateFailed\">\r\n    \t{{message}}\r\n  </ngb-alert>\r\n<form (ngSubmit)=\"save()\" ngNativeValidate>\r\n\t<mat-dialog-content>\r\n\t\t<div class=\"row\">\r\n    \t\t<div class=\"form-group\" *ngIf=\"reservationAdd.asso\"> \r\n\t        \t<mat-form-field>\r\n\t\t  \t\t\t<input matInput placeholder=\"Raison sociale\" id=\"rs\" name=\"rs\" [(ngModel)] = \"reservationAdd.nom\">\r\n\t\t\t\t</mat-form-field>\r\n\t    \t</div>\r\n\t    \t<div class=\"form-group row\" *ngIf=\"!reservationAdd.asso\">\r\n\t    \t\t<div class=\"column\">\r\n\t    \t\t\t<mat-form-field>\r\n\t\t  \t\t\t\t<input matInput placeholder=\"Nom\" id=\"nom\" required name=\"nom\" [(ngModel)] = \"reservationAdd.nom\">\r\n\t\t\t\t\t</mat-form-field>\r\n\t    \t\t</div>\r\n\t    \t\t<div class=\"column\">\r\n\t    \t\t\t<mat-form-field>\r\n\t\t  \t\t\t\t<input matInput placeholder=\"Pr&eacute;nom\" id=\"prenom\" name=\"prenom\" [(ngModel)] = \"reservationAdd.prenom\">\r\n\t\t\t\t\t</mat-form-field>\r\n\t    \t\t</div>\r\n\t    \t</div>\r\n\t\t</div>\r\n\t\t<div class=\"row\" *ngIf=\"!modif\">\r\n    \t\t<mat-form-field>\r\n\t\t  \t\t<input matInput [matDatepicker]=\"dateDebut\" required placeholder=\"Date de d&eacute;but\" name=\"dateEmprunt\" [(ngModel)] = \"reservationAdd.dateEmprunt\" (dateChange)=\"dateChanged()\">\r\n\t\t  \t\t<mat-datepicker-toggle matSuffix [for]=\"dateDebut\"></mat-datepicker-toggle>\r\n\t\t\t\t<mat-datepicker #dateDebut></mat-datepicker>\r\n\t\t\t</mat-form-field>\r\n\t\t\t<mat-form-field>\r\n\t\t\t\t<input matInput [matDatepicker]=\"dateFin\" required placeholder=\"Date de fin\"  name=\"dateRestitution\" [(ngModel)] = \"reservationAdd.dateRestitution\" (dateChange)=\"dateChanged()\">\r\n\t\t\t\t<mat-datepicker-toggle matSuffix [for]=\"dateFin\"></mat-datepicker-toggle>\r\n\t\t\t\t<mat-datepicker #dateFin [startAt]=\"reservationAdd.dateEmprunt\"></mat-datepicker>\r\n\t\t\t</mat-form-field>\r\n\t\t</div>\r\n\t\t<div class=\"row\" *ngIf=\"modif\">\r\n\t\t\t<div class=\"column\">\r\n    \t\t\t<mat-form-field>\r\n\t  \t\t\t\t<input matInput readonly placeholder=\"Date de d&eacute;but\" name=\"dateEmprunt\" [(ngModel)] = \"dateEmprunt\">\r\n\t\t\t\t</mat-form-field>\r\n\t    \t</div>\r\n\t    \t<div class=\"column\">\r\n\t    \t\t<mat-form-field>\r\n\t  \t\t\t\t<input matInput readonly placeholder=\"Date de fin\" name=\"dateRestitution\" [(ngModel)] = \"dateRestitution\">\r\n\t\t\t\t</mat-form-field>\r\n\t    \t</div>\r\n\t\t</div>\r\n\t\t<div *ngIf=\"(typeDispo && typeDispo.length != 0)\">\r\n\t\t\t<hr/>\r\n\t\t\t<h5>S&eacute;lection du mat&eacute;riel</h5>\r\n\t\t\t<div *ngFor=\"let articlechoisi of reservationAdd.articleResaDto; index as i\">\r\n\t\t\t\t<ref-article  \r\n\t\t\t\t\t[listeArticlesDispo]=\"listeArticlesDispo\"\r\n\t\t\t\t\t[typeDispo]=\"typeDispo\" [reservationAdd]=\"reservationAdd\" [indexAjout]=\"i\"\r\n\t\t\t\t\t(reservationUpdated) = \"getReservationUpdate($event)\">\t\r\n\t\t\t\t</ref-article>\r\n\t\t\t</div>\t\r\n\t\t\t<div class = \"row\" style=\"align-items:flex-start; justify-content:space-between\" >\r\n\t\t\t\t<div class=\"column\">\r\n\t\t        \t<button type=\"button\" class=\"btn btn-success\" (click)=\"ajoutArticle()\">Ajout article</button>\r\n\t\t    \t</div>\r\n\t\t\t</div>\r\n\t\t</div>\r\n\t\t<hr/>\r\n\t\t<div style=\"width:100%\">\r\n\t\t\t<h5>Commentaires</h5>\r\n\t\t\t<mat-form-field style=\"width:100%\">\r\n    \t\t\t<textarea matInput style=\"min-width: 100%\" [(ngModel)] = \"reservationAdd.commentaire\" [ngModelOptions]=\"{standalone: true}\"></textarea>\r\n    \t\t</mat-form-field>\r\n    \t</div>\r\n\t</mat-dialog-content>\r\n\t<mat-dialog-actions>\r\n\t\t<button type=\"button\" class=\"btn btn-link\" (click)=\"dialogRef.close()\">Annuler</button>\r\n\t\t<button type=\"button\" *ngIf=\"modif\" class=\"btn btn-success\" (click)=\"supprimerReservation()\">Supprimer</button>\r\n\t\t<button type=\"submit\" class=\"btn btn-success\">{{labelBouton}}</button>\r\n\t</mat-dialog-actions>\r\n</form>"
 
 /***/ }),
 
@@ -2395,6 +2785,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var src_main_webapp_app_shared_reservation_reservation_entity__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/main/webapp/app/shared/reservation/reservation.entity */ "./webapp/app/shared/reservation/reservation.entity.ts");
 /* harmony import */ var src_main_webapp_app_reservation_reservation_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/main/webapp/app/reservation/reservation.service */ "./webapp/app/reservation/reservation.service.ts");
 /* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/common */ "../../node_modules/@angular/common/fesm5/common.js");
+/* harmony import */ var src_main_webapp_app_shared_reservation_reservationArticle_entity__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! src/main/webapp/app/shared/reservation/reservationArticle.entity */ "./webapp/app/shared/reservation/reservationArticle.entity.ts");
+/* harmony import */ var _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @ng-bootstrap/ng-bootstrap */ "../../node_modules/@ng-bootstrap/ng-bootstrap/fesm5/ng-bootstrap.js");
+/* harmony import */ var src_main_webapp_app_auth_token_storage_service__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! src/main/webapp/app/auth/token-storage.service */ "./webapp/app/auth/token-storage.service.ts");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! moment */ "../../node_modules/moment/moment.js");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_9__);
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -2413,66 +2808,152 @@ var __param = (undefined && undefined.__param) || function (paramIndex, decorato
 
 
 
+
+
+
+
 var ModalAjoutComponent = /** @class */ (function () {
-    function ModalAjoutComponent(dialogRef, reservationService, data, adapter, datepipe) {
+    function ModalAjoutComponent(dialogRef, reservationService, data, adapter, alertConfig, datepipe, token) {
         this.dialogRef = dialogRef;
         this.reservationService = reservationService;
         this.data = data;
         this.adapter = adapter;
+        this.alertConfig = alertConfig;
         this.datepipe = datepipe;
+        this.token = token;
         this.date = new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"](new Date());
         this.serializedDate = new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"]((new Date()).toISOString());
         this.dateDebut = new Date();
+        this.valid = true;
+        this.dateFailed = false;
+        this.saveFailed = false;
+        this.modif = false;
+        this.article = new src_main_webapp_app_shared_reservation_reservationArticle_entity__WEBPACK_IMPORTED_MODULE_6__["ReservationArticle"]();
+        this.listeResaArticleAjoutes = [];
+        alertConfig.type = 'danger';
+        alertConfig.dismissible = false;
     }
     ModalAjoutComponent.prototype.ngOnInit = function () {
         //changement langue pour affichage chiffre datepicker
         this.adapter.setLocale('fr');
         if (this.data.reservation) {
             this.reservationAdd = this.data.reservation;
+            this.dateEmprunt = moment__WEBPACK_IMPORTED_MODULE_9__(this.reservationAdd.dateEmprunt).format('DD/MM/YYYY');
+            if (this.data.reservation.id) {
+                this.dateRestitution = moment__WEBPACK_IMPORTED_MODULE_9__(this.reservationAdd.dateRestitution).format('DD/MM/YYYY');
+                this.modif = true;
+                this.titre = "Modification d'une réservation";
+                this.labelBouton = "Modifier";
+                this.dateChanged();
+            }
+            else {
+                this.titre = "Ajout d'une réservation";
+                this.labelBouton = "Ajouter";
+                this.reservationAdd.asso = false;
+                this.modif = false;
+                this.ajoutArticle();
+            }
         }
         else {
             this.reservationAdd = new src_main_webapp_app_shared_reservation_reservation_entity__WEBPACK_IMPORTED_MODULE_3__["Reservation"]();
-        }
-        if (this.reservationAdd.id != null) {
-            this.titre = "Modification d'une réservation";
-            this.labelBouton = "Modifier";
-        }
-        else {
             this.titre = "Ajout d'une réservation";
             this.labelBouton = "Ajouter";
+            this.modif = false;
         }
+        this.user = this.token.getUsername();
     };
     // Changement de date, recherche des articles dispos
     ModalAjoutComponent.prototype.dateChanged = function () {
         var _this = this;
         if (this.reservationAdd.dateEmprunt && this.reservationAdd.dateRestitution) {
+            if (this.listeArticlesDispo != null) {
+                console.log("vidage de la liste des articles");
+                this.reservationAdd.articleResaDto.splice(0, this.reservationAdd.articleResaDto.length);
+                this.ajoutArticle();
+            }
             var dateDFormat = (this.datepipe.transform(this.reservationAdd.dateEmprunt, 'dd/MM/yyyy'));
             var dateFFormat = (this.datepipe.transform(this.reservationAdd.dateRestitution, 'dd/MM/yyyy'));
-            this.reservationService.getArticlesDispo(dateDFormat, dateFFormat).subscribe(function (data) {
-                var typeDispoInter = [];
-                data.forEach(function (articleDispo) {
-                    if (!typeDispoInter.includes(articleDispo.type)) {
-                        typeDispoInter.push(articleDispo.type);
-                    }
+            if (this.reservationAdd.dateEmprunt > this.reservationAdd.dateRestitution) {
+                this.dateFailed = true;
+                this.message = "Veuillez choisir une date de retour supérieure à la date d'emprunt";
+            }
+            else {
+                this.dateFailed = false;
+                this.reservationService.getArticlesDispo(dateDFormat, dateFFormat).subscribe(function (data) {
+                    var typeDispoInter = [];
+                    data.forEach(function (articleDispo) {
+                        if (!typeDispoInter.includes(articleDispo.type)) {
+                            typeDispoInter.push(articleDispo.type);
+                        }
+                    });
+                    _this.typeDispo = typeDispoInter;
+                    _this.listeArticlesDispo = data;
                 });
-                _this.typeDispo = typeDispoInter;
-                _this.listeArticlesDispo = data;
-            });
+            }
         }
     };
-    // Changement Type d'article -> filtrage et création liste des articles dispo 
-    ModalAjoutComponent.prototype.changementArticle = function () {
-        var typeChoisit = this.typeChoisit;
-        var listeArticle = [];
-        this.listeArticlesDispo.forEach(function (articleDispo) {
-            if (articleDispo.type == typeChoisit) {
-                listeArticle.push(articleDispo);
-            }
-        });
-        this.listeArticleSelect = listeArticle;
+    ModalAjoutComponent.prototype.ajoutArticle = function () {
+        var newArticle = new src_main_webapp_app_shared_reservation_reservationArticle_entity__WEBPACK_IMPORTED_MODULE_6__["ReservationArticle"]();
+        newArticle.newArticle = true;
+        this.reservationAdd.articleResaDto.push(Object.assign({}, newArticle));
+    };
+    ModalAjoutComponent.prototype.getReservationUpdate = function ($event) {
+        this.reservationAdd = $event;
     };
     ModalAjoutComponent.prototype.save = function () {
-        console.log("coucoou");
+        var _this = this;
+        if (!this.dateFailed) {
+            for (var i = 0; i < this.reservationAdd.articleResaDto.length; i++) {
+                if (!this.reservationAdd.articleResaDto[i].quantite || this.reservationAdd.articleResaDto[i].quantite === 0) {
+                    this.reservationAdd.articleResaDto.splice(i, 1);
+                }
+            }
+            if (this.reservationAdd.articleResaDto.length === 0) {
+                this.saveFailed = true;
+                this.message = "Veuillez ajouter au moins un article à la réservation";
+            }
+            else {
+                this.saveFailed = false;
+                this.reservationAdd.creerPar = this.user;
+                this.reservationService.validerArticles(this.reservationAdd).subscribe(function (data) {
+                    _this.valid = data;
+                    if (_this.valid) {
+                        _this.reservationService.saveReservation(_this.reservationAdd).subscribe(function (data) {
+                            _this.dialogRef.close();
+                            window.location.reload();
+                        }, function (error) {
+                            console.log(error);
+                            _this.message = "Erreur d'enregistrement de la réservation";
+                            _this.saveFailed = true;
+                        });
+                    }
+                    else {
+                        _this.valid = false;
+                        _this.message = "Les quantités désirées ne sont plus disponibles, veuillez recharger la page";
+                    }
+                }, function (error) {
+                    console.log(error);
+                    _this.message = "Erreur de validation de la réservation";
+                    _this.valid = false;
+                });
+            }
+        }
+        else {
+            console.log("Date incorrecte");
+        }
+    };
+    ModalAjoutComponent.prototype.supprimerArticle = function () {
+        this.reservationAdd.articleResaDto.splice(this.indexModif, 1);
+    };
+    ModalAjoutComponent.prototype.supprimerReservation = function () {
+        var _this = this;
+        this.reservationService.supprimerReservation(this.reservationAdd).subscribe(function (data) {
+            _this.dialogRef.close();
+            window.location.reload();
+        }, function (error) {
+            console.log(error);
+            _this.message = "Erreur de suppression de la réservation";
+        });
     };
     ModalAjoutComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -2480,10 +2961,12 @@ var ModalAjoutComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./modal-ajout.component.html */ "./webapp/app/reservation/modal/modal-ajout.component.html"),
             providers: [
                 { provide: _angular_material__WEBPACK_IMPORTED_MODULE_1__["MAT_DATE_LOCALE"], useValue: 'fr-FR' },
+                _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_7__["NgbAlertConfig"]
             ],
         }),
         __param(2, Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Inject"])(_angular_material__WEBPACK_IMPORTED_MODULE_1__["MAT_DIALOG_DATA"])),
-        __metadata("design:paramtypes", [_angular_material__WEBPACK_IMPORTED_MODULE_1__["MatDialogRef"], src_main_webapp_app_reservation_reservation_service__WEBPACK_IMPORTED_MODULE_4__["ReservationService"], Object, _angular_material__WEBPACK_IMPORTED_MODULE_1__["DateAdapter"], _angular_common__WEBPACK_IMPORTED_MODULE_5__["DatePipe"]])
+        __metadata("design:paramtypes", [_angular_material__WEBPACK_IMPORTED_MODULE_1__["MatDialogRef"], src_main_webapp_app_reservation_reservation_service__WEBPACK_IMPORTED_MODULE_4__["ReservationService"], Object, _angular_material__WEBPACK_IMPORTED_MODULE_1__["DateAdapter"],
+            _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_7__["NgbAlertConfig"], _angular_common__WEBPACK_IMPORTED_MODULE_5__["DatePipe"], src_main_webapp_app_auth_token_storage_service__WEBPACK_IMPORTED_MODULE_8__["TokenStorageService"]])
     ], ModalAjoutComponent);
     return ModalAjoutComponent;
 }());
@@ -2505,6 +2988,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "../../node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/router */ "../../node_modules/@angular/router/fesm5/router.js");
 /* harmony import */ var _reservation_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./reservation.component */ "./webapp/app/reservation/reservation.component.ts");
+/* harmony import */ var src_main_webapp_app_auth_route_guard__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/main/webapp/app/auth/route.guard */ "./webapp/app/auth/route.guard.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -2514,10 +2998,12 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 
 
 
+
 var routes = [
     {
         path: '',
         component: _reservation_component__WEBPACK_IMPORTED_MODULE_2__["ReservationComponent"],
+        canActivate: [src_main_webapp_app_auth_route_guard__WEBPACK_IMPORTED_MODULE_3__["RouteGuard"]],
         data: {
             title: 'Gestion des réservations'
         }
@@ -2592,9 +3078,6 @@ var ReservationComponent = /** @class */ (function () {
         this.reservationService = reservationService;
         this.datepipe = datepipe;
     }
-    ReservationComponent.prototype.ngOnChanges = function (changes) {
-        // changes.prop contains the old and the new value...
-    };
     ReservationComponent.prototype.ngOnInit = function () {
         // Changement langue de anglais vers français
         var sld = {
@@ -2628,19 +3111,33 @@ var ReservationComponent = /** @class */ (function () {
         // Vue moi par défault
         scheduler.init(this.schedulerContainer.nativeElement, new Date(), "month");
         scheduler.config.xml_date = "%Y-%m-%d %H:%i";
+        //Disabled drag
+        scheduler.config.drag_resize = false;
+        scheduler.config.drag_move = false;
+        scheduler.config.drag_create = false;
         this.chargedResas();
         // Custom modal for add/update event
         // bind(this) permet de conserver le this comme etant le component et non la fonction
         scheduler.showLightbox = function (id) {
+            var _this = this;
             var lightbox_event = scheduler.getEvent(id);
-            console.log(lightbox_event);
             scheduler.startLightbox(id, null);
             scheduler.hideCover();
-            var reservation = new src_main_webapp_app_shared_reservation_reservation_entity__WEBPACK_IMPORTED_MODULE_5__["Reservation"]();
-            reservation.dateEmprunt = lightbox_event.start_date;
-            var dialogRef = this.dialog.open(_modal_modal_ajout_component__WEBPACK_IMPORTED_MODULE_4__["ModalAjoutComponent"], {
-                data: { reservation: reservation }
-            });
+            if (id > 1000000000000) {
+                var reservation = new src_main_webapp_app_shared_reservation_reservation_entity__WEBPACK_IMPORTED_MODULE_5__["Reservation"]();
+                reservation.dateEmprunt = lightbox_event.start_date;
+                var dialogRef = this.dialog.open(_modal_modal_ajout_component__WEBPACK_IMPORTED_MODULE_4__["ModalAjoutComponent"], {
+                    data: { reservation: reservation }
+                });
+            }
+            else {
+                this.reservationService.getReservationById(id).subscribe(function (data) {
+                    var reservation = data;
+                    var dialogRef = _this.dialog.open(_modal_modal_ajout_component__WEBPACK_IMPORTED_MODULE_4__["ModalAjoutComponent"], {
+                        data: { reservation: reservation }
+                    });
+                });
+            }
         }.bind(this);
         //Event permettant de gerer le changement de mois pour la recuperation des resas visibles
         scheduler.attachEvent("onViewChange", function () {
@@ -2701,12 +3198,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modal_modal_ajout_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./modal/modal-ajout.component */ "./webapp/app/reservation/modal/modal-ajout.component.ts");
 /* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @angular/material */ "../../node_modules/@angular/material/esm5/material.es5.js");
 /* harmony import */ var _angular_material_datepicker__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @angular/material/datepicker */ "../../node_modules/@angular/material/esm5/datepicker.es5.js");
+/* harmony import */ var _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @ng-bootstrap/ng-bootstrap */ "../../node_modules/@ng-bootstrap/ng-bootstrap/fesm5/ng-bootstrap.js");
+/* harmony import */ var _modal_articleComponent_article_component__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./modal/articleComponent/article.component */ "./webapp/app/reservation/modal/articleComponent/article.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
+
 
 
 
@@ -2736,9 +3237,10 @@ var ReservationModule = /** @class */ (function () {
                 _angular_material__WEBPACK_IMPORTED_MODULE_10__["MatInputModule"],
                 _angular_material__WEBPACK_IMPORTED_MODULE_10__["MatCheckboxModule"],
                 _angular_material__WEBPACK_IMPORTED_MODULE_10__["MatSelectModule"],
-                _angular_material_datepicker__WEBPACK_IMPORTED_MODULE_11__["MatDatepickerModule"]
+                _angular_material_datepicker__WEBPACK_IMPORTED_MODULE_11__["MatDatepickerModule"],
+                _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_12__["NgbModule"]
             ],
-            declarations: [_reservation_component__WEBPACK_IMPORTED_MODULE_4__["ReservationComponent"], _modal_modal_ajout_component__WEBPACK_IMPORTED_MODULE_9__["ModalAjoutComponent"]],
+            declarations: [_reservation_component__WEBPACK_IMPORTED_MODULE_4__["ReservationComponent"], _modal_modal_ajout_component__WEBPACK_IMPORTED_MODULE_9__["ModalAjoutComponent"], _modal_articleComponent_article_component__WEBPACK_IMPORTED_MODULE_13__["ArticleComponent"]],
             entryComponents: [_modal_modal_ajout_component__WEBPACK_IMPORTED_MODULE_9__["ModalAjoutComponent"]],
             providers: [_reservation_service__WEBPACK_IMPORTED_MODULE_5__["ReservationService"], _angular_http__WEBPACK_IMPORTED_MODULE_6__["Http"], _angular_common__WEBPACK_IMPORTED_MODULE_1__["DatePipe"], src_main_webapp_app_auth_auth_interceptor__WEBPACK_IMPORTED_MODULE_8__["httpInterceptorProviders"]]
         })
@@ -2777,16 +3279,23 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+var httpOptions = {
+    headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpHeaders"]({ 'Content-Type': 'application/json' })
+};
 var ReservationService = /** @class */ (function () {
     function ReservationService(httpClient, datepipe) {
         this.httpClient = httpClient;
         this.datepipe = datepipe;
+        this.reservationUrl = 'acs/reservations/';
+        this.validReservationUrl = 'acs/articles/validate';
+        this.getReservationByIdUrl = 'acs/reservations/id';
+        this.deleteReservation = 'acs/reservations/delete';
     }
     ReservationService.prototype.getReservation = function (dateDebut, dateFin) {
         var params = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpParams"]();
         params = params.append('debut', dateDebut);
         params = params.append('fin', dateFin);
-        return this.httpClient.get("acs/reservations/", { params: params });
+        return this.httpClient.get(this.reservationUrl, { params: params });
     };
     ReservationService.prototype.transformedReservationToSchedulerEvent = function (reservations) {
         var eventList = [];
@@ -2810,11 +3319,46 @@ var ReservationService = /** @class */ (function () {
         params = params.append('fin', dateFin);
         return this.httpClient.get("acs/articles/articledispo", { params: params });
     };
+    ReservationService.prototype.saveReservation = function (reservation) {
+        return this.httpClient.post(this.reservationUrl, reservation, httpOptions);
+    };
+    //méthode de validation de la réservation (accès concurrent)
+    ReservationService.prototype.validerArticles = function (reservation) {
+        return this.httpClient.post(this.validReservationUrl, reservation, httpOptions);
+    };
+    ReservationService.prototype.getReservationById = function (id) {
+        var params = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpParams"]();
+        params = params.append('id', id);
+        return this.httpClient.get(this.getReservationByIdUrl, { params: params });
+    };
+    ReservationService.prototype.supprimerReservation = function (reservation) {
+        return this.httpClient.post(this.deleteReservation, reservation, httpOptions);
+    };
     ReservationService = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])(),
         __metadata("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"], _angular_common__WEBPACK_IMPORTED_MODULE_3__["DatePipe"]])
     ], ReservationService);
     return ReservationService;
+}());
+
+
+
+/***/ }),
+
+/***/ "./webapp/app/shared/reservation/articleDispo.entity.ts":
+/*!**************************************************************!*\
+  !*** ./webapp/app/shared/reservation/articleDispo.entity.ts ***!
+  \**************************************************************/
+/*! exports provided: ArticleDispo */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ArticleDispo", function() { return ArticleDispo; });
+var ArticleDispo = /** @class */ (function () {
+    function ArticleDispo() {
+    }
+    return ArticleDispo;
 }());
 
 
@@ -2853,8 +3397,406 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Reservation", function() { return Reservation; });
 var Reservation = /** @class */ (function () {
     function Reservation() {
+        this.articleResaDto = new Array();
     }
     return Reservation;
+}());
+
+
+
+/***/ }),
+
+/***/ "./webapp/app/shared/reservation/reservationArticle.entity.ts":
+/*!********************************************************************!*\
+  !*** ./webapp/app/shared/reservation/reservationArticle.entity.ts ***!
+  \********************************************************************/
+/*! exports provided: ReservationArticle */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ReservationArticle", function() { return ReservationArticle; });
+var ReservationArticle = /** @class */ (function () {
+    function ReservationArticle() {
+    }
+    return ReservationArticle;
+}());
+
+
+
+/***/ }),
+
+/***/ "./webapp/app/shared/user/userFonctionnel.entity.ts":
+/*!**********************************************************!*\
+  !*** ./webapp/app/shared/user/userFonctionnel.entity.ts ***!
+  \**********************************************************/
+/*! exports provided: UserFonctionnel */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UserFonctionnel", function() { return UserFonctionnel; });
+var UserFonctionnel = /** @class */ (function () {
+    function UserFonctionnel() {
+        this.roles = new Array();
+    }
+    return UserFonctionnel;
+}());
+
+
+
+/***/ }),
+
+/***/ "./webapp/app/user/modal/modal-modif-user.component.html":
+/*!***************************************************************!*\
+  !*** ./webapp/app/user/modal/modal-modif-user.component.html ***!
+  \***************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"row\" style=\"justify-content: space-between\">\r\n<h2 mat-dialog-title class=\"color-bleu row\">{{titre}} </h2>\r\n</div>\r\n\r\n<ngb-alert *ngIf=\"saveFailed\">\r\n    \t{{message}}\r\n  </ngb-alert>\r\n<form (ngSubmit)=\"save()\" ngNativeValidate>\r\n\t<mat-dialog-content>\r\n\t\t<div class=\"row\">\r\n\t\t\t<div class=\"form-group\"> \r\n\t        \t<mat-form-field>\r\n\t\t  \t\t\t<input matInput readonly placeholder=\"Identifiant\" id=\"username\" name=\"username\" [(ngModel)] = \"userAdd.username\">\r\n\t\t\t\t</mat-form-field>\r\n\t    \t</div>\r\n\t\t</div>\r\n\t\t<div class=\"row\">\r\n\t\t\t<div class=\"form-group\"> \r\n\t        \t<mat-form-field>\r\n\t\t  \t\t\t<input matInput readonly placeholder=\"Adresse mail\" id=\"mail\" name=\"mail\" [(ngModel)] = \"userAdd.email\">\r\n\t\t\t\t</mat-form-field>\r\n\t    \t</div>\r\n\t\t</div>\r\n\t\t<div class=\"row\">\r\n\t\t\t<div class=\"form-group\"> \r\n\t        \t<mat-checkbox color=\"warn\" style=\"float:right;\" name=\"administrateur\" [(ngModel)] = \"userAdd.administrateur\">Administrateur</mat-checkbox>\r\n\t    \t</div>\r\n\t\t</div>\t\r\n\t</mat-dialog-content>\r\n\t<mat-dialog-actions>\r\n\t\t<button type=\"button\" class=\"btn btn-link\" (click)=\"dialogRef.close()\">Annuler</button>\r\n\t\t<button type=\"submit\" class=\"btn btn-success\">{{labelBouton}}</button>\r\n\t</mat-dialog-actions>\r\n</form>"
+
+/***/ }),
+
+/***/ "./webapp/app/user/modal/modal-modif-user.component.ts":
+/*!*************************************************************!*\
+  !*** ./webapp/app/user/modal/modal-modif-user.component.ts ***!
+  \*************************************************************/
+/*! exports provided: ModalModifUserComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ModalModifUserComponent", function() { return ModalModifUserComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "../../node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/material */ "../../node_modules/@angular/material/esm5/material.es5.js");
+/* harmony import */ var _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ng-bootstrap/ng-bootstrap */ "../../node_modules/@ng-bootstrap/ng-bootstrap/fesm5/ng-bootstrap.js");
+/* harmony import */ var _user_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./../user.service */ "./webapp/app/user/user.service.ts");
+/* harmony import */ var _shared_user_userFonctionnel_entity__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../shared/user/userFonctionnel.entity */ "./webapp/app/shared/user/userFonctionnel.entity.ts");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __param = (undefined && undefined.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
+
+
+
+
+
+var ModalModifUserComponent = /** @class */ (function () {
+    function ModalModifUserComponent(dialogRef, data, userService, adapter, alertConfig) {
+        this.dialogRef = dialogRef;
+        this.data = data;
+        this.userService = userService;
+        this.adapter = adapter;
+        this.alertConfig = alertConfig;
+        this.saveFailed = false;
+        this.userAdd = new _shared_user_userFonctionnel_entity__WEBPACK_IMPORTED_MODULE_4__["UserFonctionnel"]();
+        alertConfig.type = 'danger';
+        alertConfig.dismissible = false;
+    }
+    ModalModifUserComponent.prototype.ngOnInit = function () {
+        if (this.data.user) {
+            this.titre = "Modification d'un utilisateur";
+            this.userAdd = this.data.user;
+            this.labelBouton = "Modifier";
+        }
+        else {
+            this.titre = "Ajout d'un utilisateur";
+            this.labelBouton = "Ajouter";
+        }
+    };
+    ModalModifUserComponent.prototype.save = function () {
+        var _this = this;
+        this.userAdd.roles = null;
+        if (this.userAdd.administrateur) {
+            this.userAdd.roles = new Array("ROLE_ADMIN", "ROLE_USER");
+        }
+        else {
+            this.userAdd.roles = new Array("ROLE_USER");
+        }
+        this.userService.saveUser(this.userAdd).subscribe(function (data) {
+            _this.dialogRef.close();
+            window.location.reload();
+        }, function (error) {
+            _this.message = "Erreur d'enregistrement de l'utilisateur";
+            _this.saveFailed = true;
+        });
+    };
+    ModalModifUserComponent = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+            selector: 'ref-modal-modif-user',
+            template: __webpack_require__(/*! ./modal-modif-user.component.html */ "./webapp/app/user/modal/modal-modif-user.component.html"),
+            providers: [
+                { provide: _angular_material__WEBPACK_IMPORTED_MODULE_1__["MAT_DATE_LOCALE"], useValue: 'fr-FR' },
+                _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_2__["NgbAlertConfig"]
+            ],
+        }),
+        __param(1, Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Inject"])(_angular_material__WEBPACK_IMPORTED_MODULE_1__["MAT_DIALOG_DATA"])),
+        __metadata("design:paramtypes", [_angular_material__WEBPACK_IMPORTED_MODULE_1__["MatDialogRef"], Object, _user_service__WEBPACK_IMPORTED_MODULE_3__["UserService"], _angular_material__WEBPACK_IMPORTED_MODULE_1__["DateAdapter"],
+            _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_2__["NgbAlertConfig"]])
+    ], ModalModifUserComponent);
+    return ModalModifUserComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./webapp/app/user/user-routing.module.ts":
+/*!************************************************!*\
+  !*** ./webapp/app/user/user-routing.module.ts ***!
+  \************************************************/
+/*! exports provided: UserRoutingModule */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UserRoutingModule", function() { return UserRoutingModule; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "../../node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/router */ "../../node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _user_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./user.component */ "./webapp/app/user/user.component.ts");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+
+
+
+var routes = [
+    {
+        path: '',
+        component: _user_component__WEBPACK_IMPORTED_MODULE_2__["UserComponent"],
+        data: {
+            title: 'Module user'
+        }
+    }
+];
+var UserRoutingModule = /** @class */ (function () {
+    function UserRoutingModule() {
+    }
+    UserRoutingModule = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["NgModule"])({
+            imports: [
+                _angular_router__WEBPACK_IMPORTED_MODULE_1__["RouterModule"].forChild(routes)
+            ],
+            exports: [_angular_router__WEBPACK_IMPORTED_MODULE_1__["RouterModule"]]
+        })
+    ], UserRoutingModule);
+    return UserRoutingModule;
+}());
+
+
+
+/***/ }),
+
+/***/ "./webapp/app/user/user.component.html":
+/*!*********************************************!*\
+  !*** ./webapp/app/user/user.component.html ***!
+  \*********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<h4>Gestion des utilisateurs</h4>\r\n<div style=\"display:flex; flex-direction:row; flex-wrap:wrap\">\r\n<mat-card *ngFor=\"let user of users; index as i\" style=\"width:350px; display:flex; margin-bottom: 15px; margin-right : 10px;\">\r\n  <mat-card-header style=\"width:100%; display: flex; align-items:center;\">\r\n    <div mat-card-avatar><i class=\"fas fa-user\" style=\"font-size:40px\"></i></div>\r\n    <mat-card-title>{{user.username}}</mat-card-title>\r\n    <mat-card-subtitle style=\"margin:0\" *ngIf=\"user.administrateur\">Administrateur</mat-card-subtitle>\r\n    <mat-card-subtitle style=\"margin:0\" *ngIf=\"!user.administrateur\">Utilisateur</mat-card-subtitle>\r\n  </mat-card-header>\r\n  <mat-card-actions style=\"margin-left: 30px; display: flex; flex-direction: column; padding-top: 0px; align-self: flex-end;\">\r\n    <button style = \"margin: 0px;\" class=\"btn btn-success\"(click)=\"updateUser(i)\">Modifier</button>\r\n    <button class=\"btn btn-success\"(click)=\"addResa()\">Supprimer</button>\r\n  </mat-card-actions>\r\n</mat-card>\r\n</div>"
+
+/***/ }),
+
+/***/ "./webapp/app/user/user.component.ts":
+/*!*******************************************!*\
+  !*** ./webapp/app/user/user.component.ts ***!
+  \*******************************************/
+/*! exports provided: UserComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UserComponent", function() { return UserComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "../../node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _user_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./user.service */ "./webapp/app/user/user.service.ts");
+/* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/material */ "../../node_modules/@angular/material/esm5/material.es5.js");
+/* harmony import */ var _modal_modal_modif_user_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modal/modal-modif-user.component */ "./webapp/app/user/modal/modal-modif-user.component.ts");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+var UserComponent = /** @class */ (function () {
+    function UserComponent(userService, dialog) {
+        this.userService = userService;
+        this.dialog = dialog;
+        this.users = [];
+        this.administrateur = false;
+    }
+    UserComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.userService.getUsers().subscribe(function (data) {
+            _this.users = data;
+            console.log(data);
+            data.forEach(function (user) {
+                user.administrateur = false;
+                user.roles.forEach(function (role) {
+                    if (role === "ROLE_ADMIN") {
+                        user.administrateur = true;
+                    }
+                });
+            });
+        }, function (error) {
+            console.log("userService KO");
+        });
+    };
+    UserComponent.prototype.updateUser = function (index) {
+        var dialogRef = this.dialog.open(_modal_modal_modif_user_component__WEBPACK_IMPORTED_MODULE_3__["ModalModifUserComponent"], {
+            data: { user: this.users[index] }
+        });
+    };
+    UserComponent = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+            selector: 'app-user',
+            template: __webpack_require__(/*! ./user.component.html */ "./webapp/app/user/user.component.html")
+        }),
+        __metadata("design:paramtypes", [_user_service__WEBPACK_IMPORTED_MODULE_1__["UserService"], _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatDialog"]])
+    ], UserComponent);
+    return UserComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./webapp/app/user/user.module.ts":
+/*!****************************************!*\
+  !*** ./webapp/app/user/user.module.ts ***!
+  \****************************************/
+/*! exports provided: UserModule */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UserModule", function() { return UserModule; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "../../node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common */ "../../node_modules/@angular/common/fesm5/common.js");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/forms */ "../../node_modules/@angular/forms/fesm5/forms.js");
+/* harmony import */ var _angular_material_card__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/material/card */ "../../node_modules/@angular/material/esm5/card.es5.js");
+/* harmony import */ var _user_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./user.component */ "./webapp/app/user/user.component.ts");
+/* harmony import */ var _user_routing_module__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./user-routing.module */ "./webapp/app/user/user-routing.module.ts");
+/* harmony import */ var _modal_modal_modif_user_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./modal/modal-modif-user.component */ "./webapp/app/user/modal/modal-modif-user.component.ts");
+/* harmony import */ var _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @ng-bootstrap/ng-bootstrap */ "../../node_modules/@ng-bootstrap/ng-bootstrap/fesm5/ng-bootstrap.js");
+/* harmony import */ var _angular_http__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/http */ "../../node_modules/@angular/http/fesm5/http.js");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/common/http */ "../../node_modules/@angular/common/fesm5/http.js");
+/* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @angular/material */ "../../node_modules/@angular/material/esm5/material.es5.js");
+/* harmony import */ var _user_service__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./user.service */ "./webapp/app/user/user.service.ts");
+/* harmony import */ var src_main_webapp_app_auth_auth_interceptor__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! src/main/webapp/app/auth/auth-interceptor */ "./webapp/app/auth/auth-interceptor.ts");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+var UserModule = /** @class */ (function () {
+    function UserModule() {
+    }
+    UserModule = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["NgModule"])({
+            imports: [
+                _angular_common__WEBPACK_IMPORTED_MODULE_1__["CommonModule"],
+                _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormsModule"],
+                _angular_common_http__WEBPACK_IMPORTED_MODULE_9__["HttpClientModule"],
+                _user_routing_module__WEBPACK_IMPORTED_MODULE_5__["UserRoutingModule"],
+                _angular_material_card__WEBPACK_IMPORTED_MODULE_3__["MatCardModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_10__["MatDialogModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_10__["MatFormFieldModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_10__["MatNativeDateModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_10__["MatInputModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_10__["MatCheckboxModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_10__["MatSelectModule"],
+                _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_7__["NgbModule"]
+            ],
+            declarations: [_user_component__WEBPACK_IMPORTED_MODULE_4__["UserComponent"], _modal_modal_modif_user_component__WEBPACK_IMPORTED_MODULE_6__["ModalModifUserComponent"]],
+            entryComponents: [_modal_modal_modif_user_component__WEBPACK_IMPORTED_MODULE_6__["ModalModifUserComponent"]],
+            providers: [_angular_http__WEBPACK_IMPORTED_MODULE_8__["Http"], _user_service__WEBPACK_IMPORTED_MODULE_11__["UserService"], src_main_webapp_app_auth_auth_interceptor__WEBPACK_IMPORTED_MODULE_12__["httpInterceptorProviders"]]
+        })
+    ], UserModule);
+    return UserModule;
+}());
+
+
+
+/***/ }),
+
+/***/ "./webapp/app/user/user.service.ts":
+/*!*****************************************!*\
+  !*** ./webapp/app/user/user.service.ts ***!
+  \*****************************************/
+/*! exports provided: UserService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UserService", function() { return UserService; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "../../node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common/http */ "../../node_modules/@angular/common/fesm5/http.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var httpOptions = {
+    headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpHeaders"]({ 'Content-Type': 'application/json' })
+};
+var UserService = /** @class */ (function () {
+    function UserService(http) {
+        this.http = http;
+        this.listUsers = 'acs/users/';
+        this.saveUSer = 'acs/users/';
+    }
+    UserService.prototype.getUsers = function () {
+        console.log("user service");
+        return this.http.get(this.listUsers);
+    };
+    UserService.prototype.saveUser = function (user) {
+        return this.http.post(this.saveUSer, user, httpOptions);
+    };
+    UserService = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])(),
+        __metadata("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"]])
+    ], UserService);
+    return UserService;
 }());
 
 

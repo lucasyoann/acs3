@@ -135,7 +135,6 @@ export class ModalAjoutComponent implements OnInit {
     save(){
         
         if(!this.dateFailed){
-            console.log("Reservation",this.reservationAdd);
             for(let i =0; i<this.reservationAdd.articleResaDto.length; i++){
                 if(!this.reservationAdd.articleResaDto[i].quantite || this.reservationAdd.articleResaDto[i].quantite===0){
                     this.reservationAdd.articleResaDto.splice(i,1);
