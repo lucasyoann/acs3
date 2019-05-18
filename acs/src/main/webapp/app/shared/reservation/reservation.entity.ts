@@ -12,5 +12,6 @@ export class Reservation {
     prenom: string;
     asso: boolean;
     commentaire: string;
+    avalider:boolean;
     articleResaDto: ReservationArticle[]= new Array();
 }

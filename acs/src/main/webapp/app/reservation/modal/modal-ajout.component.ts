@@ -9,7 +9,9 @@ import { ArticleDispo } from "src/main/webapp/app/shared/reservation/articleDisp
 import {NgbAlertConfig} from '@ng-bootstrap/ng-bootstrap';
 import { TokenStorageService } from 'src/main/webapp/app/auth/token-storage.service';
 import { formatDate } from "@angular/common";
+import { MatDialog } from '@angular/material';
 import * as moment from 'moment';
+import { Moment } from "moment";
 
 @Component( {
     selector: 'ref-modal-ajout',
@@ -41,15 +43,18 @@ export class ModalAjoutComponent implements OnInit {
     article: ReservationArticle = new ReservationArticle();
     user:string;
     indexModif:number;
+    listErreur: string[];
     
     dateEmprunt: string;
     dateRestitution: string;
+    
+    dateLimiteAsso :Moment;
     
     listeArticlesDispo: ArticleDispo[];
     listeResaArticleAjoutes : ReservationArticle[]=[];
     
     
-    constructor(public dialogRef: MatDialogRef<ModalAjoutComponent>,private reservationService:ReservationService,
+    constructor(public dialog: MatDialog, public dialogRef: MatDialogRef<ModalAjoutComponent>,private reservationService:ReservationService,
             @Inject(MAT_DIALOG_DATA) public data, private adapter: DateAdapter<any>,
             public alertConfig: NgbAlertConfig, public datepipe: DatePipe, private token : TokenStorageService, ) {
         alertConfig.type = 'danger';
@@ -59,7 +64,7 @@ export class ModalAjoutComponent implements OnInit {
     ngOnInit() {
         //changement langue pour affichage chiffre datepicker
         this.adapter.setLocale('fr');
-
+        this.dateLimiteAsso=moment().add(3, 'months');
         if(this.data.reservation){
             this.reservationAdd = this.data.reservation;
             this.dateEmprunt = moment(this.reservationAdd.dateEmprunt).format('DD/MM/YYYY');
@@ -105,17 +110,33 @@ export class ModalAjoutComponent implements OnInit {
                 this.message = "Veuillez choisir une date de retour supérieure à la date d'emprunt";
             }else{
                 this.dateFailed=false;
+                if(moment(this.reservationAdd.dateEmprunt)>this.dateLimiteAsso && this.reservationAdd.asso){
+                    console.log("asso et 3 mois");
+                    this.reservationService.getArticlesDispo( dateDFormat, dateFFormat,true).subscribe(data =>{
+                        const typeDispoInter: string[] =[];
+                        data.forEach(function (articleDispo) {
+                            if(!typeDispoInter.includes(articleDispo.type)){
+                                typeDispoInter.push(articleDispo.type);
+                            }
+                        }); 
+                       this.typeDispo = typeDispoInter;
+                       this.listeArticlesDispo = data;
+                    });
+                }else{
+                    //cas normal
+                    console.log("cas normal");
+                    this.reservationService.getArticlesDispo( dateDFormat, dateFFormat,false).subscribe(data =>{
+                        const typeDispoInter: string[] =[];
+                        data.forEach(function (articleDispo) {
+                            if(!typeDispoInter.includes(articleDispo.type)){
+                                typeDispoInter.push(articleDispo.type);
+                            }
+                        }); 
+                       this.typeDispo = typeDispoInter;
+                       this.listeArticlesDispo = data;
+                    });
+                }
                 
-                this.reservationService.getArticlesDispo( dateDFormat, dateFFormat).subscribe(data =>{
-                    const typeDispoInter: string[] =[];
-                    data.forEach(function (articleDispo) {
-                        if(!typeDispoInter.includes(articleDispo.type)){
-                            typeDispoInter.push(articleDispo.type);
-                        }
-                    }); 
-                   this.typeDispo = typeDispoInter;
-                   this.listeArticlesDispo = data;
-                });
             }
             
         }
@@ -147,21 +168,45 @@ export class ModalAjoutComponent implements OnInit {
             }else{
                 this.saveFailed=false;
                 this.reservationAdd.creerPar=this.user;
-                this.reservationService.validerArticles(this.reservationAdd).subscribe(
+                this.reservationAdd.avalider=true;
+                this.reservationService.validerArticles(this.reservationAdd,false).subscribe(
                         data=>{
+                                console.log("premiere validation")
                                 this.valid=data;
-                                if(this.valid){
+                                if(this.valid && !this.reservationAdd.asso){
                                     this.reservationService.saveReservation(this.reservationAdd).subscribe(
                                             data=>{
+                                                console.log("seconde validation cas normal");
                                                 this.dialogRef.close();
                                                 window.location.reload();
                                             },
                                             error => {
-                                                console.log(error);
                                                 this.message="Erreur d'enregistrement de la réservation";
                                                 this.saveFailed=true;
                                             }
                                         );
+                                }else if (this.valid && !this.reservationAdd.asso){
+                                    this.reservationService.validerArticles(this.reservationAdd,false).subscribe(
+                                            data=>{
+                                                console.log("seconde validation cas asso et 3 mois");
+                                                this.valid=data;
+                                                if(this.valid){
+                                                    this.reservationService.validerArticlesAsso3Mois(this.reservationAdd).subscribe(
+                                                            data=>{
+                                                                this.listErreur=data;
+                                                                const dialogRef = this.dialog.open(ModalAjoutComponent, {
+                                                                    width: '650px',
+                                                                    data: {liste: this.listErreur, reservation : this.reservationAdd}
+                                                                });
+                                                            }
+                                                    );
+                                                }
+                                            },
+                                            error =>{
+                                                this.valid=false;
+                                                this.message="Erreur de validation de la réservation";
+                                            }
+                                    );
                                 }else{
                                     this.valid=false;
                                     this.message="Les quantités désirées ne sont plus disponibles, veuillez recharger la page";

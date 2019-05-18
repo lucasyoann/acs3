@@ -19,6 +19,7 @@ export class ReservationService {
     private validReservationUrl = 'acs/articles/validate';
     private getReservationByIdUrl = 'acs/reservations/id';
     private deleteReservation = 'acs/reservations/delete';
+    private validResaAsso = 'acs/articles/validateAsso';
     
     constructor(private httpClient: HttpClient, public datepipe: DatePipe) {}
        
@@ -50,10 +51,12 @@ export class ReservationService {
     
     
     /** appel permettant de récupérer la liste des articles disponibles entre 2 dates et leur nombre */
-    getArticlesDispo(dateDebut, dateFin): Observable<ArticleDispo[]> {
+    getArticlesDispo(dateDebut, dateFin, asso): Observable<ArticleDispo[]> {
         let params = new HttpParams();
+        console.log("essai "+ asso);
         params = params.append('debut', dateDebut);
         params = params.append('fin', dateFin);
+        params = params.append('asso',asso);
         return this.httpClient.get( `acs/articles/articledispo`, { params: params }) as Observable<ArticleDispo[]>;
     }
     
@@ -63,8 +66,14 @@ export class ReservationService {
     
     //méthode de validation de la réservation (accès concurrent)
     
-    validerArticles(reservation: Reservation){
-        return this.httpClient.post( this.validReservationUrl, reservation, httpOptions) as Observable<boolean>;
+    validerArticles(reservation: Reservation,asso:boolean){
+        console.log("esaisdjfndslfnsdfsdfsfsdfdsfs");
+        console.log(reservation);
+        return this.httpClient.post( this.validReservationUrl, {reservation,asso}, httpOptions) as Observable<boolean>;
+    }
+    
+    validerArticlesAsso3Mois(reservation: Reservation){
+        return this.httpClient.post( this.validResaAsso, reservation, httpOptions) as Observable<string[]>;
     }
     
     getReservationById(id): Observable<Reservation> {

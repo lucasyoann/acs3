@@ -98,3 +98,20 @@ h2{
 .form-group input + input {
   margin-top: 5px;
 }
+
+.mat-column-type{
+	width: 100px;
+}
+
+.mat-column-description{
+	max-width: 300px;
+	padding: 0 10px !important;
+}
+
+.mat-column-intitule{
+	width: 200px;
+}
+
+td.mat-column-modifier{
+	display: flex;
+}

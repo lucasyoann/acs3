@@ -46,6 +46,7 @@ public class ReservationMapper {
 		reservationDto.setAsso(reservation.getAsso());
 		reservationDto.setActive(reservation.getActive());
 		reservationDto.setCommentaire(reservation.getCommentaire());
+		reservationDto.setAvalider(reservation.getAvalider());
 		for(ReservationArticle reservationArticle : reservation.getReservationArticles()) {
 			listArticlesDto.add(articleMapper.articleToArticleDTO(reservationArticle.getArticle()));
 		}
@@ -91,6 +92,7 @@ public class ReservationMapper {
 		reservation.setDateEmprunt(dateEmprunt);
 		reservation.setDateRestitution(dateRestitution);
 		reservation.setCreerPar(reservationDto.getCreerPar());
+		reservation.setAvalider(reservationDto.getAvalider());
 		
 		reservation.setValidePar(reservationDto.getValidePar());
 		reservation.setNom(reservationDto.getNom());

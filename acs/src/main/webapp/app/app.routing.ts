@@ -48,6 +48,10 @@ export const routes: Routes = [
        {
            path: 'checkdispo',
            loadChildren: './checkdispo/checkdispo.module#CheckDispoModule'
+      },
+      {
+          path: 'stock',
+          loadChildren: './stock/stock.module#StockModule'
       }
     ]
   }

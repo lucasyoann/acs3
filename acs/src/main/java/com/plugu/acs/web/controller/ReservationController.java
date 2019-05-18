@@ -26,7 +26,7 @@ public class ReservationController {
 	@GetMapping(value="/")
 	@PreAuthorize("hasRole('USER') or hasRole('ADMIN') or hasRole('SUPER_ADMIN')")
     public List<ReservationDTO> listeReservations(@RequestParam("debut") String debut, @RequestParam("fin") String fin) throws ParseException {
-		return reservationService.listerResa(debut, fin);
+		return reservationService.listerResa(debut, fin,false);
     }
 	
 	@PostMapping(value="/")

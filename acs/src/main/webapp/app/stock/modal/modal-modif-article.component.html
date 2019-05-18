@@ -1,0 +1,41 @@
+<div class="row" style="justify-content: space-between">
+<h2 mat-dialog-title class="color-bleu row">{{titre}}</h2>
+</div>
+
+<ngb-alert *ngIf="saveFailed">
+    	{{message}}
+  </ngb-alert>
+<form (ngSubmit)="save()" ngNativeValidate>
+	<mat-dialog-content style="width:100%">
+		<div class="row">
+			<div class="form-group" style="width:100%"> 
+	        	<mat-form-field *ngIf="modif" style="width:100%">
+		  			<input matInput readonly placeholder="Type de mat&eacute;riel" id="type" name="type" [(ngModel)] = "article.type">
+				</mat-form-field>
+				<mat-form-field *ngIf="!modif" style="width:100%">
+		  			<input matInput required placeholder="Type de mat&eacute;riel" id="type" name="type" [(ngModel)] = "article.type">
+				</mat-form-field>
+				<mat-form-field *ngIf="modif" style="width:100%">
+		  			<input matInput readonly placeholder="Intitul&eacute;" id="intitule" name="intitule" [(ngModel)] = "article.intitule">
+				</mat-form-field>
+				<mat-form-field *ngIf="!modif" style="width:100%">
+		  			<input matInput required placeholder="Intitul&eacute;" id="intitule" name="intitule" [(ngModel)] = "article.intitule">
+				</mat-form-field>
+				<mat-form-field style="width:100%">
+		  			<input matInput required placeholder="Quantit&eacute;" id="quantite" name="quantite" [(ngModel)] = "article.quantite">
+				</mat-form-field>
+				<hr/>
+				<div style="width:100%">
+					<h5>Description</h5>
+					<mat-form-field style="width:100%">
+    					<textarea matInput style="min-width: 100%" [(ngModel)] = "article.description" [ngModelOptions]="{standalone: true}"></textarea>
+    				</mat-form-field>
+    			</div>
+	    	</div>
+		</div>	
+	</mat-dialog-content>
+	<mat-dialog-actions>
+		<button type="button" class="btn btn-link" (click)="dialogRef.close()">Annuler</button>
+		<button type="submit" class="btn btn-success">{{labelBouton}}</button>
+	</mat-dialog-actions>
+</form>

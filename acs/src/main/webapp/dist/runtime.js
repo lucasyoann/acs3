@@ -63,7 +63,7 @@
 /******/
 /******/ 	// script path function
 /******/ 	function jsonpScriptSrc(chunkId) {
-/******/ 		return __webpack_require__.p + "" + ({"coreui-views-dashboard-dashboard-module":"coreui-views-dashboard-dashboard-module","myProfile-myProfile-module":"myProfile-myProfile-module"}[chunkId]||chunkId) + ".js"
+/******/ 		return __webpack_require__.p + "" + ({"checkdispo-checkdispo-module":"checkdispo-checkdispo-module","coreui-views-dashboard-dashboard-module":"coreui-views-dashboard-dashboard-module","myProfile-myProfile-module":"myProfile-myProfile-module","stock-stock-module":"stock-stock-module"}[chunkId]||chunkId) + ".js"
 /******/ 	}
 /******/
 /******/ 	// The require function

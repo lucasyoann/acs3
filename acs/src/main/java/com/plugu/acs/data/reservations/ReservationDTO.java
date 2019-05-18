@@ -20,6 +20,7 @@ public class ReservationDTO {
 	private String prenom;
 	private Boolean asso;
 	private Boolean active;
+	private Boolean avalider;
 	private String commentaire;
 	
 	private Set<ArticleDTO> articles;
@@ -109,6 +110,12 @@ public class ReservationDTO {
 	}
 	public void setCommentaire(String commentaire) {
 		this.commentaire = commentaire;
+	}
+	public Boolean getAvalider() {
+		return avalider;
+	}
+	public void setAvalider(Boolean avalider) {
+		this.avalider = avalider;
 	}
 	
 }

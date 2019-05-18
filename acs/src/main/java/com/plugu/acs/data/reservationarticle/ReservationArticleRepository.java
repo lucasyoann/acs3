@@ -1,5 +1,7 @@
 package com.plugu.acs.data.reservationarticle;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -13,4 +15,7 @@ public interface ReservationArticleRepository extends CrudRepository<Reservation
 			+ " ra.primaryKey.reservation.id=:reservationId")
 	public void deleteReservationArticle(int articleId, int reservationId);
 	
+	@Modifying
+	@Query(value="SELECT ra from ReservationArticle ra WHERE ra.primaryKey.article.id=:articleId")
+	public List<ReservationArticle> getReservations(int articleId);
 }

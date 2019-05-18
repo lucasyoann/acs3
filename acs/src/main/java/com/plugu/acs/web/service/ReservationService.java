@@ -40,23 +40,35 @@ public class ReservationService {
 	
 	private ReservationMapper reservationMapper = new ReservationMapper();
 	
-	public List<ReservationDTO> listerResa(String dateEmprunt, String dateRetour) throws ParseException{
+	public List<ReservationDTO> listerResa(String dateEmprunt, String dateRetour,boolean orderBy) throws ParseException{
 		dateEmprunt = dateEmprunt.concat(" 12:00:01");
 		dateRetour = dateRetour.concat(" 11:59:59");
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 		Date datedebut = simpleDateFormat.parse(dateEmprunt);
 		Date datefin = simpleDateFormat.parse(dateRetour);
 		List<ReservationDTO> result = new ArrayList<>();
-        for(Reservation reserv : reservationRepository.findBetweenDate(datedebut,datefin)) {
+		List<Reservation> listResas = new ArrayList<>();
+		if(orderBy) {
+			listResas = reservationRepository.findBetweenDateOrderBy(datedebut,datefin);
+		}else {
+			listResas =reservationRepository.findBetweenDate(datedebut,datefin);
+		}
+        for(Reservation reserv : listResas) {
         	result.add(reservationMapper.reservationToReservationDTO(reserv));
         }
         return result;
 	}
 	
-	public List<ReservationDTO> listerResaDuJour(Date dateDebutJournee, Date dateFinJournee) throws ParseException{
+	public List<ReservationDTO> listerResaDuJour(Date dateDebutJournee, Date dateFinJournee, boolean assoEt3Mois ) throws ParseException{
 		
 		List<ReservationDTO> result = new ArrayList<>();
-        for(Reservation reserv : reservationRepository.findBetweenDate(dateDebutJournee,dateFinJournee)) {
+		List<Reservation> listResa = new ArrayList<>();
+		if(assoEt3Mois) {
+			listResa = reservationRepository.findBetweenDateAsso(dateDebutJournee, dateFinJournee);
+		}else {
+			listResa = reservationRepository.findBetweenDate(dateDebutJournee,dateFinJournee);
+		}
+        for(Reservation reserv : listResa){
         	result.add(reservationMapper.reservationToReservationDTO(reserv));
         }
         return result;
@@ -125,6 +137,15 @@ public class ReservationService {
 		Optional<Reservation> reservation = reservationRepository.findById(id);
 		if(reservation.isPresent()) {
 			return reservationMapper.reservationToReservationDTO(reservation.get());
+		}else {
+			return null;
+		}
+	}
+	
+	public Reservation getReservation(int id) {
+		Optional<Reservation> reservation = reservationRepository.findById(id);
+		if(reservation.isPresent()) {
+			return reservation.get();
 		}else {
 			return null;
 		}

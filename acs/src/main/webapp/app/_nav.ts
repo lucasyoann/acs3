@@ -38,7 +38,12 @@ export const navigation_super_admin = [
   {
       name: 'Vérifier les disponibilités',
       url: '/checkdispo',
-      icon: 'icon-drawer'
+      icon: 'icon-calculator'
+  },
+  {
+      name: 'Gestion des stocks',
+      url: '/stock',
+      icon: 'icon-settings'
   }
   ];
 

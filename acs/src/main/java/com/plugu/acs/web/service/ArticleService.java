@@ -13,14 +13,23 @@ import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.plugu.acs.data.articles.Article;
 import com.plugu.acs.data.articles.ArticleDTO;
 import com.plugu.acs.data.articles.ArticleDispoDTO;
+import com.plugu.acs.data.articles.ArticleMapper;
 import com.plugu.acs.data.articles.ArticleRepository;
 import com.plugu.acs.data.articles.ArticleResaDTO;
+import com.plugu.acs.data.reservationarticle.ReservationArticleRepository;
+import com.plugu.acs.data.reservations.Reservation;
 import com.plugu.acs.data.reservations.ReservationDTO;
+import com.plugu.acs.data.reservations.ReservationMapper;
+import com.plugu.acs.security.message.response.ResponseMessage;
+import com.plugu.acs.data.reservationarticle.ReservationArticle;
+import com.plugu.acs.data.reservationarticle.ReservationArticleId;
 
 @Service
 public class ArticleService {
@@ -35,10 +44,37 @@ public class ArticleService {
 	@Autowired
 	ArticleRepository articleRepository;
 	
-	public List<ArticleDispoDTO> listerArticleDispoInListArticleDispo(String dateDebut, String dateRetour) throws ParseException{
+	@Autowired
+	ReservationArticleRepository reservationArticleRepository;
+	
+	private ArticleMapper articleMapper = new ArticleMapper();
+	
+	public List<ArticleDTO> listerArticle(){
+		List<ArticleDTO> listArticles = new ArrayList<>();
+		for(Article article : articleRepository.findAll()) {
+			listArticles.add(articleMapper.articleToArticleDTO(article));
+		}
+		return listArticles;
+	}
+	
+	public ResponseEntity<?> createOrUpdateArticle(ArticleDTO articleDto) {
+		Optional<Article> articleOptional = articleRepository.findById(articleDto.getId());
+		Article article =new Article();
+		if(articleOptional.isPresent()) {
+			article = articleOptional.get();
+		}
+		article.setIntitule(articleDto.getIntitule().toUpperCase());
+		article.setType(articleDto.getType().toUpperCase());
+		article.setDescription(articleDto.getDescription());
+		article.setQuantite(articleDto.getQuantite());
+		articleRepository.save(article);
+		return ResponseEntity.ok(articleMapper.articleToArticleDTO(article));
+	}
+	
+	public List<ArticleDispoDTO> listerArticleDispoInListArticleDispo(String dateDebut, String dateRetour,boolean AssoEt3Mois) throws ParseException{
 		
 		List<ArticleDispoDTO> result= new ArrayList<>();
-		List<ArticleDispoDTO> listArticleReserv = listerArticlesReservesPourDates(dateDebut, dateRetour);
+		List<ArticleDispoDTO> listArticleReserv = listerArticlesReservesPourDates(dateDebut, dateRetour,AssoEt3Mois);
 		for(Article articleEnStock : articleRepository.findAll()) {
 			for(ArticleDispoDTO articleReserves : listArticleReserv) {
 				if(articleEnStock.getId()==articleReserves.getId()) {
@@ -54,9 +90,9 @@ public class ArticleService {
 	}
 
 	
-	public boolean verifierArticles(String dateDebut, String dateRetour, List<ArticleResaDTO> listArticles) throws ParseException{
+	public boolean verifierArticles(String dateDebut, String dateRetour, List<ArticleResaDTO> listArticles, boolean assoEt3Mois) throws ParseException{
 		boolean valid = true;
-		Map<Integer, Integer> listArticleReserv = listerArticleDispoInMap(dateDebut, dateRetour);
+		Map<Integer, Integer> listArticleReserv = listerArticleDispoInMap(dateDebut, dateRetour,assoEt3Mois);
 		for(ArticleResaDTO articlesReservation : listArticles) {
 			if(articlesReservation.getQuantite() > listArticleReserv.get(articlesReservation.getArticleId())) {
 				valid=false;
@@ -64,6 +100,51 @@ public class ArticleService {
 			listArticleReserv.replace(articlesReservation.getArticleId(), listArticleReserv.get(articlesReservation.getArticleId()) - articlesReservation.getQuantite());
 		}
 		return valid;
+	}
+	
+	public ResponseEntity<?> verifierArticlesAssoEt3Mois(String dateDebut, String dateRetour, List<ArticleResaDTO> listArticles) throws ParseException{
+		List<String> listMessageErreur = new ArrayList<>();
+		Map<Integer, Integer> listArticleReserv = listerArticleDispoInMap(dateDebut, dateRetour,false);
+		for(ArticleResaDTO articlesReservation : listArticles) {
+			if(articlesReservation.getQuantite() > listArticleReserv.get(articlesReservation.getArticleId())) {
+				int qteAEliminer = articlesReservation.getQuantite() - listArticleReserv.get(articlesReservation.getArticleId());
+				for(ReservationDTO resaDto : reservationService.listerResa(dateDebut, dateRetour,true)){
+					for(ArticleResaDTO resaArticle:resaDto.getArticleResaDto()) {
+						if(resaArticle.getArticleId()==articlesReservation.getArticleId()) {
+							int quantite = resaArticle.getQuantite();
+							Article article = getArticleById(articlesReservation.getArticleId());
+							if(article==null) {
+								return new ResponseEntity<>(new ResponseMessage("Fail -> Article doesn't exist!"),
+										HttpStatus.BAD_REQUEST);
+							}
+							if(qteAEliminer<=quantite) {
+								int newQuantite = quantite - qteAEliminer;
+								resaArticle.setQuantite(newQuantite);
+								listMessageErreur.add("La reservation au nom de "+resaDto.getNom()+" a été modifiée.La quantité de "+ article.getIntitule() + 
+										" est passé de " +quantite + " à " + newQuantite);
+								qteAEliminer=0;
+							}else {
+								resaArticle.setQuantite(0);
+								qteAEliminer=qteAEliminer-quantite;
+								listMessageErreur.add("La reservation au nom de "+resaDto.getNom()+" a été modifiée.La quantité de "+ article.getIntitule() + 
+										" est passé de " +quantite + " à 0");
+							}
+							ReservationArticle resaArticleModifiee= new ReservationArticle();
+							
+							resaArticleModifiee.setArticle(article);
+							resaArticleModifiee.setReservation(reservationService.getReservation(resaDto.getId()));
+							resaArticleModifiee.setQuantite(resaArticle.getQuantite());
+							reservationArticleRepository.save(resaArticleModifiee);
+							break;
+						}
+					}
+					if(qteAEliminer==0) {
+						break;
+					}
+				}
+			}
+		}
+		return ResponseEntity.ok(listMessageErreur);
 	}
 	
 	public Article getArticleById(int id) {
@@ -77,7 +158,7 @@ public class ArticleService {
 	
 
 	
-	private List<ArticleDispoDTO> listerArticlesReservesPourDates(String dateDebutString, String dateRetourString) throws ParseException{
+	private List<ArticleDispoDTO> listerArticlesReservesPourDates(String dateDebutString, String dateRetourString, boolean assoEt3Mois) throws ParseException{
 		//Par défaut une réservation commence à 12h et se termine à 11h59
 		dateDebutString = dateDebutString.concat(" 12:00:01");
 		dateRetourString = dateRetourString.concat(" 11:59:58");
@@ -95,7 +176,8 @@ public class ArticleService {
 	        calendar.set(Calendar.MINUTE, 59);
 	        calendar.set(Calendar.SECOND, 58);
 	        Date datePlusUn = calendar.getTime();
-	        for(ReservationDTO resa : reservationService.listerResaDuJour(date, datePlusUn)) {
+	        
+	        for(ReservationDTO resa : reservationService.listerResaDuJour(date, datePlusUn, assoEt3Mois)) {
 	        	if(resa.getArticles() != null) {
 	        		//on liste les articles de chaque réservation
 	        		for(ArticleDTO article :  resa.getArticles()) {
@@ -141,10 +223,10 @@ public class ArticleService {
 	
 	}
 	
-	private Map<Integer, Integer> listerArticleDispoInMap(String dateDebut, String dateRetour) throws ParseException{
+	private Map<Integer, Integer> listerArticleDispoInMap(String dateDebut, String dateRetour,boolean assoEt3Mois) throws ParseException{
 		
 		Map<Integer, Integer> result = new HashMap<>();
-		List<ArticleDispoDTO> listArticleReserv = listerArticlesReservesPourDates(dateDebut, dateRetour);
+		List<ArticleDispoDTO> listArticleReserv = listerArticlesReservesPourDates(dateDebut, dateRetour,assoEt3Mois);
 		for(Article articleEnStock : articleRepository.findAll()) {
 			for(ArticleDispoDTO articleReserves : listArticleReserv) {
 				if(articleEnStock.getId()==articleReserves.getId()) {
