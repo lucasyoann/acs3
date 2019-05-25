@@ -27,6 +27,7 @@ import com.plugu.acs.data.reservationarticle.ReservationArticleRepository;
 import com.plugu.acs.data.reservations.Reservation;
 import com.plugu.acs.data.reservations.ReservationDTO;
 import com.plugu.acs.data.reservations.ReservationMapper;
+import com.plugu.acs.data.reservations.ReservationRepository;
 import com.plugu.acs.security.message.response.ResponseMessage;
 import com.plugu.acs.data.reservationarticle.ReservationArticle;
 import com.plugu.acs.data.reservationarticle.ReservationArticleId;
@@ -42,12 +43,17 @@ public class ArticleService {
 	ReservationService reservationService;
 	
 	@Autowired
+	private ReservationRepository reservationRepository;
+	
+	@Autowired
 	ArticleRepository articleRepository;
 	
 	@Autowired
 	ReservationArticleRepository reservationArticleRepository;
 	
 	private ArticleMapper articleMapper = new ArticleMapper();
+	
+	private ReservationMapper reservationMapper = new ReservationMapper();
 	
 	public List<ArticleDTO> listerArticle(){
 		List<ArticleDTO> listArticles = new ArrayList<>();
@@ -82,7 +88,7 @@ public class ArticleService {
 					break;
 				}
 			}
-			ArticleDispoDTO articleDispo = new ArticleDispoDTO(articleEnStock.getId(),articleEnStock.getDescription(),
+			ArticleDispoDTO articleDispo = new ArticleDispoDTO(articleEnStock.getId(),articleEnStock.getIntitule(),
 					articleEnStock.getType(),articleEnStock.getQuantite());
 			result.add(articleDispo);	
 		}
@@ -102,13 +108,13 @@ public class ArticleService {
 		return valid;
 	}
 	
-	public ResponseEntity<?> verifierArticlesAssoEt3Mois(String dateDebut, String dateRetour, List<ArticleResaDTO> listArticles) throws ParseException{
+	public ResponseEntity<?> verifierArticlesAssoEt3Mois(String dateDebut, String dateRetour, List<ArticleResaDTO> listArticles, List<ReservationDTO> listReservationDto) throws ParseException{
 		List<String> listMessageErreur = new ArrayList<>();
 		Map<Integer, Integer> listArticleReserv = listerArticleDispoInMap(dateDebut, dateRetour,false);
 		for(ArticleResaDTO articlesReservation : listArticles) {
 			if(articlesReservation.getQuantite() > listArticleReserv.get(articlesReservation.getArticleId())) {
 				int qteAEliminer = articlesReservation.getQuantite() - listArticleReserv.get(articlesReservation.getArticleId());
-				for(ReservationDTO resaDto : reservationService.listerResa(dateDebut, dateRetour,true)){
+				for(ReservationDTO resaDto : listReservationDto){
 					for(ArticleResaDTO resaArticle:resaDto.getArticleResaDto()) {
 						if(resaArticle.getArticleId()==articlesReservation.getArticleId()) {
 							int quantite = resaArticle.getQuantite();
@@ -132,7 +138,19 @@ public class ArticleService {
 							ReservationArticle resaArticleModifiee= new ReservationArticle();
 							
 							resaArticleModifiee.setArticle(article);
-							resaArticleModifiee.setReservation(reservationService.getReservation(resaDto.getId()));
+							Optional<Reservation> resaOptional = reservationRepository.findById(resaDto.getId());
+							if(!resaOptional.isPresent()) {
+								return new ResponseEntity<>(new ResponseMessage("Fail -> Reservation doesn't exist!"),
+										HttpStatus.BAD_REQUEST);
+							}
+							resaArticleModifiee.setReservation(resaOptional.get());
+							resaArticleModifiee.setQuantite(resaArticle.getQuantite());
+							Optional<ReservationArticle> reservationArticleOpt = reservationArticleRepository.findById(resaArticleModifiee.getPrimaryKey());
+							if(!reservationArticleOpt.isPresent()) {
+								return new ResponseEntity<>(new ResponseMessage("Fail -> Reservation doesn't exist!"),
+										HttpStatus.BAD_REQUEST);
+							}
+							resaArticleModifiee=reservationArticleOpt.get();
 							resaArticleModifiee.setQuantite(resaArticle.getQuantite());
 							reservationArticleRepository.save(resaArticleModifiee);
 							break;

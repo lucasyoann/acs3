@@ -13,8 +13,9 @@ import { httpInterceptorProviders } from 'src/main/webapp/app/auth/auth-intercep
 
 
 import { ModalAjoutComponent } from './modal/modal-ajout.component';
+import { ModalListErreurComponent } from './modal/modal/modalListeErreur.component';
 import { ModalConsultationReservationComponent } from './modal/modal-consultation-reservation.component';
-import { MatDialogModule, MatFormFieldModule, MatNativeDateModule, MatInputModule,MatCheckboxModule, MatSelectModule } from '@angular/material';
+import { MatDialogModule, MatFormFieldModule, MatNativeDateModule, MatInputModule,MatCheckboxModule, MatSelectModule,MatListModule } from '@angular/material';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ArticleComponent } from './modal/articleComponent/article.component';
@@ -33,11 +34,12 @@ import { DatePipe } from '@angular/common';
       MatInputModule, 
       MatCheckboxModule,
       MatSelectModule,
+      MatListModule,
       MatDatepickerModule,
       NgbModule
     ],
-    declarations:[ReservationComponent,ModalAjoutComponent,ArticleComponent,ModalConsultationReservationComponent],
-    entryComponents:[ModalAjoutComponent, ModalConsultationReservationComponent],
+    declarations:[ReservationComponent,ModalAjoutComponent,ArticleComponent,ModalConsultationReservationComponent, ModalListErreurComponent],
+    entryComponents:[ModalAjoutComponent, ModalConsultationReservationComponent, ModalListErreurComponent],
     providers: [ReservationService, Http, DatePipe,httpInterceptorProviders]
 })
 export class ReservationModule{}

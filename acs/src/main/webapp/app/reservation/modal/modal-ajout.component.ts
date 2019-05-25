@@ -8,6 +8,7 @@ import { ReservationArticle } from "src/main/webapp/app/shared/reservation/reser
 import { ArticleDispo } from "src/main/webapp/app/shared/reservation/articleDispo.entity";
 import {NgbAlertConfig} from '@ng-bootstrap/ng-bootstrap';
 import { TokenStorageService } from 'src/main/webapp/app/auth/token-storage.service';
+import {ModalListErreurComponent} from './modal/modalListeErreur.component';
 import { formatDate } from "@angular/common";
 import { MatDialog } from '@angular/material';
 import * as moment from 'moment';
@@ -88,6 +89,7 @@ export class ModalAjoutComponent implements OnInit {
             this.titre = "Ajout d'une réservation";
             this.labelBouton = "Ajouter";
             this.modif=false;
+            this.reservationAdd.asso=false;
         }
 
         this.user=this.token.getUsername();
@@ -110,6 +112,10 @@ export class ModalAjoutComponent implements OnInit {
                 this.message = "Veuillez choisir une date de retour supérieure à la date d'emprunt";
             }else{
                 this.dateFailed=false;
+                console.log("date résa :" +this.reservationAdd.dateEmprunt);
+                console.log(moment(this.reservationAdd.dateEmprunt));
+                console.log("date asso " + this.dateLimiteAsso);
+                console.log("asso :"+this.reservationAdd.asso);
                 if(moment(this.reservationAdd.dateEmprunt)>this.dateLimiteAsso && this.reservationAdd.asso){
                     console.log("asso et 3 mois");
                     this.reservationService.getArticlesDispo( dateDFormat, dateFFormat,true).subscribe(data =>{
@@ -185,8 +191,8 @@ export class ModalAjoutComponent implements OnInit {
                                                 this.saveFailed=true;
                                             }
                                         );
-                                }else if (this.valid && !this.reservationAdd.asso){
-                                    this.reservationService.validerArticles(this.reservationAdd,false).subscribe(
+                                }else if (!this.valid && this.reservationAdd.asso){
+                                    this.reservationService.validerArticles(this.reservationAdd,true).subscribe(
                                             data=>{
                                                 console.log("seconde validation cas asso et 3 mois");
                                                 this.valid=data;
@@ -194,7 +200,7 @@ export class ModalAjoutComponent implements OnInit {
                                                     this.reservationService.validerArticlesAsso3Mois(this.reservationAdd).subscribe(
                                                             data=>{
                                                                 this.listErreur=data;
-                                                                const dialogRef = this.dialog.open(ModalAjoutComponent, {
+                                                                const dialogRef = this.dialog.open(ModalListErreurComponent, {
                                                                     width: '650px',
                                                                     data: {liste: this.listErreur, reservation : this.reservationAdd}
                                                                 });
@@ -215,7 +221,7 @@ export class ModalAjoutComponent implements OnInit {
                             },
                         error=>{
                             console.log(error);
-                            this.message="Erreur de validation de la réservation";
+                            this.message="Erreur de validation de la réservationEEEEEEE";
                             this.valid=false;
                         });
                     

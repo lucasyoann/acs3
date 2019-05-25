@@ -7,6 +7,7 @@ import { Reservation } from "src/main/webapp/app/shared/reservation/reservation.
 import { DatePipe } from '@angular/common'
 import { ArticleDispo } from "src/main/webapp/app/shared/reservation/articleDispo.entity";
 import { ReservationArticle } from "src/main/webapp/app/shared/reservation/reservationArticle.entity";
+import { ReservationValidation } from "../shared/reservation/reservationValidation.entity";
 
 const httpOptions = {
         headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -20,6 +21,8 @@ export class ReservationService {
     private getReservationByIdUrl = 'acs/reservations/id';
     private deleteReservation = 'acs/reservations/delete';
     private validResaAsso = 'acs/articles/validateAsso';
+    
+    reservationValidation : ReservationValidation=new ReservationValidation();
     
     constructor(private httpClient: HttpClient, public datepipe: DatePipe) {}
        
@@ -69,7 +72,9 @@ export class ReservationService {
     validerArticles(reservation: Reservation,asso:boolean){
         console.log("esaisdjfndslfnsdfsdfsfsdfdsfs");
         console.log(reservation);
-        return this.httpClient.post( this.validReservationUrl, {reservation,asso}, httpOptions) as Observable<boolean>;
+        this.reservationValidation.reservationDto=reservation;
+        this.reservationValidation.asso=asso;
+        return this.httpClient.post( this.validReservationUrl, this.reservationValidation, httpOptions) as Observable<boolean>;
     }
     
     validerArticlesAsso3Mois(reservation: Reservation){

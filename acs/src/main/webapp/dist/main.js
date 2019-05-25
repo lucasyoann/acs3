@@ -2807,7 +2807,7 @@ var ArticleComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\" style=\"justify-content: space-between\">\r\n<h2 mat-dialog-title class=\"color-bleu row\">{{titre}} </h2>\r\n<mat-checkbox *ngIf=\"modif\" disabled=\"disabled\" color=\"warn\" style=\"float:right;\" [(ngModel)] = \"reservationAdd.asso\">Association</mat-checkbox>\r\n<mat-checkbox *ngIf=\"!modif\" color=\"warn\" style=\"float:right;\" [(ngModel)] = \"reservationAdd.asso\">Association</mat-checkbox>\r\n</div>\r\n\r\n<ngb-alert *ngIf=\"!valid || saveFailed || dateFailed\">\r\n    \t{{message}}\r\n  </ngb-alert>\r\n<form (ngSubmit)=\"save()\" ngNativeValidate>\r\n\t<mat-dialog-content>\r\n\t\t<div class=\"row\">\r\n    \t\t<div class=\"form-group\" *ngIf=\"reservationAdd.asso\"> \r\n\t        \t<mat-form-field>\r\n\t\t  \t\t\t<input matInput placeholder=\"Raison sociale\" id=\"rs\" name=\"rs\" [(ngModel)] = \"reservationAdd.nom\">\r\n\t\t\t\t</mat-form-field>\r\n\t    \t</div>\r\n\t    \t<div class=\"form-group row\" *ngIf=\"!reservationAdd.asso\">\r\n\t    \t\t<div class=\"column\">\r\n\t    \t\t\t<mat-form-field>\r\n\t\t  \t\t\t\t<input matInput placeholder=\"Nom\" id=\"nom\" required name=\"nom\" [(ngModel)] = \"reservationAdd.nom\">\r\n\t\t\t\t\t</mat-form-field>\r\n\t    \t\t</div>\r\n\t    \t\t<div class=\"column\">\r\n\t    \t\t\t<mat-form-field>\r\n\t\t  \t\t\t\t<input matInput placeholder=\"Pr&eacute;nom\" id=\"prenom\" name=\"prenom\" [(ngModel)] = \"reservationAdd.prenom\">\r\n\t\t\t\t\t</mat-form-field>\r\n\t    \t\t</div>\r\n\t    \t</div>\r\n\t\t</div>\r\n\t\t<div class=\"row\" *ngIf=\"!modif\">\r\n    \t\t<mat-form-field>\r\n\t\t  \t\t<input matInput [matDatepicker]=\"dateDebut\" required placeholder=\"Date de d&eacute;but\" name=\"dateEmprunt\" [(ngModel)] = \"reservationAdd.dateEmprunt\" (dateChange)=\"dateChanged()\">\r\n\t\t  \t\t<mat-datepicker-toggle matSuffix [for]=\"dateDebut\"></mat-datepicker-toggle>\r\n\t\t\t\t<mat-datepicker #dateDebut></mat-datepicker>\r\n\t\t\t</mat-form-field>\r\n\t\t\t<mat-form-field>\r\n\t\t\t\t<input matInput [matDatepicker]=\"dateFin\" required placeholder=\"Date de fin\"  name=\"dateRestitution\" [(ngModel)] = \"reservationAdd.dateRestitution\" (dateChange)=\"dateChanged()\">\r\n\t\t\t\t<mat-datepicker-toggle matSuffix [for]=\"dateFin\"></mat-datepicker-toggle>\r\n\t\t\t\t<mat-datepicker #dateFin [startAt]=\"reservationAdd.dateEmprunt\"></mat-datepicker>\r\n\t\t\t</mat-form-field>\r\n\t\t</div>\r\n\t\t<div class=\"row\" *ngIf=\"modif\">\r\n\t\t\t<div class=\"column\">\r\n    \t\t\t<mat-form-field>\r\n\t  \t\t\t\t<input matInput readonly placeholder=\"Date de d&eacute;but\" name=\"dateEmprunt\" [(ngModel)] = \"dateEmprunt\">\r\n\t\t\t\t</mat-form-field>\r\n\t    \t</div>\r\n\t    \t<div class=\"column\">\r\n\t    \t\t<mat-form-field>\r\n\t  \t\t\t\t<input matInput readonly placeholder=\"Date de fin\" name=\"dateRestitution\" [(ngModel)] = \"dateRestitution\">\r\n\t\t\t\t</mat-form-field>\r\n\t    \t</div>\r\n\t\t</div>\r\n\t\t<div *ngIf=\"(typeDispo && typeDispo.length != 0)\">\r\n\t\t\t<hr/>\r\n\t\t\t<h5>S&eacute;lection du mat&eacute;riel</h5>\r\n\t\t\t<div *ngFor=\"let articlechoisi of reservationAdd.articleResaDto; index as i\">\r\n\t\t\t\t<ref-article  \r\n\t\t\t\t\t[listeArticlesDispo]=\"listeArticlesDispo\"\r\n\t\t\t\t\t[typeDispo]=\"typeDispo\" [reservationAdd]=\"reservationAdd\" [indexAjout]=\"i\"\r\n\t\t\t\t\t(reservationUpdated) = \"getReservationUpdate($event)\">\t\r\n\t\t\t\t</ref-article>\r\n\t\t\t</div>\t\r\n\t\t\t<div class = \"row\" style=\"align-items:flex-start; justify-content:space-between\" >\r\n\t\t\t\t<div class=\"column\">\r\n\t\t        \t<button type=\"button\" class=\"btn btn-success\" (click)=\"ajoutArticle()\">Ajout article</button>\r\n\t\t    \t</div>\r\n\t\t\t</div>\r\n\t\t</div>\r\n\t\t<hr/>\r\n\t\t<div style=\"width:100%\">\r\n\t\t\t<h5>Commentaires</h5>\r\n\t\t\t<mat-form-field style=\"width:100%\">\r\n    \t\t\t<textarea matInput style=\"min-width: 100%\" [(ngModel)] = \"reservationAdd.commentaire\" [ngModelOptions]=\"{standalone: true}\"></textarea>\r\n    \t\t</mat-form-field>\r\n    \t</div>\r\n\t</mat-dialog-content>\r\n\t<mat-dialog-actions>\r\n\t\t<button type=\"button\" class=\"btn btn-link\" (click)=\"dialogRef.close()\">Annuler</button>\r\n\t\t<button type=\"button\" *ngIf=\"modif\" class=\"btn btn-success\" (click)=\"supprimerReservation()\">Supprimer</button>\r\n\t\t<button type=\"submit\" class=\"btn btn-success\">{{labelBouton}}</button>\r\n\t</mat-dialog-actions>\r\n</form>"
+module.exports = "<div class=\"row\" style=\"justify-content: space-between\">\r\n<h2 mat-dialog-title class=\"color-bleu row\">{{titre}} </h2>\r\n<mat-checkbox *ngIf=\"modif\" disabled=\"disabled\" color=\"warn\" style=\"float:right;\" [(ngModel)] = \"reservationAdd.asso\">Association</mat-checkbox>\r\n<mat-checkbox *ngIf=\"!modif\" color=\"warn\" (change)=\"dateChanged()\" style=\"float:right;\" [(ngModel)] = \"reservationAdd.asso\">Association</mat-checkbox>\r\n</div>\r\n\r\n<ngb-alert *ngIf=\"!valid || saveFailed || dateFailed\">\r\n    \t{{message}}\r\n  </ngb-alert>\r\n<form (ngSubmit)=\"save()\" ngNativeValidate>\r\n\t<mat-dialog-content>\r\n\t\t<div class=\"row\">\r\n    \t\t<div class=\"form-group\" *ngIf=\"reservationAdd.asso\"> \r\n\t        \t<mat-form-field>\r\n\t\t  \t\t\t<input matInput placeholder=\"Raison sociale\" id=\"rs\" required name=\"rs\" [(ngModel)] = \"reservationAdd.nom\">\r\n\t\t\t\t</mat-form-field>\r\n\t    \t</div>\r\n\t    \t<div class=\"form-group row\" *ngIf=\"!reservationAdd.asso\">\r\n\t    \t\t<div class=\"column\">\r\n\t    \t\t\t<mat-form-field>\r\n\t\t  \t\t\t\t<input matInput placeholder=\"Nom\" id=\"nom\" required name=\"nom\" [(ngModel)] = \"reservationAdd.nom\">\r\n\t\t\t\t\t</mat-form-field>\r\n\t    \t\t</div>\r\n\t    \t\t<div class=\"column\">\r\n\t    \t\t\t<mat-form-field>\r\n\t\t  \t\t\t\t<input matInput placeholder=\"Pr&eacute;nom\" id=\"prenom\" name=\"prenom\" [(ngModel)] = \"reservationAdd.prenom\">\r\n\t\t\t\t\t</mat-form-field>\r\n\t    \t\t</div>\r\n\t    \t</div>\r\n\t\t</div>\r\n\t\t<div class=\"row\" *ngIf=\"!modif\">\r\n    \t\t<mat-form-field>\r\n\t\t  \t\t<input matInput [matDatepicker]=\"dateDebut\" required placeholder=\"Date de d&eacute;but\" name=\"dateEmprunt\" [(ngModel)] = \"reservationAdd.dateEmprunt\" (dateChange)=\"dateChanged()\">\r\n\t\t  \t\t<mat-datepicker-toggle matSuffix [for]=\"dateDebut\"></mat-datepicker-toggle>\r\n\t\t\t\t<mat-datepicker #dateDebut></mat-datepicker>\r\n\t\t\t</mat-form-field>\r\n\t\t\t<mat-form-field>\r\n\t\t\t\t<input matInput [matDatepicker]=\"dateFin\" required placeholder=\"Date de fin\"  name=\"dateRestitution\" [(ngModel)] = \"reservationAdd.dateRestitution\" (dateChange)=\"dateChanged()\">\r\n\t\t\t\t<mat-datepicker-toggle matSuffix [for]=\"dateFin\"></mat-datepicker-toggle>\r\n\t\t\t\t<mat-datepicker #dateFin [startAt]=\"reservationAdd.dateEmprunt\"></mat-datepicker>\r\n\t\t\t</mat-form-field>\r\n\t\t</div>\r\n\t\t<div class=\"row\" *ngIf=\"modif\">\r\n\t\t\t<div class=\"column\">\r\n    \t\t\t<mat-form-field>\r\n\t  \t\t\t\t<input matInput readonly placeholder=\"Date de d&eacute;but\" name=\"dateEmprunt\" [(ngModel)] = \"dateEmprunt\">\r\n\t\t\t\t</mat-form-field>\r\n\t    \t</div>\r\n\t    \t<div class=\"column\">\r\n\t    \t\t<mat-form-field>\r\n\t  \t\t\t\t<input matInput readonly placeholder=\"Date de fin\" name=\"dateRestitution\" [(ngModel)] = \"dateRestitution\">\r\n\t\t\t\t</mat-form-field>\r\n\t    \t</div>\r\n\t\t</div>\r\n\t\t<div *ngIf=\"(typeDispo && typeDispo.length != 0)\">\r\n\t\t\t<hr/>\r\n\t\t\t<h5>S&eacute;lection du mat&eacute;riel</h5>\r\n\t\t\t<div *ngFor=\"let articlechoisi of reservationAdd.articleResaDto; index as i\">\r\n\t\t\t\t<ref-article  \r\n\t\t\t\t\t[listeArticlesDispo]=\"listeArticlesDispo\"\r\n\t\t\t\t\t[typeDispo]=\"typeDispo\" [reservationAdd]=\"reservationAdd\" [indexAjout]=\"i\"\r\n\t\t\t\t\t(reservationUpdated) = \"getReservationUpdate($event)\">\t\r\n\t\t\t\t</ref-article>\r\n\t\t\t</div>\t\r\n\t\t\t<div class = \"row\" style=\"align-items:flex-start; justify-content:space-between\" >\r\n\t\t\t\t<div class=\"column\">\r\n\t\t        \t<button type=\"button\" class=\"btn btn-success\" (click)=\"ajoutArticle()\">Ajout article</button>\r\n\t\t    \t</div>\r\n\t\t\t</div>\r\n\t\t</div>\r\n\t\t<hr/>\r\n\t\t<div style=\"width:100%\">\r\n\t\t\t<h5>Commentaires</h5>\r\n\t\t\t<mat-form-field style=\"width:100%\">\r\n    \t\t\t<textarea matInput style=\"min-width: 100%\" [(ngModel)] = \"reservationAdd.commentaire\" [ngModelOptions]=\"{standalone: true}\"></textarea>\r\n    \t\t</mat-form-field>\r\n    \t</div>\r\n\t</mat-dialog-content>\r\n\t<mat-dialog-actions>\r\n\t\t<button type=\"button\" class=\"btn btn-link\" (click)=\"dialogRef.close()\">Annuler</button>\r\n\t\t<button type=\"button\" *ngIf=\"modif\" class=\"btn btn-success\" (click)=\"supprimerReservation()\">Supprimer</button>\r\n\t\t<button type=\"submit\" class=\"btn btn-success\">{{labelBouton}}</button>\r\n\t</mat-dialog-actions>\r\n</form>"
 
 /***/ }),
 
@@ -2830,8 +2830,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var src_main_webapp_app_shared_reservation_reservationArticle_entity__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! src/main/webapp/app/shared/reservation/reservationArticle.entity */ "./webapp/app/shared/reservation/reservationArticle.entity.ts");
 /* harmony import */ var _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @ng-bootstrap/ng-bootstrap */ "../../node_modules/@ng-bootstrap/ng-bootstrap/fesm5/ng-bootstrap.js");
 /* harmony import */ var src_main_webapp_app_auth_token_storage_service__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! src/main/webapp/app/auth/token-storage.service */ "./webapp/app/auth/token-storage.service.ts");
-/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! moment */ "../../node_modules/moment/moment.js");
-/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var _modal_modalListeErreur_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./modal/modalListeErreur.component */ "./webapp/app/reservation/modal/modal/modalListeErreur.component.ts");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! moment */ "../../node_modules/moment/moment.js");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_10__);
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -2844,6 +2845,7 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 var __param = (undefined && undefined.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
+
 
 
 
@@ -2877,16 +2879,15 @@ var ModalAjoutComponent = /** @class */ (function () {
         alertConfig.type = 'danger';
         alertConfig.dismissible = false;
     }
-    ModalAjoutComponent_1 = ModalAjoutComponent;
     ModalAjoutComponent.prototype.ngOnInit = function () {
         //changement langue pour affichage chiffre datepicker
         this.adapter.setLocale('fr');
-        this.dateLimiteAsso = moment__WEBPACK_IMPORTED_MODULE_9__().add(3, 'months');
+        this.dateLimiteAsso = moment__WEBPACK_IMPORTED_MODULE_10__().add(3, 'months');
         if (this.data.reservation) {
             this.reservationAdd = this.data.reservation;
-            this.dateEmprunt = moment__WEBPACK_IMPORTED_MODULE_9__(this.reservationAdd.dateEmprunt).format('DD/MM/YYYY');
+            this.dateEmprunt = moment__WEBPACK_IMPORTED_MODULE_10__(this.reservationAdd.dateEmprunt).format('DD/MM/YYYY');
             if (this.data.reservation.id) {
-                this.dateRestitution = moment__WEBPACK_IMPORTED_MODULE_9__(this.reservationAdd.dateRestitution).format('DD/MM/YYYY');
+                this.dateRestitution = moment__WEBPACK_IMPORTED_MODULE_10__(this.reservationAdd.dateRestitution).format('DD/MM/YYYY');
                 this.modif = true;
                 this.titre = "Modification d'une réservation";
                 this.labelBouton = "Modifier";
@@ -2905,6 +2906,7 @@ var ModalAjoutComponent = /** @class */ (function () {
             this.titre = "Ajout d'une réservation";
             this.labelBouton = "Ajouter";
             this.modif = false;
+            this.reservationAdd.asso = false;
         }
         this.user = this.token.getUsername();
     };
@@ -2925,7 +2927,11 @@ var ModalAjoutComponent = /** @class */ (function () {
             }
             else {
                 this.dateFailed = false;
-                if (moment__WEBPACK_IMPORTED_MODULE_9__(this.reservationAdd.dateEmprunt) > this.dateLimiteAsso && this.reservationAdd.asso) {
+                console.log("date résa :" + this.reservationAdd.dateEmprunt);
+                console.log(moment__WEBPACK_IMPORTED_MODULE_10__(this.reservationAdd.dateEmprunt));
+                console.log("date asso " + this.dateLimiteAsso);
+                console.log("asso :" + this.reservationAdd.asso);
+                if (moment__WEBPACK_IMPORTED_MODULE_10__(this.reservationAdd.dateEmprunt) > this.dateLimiteAsso && this.reservationAdd.asso) {
                     console.log("asso et 3 mois");
                     this.reservationService.getArticlesDispo(dateDFormat, dateFFormat, true).subscribe(function (data) {
                         var typeDispoInter = [];
@@ -2992,14 +2998,14 @@ var ModalAjoutComponent = /** @class */ (function () {
                             _this.saveFailed = true;
                         });
                     }
-                    else if (_this.valid && !_this.reservationAdd.asso) {
-                        _this.reservationService.validerArticles(_this.reservationAdd, false).subscribe(function (data) {
+                    else if (!_this.valid && _this.reservationAdd.asso) {
+                        _this.reservationService.validerArticles(_this.reservationAdd, true).subscribe(function (data) {
                             console.log("seconde validation cas asso et 3 mois");
                             _this.valid = data;
                             if (_this.valid) {
                                 _this.reservationService.validerArticlesAsso3Mois(_this.reservationAdd).subscribe(function (data) {
                                     _this.listErreur = data;
-                                    var dialogRef = _this.dialog.open(ModalAjoutComponent_1, {
+                                    var dialogRef = _this.dialog.open(_modal_modalListeErreur_component__WEBPACK_IMPORTED_MODULE_9__["ModalListErreurComponent"], {
                                         width: '650px',
                                         data: { liste: _this.listErreur, reservation: _this.reservationAdd }
                                     });
@@ -3016,7 +3022,7 @@ var ModalAjoutComponent = /** @class */ (function () {
                     }
                 }, function (error) {
                     console.log(error);
-                    _this.message = "Erreur de validation de la réservation";
+                    _this.message = "Erreur de validation de la réservationEEEEEEE";
                     _this.valid = false;
                 });
             }
@@ -3038,8 +3044,7 @@ var ModalAjoutComponent = /** @class */ (function () {
             _this.message = "Erreur de suppression de la réservation";
         });
     };
-    var ModalAjoutComponent_1;
-    ModalAjoutComponent = ModalAjoutComponent_1 = __decorate([
+    ModalAjoutComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
             selector: 'ref-modal-ajout',
             template: __webpack_require__(/*! ./modal-ajout.component.html */ "./webapp/app/reservation/modal/modal-ajout.component.html"),
@@ -3137,6 +3142,87 @@ var ModalConsultationReservationComponent = /** @class */ (function () {
 /***/ (function(module, exports) {
 
 module.exports = "<div class=\"row\" style=\"justify-content: space-between\">\r\n<h2 mat-dialog-title class=\"color-bleu row\">Informations R&eacute;servation</h2>\r\n<mat-checkbox disabled=\"disabled\" color=\"warn\" style=\"float:right;\" [(ngModel)] = \"reservationAdd.asso\">Association</mat-checkbox>\r\n</div>\r\n\r\n<mat-dialog-content>\r\n\t<div class=\"row\">\r\n    \t\t<div class=\"form-group\" *ngIf=\"reservationAdd.asso\"> \r\n\t        \t<mat-form-field>\r\n\t\t  \t\t\t<input matInput readonly placeholder=\"Raison sociale\" id=\"rs\" name=\"rs\" [(ngModel)] = \"reservationAdd.nom\">\r\n\t\t\t\t</mat-form-field>\r\n\t    \t</div>\r\n\t    \t<div class=\"form-group row\" *ngIf=\"!reservationAdd.asso\">\r\n\t    \t\t<div class=\"column\">\r\n\t    \t\t\t<mat-form-field>\r\n\t\t  \t\t\t\t<input matInput readonly placeholder=\"Nom\" id=\"nom\" required name=\"nom\" [(ngModel)] = \"reservationAdd.nom\">\r\n\t\t\t\t\t</mat-form-field>\r\n\t    \t\t</div>\r\n\t    \t\t<div class=\"column\" *ngIf=\"reservationAdd.prenom!=null\">\r\n\t    \t\t\t<mat-form-field>\r\n\t\t  \t\t\t\t<input matInput readonly placeholder=\"Pr&eacute;nom\" id=\"prenom\" name=\"prenom\" [(ngModel)] = \"reservationAdd.prenom\">\r\n\t\t\t\t\t</mat-form-field>\r\n\t    \t\t</div>\r\n\t    \t</div>\r\n\t\t</div>\r\n\t\t<div class=\"row\">\r\n\t\t\t<div class=\"column\">\r\n    \t\t\t<mat-form-field>\r\n\t  \t\t\t\t<input matInput readonly placeholder=\"Date de d&eacute;but\" name=\"dateEmprunt\" [(ngModel)] = \"dateEmprunt\">\r\n\t\t\t\t</mat-form-field>\r\n\t    \t</div>\r\n\t    \t<div class=\"column\">\r\n\t    \t\t<mat-form-field>\r\n\t  \t\t\t\t<input matInput readonly placeholder=\"Date de fin\" name=\"dateRestitution\" [(ngModel)] = \"dateRestitution\">\r\n\t\t\t\t</mat-form-field>\r\n\t    \t</div>\r\n\t\t</div>\r\n\t\t<div>\r\n\t\t\t<hr/>\r\n\t\t\t<h5>S&eacute;lection du mat&eacute;riel</h5>\r\n\t\t\t<div class =\"row\" *ngFor=\"let articlechoisi of reservationAdd.articleResaDto; index as i\">\r\n\t\t\t\t<mat-form-field>\r\n\t  \t\t\t\t<input matInput readonly placeholder=\"Type\" [(ngModel)] = \"articlechoisi.type\">\r\n\t\t\t\t</mat-form-field>\r\n\t\t\t\t<mat-form-field>\r\n\t  \t\t\t\t<input matInput readonly placeholder=\"Nom\" [(ngModel)] = \"articlechoisi.nom\">\r\n\t\t\t\t</mat-form-field>\r\n\t\t\t\t<mat-form-field>\r\n\t  \t\t\t\t<input matInput readonly placeholder=\"Quantite\" [(ngModel)] = \"articlechoisi.quantite\">\r\n\t\t\t\t</mat-form-field>\r\n\t\t\t</div>\t\r\n\t\t</div>\r\n\t\t<hr/>\r\n\t\t<div style=\"width:100%\">\r\n\t\t\t<h5>Commentaires</h5>\r\n\t\t\t<mat-form-field style=\"width:100%\">\r\n    \t\t\t<textarea matInput readonly style=\"min-width: 100%\" [(ngModel)] = \"reservationAdd.commentaire\" [ngModelOptions]=\"{standalone: true}\"></textarea>\r\n    \t\t</mat-form-field>\r\n    \t</div>\r\n</mat-dialog-content>\r\n<mat-dialog-actions>\r\n\t<button type=\"button\" class=\"btn btn-link\" (click)=\"dialogRef.close()\">Fermer</button>\r\n</mat-dialog-actions>"
+
+/***/ }),
+
+/***/ "./webapp/app/reservation/modal/modal/modalListeErreur.component.html":
+/*!****************************************************************************!*\
+  !*** ./webapp/app/reservation/modal/modal/modalListeErreur.component.html ***!
+  \****************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"row\" style=\"justify-content: space-between\">\r\n<h2 mat-dialog-title class=\"color-bleu row\">R&eacute;servations modifi&eacute;es</h2>\r\n</div>\r\n<mat-list *ngFor=\"let ligne of listErreur\">\r\n\t<mat-list-item>{{ligne}}</mat-list-item>\r\n \t<mat-divider></mat-divider>\r\n</mat-list>\r\n<mat-dialog-actions>\r\n\t<button type=\"button\" class=\"btn btn-link\" (click)=\"dialogRef.close()\">Fermer</button>\r\n\t<button type=\"button\" *ngIf=\"modif\" class=\"btn btn-success\" (click)=\"supprimerReservation()\">Supprimer</button>\r\n</mat-dialog-actions>"
+
+/***/ }),
+
+/***/ "./webapp/app/reservation/modal/modal/modalListeErreur.component.ts":
+/*!**************************************************************************!*\
+  !*** ./webapp/app/reservation/modal/modal/modalListeErreur.component.ts ***!
+  \**************************************************************************/
+/*! exports provided: ModalListErreurComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ModalListErreurComponent", function() { return ModalListErreurComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "../../node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/material */ "../../node_modules/@angular/material/esm5/material.es5.js");
+/* harmony import */ var _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ng-bootstrap/ng-bootstrap */ "../../node_modules/@ng-bootstrap/ng-bootstrap/fesm5/ng-bootstrap.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __param = (undefined && undefined.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
+
+
+
+
+var ModalListErreurComponent = /** @class */ (function () {
+    function ModalListErreurComponent(dialog, dialogRef, data, adapter, alertConfig) {
+        this.dialog = dialog;
+        this.dialogRef = dialogRef;
+        this.data = data;
+        this.adapter = adapter;
+        this.alertConfig = alertConfig;
+        this.saveFailed = false;
+        this.listErreur = [];
+        alertConfig.type = 'danger';
+        alertConfig.dismissible = false;
+    }
+    ModalListErreurComponent.prototype.ngOnInit = function () {
+        if (this.data.liste) {
+            this.listErreur = this.data.listErreur;
+        }
+        else {
+            this.saveFailed = true;
+            this.message = "Erreur de récupération des réservations modifiées";
+        }
+    };
+    ModalListErreurComponent = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+            selector: 'modal-list-erreur',
+            template: __webpack_require__(/*! ./modalListeErreur.component.html */ "./webapp/app/reservation/modal/modal/modalListeErreur.component.html"),
+            providers: [
+                { provide: _angular_material__WEBPACK_IMPORTED_MODULE_1__["MAT_DATE_LOCALE"], useValue: 'fr-FR' },
+                _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_2__["NgbAlertConfig"]
+            ],
+        }),
+        __param(2, Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Inject"])(_angular_material__WEBPACK_IMPORTED_MODULE_1__["MAT_DIALOG_DATA"])),
+        __metadata("design:paramtypes", [_angular_material__WEBPACK_IMPORTED_MODULE_1__["MatDialog"], _angular_material__WEBPACK_IMPORTED_MODULE_1__["MatDialogRef"], Object, _angular_material__WEBPACK_IMPORTED_MODULE_1__["DateAdapter"],
+            _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_2__["NgbAlertConfig"]])
+    ], ModalListErreurComponent);
+    return ModalListErreurComponent;
+}());
+
+
 
 /***/ }),
 
@@ -3403,17 +3489,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/common/http */ "../../node_modules/@angular/common/fesm5/http.js");
 /* harmony import */ var src_main_webapp_app_auth_auth_interceptor__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! src/main/webapp/app/auth/auth-interceptor */ "./webapp/app/auth/auth-interceptor.ts");
 /* harmony import */ var _modal_modal_ajout_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./modal/modal-ajout.component */ "./webapp/app/reservation/modal/modal-ajout.component.ts");
-/* harmony import */ var _modal_modal_consultation_reservation_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./modal/modal-consultation-reservation.component */ "./webapp/app/reservation/modal/modal-consultation-reservation.component.ts");
-/* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @angular/material */ "../../node_modules/@angular/material/esm5/material.es5.js");
-/* harmony import */ var _angular_material_datepicker__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @angular/material/datepicker */ "../../node_modules/@angular/material/esm5/datepicker.es5.js");
-/* harmony import */ var _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @ng-bootstrap/ng-bootstrap */ "../../node_modules/@ng-bootstrap/ng-bootstrap/fesm5/ng-bootstrap.js");
-/* harmony import */ var _modal_articleComponent_article_component__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./modal/articleComponent/article.component */ "./webapp/app/reservation/modal/articleComponent/article.component.ts");
+/* harmony import */ var _modal_modal_modalListeErreur_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./modal/modal/modalListeErreur.component */ "./webapp/app/reservation/modal/modal/modalListeErreur.component.ts");
+/* harmony import */ var _modal_modal_consultation_reservation_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./modal/modal-consultation-reservation.component */ "./webapp/app/reservation/modal/modal-consultation-reservation.component.ts");
+/* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @angular/material */ "../../node_modules/@angular/material/esm5/material.es5.js");
+/* harmony import */ var _angular_material_datepicker__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @angular/material/datepicker */ "../../node_modules/@angular/material/esm5/datepicker.es5.js");
+/* harmony import */ var _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @ng-bootstrap/ng-bootstrap */ "../../node_modules/@ng-bootstrap/ng-bootstrap/fesm5/ng-bootstrap.js");
+/* harmony import */ var _modal_articleComponent_article_component__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./modal/articleComponent/article.component */ "./webapp/app/reservation/modal/articleComponent/article.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -3440,17 +3528,18 @@ var ReservationModule = /** @class */ (function () {
                 _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormsModule"],
                 _angular_common_http__WEBPACK_IMPORTED_MODULE_7__["HttpClientModule"],
                 _reservation_routing_module__WEBPACK_IMPORTED_MODULE_3__["ReservationRoutingModule"],
-                _angular_material__WEBPACK_IMPORTED_MODULE_11__["MatDialogModule"],
-                _angular_material__WEBPACK_IMPORTED_MODULE_11__["MatFormFieldModule"],
-                _angular_material__WEBPACK_IMPORTED_MODULE_11__["MatNativeDateModule"],
-                _angular_material__WEBPACK_IMPORTED_MODULE_11__["MatInputModule"],
-                _angular_material__WEBPACK_IMPORTED_MODULE_11__["MatCheckboxModule"],
-                _angular_material__WEBPACK_IMPORTED_MODULE_11__["MatSelectModule"],
-                _angular_material_datepicker__WEBPACK_IMPORTED_MODULE_12__["MatDatepickerModule"],
-                _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_13__["NgbModule"]
+                _angular_material__WEBPACK_IMPORTED_MODULE_12__["MatDialogModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_12__["MatFormFieldModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_12__["MatNativeDateModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_12__["MatInputModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_12__["MatCheckboxModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_12__["MatSelectModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_12__["MatListModule"],
+                _angular_material_datepicker__WEBPACK_IMPORTED_MODULE_13__["MatDatepickerModule"],
+                _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_14__["NgbModule"]
             ],
-            declarations: [_reservation_component__WEBPACK_IMPORTED_MODULE_4__["ReservationComponent"], _modal_modal_ajout_component__WEBPACK_IMPORTED_MODULE_9__["ModalAjoutComponent"], _modal_articleComponent_article_component__WEBPACK_IMPORTED_MODULE_14__["ArticleComponent"], _modal_modal_consultation_reservation_component__WEBPACK_IMPORTED_MODULE_10__["ModalConsultationReservationComponent"]],
-            entryComponents: [_modal_modal_ajout_component__WEBPACK_IMPORTED_MODULE_9__["ModalAjoutComponent"], _modal_modal_consultation_reservation_component__WEBPACK_IMPORTED_MODULE_10__["ModalConsultationReservationComponent"]],
+            declarations: [_reservation_component__WEBPACK_IMPORTED_MODULE_4__["ReservationComponent"], _modal_modal_ajout_component__WEBPACK_IMPORTED_MODULE_9__["ModalAjoutComponent"], _modal_articleComponent_article_component__WEBPACK_IMPORTED_MODULE_15__["ArticleComponent"], _modal_modal_consultation_reservation_component__WEBPACK_IMPORTED_MODULE_11__["ModalConsultationReservationComponent"], _modal_modal_modalListeErreur_component__WEBPACK_IMPORTED_MODULE_10__["ModalListErreurComponent"]],
+            entryComponents: [_modal_modal_ajout_component__WEBPACK_IMPORTED_MODULE_9__["ModalAjoutComponent"], _modal_modal_consultation_reservation_component__WEBPACK_IMPORTED_MODULE_11__["ModalConsultationReservationComponent"], _modal_modal_modalListeErreur_component__WEBPACK_IMPORTED_MODULE_10__["ModalListErreurComponent"]],
             providers: [_reservation_service__WEBPACK_IMPORTED_MODULE_5__["ReservationService"], _angular_http__WEBPACK_IMPORTED_MODULE_6__["Http"], _angular_common__WEBPACK_IMPORTED_MODULE_1__["DatePipe"], src_main_webapp_app_auth_auth_interceptor__WEBPACK_IMPORTED_MODULE_8__["httpInterceptorProviders"]]
         })
     ], ReservationModule);
@@ -3475,6 +3564,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common/http */ "../../node_modules/@angular/common/fesm5/http.js");
 /* harmony import */ var _shared_reservation_event__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../shared/reservation/event */ "./webapp/app/shared/reservation/event.ts");
 /* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/common */ "../../node_modules/@angular/common/fesm5/common.js");
+/* harmony import */ var _shared_reservation_reservationValidation_entity__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../shared/reservation/reservationValidation.entity */ "./webapp/app/shared/reservation/reservationValidation.entity.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -3484,6 +3574,7 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 var __metadata = (undefined && undefined.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+
 
 
 
@@ -3500,6 +3591,7 @@ var ReservationService = /** @class */ (function () {
         this.getReservationByIdUrl = 'acs/reservations/id';
         this.deleteReservation = 'acs/reservations/delete';
         this.validResaAsso = 'acs/articles/validateAsso';
+        this.reservationValidation = new _shared_reservation_reservationValidation_entity__WEBPACK_IMPORTED_MODULE_4__["ReservationValidation"]();
     }
     ReservationService.prototype.getReservation = function (dateDebut, dateFin) {
         var params = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpParams"]();
@@ -3523,19 +3615,24 @@ var ReservationService = /** @class */ (function () {
         return Promise.resolve(eventList);
     };
     /** appel permettant de récupérer la liste des articles disponibles entre 2 dates et leur nombre */
-    ReservationService.prototype.getArticlesDispo = function (dateDebut, dateFin, assoEt3Mois) {
+    ReservationService.prototype.getArticlesDispo = function (dateDebut, dateFin, asso) {
         var params = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpParams"]();
+        console.log("essai " + asso);
         params = params.append('debut', dateDebut);
         params = params.append('fin', dateFin);
-        params = params.append('assoet3mois', assoEt3Mois);
+        params = params.append('asso', asso);
         return this.httpClient.get("acs/articles/articledispo", { params: params });
     };
     ReservationService.prototype.saveReservation = function (reservation) {
         return this.httpClient.post(this.reservationUrl, reservation, httpOptions);
     };
     //méthode de validation de la réservation (accès concurrent)
-    ReservationService.prototype.validerArticles = function (reservation, assoEt3Mois) {
-        return this.httpClient.post(this.validReservationUrl, { reservation: reservation, assoEt3Mois: assoEt3Mois }, httpOptions);
+    ReservationService.prototype.validerArticles = function (reservation, asso) {
+        console.log("esaisdjfndslfnsdfsdfsfsdfdsfs");
+        console.log(reservation);
+        this.reservationValidation.reservationDto = reservation;
+        this.reservationValidation.asso = asso;
+        return this.httpClient.post(this.validReservationUrl, this.reservationValidation, httpOptions);
     };
     ReservationService.prototype.validerArticlesAsso3Mois = function (reservation) {
         return this.httpClient.post(this.validResaAsso, reservation, httpOptions);
@@ -3634,6 +3731,26 @@ var ReservationArticle = /** @class */ (function () {
     function ReservationArticle() {
     }
     return ReservationArticle;
+}());
+
+
+
+/***/ }),
+
+/***/ "./webapp/app/shared/reservation/reservationValidation.entity.ts":
+/*!***********************************************************************!*\
+  !*** ./webapp/app/shared/reservation/reservationValidation.entity.ts ***!
+  \***********************************************************************/
+/*! exports provided: ReservationValidation */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ReservationValidation", function() { return ReservationValidation; });
+var ReservationValidation = /** @class */ (function () {
+    function ReservationValidation() {
+    }
+    return ReservationValidation;
 }());
 
 
