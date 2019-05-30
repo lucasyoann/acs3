@@ -84,6 +84,23 @@
 				<version>1.6.0</version>
 				<executions>
 					<execution>
+              			<id>npm install</id>
+              			<goals>
+                			<goal>exec</goal>
+              			</goals>
+              			<phase>generate-sources</phase>
+              			<configuration>
+                			<executable>npm</executable>
+                			<arguments>
+                  				<argument>install</argument>
+                			</arguments>
+                			<workingDirectory>./</workingDirectory>
+                			<target>
+                  				<echo message="npm install" />
+                			</target>
+              			</configuration>
+            		</execution>
+					<execution>
 						<phase>validate</phase>
 						<goals>
 							<goal>exec</goal>
