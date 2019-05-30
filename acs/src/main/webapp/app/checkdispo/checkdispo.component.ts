@@ -23,6 +23,7 @@ export class CheckDispoComponent implements OnInit {
     message:string;
     listArticlesDispo : ArticleDispo[];
     displayedColumns: string[] = ['type', 'description', 'quantite'];
+    asso :boolean = false;
     
     constructor(public dialog: MatDialog, private reservationService:ReservationService, public datepipe: DatePipe,
             private adapter: DateAdapter<any>, private token : TokenStorageService,private userService: UserService){}
@@ -35,14 +36,16 @@ export class CheckDispoComponent implements OnInit {
     rechercherDisponibilite(){
         if( this.dateDebutText && this.dateFinText){
             if(this.dateDebutText>this.dateFinText){
-                this.searchFailed=true
-                this.message="Veuillez choisir une date de fin supérieure à la date de début de la réservation"
+                this.searchFailed=true;
+                this.message="Veuillez choisir une date de fin supérieure à la date de début de la réservation";
             }else{
+                this.searchFailed=false;
                 const dateDFormat = (this.datepipe.transform(this.dateDebutText, 'dd/MM/yyyy'));
                 const dateFFormat = (this.datepipe.transform(this.dateFinText, 'dd/MM/yyyy'));
-                this.reservationService.getArticlesDispo( dateDFormat, dateFFormat,false).subscribe(
+                this.reservationService.getArticlesDispo( dateDFormat, dateFFormat,this.asso).subscribe(
                         data =>{
                             this.listArticlesDispo=data;
+                            this.searchFailed=false;
                         },
                         error =>{
                             this.searchFailed=true;
@@ -60,7 +63,7 @@ export class CheckDispoComponent implements OnInit {
     }
     
     sortData(sort: Sort) {
-        console.log("TRI EN COURS");
+        
         const data = this.listArticlesDispo.slice();
         if (!sort.active || sort.direction === '') {
           this.listArticlesDispo = data;

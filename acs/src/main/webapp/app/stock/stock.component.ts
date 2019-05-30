@@ -38,7 +38,6 @@ export class StockComponent implements OnInit {
             this.stockService.getUsers().subscribe(
                     data=>{
                         this.listArticle=data;
-                        console.log(this.listArticle);
                     },
                     error=>{
                         this.saveFailed=true;
@@ -51,7 +50,6 @@ export class StockComponent implements OnInit {
     }
     
     sortData(sort: Sort) {
-        console.log("TRI EN COURS");
         const data = this.listArticle.slice();
         if (!sort.active || sort.direction === '') {
           this.listArticle = data;

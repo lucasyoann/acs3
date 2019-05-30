@@ -27,6 +27,7 @@ import com.plugu.acs.data.reservationarticle.ReservationArticleRepository;
 import com.plugu.acs.data.reservations.Reservation;
 import com.plugu.acs.data.reservations.ReservationDTO;
 import com.plugu.acs.data.reservations.ReservationMapper;
+import com.plugu.acs.data.reservations.ReservationModifieeDTO;
 import com.plugu.acs.data.reservations.ReservationRepository;
 import com.plugu.acs.security.message.response.ResponseMessage;
 import com.plugu.acs.data.reservationarticle.ReservationArticle;
@@ -109,14 +110,20 @@ public class ArticleService {
 	}
 	
 	public ResponseEntity<?> verifierArticlesAssoEt3Mois(String dateDebut, String dateRetour, List<ArticleResaDTO> listArticles, List<ReservationDTO> listReservationDto) throws ParseException{
-		List<String> listMessageErreur = new ArrayList<>();
+		
+		List <ReservationModifieeDTO> result = new ArrayList<>();
 		Map<Integer, Integer> listArticleReserv = listerArticleDispoInMap(dateDebut, dateRetour,false);
 		for(ArticleResaDTO articlesReservation : listArticles) {
 			if(articlesReservation.getQuantite() > listArticleReserv.get(articlesReservation.getArticleId())) {
 				int qteAEliminer = articlesReservation.getQuantite() - listArticleReserv.get(articlesReservation.getArticleId());
 				for(ReservationDTO resaDto : listReservationDto){
+					boolean resaAmodifier = false;
+					List<ArticleResaDTO> listArticleARemplacer = new ArrayList<>();
+					ReservationModifieeDTO resaModifieeDto = new ReservationModifieeDTO();
 					for(ArticleResaDTO resaArticle:resaDto.getArticleResaDto()) {
+						
 						if(resaArticle.getArticleId()==articlesReservation.getArticleId()) {
+							resaAmodifier=true;
 							int quantite = resaArticle.getQuantite();
 							Article article = getArticleById(articlesReservation.getArticleId());
 							if(article==null) {
@@ -126,43 +133,34 @@ public class ArticleService {
 							if(qteAEliminer<=quantite) {
 								int newQuantite = quantite - qteAEliminer;
 								resaArticle.setQuantite(newQuantite);
-								listMessageErreur.add("La reservation au nom de "+resaDto.getNom()+" a été modifiée.La quantité de "+ article.getIntitule() + 
+								resaModifieeDto.setMessageErreur("La reservation au nom de "+resaDto.getNom()+" a été modifiée.La quantité de "+ article.getIntitule() + 
 										" est passé de " +quantite + " à " + newQuantite);
 								qteAEliminer=0;
 							}else {
 								resaArticle.setQuantite(0);
 								qteAEliminer=qteAEliminer-quantite;
-								listMessageErreur.add("La reservation au nom de "+resaDto.getNom()+" a été modifiée.La quantité de "+ article.getIntitule() + 
+								resaModifieeDto.setMessageErreur("La reservation au nom de "+resaDto.getNom()+" a été modifiée.La quantité de "+ article.getIntitule() + 
 										" est passé de " +quantite + " à 0");
 							}
-							ReservationArticle resaArticleModifiee= new ReservationArticle();
-							
-							resaArticleModifiee.setArticle(article);
-							Optional<Reservation> resaOptional = reservationRepository.findById(resaDto.getId());
-							if(!resaOptional.isPresent()) {
-								return new ResponseEntity<>(new ResponseMessage("Fail -> Reservation doesn't exist!"),
-										HttpStatus.BAD_REQUEST);
-							}
-							resaArticleModifiee.setReservation(resaOptional.get());
-							resaArticleModifiee.setQuantite(resaArticle.getQuantite());
-							Optional<ReservationArticle> reservationArticleOpt = reservationArticleRepository.findById(resaArticleModifiee.getPrimaryKey());
-							if(!reservationArticleOpt.isPresent()) {
-								return new ResponseEntity<>(new ResponseMessage("Fail -> Reservation doesn't exist!"),
-										HttpStatus.BAD_REQUEST);
-							}
-							resaArticleModifiee=reservationArticleOpt.get();
-							resaArticleModifiee.setQuantite(resaArticle.getQuantite());
-							reservationArticleRepository.save(resaArticleModifiee);
-							break;
+							listArticleARemplacer.add(resaArticle);
+						}else {
+							listArticleARemplacer.add(resaArticle);
 						}
 					}
+					if(resaAmodifier) {
+						resaDto.setArticleResaDto(listArticleARemplacer);
+						resaModifieeDto.setReservationDto(resaDto);
+						result.add(resaModifieeDto);
+					}
+					
+					
 					if(qteAEliminer==0) {
 						break;
 					}
 				}
 			}
 		}
-		return ResponseEntity.ok(listMessageErreur);
+		return ResponseEntity.ok(result);
 	}
 	
 	public Article getArticleById(int id) {

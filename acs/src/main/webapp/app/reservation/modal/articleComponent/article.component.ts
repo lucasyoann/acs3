@@ -87,7 +87,6 @@ export class ArticleComponent implements OnInit {
                 
                     this.etatQ = this.article.quantiteMax;
                 }
-                console.log("saveEtat", this.etatQ);
     }
     
     saveQuantite(){
@@ -106,8 +105,7 @@ export class ArticleComponent implements OnInit {
         }
         this.listeArticlesDispo.forEach(function (articleDispo) {
                 if( this.reservationAdd.articleResaDto[this.indexAjout].articleId===articleDispo.id){
-                    console.log("etat", this.etatQ);
-                    console.log("q", this.reservationAdd.articleResaDto[this.indexAjout].quantite);
+                    
                     articleDispo.quantiteMax = articleDispo.quantiteMax -this.reservationAdd.articleResaDto[this.indexAjout].quantite + this.etatQ;
                     this.quantiteMax = articleDispo.quantiteMax;
                 }

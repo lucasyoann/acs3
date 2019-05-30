@@ -8,6 +8,7 @@ import { DatePipe } from '@angular/common'
 import { ArticleDispo } from "src/main/webapp/app/shared/reservation/articleDispo.entity";
 import { ReservationArticle } from "src/main/webapp/app/shared/reservation/reservationArticle.entity";
 import { ReservationValidation } from "../shared/reservation/reservationValidation.entity";
+import { ReservationModifiee } from "../shared/reservation/reservationModifiee.entity";
 
 const httpOptions = {
         headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -56,7 +57,6 @@ export class ReservationService {
     /** appel permettant de récupérer la liste des articles disponibles entre 2 dates et leur nombre */
     getArticlesDispo(dateDebut, dateFin, asso): Observable<ArticleDispo[]> {
         let params = new HttpParams();
-        console.log("essai "+ asso);
         params = params.append('debut', dateDebut);
         params = params.append('fin', dateFin);
         params = params.append('asso',asso);
@@ -70,15 +70,14 @@ export class ReservationService {
     //méthode de validation de la réservation (accès concurrent)
     
     validerArticles(reservation: Reservation,asso:boolean){
-        console.log("esaisdjfndslfnsdfsdfsfsdfdsfs");
-        console.log(reservation);
+        
         this.reservationValidation.reservationDto=reservation;
         this.reservationValidation.asso=asso;
         return this.httpClient.post( this.validReservationUrl, this.reservationValidation, httpOptions) as Observable<boolean>;
     }
     
     validerArticlesAsso3Mois(reservation: Reservation){
-        return this.httpClient.post( this.validResaAsso, reservation, httpOptions) as Observable<string[]>;
+        return this.httpClient.post( this.validResaAsso, reservation, httpOptions) as Observable<ReservationModifiee[]>;
     }
     
     getReservationById(id): Observable<Reservation> {

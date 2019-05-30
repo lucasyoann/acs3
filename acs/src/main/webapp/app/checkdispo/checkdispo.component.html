@@ -9,12 +9,13 @@
 	  		<mat-datepicker-toggle matSuffix [for]="dateDebut"></mat-datepicker-toggle>
 				<mat-datepicker #dateDebut></mat-datepicker>
 		</mat-form-field>
-		<mat-form-field style="margin-right:20px">
+		<mat-form-field style="margin-left:20px; margin-right:20px;">
 			<input matInput [matDatepicker]="dateFin" required placeholder="Date de fin" [(ngModel)] = "dateFinText">
 			<mat-datepicker-toggle matSuffix [for]="dateFin"></mat-datepicker-toggle>
-				<mat-datepicker #dateFin></mat-datepicker>
+				<mat-datepicker #dateFin [startAt]="dateDebutText">></mat-datepicker>
 		</mat-form-field>
-		<mat-dialog-actions>
+		<mat-checkbox style="margin-left:20px; margin-right:20px;" color="warn" [(ngModel)] = "asso">Association</mat-checkbox>
+		<mat-dialog-actions style="margin-left:20px; margin-right:20px;">
 			<button type="button" class="btn btn-success" (click)="rechercherDisponibilite()">Rechercher</button>
 		</mat-dialog-actions>
 	</div>

@@ -19,6 +19,7 @@ import com.plugu.acs.data.articles.ArticleDTO;
 import com.plugu.acs.data.articles.ArticleDispoDTO;
 import com.plugu.acs.data.articles.ArticleResaDTO;
 import com.plugu.acs.data.reservations.ReservationDTO;
+import com.plugu.acs.data.reservations.ReservationModifieeDTO;
 import com.plugu.acs.web.service.ArticleService;
 import com.plugu.acs.web.service.ReservationService;
 import com.plugu.acs.common.ReservationValidation;
@@ -46,7 +47,7 @@ public class ArticleController {
 	}
 	
 	@GetMapping("/articledispo")
-	@PreAuthorize("hasRole('ADMIN') or hasRole('SUPER_ADMIN')")
+	@PreAuthorize("hasRole('USER') or hasRole('ADMIN') or hasRole('SUPER_ADMIN')")
 	public List<ArticleDispoDTO> getArticleDispos(@RequestParam String debut, @RequestParam String fin, @RequestParam boolean asso) throws ParseException {
 		
 		////récupération liste des articles disponibles
@@ -71,6 +72,7 @@ public class ArticleController {
 		String fin =formatter.format(reservation.getDateRestitution());
 		List<ArticleResaDTO> articles = articleService.listArticleToCheck(reservation);
 		List<ReservationDTO> listReservationDto = reservationService.listerResa(debut, fin, true);
-		return ResponseEntity.ok(articleService.verifierArticlesAssoEt3Mois(debut, fin, articles,listReservationDto));
+		
+		return articleService.verifierArticlesAssoEt3Mois(debut, fin, articles,listReservationDto);
     }
 }

@@ -13,8 +13,6 @@ export class AppComponent implements OnInit {
  
   ngOnInit() {
     if (this.tokenStorage.getToken()) {
-        console.log("start");
-        console.log("token : " + this.tokenStorage.getToken());
       this.roles = this.tokenStorage.getAuthorities();
       this.roles.every(role => {
         if (role === 'ROLE_ADMIN') {
@@ -27,7 +25,7 @@ export class AppComponent implements OnInit {
         this.authority = 'user';
         return true;
       });
-      console.log(this.authority);
+      
     }
   }
 }

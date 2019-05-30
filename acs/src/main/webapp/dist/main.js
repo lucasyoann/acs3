@@ -3004,11 +3004,23 @@ var ModalAjoutComponent = /** @class */ (function () {
                             _this.valid = data;
                             if (_this.valid) {
                                 _this.reservationService.validerArticlesAsso3Mois(_this.reservationAdd).subscribe(function (data) {
-                                    _this.listErreur = data;
-                                    var dialogRef = _this.dialog.open(_modal_modalListeErreur_component__WEBPACK_IMPORTED_MODULE_9__["ModalListErreurComponent"], {
-                                        width: '650px',
-                                        data: { liste: _this.listErreur, reservation: _this.reservationAdd }
-                                    });
+                                    _this.listResaModifiees = data;
+                                    var _loop_1 = function (j) {
+                                        _this.reservationService.saveReservation(_this.listResaModifiees[j].reservationDto).subscribe(function (data) {
+                                            if (j === _this.listResaModifiees.length - 1) {
+                                                var dialogRef = _this.dialog.open(_modal_modalListeErreur_component__WEBPACK_IMPORTED_MODULE_9__["ModalListErreurComponent"], {
+                                                    width: '650px',
+                                                    data: { liste: _this.listResaModifiees, reservation: _this.reservationAdd }
+                                                });
+                                            }
+                                        }, function (error) {
+                                            _this.message = "Erreur d'enregistrement de la réservation";
+                                            _this.saveFailed = true;
+                                        });
+                                    };
+                                    for (var j = 0; j < _this.listResaModifiees.length; j++) {
+                                        _loop_1(j);
+                                    }
                                 });
                             }
                         }, function (error) {
@@ -3193,13 +3205,13 @@ var ModalListErreurComponent = /** @class */ (function () {
         this.adapter = adapter;
         this.alertConfig = alertConfig;
         this.saveFailed = false;
-        this.listErreur = [];
+        this.listResaModifiee = [];
         alertConfig.type = 'danger';
         alertConfig.dismissible = false;
     }
     ModalListErreurComponent.prototype.ngOnInit = function () {
         if (this.data.liste) {
-            this.listErreur = this.data.listErreur;
+            this.listResaModifiee = this.data.liste;
         }
         else {
             this.saveFailed = true;

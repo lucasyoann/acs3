@@ -34,7 +34,6 @@ export class ModalDeleteUserComponent implements OnInit {
     }
     
     deleteUserA(){
-        console.log("ESQCDSVFSDVXVDSFVFDBFDSBDGBGFDBHD");
         this.userService.deleteUserA(this.userAdd).subscribe(
                 data=>{
                     this.dialogRef.close();

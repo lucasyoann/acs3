@@ -25,14 +25,13 @@ export class AppHeaderComponent implements OnInit{
                 authorities: this.token.getAuthorities()
         
         };
-        console.log("token3 " + this.info.token)
+        
         if(this.info.token !=null){
-            console.log("token :" + this.info.token);
+            
             
             this.authService.validateToken(this.info.token).subscribe(data =>{
                 this.testAuth = data;
-                console.log("data : " + data);
-                console.log("testAuth : "+ this.testAuth);
+                
                 if(!this.testAuth){
                     console.log("token expiré");
                     this.token.signOut();

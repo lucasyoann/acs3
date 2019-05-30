@@ -19,9 +19,7 @@ export class RouteGuard implements CanActivate {
     ) { }
 
     canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot ): Observable<boolean> {
-        console.log( 'canActivate' );
-         //let test = this.checkLogin( state );
-        console.log( 'checkLogin' );
+        
         return new Observable<boolean>( (observer) => {  
             if(this.tokenStorage.getToken()){
                 let tets = null;
@@ -42,7 +40,7 @@ export class RouteGuard implements CanActivate {
                  });
 
              } else {
-                 console.log( 'not athenticated' );
+                 
                  this.router.navigate( ['/dashboard'], {
                      queryParams: { origin: state.url }
                  } );

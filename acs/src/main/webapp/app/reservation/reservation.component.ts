@@ -24,7 +24,7 @@ export class ReservationComponent implements OnInit {
     
     
     constructor(public dialog: MatDialog, private reservationService:ReservationService, public datepipe: DatePipe,
-            private token : TokenStorageService,private userService: UserService){}
+            private token : TokenStorageService,private userService: UserService, private _elementRef : ElementRef){}
        
     ngOnInit() { 
         
@@ -88,12 +88,12 @@ export class ReservationComponent implements OnInit {
         scheduler.config.drag_create = false;
         
        this.chargedResas();
-        
+
         // Custom modal for add/update event
         // bind(this) permet de conserver le this comme etant le component et non la fonction
         scheduler.showLightbox = function(id) {
             var lightbox_event = scheduler.getEvent(id);
-         
+            
             scheduler.startLightbox(id, null); 
             scheduler.hideCover();
             if( id> 1000000000000 && this.user.administrateur){
@@ -103,12 +103,21 @@ export class ReservationComponent implements OnInit {
                     width: '650px',
                     data: {reservation: reservation}
                 });
+                dialogRef.afterClosed().subscribe(result => {
+                    scheduler.clearAll();
+                    this.chargedResas();
+                });
             }else if (this.user.administrateur){
                 this.reservationService.getReservationById(id).subscribe(data=>{
                     var reservation=data;
                     const dialogRef = this.dialog.open(ModalAjoutComponent, {
                         width: '650px',
                         data: {reservation: reservation}
+                    });
+                    // rechargement du scheduler une fois la popup fermée
+                    dialogRef.afterClosed().subscribe(result => {
+                        scheduler.clearAll();
+                        this.chargedResas();
                     });
                 });
             }else{
@@ -118,9 +127,13 @@ export class ReservationComponent implements OnInit {
                         width: '650px',
                         data: {reservation: reservation}
                     });
+                    dialogRef.afterClosed().subscribe(result => {
+                        scheduler.clearAll();
+                        this.chargedResas();
+                    });
                 });
             }
-           
+            
         }.bind(this);
         
         //Event permettant de gerer le changement de mois pour la recuperation des resas visibles
@@ -140,6 +153,7 @@ export class ReservationComponent implements OnInit {
     
     addResa(){
         const dialogRef = this.dialog.open(ModalAjoutComponent, {
+            width: '650px',
             data: {}
         });
     }
