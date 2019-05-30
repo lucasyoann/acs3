@@ -7,7 +7,7 @@
       "container": "TOMCAT8",
       "war": [
          {
-            "file": "acs/target/acs-0.0.1-SNAPSHOT.war",
+            "file": "target/acs-0.0.1-SNAPSHOT.war",
             "context": "/acs"
          }
       ]
