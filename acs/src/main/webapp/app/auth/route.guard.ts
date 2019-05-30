@@ -4,8 +4,8 @@ import { Router, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/ro
 import { Observable } from 'rxjs';
 
 
-import {TokenStorageService} from 'src/main/webapp/app/auth/token-storage.service';
-import {AuthService} from 'src/main/webapp/app/auth/auth.service';
+import {TokenStorageService} from './token-storage.service';
+import {AuthService} from './auth.service';
 
 @Injectable({ providedIn: 'root' })
 export class RouteGuard implements CanActivate {

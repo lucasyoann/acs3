@@ -4,14 +4,27 @@ import "dhtmlx-scheduler";
 import { ReservationService } from './reservation.service';
 import { MatDialog } from '@angular/material';
 import { ModalAjoutComponent } from './modal/modal-ajout.component';
-import { Reservation } from "src/main/webapp/app/shared/reservation/reservation.entity";
+import { Reservation } from "../shared/reservation/reservation.entity";
 import { DatePipe } from '@angular/common'
 
-@Component( {
-    encapsulation: ViewEncapsulation.None,
+@Component({
     selector: 'ref-reservations',
-    templateUrl: './reservation.component.html'
-} )
+    template: `<button class="btn btn-success"(click)="addResa()">Ajouter une r&eacute;servation</button>
+<div #scheduler_here class="dhx_cal_container" style="width: 100%; height:80vh; margin-top:60px;">
+   <div class="dhx_cal_navline">
+       <div class="dhx_cal_prev_button">&nbsp;</div>
+       <div class="dhx_cal_next_button">&nbsp;</div>
+       <div class="dhx_cal_today_button"></div>
+       <div class="dhx_cal_date"></div>
+       <div class="dhx_cal_tab" name="day_tab"></div>
+       <div class="dhx_cal_tab" name="week_tab"></div>
+       <div class="dhx_cal_tab" name="month_tab"></div>
+   </div>
+   <div class="dhx_cal_header"></div>
+   <div class="dhx_cal_data"></div>
+</div>`,
+    providers: []
+})
 export class ReservationComponent implements OnInit {
     @ViewChild("scheduler_here") schedulerContainer: ElementRef;
     
@@ -61,7 +74,7 @@ export class ReservationComponent implements OnInit {
         
         // Custom modal for add/update event
         // bind(this) permet de conserver le this comme etant le component et non la fonction
-        scheduler.showLightbox = function(id) {
+        scheduler.showLightbox = function(id : any) {
             var lightbox_event = scheduler.getEvent(id);
          
             scheduler.startLightbox(id, null); 
@@ -73,7 +86,7 @@ export class ReservationComponent implements OnInit {
                     data: {reservation: reservation}
                 });
             }else{
-                this.reservationService.getReservationById(id).subscribe(data=>{
+                this.reservationService.getReservationById(id).subscribe((data : Reservation) =>{
                     var reservation=data;
                     const dialogRef = this.dialog.open(ModalAjoutComponent, {
                         data: {reservation: reservation}

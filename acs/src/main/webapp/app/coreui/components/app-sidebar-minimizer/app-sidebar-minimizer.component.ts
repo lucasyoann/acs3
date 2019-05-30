@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-sidebar-minimizer',
-  templateUrl: './app-sidebar-minimizer.component.html'
+  template:`<button class="sidebar-minimizer" type="button" appSidebarMinimizer appBrandMinimizer></button>
+`
 })
 export class AppSidebarMinimizerComponent { }

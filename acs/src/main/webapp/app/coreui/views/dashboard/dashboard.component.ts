@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
+import { OnInit } from "@angular/core";
 
 @Component({
-  templateUrl: 'dashboard.component.html'
+    template: `<div class="animated fadeIn">
+    <router-outlet></router-outlet>
+</div>`
 })
 export class DashboardComponent {
-
-  constructor( ) { }
-
+  constructor( ) {}
 }

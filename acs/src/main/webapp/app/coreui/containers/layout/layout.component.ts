@@ -2,7 +2,22 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-dashboard',
-  templateUrl: './layout.component.html'
+  template: `<app-header></app-header>
+<div class="app-body">
+    <app-sidebar></app-sidebar>
+    <!-- Main content -->
+    <main class="main">
+        <!-- Breadcrumb 
+        <ol class="breadcrumb">
+            <app-breadcrumbs></app-breadcrumbs>
+        </ol>-->
+        <div id='div' style="position:absolute; left:50%;"><span id='span'></span></div>
+        <div class="container-fluid">
+            <router-outlet></router-outlet>
+        </div>
+    </main>
+</div>
+<app-footer></app-footer>`
 })
 export class FullLayoutComponent { 
     span: HTMLElement;

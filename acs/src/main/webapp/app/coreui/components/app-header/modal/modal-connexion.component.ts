@@ -3,9 +3,9 @@ import { MatDialogRef, MAT_DIALOG_DATA, MAT_DATE_LOCALE, DateAdapter, MAT_DATE_F
 import {FormControl} from '@angular/forms';
 import {NgbAlertConfig} from '@ng-bootstrap/ng-bootstrap';
 
-import {AuthService} from 'src/main/webapp/app/auth/auth.service';
-import {TokenStorageService} from 'src/main/webapp/app/auth/token-storage.service';
-import {AuthLoginInfo} from 'src/main/webapp/App/auth/login-info';
+import {AuthService} from '../../../../auth/auth.service';
+import {TokenStorageService} from '../../../../auth/token-storage.service';
+import {AuthLoginInfo} from '../../../../auth/login-info';
 
 interface Alert {
     type: string;
@@ -20,7 +20,35 @@ const ALERT: Alert = {
   
 @Component( {
     selector: 'ref-modal-connexion',
-    templateUrl: './modal-connexion.component.html',
+    template:`<div class="row" style="justify-content: space-between;height: 40px;">
+<h2 mat-dialog-title class="color-vert-stg row">Connexion </h2>
+</div>
+<div *ngIf="isLoginFailed">
+    <ngb-alert>
+        Erreur d'autentification
+  </ngb-alert>
+</div>
+<mat-dialog-content>
+    <div class="row">
+        <div class="form-group column" >
+            <div class="row">
+                <mat-form-field>
+                    <input matInput placeholder="Identifiant de connexion" id="nomconnexion" name="nomconnexion" [(ngModel)] = "form.username">
+                </mat-form-field>
+            </div>
+            <div class="row">
+                <mat-form-field>
+                    <input matInput placeholder="Mot de passe" type="password" id="motdepasse" name="motdepasse" [(ngModel)] = "form.password">
+                </mat-form-field>
+            </div>
+        </div>
+
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button class="btn btn-link"(click)="dialogRef.close()">Annuler</button>
+    <button class="btn btn-success"(click)="onSubmit()">Connexion</button>
+</mat-dialog-actions>`,
     providers: [
                 {provide: MAT_DATE_LOCALE, useValue: 'fr-FR'},
                 NgbAlertConfig

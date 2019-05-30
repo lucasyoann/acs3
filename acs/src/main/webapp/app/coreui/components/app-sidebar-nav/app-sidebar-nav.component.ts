@@ -2,8 +2,8 @@ import { Component, ElementRef, Input, OnInit, Renderer2 } from '@angular/core';
 
 // Import navigation elements
 import { navigation_user, navigation_disconnect } from './../../../_nav';
-import { TokenStorageService } from 'src/main/webapp/app/auth/token-storage.service';
-import {AuthService} from 'src/main/webapp/app/auth/auth.service';
+import { TokenStorageService } from '../../../auth/token-storage.service';
+import {AuthService} from '../../../auth/auth.service';
 
 @Component({
   selector: 'app-sidebar-nav',
@@ -42,11 +42,11 @@ export class AppSidebarNavComponent {
   
     public navigation_disconnect = navigation_disconnect;
 
-    public isDivider(item) {
+    public isDivider(item : any) {
         return item.divider ? true : false;
     }
 
-    public isTitle(item) {
+    public isTitle(item :any) {
         return item.title ? true : false;
     }
 

@@ -3,10 +3,10 @@ import { Observable } from 'rxjs';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 
 import { Event } from '../shared/reservation/event';
-import { Reservation } from "src/main/webapp/app/shared/reservation/reservation.entity";
+import { Reservation } from "../shared/reservation/reservation.entity";
 import { DatePipe } from '@angular/common'
-import { ArticleDispo } from "src/main/webapp/app/shared/reservation/articleDispo.entity";
-import { ReservationArticle } from "src/main/webapp/app/shared/reservation/reservationArticle.entity";
+import { ArticleDispo } from "../shared/reservation/articleDispo.entity";
+import { ReservationArticle } from "../shared/reservation/reservationArticle.entity";
 
 const httpOptions = {
         headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -22,18 +22,18 @@ export class ReservationService {
     
     constructor(private httpClient: HttpClient, public datepipe: DatePipe) {}
        
-    getReservation(dateDebut, dateFin): Observable<Reservation[]> {
+    getReservation(dateDebut : any, dateFin : any): Observable<Reservation[]> {
         let params = new HttpParams();
         params = params.append('debut', dateDebut);
         params = params.append('fin', dateFin);
         return this.httpClient.get( this.reservationUrl, { params: params }) as Observable<Reservation[]>;
     }
     
-    transformedReservationToSchedulerEvent(reservations): Promise<Event[]>{
+    transformedReservationToSchedulerEvent(reservations : any): Promise<Event[]>{
         let eventList :Event[]= [];
 
         
-        reservations.forEach(function(resa) {
+        reservations.forEach(function(resa : any) {
             let evt = new Event();
             evt.id = resa.id;
             evt.start_date = this.datepipe.transform( resa.dateEmprunt, 'MM-dd-yyyy HH:mm').toString();
@@ -50,7 +50,7 @@ export class ReservationService {
     
     
     /** appel permettant de récupérer la liste des articles disponibles entre 2 dates et leur nombre */
-    getArticlesDispo(dateDebut, dateFin): Observable<ArticleDispo[]> {
+    getArticlesDispo(dateDebut : any, dateFin : any): Observable<ArticleDispo[]> {
         let params = new HttpParams();
         params = params.append('debut', dateDebut);
         params = params.append('fin', dateFin);
@@ -67,7 +67,7 @@ export class ReservationService {
         return this.httpClient.post( this.validReservationUrl, reservation, httpOptions) as Observable<boolean>;
     }
     
-    getReservationById(id): Observable<Reservation> {
+    getReservationById(id : any): Observable<Reservation> {
         let params = new HttpParams();
         params = params.append('id', id);
         return this.httpClient.get( this.getReservationByIdUrl,  { params: params }) as Observable<Reservation>;

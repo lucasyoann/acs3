@@ -4,18 +4,18 @@
   "newProjectRoot": "projects",
   "projects": {
     "acs-web": {
-      "root": "src/main",
+      "root": "src/main/webapp",
       "sourceRoot": "src/main/webapp",
       "projectType": "application",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "src/main/webapp/dist",
-            "index": "src/main/webapp//index.html",
-            "main": "src/main/webapp//app.main.ts",
-            "polyfills": "src/main/webapp//polyfills.ts",
-            "tsConfig": "src/main/webapp//../../../tsconfig.json",
+            "outputPath": "src/main/resources/public",
+            "index": "src/main/webapp/index.html",
+            "main": "src/main/webapp/app.main.ts",
+            "polyfills": "src/main/webapp/polyfills.ts",
+            "tsConfig": "src/main/webapp/../../../tsconfig.json",
             "assets": [
               "src/main/webapp/favicon.ico",
               "src/main/webapp/assets"

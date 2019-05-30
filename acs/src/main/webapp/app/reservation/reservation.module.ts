@@ -9,7 +9,7 @@ import { ReservationService } from './reservation.service';
 import { Http } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
 
-import { httpInterceptorProviders } from 'src/main/webapp/app/auth/auth-interceptor';
+import { httpInterceptorProviders } from '../auth/auth-interceptor';
 
 
 import { ModalAjoutComponent } from './modal/modal-ajout.component';

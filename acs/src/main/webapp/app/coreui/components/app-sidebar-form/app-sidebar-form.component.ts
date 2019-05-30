@@ -2,6 +2,6 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-sidebar-form',
-  templateUrl: './app-sidebar-form.component.html'
-})
+  template: ''
+})   
 export class AppSidebarFormComponent { }

@@ -93,3 +93,24 @@ input:read-only{
 .form-group input + input {
   margin-top: 5px;
 }
+
+
+
+///////side bar header
+.menu-accueil {
+   width: 100%;
+   height: 45px;
+}
+
+.button-accueil {
+    width: 100%;
+    height: 100%;
+    background-color: #e4e5e6;
+    color: #1f1d26;
+    text-decoration: none;
+    border-radius: 0;
+}
+.button-accueil:hover{
+    background-color: #d3cfcb;
+    color: #1f1d26;
+}

@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 @Component({
   selector: 'app-sidebar-header',
-  templateUrl: './app-sidebar-header.component.html',
-  styleUrls: ['app-sidebar-header.component.css']
+  template: ''
 })
 export class AppSidebarHeaderComponent implements OnInit{ 
   constructor(private router: Router ) {

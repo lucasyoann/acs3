@@ -3,7 +3,9 @@ import { UserService } from '../user.service';
  
 @Component({
   selector: 'app-user',
-  templateUrl: './user.component.html'
+  template:`<h4>Content from Server</h4>
+              {{board}}
+              {{errorMessage}}`
 })
 export class UserComponent implements OnInit {
   board: string;

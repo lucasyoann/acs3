@@ -2,13 +2,28 @@ import { Component, OnInit } from '@angular/core';
 
 import { MatDialog } from '@angular/material';
 import { ModalConnexion } from './modal/modal-connexion.component';
-import { TokenStorageService } from 'src/main/webapp/app/auth/token-storage.service';
-import {AuthService} from 'src/main/webapp/app/auth/auth.service';
+import { TokenStorageService } from '../../../auth/token-storage.service';
+import {AuthService} from '../../../auth/auth.service';
 
 @Component({
   selector: 'app-header',
-  templateUrl: './app-header.component.html',
-  styleUrls: ['./app-header.component.css']
+  template: `<header class="app-header navbar">
+  <button class="navbar-toggler d-lg-none" type="button" appMobileSidebarToggler>
+    <span class="navbar-toggler-icon"></span>
+  </button>
+    <a class="navbar-brand" href="#"></a>
+  <button class="navbar-toggler d-md-down-none mr-auto" type="button" appSidebarToggler>
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div  *ngIf="!info.token || !testAuth" class="flex end">
+    <button class="btn btn-success" style="margin-right:15px"
+        (click)="signin()" title="Connexion">Connexion</button>
+    </div>
+    <div  *ngIf="info.token && testAuth" class="flex end">
+    <button class="btn btn-success" style="margin-right:15px"
+        (click)="logout()" title="D&eacute;connexion">D&eacute;connexion</button>
+    </div>
+</header>`
 })
 export class AppHeaderComponent implements OnInit{ 
     

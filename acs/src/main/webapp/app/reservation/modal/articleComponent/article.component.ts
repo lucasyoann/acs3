@@ -1,15 +1,38 @@
 import { Component, OnInit, Inject,Input, Output, EventEmitter } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA, MAT_DATE_LOCALE, DateAdapter, MAT_DATE_FORMATS } from '@angular/material';
 import {FormControl} from '@angular/forms';
-import { Reservation } from "src/main/webapp/app/shared/reservation/reservation.entity";
-import { ArticleDispo } from "src/main/webapp/app/shared/reservation/articleDispo.entity";
-import { ReservationArticle } from "src/main/webapp/app/shared/reservation/reservationArticle.entity";
-
-//import { ModalAjoutComponent } from "src/main/webapp/app/reservation/modal/modal-ajout.component";
+import { Reservation } from '../../../shared/reservation/reservation.entity';
+import { ArticleDispo } from '../../../shared/reservation/articleDispo.entity';
+import { ReservationArticle } from '../../../shared/reservation/reservationArticle.entity';
 
 @Component( {
     selector: 'ref-article',
-    templateUrl: './article.component.html',
+    template: `<div class="row" style="align-items : baseline">
+    <div class="column">
+        <mat-form-field>
+            <mat-select placeholder="Type de mat&eacute;riel" [(value)]="article.type" (selectionChange)="changementArticle()">
+            <mat-option *ngFor="let type of typeDispo" [value]="type">
+                {{type}}
+            </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div class="column" *ngIf="typeArticleChargee">
+        <mat-form-field>
+            <mat-select placeholder="Mat&eacute;riel" [(value)]="article.id" (selectionChange)="getQuantiteMax()">
+            <mat-option *ngFor="let articleid of listeArticleSelect" [value]="articleid.id" >
+                  {{articleid.description}}
+            </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div class="column" *ngIf="quantmaxchargee">
+        <mat-form-field>
+            <input matInput placeholder="Quantit&eacute; (Reste : {{quantiteMax}})" type="number" min ="0" max="quantiteMax" name="quantite" [(ngModel)] = "article.quantiteMax" (click)="saveEtat()" (focusout)="saveQuantite()">
+        </mat-form-field>
+    </div>
+    <i (click)="supprimerArticle()" class="fas fa-trash" style="margin-left:15px; float:right"></i>
+</div>`,
     providers: [],
 } )
 export class ArticleComponent implements OnInit {
@@ -104,7 +127,7 @@ export class ArticleComponent implements OnInit {
         }else{
             this.reservationAdd.articleResaDto[this.indexAjout].quantite=quantite;
         }
-        this.listeArticlesDispo.forEach(function (articleDispo) {
+        this.listeArticlesDispo.forEach(function (articleDispo : ArticleDispo) {
                 if( this.reservationAdd.articleResaDto[this.indexAjout].articleId===articleDispo.id){
                     console.log("etat", this.etatQ);
                     console.log("q", this.reservationAdd.articleResaDto[this.indexAjout].quantite);
@@ -117,7 +140,7 @@ export class ArticleComponent implements OnInit {
     }
     
     supprimerArticle(){
-        this.listeArticlesDispo.forEach(function (articleDispo) {
+        this.listeArticlesDispo.forEach(function (articleDispo : ArticleDispo) {
             if(this.reservationAdd.articleResaDto[this.indexAjout].quantite && this.reservationAdd.articleResaDto[this.indexAjout].articleId===articleDispo.id){
                
                 articleDispo.quantiteMax = articleDispo.quantiteMax +this.reservationAdd.articleResaDto[this.indexAjout].quantite;

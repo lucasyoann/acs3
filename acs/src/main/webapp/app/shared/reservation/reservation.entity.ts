@@ -1,4 +1,4 @@
-import { ReservationArticle } from "src/main/webapp/app/shared/reservation/reservationArticle.entity";
+import { ReservationArticle } from "../../shared/reservation/reservationArticle.entity";
 
 export class Reservation {
     id: number;

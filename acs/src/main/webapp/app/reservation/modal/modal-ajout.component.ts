@@ -1,19 +1,101 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA, MAT_DATE_LOCALE, DateAdapter, MAT_DATE_FORMATS } from '@angular/material';
 import {FormControl} from '@angular/forms';
-import { Reservation } from "src/main/webapp/app/shared/reservation/reservation.entity";
-import { ReservationService } from "src/main/webapp/app/reservation/reservation.service";
+import { Reservation } from "../../shared/reservation/reservation.entity";
+import { ReservationService } from "../../reservation/reservation.service";
 import { DatePipe } from "@angular/common";
-import { ReservationArticle } from "src/main/webapp/app/shared/reservation/reservationArticle.entity";
-import { ArticleDispo } from "src/main/webapp/app/shared/reservation/articleDispo.entity";
+import { ReservationArticle } from "../../shared/reservation/reservationArticle.entity";
+import { ArticleDispo } from "../../shared/reservation/articleDispo.entity";
 import {NgbAlertConfig} from '@ng-bootstrap/ng-bootstrap';
-import { TokenStorageService } from 'src/main/webapp/app/auth/token-storage.service';
+import { TokenStorageService } from '../../auth/token-storage.service';
 import { formatDate } from "@angular/common";
 import * as moment from 'moment';
 
 @Component( {
     selector: 'ref-modal-ajout',
-    templateUrl: './modal-ajout.component.html',
+    template: `<div class="row" style="justify-content: space-between">
+<h2 mat-dialog-title class="color-bleu row">{{titre}} </h2>
+<mat-checkbox color="warn" style="float:right;" [(ngModel)] = "reservationAdd.asso">Association</mat-checkbox>
+</div>
+
+<ngb-alert *ngIf="!valid || saveFailed || dateFailed">
+        {{message}}
+  </ngb-alert>
+<form (ngSubmit)="save()" ngNativeValidate>
+    <mat-dialog-content>
+        <div class="row">
+            <div class="form-group" *ngIf="reservationAdd.asso"> 
+                <mat-form-field>
+                    <input matInput placeholder="Raison sociale" id="rs" name="rs" [(ngModel)] = "reservationAdd.nom">
+                </mat-form-field>
+            </div>
+            <div class="form-group row" *ngIf="!reservationAdd.asso">
+                <div class="column">
+                    <mat-form-field>
+                        <input matInput placeholder="Nom" id="nom" required name="nom" [(ngModel)] = "reservationAdd.nom">
+                    </mat-form-field>
+                </div>
+                <div class="column">
+                    <mat-form-field>
+                        <input matInput placeholder="Pr&eacute;nom" id="prenom" name="prenom" [(ngModel)] = "reservationAdd.prenom">
+                    </mat-form-field>
+                </div>
+            </div>
+        </div>
+        <div class="row" *ngIf="!modif">
+            <mat-form-field>
+                <input matInput [matDatepicker]="dateDebut" required placeholder="Date de d&eacute;but" name="dateEmprunt" [(ngModel)] = "reservationAdd.dateEmprunt" (dateChange)="dateChanged()">
+                <mat-datepicker-toggle matSuffix [for]="dateDebut"></mat-datepicker-toggle>
+                <mat-datepicker #dateDebut></mat-datepicker>
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput [matDatepicker]="dateFin" required placeholder="Date de fin"  name="dateRestitution" [(ngModel)] = "reservationAdd.dateRestitution" (dateChange)="dateChanged()">
+                <mat-datepicker-toggle matSuffix [for]="dateFin"></mat-datepicker-toggle>
+                <mat-datepicker #dateFin [startAt]="reservationAdd.dateEmprunt"></mat-datepicker>
+            </mat-form-field>
+        </div>
+        <div class="row" *ngIf="modif">
+            <div class="column">
+                <mat-form-field>
+                    <input matInput readonly placeholder="Date de d&eacute;but" name="dateEmprunt" [(ngModel)] = "dateEmprunt">
+                </mat-form-field>
+            </div>
+            <div class="column">
+                <mat-form-field>
+                    <input matInput readonly placeholder="Date de fin" name="dateRestitution" [(ngModel)] = "dateRestitution">
+                </mat-form-field>
+            </div>
+        </div>
+        <div *ngIf="(typeDispo && typeDispo.length != 0)">
+            <hr/>
+            <h5>S&eacute;lection du mat&eacute;riel</h5>
+            <div *ngFor="let articlechoisi of reservationAdd.articleResaDto; index as i">
+                <ref-article  
+                    [listeArticlesDispo]="listeArticlesDispo"
+                    [typeDispo]="typeDispo" [reservationAdd]="reservationAdd" [indexAjout]="i"
+                    (reservationUpdated) = "getReservationUpdate($event)">  
+                </ref-article>
+            </div>  
+            <div class = "row" style="align-items:flex-start; justify-content:space-between" >
+                <div class="column">
+                    <button type="button" class="btn btn-success" (click)="ajoutArticle()">Ajout article</button>
+                </div>
+            </div>
+        </div>
+        <hr/>
+        <div style="width:100%">
+            <h5>Commentaires</h5>
+            <mat-form-field style="width:100%">
+                <textarea matInput style="min-width: 100%" [(ngModel)] = "reservationAdd.commentaire" [ngModelOptions]="{standalone: true}"></textarea>
+            </mat-form-field>
+        </div>
+    </mat-dialog-content>
+    <mat-dialog-actions>
+        <button type="button" class="btn btn-link" (click)="dialogRef.close()">Annuler</button>
+        <button type="button" *ngIf="modif" class="btn btn-success" (click)="supprimerReservation()">Supprimer</button>
+        <button type="submit" class="btn btn-success">{{labelBouton}}</button>
+    </mat-dialog-actions>
+</form>`,
     providers: [
                 {provide: MAT_DATE_LOCALE, useValue: 'fr-FR'},
                 NgbAlertConfig
@@ -50,7 +132,7 @@ export class ModalAjoutComponent implements OnInit {
     
     
     constructor(public dialogRef: MatDialogRef<ModalAjoutComponent>,private reservationService:ReservationService,
-            @Inject(MAT_DIALOG_DATA) public data, private adapter: DateAdapter<any>,
+            @Inject(MAT_DIALOG_DATA) public data : any, private adapter: DateAdapter<any>,
             public alertConfig: NgbAlertConfig, public datepipe: DatePipe, private token : TokenStorageService, ) {
         alertConfig.type = 'danger';
         alertConfig.dismissible = false;
@@ -128,7 +210,7 @@ export class ModalAjoutComponent implements OnInit {
         
     }
     
-    getReservationUpdate($event){
+    getReservationUpdate($event : Reservation){
         this.reservationAdd = $event;
     }
     

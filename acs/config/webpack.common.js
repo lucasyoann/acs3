@@ -15,29 +15,20 @@ module.exports = {
 			    loader: 'html-loader'
 		  },
 		  {
-		    test: /\.(scss|sass)$/,
-		    use: [
-		        'to-string-loader',
-		        { 
-		            loader: 'css-loader', 
-		            options: { 
-		                sourceMap: true 
-		            } 
-		        },
-		        { 
-		            loader: 'sass-loader', 
-		            options: { 
-		                sourceMap: true 
-		            } 
-		        }
-		    ],
-		    include: helpers.root('src', 'webapp')
-		  }
+			    test: /\.css$/,
+			    include: /stylesheets|node_modules/,
+			    use: ["style-loader", "css-loader"]
+			},
+			{
+			    test: /\.scss$/,
+			    include: /stylesheets/,
+			    use: [ 'style-loader', 'css-loader', 'sass-loader' ]
+			}
 	  ]
   },
   plugins: [
     new CleanWebpackPlugin(
-    	helpers.root('dist'),
+    	helpers.root('src/main/webapp/dist'),
 	    {
 	        root: helpers.root(),
 	        verbose: true
@@ -46,5 +37,8 @@ module.exports = {
     new HtmlWebpackPlugin({
     	template: 'src/main/webapp/index.html'
     })
-  ]
+  ],
+  resolve:{
+	  extensions: [".js", ".ts", ".scss"]
+  }
 };
