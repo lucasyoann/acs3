@@ -138,14 +138,11 @@ export class ModalAjoutComponent implements OnInit {
     listeResaArticleAjoutes : ReservationArticle[]=[];
     
     
-<<<<<<< HEAD
-    constructor(public dialogRef: MatDialogRef<ModalAjoutComponent>,private reservationService:ReservationService,
-            @Inject(MAT_DIALOG_DATA) public data : any, private adapter: DateAdapter<any>,
-=======
+
     constructor(public dialog: MatDialog, public dialogRef: MatDialogRef<ModalAjoutComponent>,private reservationService:ReservationService,
-            @Inject(MAT_DIALOG_DATA) public data, private adapter: DateAdapter<any>,
->>>>>>> b851bda23c24d2fd4f09dcf6d4115a4f5c770e2c
-            public alertConfig: NgbAlertConfig, public datepipe: DatePipe, private token : TokenStorageService, ) {
+            @Inject(MAT_DIALOG_DATA) public data : any, private adapter: DateAdapter<any>,
+
+    public alertConfig: NgbAlertConfig, public datepipe: DatePipe, private token : TokenStorageService, ) {
         alertConfig.type = 'danger';
         alertConfig.dismissible = false;
     }

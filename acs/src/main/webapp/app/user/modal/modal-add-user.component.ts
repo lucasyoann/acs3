@@ -7,11 +7,53 @@ import {UserService} from './../user.service';
 import { MatDialog } from '@angular/material';
 import { UserFonctionnel } from '../../shared/user/userFonctionnel.entity';
 import { User } from '../../shared/user/user.entity';
+import { ViewEncapsulation } from "@angular/core";
 
 
 @Component( {
+    encapsulation: ViewEncapsulation.None,
     selector: 'ref-modal-add-user',
-    templateUrl: './modal-add-user.component.html',
+    template: `<div class="row" style="justify-content: space-between">
+<h2 mat-dialog-title class="color-bleu row">Ajout d'un utilisateur </h2>
+</div>
+
+<ngb-alert *ngIf="saveFailed">
+        {{message}}
+  </ngb-alert>
+<form (ngSubmit)="save()" ngNativeValidate>
+    <mat-dialog-content style="width:100%">
+        <div class="row">
+            <div class="form-group" style="width:100%"> 
+                <mat-form-field style="width:100%">
+                    <input matInput required placeholder="Identifiant" id="username" name="username" [(ngModel)] = "userAdd.username">
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group" style="width:100%"> 
+                <mat-form-field style="width:100%">
+                    <input matInput required placeholder="Mot de passe" type="password" id="password" name="password" [(ngModel)] = "userAdd.password">
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group" style="width:100%"> 
+                <mat-form-field style="width:100%">
+                    <input matInput required placeholder="Confirmation du mot de passe" type="password" id="passwordConfirm" name="passwordConfirm" [(ngModel)] = "userAdd.passwordConfirm">
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group"> 
+                <mat-checkbox color="warn" style="float:right;" name="administrateur" [(ngModel)] = "userAdd.administrateur">Administrateur</mat-checkbox>
+            </div>
+        </div>  
+    </mat-dialog-content>
+    <mat-dialog-actions>
+        <button type="button" class="btn btn-link" (click)="dialogRef.close()">Annuler</button>
+        <button type="submit" class="btn btn-success">Cr&eacute;er</button>
+    </mat-dialog-actions>
+</form>`,
     providers: [
                 {provide: MAT_DATE_LOCALE, useValue: 'fr-FR'},
                 NgbAlertConfig

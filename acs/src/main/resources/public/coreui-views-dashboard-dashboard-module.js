@@ -16,10 +16,10 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var core_1 = __webpack_require__(/*! @angular/core */ "../../../node_modules/@angular/core/fesm5/core.js");
-var router_1 = __webpack_require__(/*! @angular/router */ "../../../node_modules/@angular/router/fesm5/router.js");
-var dashboard_component_1 = __webpack_require__(/*! ./dashboard.component */ "./app/coreui/views/dashboard/dashboard.component.ts");
-var routes = [
+const core_1 = __webpack_require__(/*! @angular/core */ "../../../node_modules/@angular/core/fesm2015/core.js");
+const router_1 = __webpack_require__(/*! @angular/router */ "../../../node_modules/@angular/router/fesm2015/router.js");
+const dashboard_component_1 = __webpack_require__(/*! ./dashboard.component */ "./app/coreui/views/dashboard/dashboard.component.ts");
+const routes = [
     {
         path: '',
         component: dashboard_component_1.DashboardComponent,
@@ -28,17 +28,14 @@ var routes = [
         }
     }
 ];
-var DashboardRoutingModule = /** @class */ (function () {
-    function DashboardRoutingModule() {
-    }
-    DashboardRoutingModule = __decorate([
-        core_1.NgModule({
-            imports: [router_1.RouterModule.forChild(routes)],
-            exports: [router_1.RouterModule]
-        })
-    ], DashboardRoutingModule);
-    return DashboardRoutingModule;
-}());
+let DashboardRoutingModule = class DashboardRoutingModule {
+};
+DashboardRoutingModule = __decorate([
+    core_1.NgModule({
+        imports: [router_1.RouterModule.forChild(routes)],
+        exports: [router_1.RouterModule]
+    })
+], DashboardRoutingModule);
 exports.DashboardRoutingModule = DashboardRoutingModule;
 
 
@@ -63,18 +60,18 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var core_1 = __webpack_require__(/*! @angular/core */ "../../../node_modules/@angular/core/fesm5/core.js");
-var DashboardComponent = /** @class */ (function () {
-    function DashboardComponent() {
-    }
-    DashboardComponent = __decorate([
-        core_1.Component({
-            template: "<div class=\"animated fadeIn\">\n    <router-outlet></router-outlet>\n</div>"
-        }),
-        __metadata("design:paramtypes", [])
-    ], DashboardComponent);
-    return DashboardComponent;
-}());
+const core_1 = __webpack_require__(/*! @angular/core */ "../../../node_modules/@angular/core/fesm2015/core.js");
+let DashboardComponent = class DashboardComponent {
+    constructor() { }
+};
+DashboardComponent = __decorate([
+    core_1.Component({
+        template: `<div class="animated fadeIn">
+    <router-outlet></router-outlet>
+</div>`
+    }),
+    __metadata("design:paramtypes", [])
+], DashboardComponent);
 exports.DashboardComponent = DashboardComponent;
 
 
@@ -96,22 +93,19 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var core_1 = __webpack_require__(/*! @angular/core */ "../../../node_modules/@angular/core/fesm5/core.js");
-var dashboard_component_1 = __webpack_require__(/*! ./dashboard.component */ "./app/coreui/views/dashboard/dashboard.component.ts");
-var dashboard_routing_module_1 = __webpack_require__(/*! ./dashboard-routing.module */ "./app/coreui/views/dashboard/dashboard-routing.module.ts");
-var DashboardModule = /** @class */ (function () {
-    function DashboardModule() {
-    }
-    DashboardModule = __decorate([
-        core_1.NgModule({
-            imports: [
-                dashboard_routing_module_1.DashboardRoutingModule
-            ],
-            declarations: [dashboard_component_1.DashboardComponent]
-        })
-    ], DashboardModule);
-    return DashboardModule;
-}());
+const core_1 = __webpack_require__(/*! @angular/core */ "../../../node_modules/@angular/core/fesm2015/core.js");
+const dashboard_component_1 = __webpack_require__(/*! ./dashboard.component */ "./app/coreui/views/dashboard/dashboard.component.ts");
+const dashboard_routing_module_1 = __webpack_require__(/*! ./dashboard-routing.module */ "./app/coreui/views/dashboard/dashboard-routing.module.ts");
+let DashboardModule = class DashboardModule {
+};
+DashboardModule = __decorate([
+    core_1.NgModule({
+        imports: [
+            dashboard_routing_module_1.DashboardRoutingModule
+        ],
+        declarations: [dashboard_component_1.DashboardComponent]
+    })
+], DashboardModule);
 exports.DashboardModule = DashboardModule;
 
 

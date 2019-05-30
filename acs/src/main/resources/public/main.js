@@ -8,15 +8,27 @@
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
-	"./auth/user/user/user.module": [
-		"./app/auth/user/user/user.module.ts"
+	"./checkdispo/checkdispo.module": [
+		"./app/checkdispo/checkdispo.module.ts",
+		"checkdispo-checkdispo-module"
 	],
 	"./coreui/views/dashboard/dashboard.module": [
 		"./app/coreui/views/dashboard/dashboard.module.ts",
 		"coreui-views-dashboard-dashboard-module"
 	],
+	"./myProfile/myProfile.module": [
+		"./app/myProfile/myProfile.module.ts",
+		"myProfile-myProfile-module"
+	],
 	"./reservation/reservation.module": [
 		"./app/reservation/reservation.module.ts"
+	],
+	"./stock/stock.module": [
+		"./app/stock/stock.module.ts",
+		"stock-stock-module"
+	],
+	"./user/user.module": [
+		"./app/user/user.module.ts"
 	]
 };
 function webpackAsyncContext(req) {
@@ -338,10 +350,10 @@ webpackContext.id = "../../../node_modules/moment/locale sync recursive ^\\.\\/.
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var core_1 = __webpack_require__(/*! @angular/core */ "../../../node_modules/@angular/core/fesm5/core.js");
-var platform_browser_dynamic_1 = __webpack_require__(/*! @angular/platform-browser-dynamic */ "../../../node_modules/@angular/platform-browser-dynamic/fesm5/platform-browser-dynamic.js");
-var app_1 = __webpack_require__(/*! ./app */ "./app/index.ts");
-var environment_1 = __webpack_require__(/*! ./environments/environment */ "./environments/environment.ts");
+const core_1 = __webpack_require__(/*! @angular/core */ "../../../node_modules/@angular/core/fesm2015/core.js");
+const platform_browser_dynamic_1 = __webpack_require__(/*! @angular/platform-browser-dynamic */ "../../../node_modules/@angular/platform-browser-dynamic/fesm2015/platform-browser-dynamic.js");
+const app_1 = __webpack_require__(/*! ./app */ "./app/index.ts");
+const environment_1 = __webpack_require__(/*! ./environments/environment */ "./environments/environment.ts");
 if (environment_1.environment.production) {
     core_1.enableProdMode();
     /*platformBrowser().bootstrapModuleFactory(AppModuleNgFactory).
@@ -350,8 +362,8 @@ if (environment_1.environment.production) {
 }
 else {
     platform_browser_dynamic_1.platformBrowserDynamic().bootstrapModule(app_1.AppModule).
-        then(function (success) { return console.log('Webapp demarre'); })
-        .catch(function (err) { return console.error(err); });
+        then((success) => console.log('Webapp demarre'))
+        .catch(err => console.error(err));
 }
 
 
@@ -366,24 +378,52 @@ else {
 
 "use strict";
 
+//export const navigation_disconnect = [
+//  
+//  ];
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.navigation_disconnect = [
-    {
-        name: 'user',
-        url: '/user',
-        icon: 'icon-calendar'
-    }
-];
 exports.navigation_user = [
+    {
+        name: 'Mon Profil',
+        url: '/myProfile',
+        icon: 'icon-user'
+    },
     {
         name: 'Gestion réservation',
         url: '/reservations',
         icon: 'icon-calendar'
     },
     {
-        name: 'user',
-        url: '/user',
+        name: 'Vérifier les disponibilités',
+        url: '/checkdispo',
+        icon: 'icon-calculator'
+    }
+];
+exports.navigation_super_admin = [
+    {
+        name: 'Mon Profil',
+        url: '/myProfile',
+        icon: 'icon-user'
+    },
+    {
+        name: 'Gestion réservation',
+        url: '/reservations',
         icon: 'icon-calendar'
+    },
+    {
+        name: 'Gestion des utilisateurs',
+        url: '/user',
+        icon: 'icon-people'
+    },
+    {
+        name: 'Vérifier les disponibilités',
+        url: '/checkdispo',
+        icon: 'icon-calculator'
+    },
+    {
+        name: 'Gestion des stocks',
+        url: '/stock',
+        icon: 'icon-settings'
     }
 ];
 
@@ -409,39 +449,37 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var core_1 = __webpack_require__(/*! @angular/core */ "../../../node_modules/@angular/core/fesm5/core.js");
-var token_storage_service_1 = __webpack_require__(/*! ./auth/token-storage.service */ "./app/auth/token-storage.service.ts");
-var AppComponent = /** @class */ (function () {
-    function AppComponent(tokenStorage) {
+const core_1 = __webpack_require__(/*! @angular/core */ "../../../node_modules/@angular/core/fesm2015/core.js");
+const token_storage_service_1 = __webpack_require__(/*! ./auth/token-storage.service */ "./app/auth/token-storage.service.ts");
+let AppComponent = class AppComponent {
+    constructor(tokenStorage) {
         this.tokenStorage = tokenStorage;
     }
-    AppComponent.prototype.ngOnInit = function () {
-        var _this = this;
+    ngOnInit() {
         if (this.tokenStorage.getToken()) {
             this.roles = this.tokenStorage.getAuthorities();
-            this.roles.every(function (role) {
+            this.roles.every(role => {
                 if (role === 'ROLE_ADMIN') {
-                    _this.authority = 'admin';
+                    this.authority = 'admin';
                     return false;
                 }
-                else if (role === 'ROLE_PM') {
-                    _this.authority = 'pm';
+                else if (role === 'ROLE_SUPER_ADMIN') {
+                    this.authority = 'superAdmin';
                     return false;
                 }
-                _this.authority = 'user';
+                this.authority = 'user';
                 return true;
             });
         }
-    };
-    AppComponent = __decorate([
-        core_1.Component({
-            selector: 'body',
-            template: '<router-outlet></router-outlet>'
-        }),
-        __metadata("design:paramtypes", [token_storage_service_1.TokenStorageService])
-    ], AppComponent);
-    return AppComponent;
-}());
+    }
+};
+AppComponent = __decorate([
+    core_1.Component({
+        selector: 'body',
+        template: '<router-outlet></router-outlet>'
+    }),
+    __metadata("design:paramtypes", [token_storage_service_1.TokenStorageService])
+], AppComponent);
 exports.AppComponent = AppComponent;
 
 
@@ -463,22 +501,22 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var platform_browser_1 = __webpack_require__(/*! @angular/platform-browser */ "../../../node_modules/@angular/platform-browser/fesm5/platform-browser.js");
-var animations_1 = __webpack_require__(/*! @angular/platform-browser/animations */ "../../../node_modules/@angular/platform-browser/fesm5/animations.js");
-var core_1 = __webpack_require__(/*! @angular/core */ "../../../node_modules/@angular/core/fesm5/core.js");
-var app_component_1 = __webpack_require__(/*! ./app.component */ "./app/app.component.ts");
-var ngx_bootstrap_1 = __webpack_require__(/*! ngx-bootstrap */ "../../../node_modules/ngx-bootstrap/esm5/ngx-bootstrap.js");
-var ng_bootstrap_1 = __webpack_require__(/*! @ng-bootstrap/ng-bootstrap */ "../../../node_modules/@ng-bootstrap/ng-bootstrap/fesm5/ng-bootstrap.js");
-var forms_1 = __webpack_require__(/*! @angular/forms */ "../../../node_modules/@angular/forms/fesm5/forms.js");
-var auth_interceptor_1 = __webpack_require__(/*! ./auth/auth-interceptor */ "./app/auth/auth-interceptor.ts");
+const platform_browser_1 = __webpack_require__(/*! @angular/platform-browser */ "../../../node_modules/@angular/platform-browser/fesm2015/platform-browser.js");
+const animations_1 = __webpack_require__(/*! @angular/platform-browser/animations */ "../../../node_modules/@angular/platform-browser/fesm2015/animations.js");
+const core_1 = __webpack_require__(/*! @angular/core */ "../../../node_modules/@angular/core/fesm2015/core.js");
+const app_component_1 = __webpack_require__(/*! ./app.component */ "./app/app.component.ts");
+const ngx_bootstrap_1 = __webpack_require__(/*! ngx-bootstrap */ "../../../node_modules/ngx-bootstrap/esm5/ngx-bootstrap.js");
+const ng_bootstrap_1 = __webpack_require__(/*! @ng-bootstrap/ng-bootstrap */ "../../../node_modules/@ng-bootstrap/ng-bootstrap/fesm2015/ng-bootstrap.js");
+const forms_1 = __webpack_require__(/*! @angular/forms */ "../../../node_modules/@angular/forms/fesm2015/forms.js");
+const auth_interceptor_1 = __webpack_require__(/*! ./auth/auth-interceptor */ "./app/auth/auth-interceptor.ts");
 //Import containers
-var containers_1 = __webpack_require__(/*! ./coreui/containers */ "./app/coreui/containers/index.ts");
-var APP_CONTAINERS = [
+const containers_1 = __webpack_require__(/*! ./coreui/containers */ "./app/coreui/containers/index.ts");
+const APP_CONTAINERS = [
     containers_1.FullLayoutComponent
 ];
 //Import components
-var components_1 = __webpack_require__(/*! ./coreui/components */ "./app/coreui/components/index.ts");
-var APP_COMPONENTS = [
+const components_1 = __webpack_require__(/*! ./coreui/components */ "./app/coreui/components/index.ts");
+const APP_COMPONENTS = [
     components_1.AppAsideComponent,
     components_1.AppBreadcrumbsComponent,
     components_1.AppFooterComponent,
@@ -491,60 +529,59 @@ var APP_COMPONENTS = [
     components_1.APP_SIDEBAR_NAV
 ];
 //Import directives
-var directives_1 = __webpack_require__(/*! ./coreui/directives */ "./app/coreui/directives/index.ts");
-var APP_DIRECTIVES = [
+const directives_1 = __webpack_require__(/*! ./coreui/directives */ "./app/coreui/directives/index.ts");
+const APP_DIRECTIVES = [
     directives_1.AsideToggleDirective,
     directives_1.NAV_DROPDOWN_DIRECTIVES,
     directives_1.ReplaceDirective,
     directives_1.SIDEBAR_TOGGLE_DIRECTIVES
 ];
 //Import routing module
-var app_routing_1 = __webpack_require__(/*! ./app.routing */ "./app/app.routing.ts");
+const app_routing_1 = __webpack_require__(/*! ./app.routing */ "./app/app.routing.ts");
 //Import 3rd party components
-var dropdown_1 = __webpack_require__(/*! ngx-bootstrap/dropdown */ "../../../node_modules/ngx-bootstrap/dropdown/fesm5/ngx-bootstrap-dropdown.js");
-var tabs_1 = __webpack_require__(/*! ngx-bootstrap/tabs */ "../../../node_modules/ngx-bootstrap/tabs/fesm5/ngx-bootstrap-tabs.js");
-var chronos_1 = __webpack_require__(/*! ngx-bootstrap/chronos */ "../../../node_modules/ngx-bootstrap/chronos/fesm5/ngx-bootstrap-chronos.js");
-var locale_1 = __webpack_require__(/*! ngx-bootstrap/locale */ "../../../node_modules/ngx-bootstrap/locale/fesm5/ngx-bootstrap-locale.js");
+const dropdown_1 = __webpack_require__(/*! ngx-bootstrap/dropdown */ "../../../node_modules/ngx-bootstrap/dropdown/fesm2015/ngx-bootstrap-dropdown.js");
+const tabs_1 = __webpack_require__(/*! ngx-bootstrap/tabs */ "../../../node_modules/ngx-bootstrap/tabs/fesm2015/ngx-bootstrap-tabs.js");
+const chronos_1 = __webpack_require__(/*! ngx-bootstrap/chronos */ "../../../node_modules/ngx-bootstrap/chronos/fesm2015/ngx-bootstrap-chronos.js");
+const locale_1 = __webpack_require__(/*! ngx-bootstrap/locale */ "../../../node_modules/ngx-bootstrap/locale/fesm2015/ngx-bootstrap-locale.js");
 chronos_1.defineLocale('fr', locale_1.frLocale);
-var material_1 = __webpack_require__(/*! @angular/material */ "../../../node_modules/@angular/material/esm5/material.es5.js");
-var reservation_module_1 = __webpack_require__(/*! ./reservation/reservation.module */ "./app/reservation/reservation.module.ts");
-var user_module_1 = __webpack_require__(/*! ./auth/user/user/user.module */ "./app/auth/user/user/user.module.ts");
-var modal_connexion_component_1 = __webpack_require__(/*! ./coreui/components/app-header/modal/modal-connexion.component */ "./app/coreui/components/app-header/modal/modal-connexion.component.ts");
-var AppModule = /** @class */ (function () {
-    function AppModule() {
-    }
-    AppModule = __decorate([
-        core_1.NgModule({
-            declarations: [
-                app_component_1.AppComponent
-            ].concat(APP_CONTAINERS, APP_COMPONENTS, APP_DIRECTIVES, [
-                modal_connexion_component_1.ModalConnexion
-            ]),
-            imports: [
-                platform_browser_1.BrowserModule,
-                animations_1.BrowserAnimationsModule,
-                app_routing_1.AppRoutingModule,
-                reservation_module_1.ReservationModule,
-                user_module_1.UserModule,
-                material_1.MatDialogModule,
-                forms_1.FormsModule,
-                material_1.MatFormFieldModule,
-                material_1.MatNativeDateModule,
-                material_1.MatInputModule,
-                material_1.MatCheckboxModule,
-                material_1.MatSelectModule,
-                dropdown_1.BsDropdownModule.forRoot(),
-                tabs_1.TabsModule.forRoot(),
-                ngx_bootstrap_1.ModalModule.forRoot(),
-                ng_bootstrap_1.NgbModule
-            ],
-            providers: [auth_interceptor_1.httpInterceptorProviders],
-            bootstrap: [app_component_1.AppComponent],
-            entryComponents: [modal_connexion_component_1.ModalConnexion],
-        })
-    ], AppModule);
-    return AppModule;
-}());
+const material_1 = __webpack_require__(/*! @angular/material */ "../../../node_modules/@angular/material/esm2015/material.js");
+const reservation_module_1 = __webpack_require__(/*! ./reservation/reservation.module */ "./app/reservation/reservation.module.ts");
+const user_module_1 = __webpack_require__(/*! ./user/user.module */ "./app/user/user.module.ts");
+const modal_connexion_component_1 = __webpack_require__(/*! ./coreui/components/app-header/modal/modal-connexion.component */ "./app/coreui/components/app-header/modal/modal-connexion.component.ts");
+let AppModule = class AppModule {
+};
+AppModule = __decorate([
+    core_1.NgModule({
+        declarations: [
+            app_component_1.AppComponent,
+            ...APP_CONTAINERS,
+            ...APP_COMPONENTS,
+            ...APP_DIRECTIVES,
+            modal_connexion_component_1.ModalConnexion
+        ],
+        imports: [
+            platform_browser_1.BrowserModule,
+            animations_1.BrowserAnimationsModule,
+            app_routing_1.AppRoutingModule,
+            reservation_module_1.ReservationModule,
+            user_module_1.UserModule,
+            material_1.MatDialogModule,
+            forms_1.FormsModule,
+            material_1.MatFormFieldModule,
+            material_1.MatNativeDateModule,
+            material_1.MatInputModule,
+            material_1.MatCheckboxModule,
+            material_1.MatSelectModule,
+            dropdown_1.BsDropdownModule.forRoot(),
+            tabs_1.TabsModule.forRoot(),
+            ngx_bootstrap_1.ModalModule.forRoot(),
+            ng_bootstrap_1.NgbModule
+        ],
+        providers: [auth_interceptor_1.httpInterceptorProviders],
+        bootstrap: [app_component_1.AppComponent],
+        entryComponents: [modal_connexion_component_1.ModalConnexion],
+    })
+], AppModule);
 exports.AppModule = AppModule;
 
 
@@ -566,11 +603,11 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var core_1 = __webpack_require__(/*! @angular/core */ "../../../node_modules/@angular/core/fesm5/core.js");
-var router_1 = __webpack_require__(/*! @angular/router */ "../../../node_modules/@angular/router/fesm5/router.js");
-var route_guard_1 = __webpack_require__(/*! ./auth/route.guard */ "./app/auth/route.guard.ts");
+const core_1 = __webpack_require__(/*! @angular/core */ "../../../node_modules/@angular/core/fesm2015/core.js");
+const router_1 = __webpack_require__(/*! @angular/router */ "../../../node_modules/@angular/router/fesm2015/router.js");
+const route_guard_1 = __webpack_require__(/*! ./auth/route.guard */ "./app/auth/route.guard.ts");
 // Import Containers
-var containers_1 = __webpack_require__(/*! ./coreui/containers */ "./app/coreui/containers/index.ts");
+const containers_1 = __webpack_require__(/*! ./coreui/containers */ "./app/coreui/containers/index.ts");
 exports.routes = [
     {
         path: '',
@@ -604,22 +641,31 @@ exports.routes = [
             },
             {
                 path: 'user',
-                loadChildren: './auth/user/user/user.module#UserModule'
+                loadChildren: './user/user.module#UserModule'
+            },
+            {
+                path: 'myProfile',
+                loadChildren: './myProfile/myProfile.module#MyProfileModule'
+            },
+            {
+                path: 'checkdispo',
+                loadChildren: './checkdispo/checkdispo.module#CheckDispoModule'
+            },
+            {
+                path: 'stock',
+                loadChildren: './stock/stock.module#StockModule'
             }
         ]
     }
 ];
-var AppRoutingModule = /** @class */ (function () {
-    function AppRoutingModule() {
-    }
-    AppRoutingModule = __decorate([
-        core_1.NgModule({
-            imports: [router_1.RouterModule.forRoot(exports.routes, { enableTracing: false })],
-            exports: [router_1.RouterModule]
-        })
-    ], AppRoutingModule);
-    return AppRoutingModule;
-}());
+let AppRoutingModule = class AppRoutingModule {
+};
+AppRoutingModule = __decorate([
+    core_1.NgModule({
+        imports: [router_1.RouterModule.forRoot(exports.routes, { enableTracing: false })],
+        exports: [router_1.RouterModule]
+    })
+], AppRoutingModule);
 exports.AppRoutingModule = AppRoutingModule;
 
 
@@ -644,29 +690,27 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var http_1 = __webpack_require__(/*! @angular/common/http */ "../../../node_modules/@angular/common/fesm5/http.js");
-var core_1 = __webpack_require__(/*! @angular/core */ "../../../node_modules/@angular/core/fesm5/core.js");
-var token_storage_service_1 = __webpack_require__(/*! ./token-storage.service */ "./app/auth/token-storage.service.ts");
-var TOKEN_HEADER_KEY = 'Authorization';
-var AuthInterceptor = /** @class */ (function () {
-    function AuthInterceptor(token) {
+const http_1 = __webpack_require__(/*! @angular/common/http */ "../../../node_modules/@angular/common/fesm2015/http.js");
+const core_1 = __webpack_require__(/*! @angular/core */ "../../../node_modules/@angular/core/fesm2015/core.js");
+const token_storage_service_1 = __webpack_require__(/*! ./token-storage.service */ "./app/auth/token-storage.service.ts");
+const TOKEN_HEADER_KEY = 'Authorization';
+let AuthInterceptor = class AuthInterceptor {
+    constructor(token) {
         this.token = token;
     }
-    AuthInterceptor.prototype.intercept = function (req, next) {
-        console.log("interceptor");
-        var authReq = req;
-        var token = this.token.getToken();
+    intercept(req, next) {
+        let authReq = req;
+        const token = this.token.getToken();
         if (token != null) {
             authReq = req.clone({ headers: req.headers.set(TOKEN_HEADER_KEY, 'Bearer ' + token) });
         }
         return next.handle(authReq);
-    };
-    AuthInterceptor = __decorate([
-        core_1.Injectable({ providedIn: 'root' }),
-        __metadata("design:paramtypes", [token_storage_service_1.TokenStorageService])
-    ], AuthInterceptor);
-    return AuthInterceptor;
-}());
+    }
+};
+AuthInterceptor = __decorate([
+    core_1.Injectable({ providedIn: 'root' }),
+    __metadata("design:paramtypes", [token_storage_service_1.TokenStorageService])
+], AuthInterceptor);
 exports.AuthInterceptor = AuthInterceptor;
 exports.httpInterceptorProviders = [
     { provide: http_1.HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
@@ -694,38 +738,33 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var core_1 = __webpack_require__(/*! @angular/core */ "../../../node_modules/@angular/core/fesm5/core.js");
-var http_1 = __webpack_require__(/*! @angular/common/http */ "../../../node_modules/@angular/common/fesm5/http.js");
-var httpOptions = {
+const core_1 = __webpack_require__(/*! @angular/core */ "../../../node_modules/@angular/core/fesm2015/core.js");
+const http_1 = __webpack_require__(/*! @angular/common/http */ "../../../node_modules/@angular/common/fesm2015/http.js");
+const httpOptions = {
     headers: new http_1.HttpHeaders({ 'Content-Type': 'application/json' })
 };
-var AuthService = /** @class */ (function () {
-    function AuthService(http) {
+let AuthService = class AuthService {
+    constructor(http) {
         this.http = http;
-        this.loginUrl = 'acs/auth/signin';
-        this.signupUrl = 'acs/auth/signup';
-        this.valToken = 'acs/auth/validate';
-        this.signout = 'acs/auth/signout';
+        this.loginUrl = 'auth/signin';
+        this.valToken = 'auth/validate';
+        this.signout = 'auth/signout';
     }
-    AuthService.prototype.attemptAuth = function (credentials) {
+    attemptAuth(credentials) {
         return this.http.post(this.loginUrl, credentials, httpOptions);
-    };
-    AuthService.prototype.validateToken = function (token) {
-        var params = new http_1.HttpParams();
+    }
+    validateToken(token) {
+        let params = new http_1.HttpParams();
         params = params.append('token', token);
         return this.http.get(this.valToken, { params: params });
-    };
-    AuthService.prototype.signUp = function (info) {
-        return this.http.post(this.signupUrl, info, httpOptions);
-    };
-    AuthService = __decorate([
-        core_1.Injectable({
-            providedIn: 'root'
-        }),
-        __metadata("design:paramtypes", [http_1.HttpClient])
-    ], AuthService);
-    return AuthService;
-}());
+    }
+};
+AuthService = __decorate([
+    core_1.Injectable({
+        providedIn: 'root'
+    }),
+    __metadata("design:paramtypes", [http_1.HttpClient])
+], AuthService);
 exports.AuthService = AuthService;
 
 
@@ -741,13 +780,12 @@ exports.AuthService = AuthService;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var AuthLoginInfo = /** @class */ (function () {
-    function AuthLoginInfo(username, password) {
+class AuthLoginInfo {
+    constructor(username, password) {
         this.username = username;
         this.password = password;
     }
-    return AuthLoginInfo;
-}());
+}
 exports.AuthLoginInfo = AuthLoginInfo;
 
 
@@ -772,57 +810,51 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var core_1 = __webpack_require__(/*! @angular/core */ "../../../node_modules/@angular/core/fesm5/core.js");
-var router_1 = __webpack_require__(/*! @angular/router */ "../../../node_modules/@angular/router/fesm5/router.js");
-var rxjs_1 = __webpack_require__(/*! rxjs */ "../../../node_modules/rxjs/_esm5/index.js");
-var token_storage_service_1 = __webpack_require__(/*! ./token-storage.service */ "./app/auth/token-storage.service.ts");
-var auth_service_1 = __webpack_require__(/*! ./auth.service */ "./app/auth/auth.service.ts");
-var RouteGuard = /** @class */ (function () {
-    function RouteGuard(router, tokenStorage, authService) {
+const core_1 = __webpack_require__(/*! @angular/core */ "../../../node_modules/@angular/core/fesm2015/core.js");
+const router_1 = __webpack_require__(/*! @angular/router */ "../../../node_modules/@angular/router/fesm2015/router.js");
+const rxjs_1 = __webpack_require__(/*! rxjs */ "../../../node_modules/rxjs/_esm2015/index.js");
+const token_storage_service_1 = __webpack_require__(/*! ./token-storage.service */ "./app/auth/token-storage.service.ts");
+const auth_service_1 = __webpack_require__(/*! ./auth.service */ "./app/auth/auth.service.ts");
+let RouteGuard = class RouteGuard {
+    constructor(router, tokenStorage, authService) {
         this.router = router;
         this.tokenStorage = tokenStorage;
         this.authService = authService;
     }
-    RouteGuard.prototype.canActivate = function (next, state) {
-        var _this = this;
-        console.log('canActivate');
-        //let test = this.checkLogin( state );
-        console.log('checkLogin');
-        return new rxjs_1.Observable(function (observer) {
-            if (_this.tokenStorage.getToken()) {
-                var tets = null;
-                _this.authService.validateToken(_this.tokenStorage.getToken()).subscribe(function (data) {
+    canActivate(next, state) {
+        return new rxjs_1.Observable((observer) => {
+            if (this.tokenStorage.getToken()) {
+                let tets = null;
+                this.authService.validateToken(this.tokenStorage.getToken()).subscribe(data => {
                     if (!data) {
-                        _this.tokenStorage.signOut();
-                        _this.router.navigate(['/dashboard'], {
+                        this.tokenStorage.signOut();
+                        this.router.navigate(['/dashboard'], {
                             queryParams: { origin: state.url }
                         });
-                        _this.result = false;
+                        this.result = false;
                         observer.next(false);
                     }
                     else {
-                        _this.result = true;
+                        this.result = true;
                         observer.next(true);
                     }
                 });
             }
             else {
-                console.log('not athenticated');
-                _this.router.navigate(['/dashboard'], {
+                this.router.navigate(['/dashboard'], {
                     queryParams: { origin: state.url }
                 });
                 observer.next(false);
             }
         });
-    };
-    RouteGuard = __decorate([
-        core_1.Injectable({ providedIn: 'root' }),
-        __metadata("design:paramtypes", [router_1.Router,
-            token_storage_service_1.TokenStorageService,
-            auth_service_1.AuthService])
-    ], RouteGuard);
-    return RouteGuard;
-}());
+    }
+};
+RouteGuard = __decorate([
+    core_1.Injectable({ providedIn: 'root' }),
+    __metadata("design:paramtypes", [router_1.Router,
+        token_storage_service_1.TokenStorageService,
+        auth_service_1.AuthService])
+], RouteGuard);
 exports.RouteGuard = RouteGuard;
 
 
@@ -847,249 +879,52 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var core_1 = __webpack_require__(/*! @angular/core */ "../../../node_modules/@angular/core/fesm5/core.js");
-var TOKEN_KEY = 'AuthToken';
-var USERNAME_KEY = 'AuthUsername';
-var AUTHORITIES_KEY = 'AuthAuthorities';
-var TokenStorageService = /** @class */ (function () {
-    function TokenStorageService() {
+const core_1 = __webpack_require__(/*! @angular/core */ "../../../node_modules/@angular/core/fesm2015/core.js");
+const TOKEN_KEY = 'AuthToken';
+const USERNAME_KEY = 'AuthUsername';
+const AUTHORITIES_KEY = 'AuthAuthorities';
+let TokenStorageService = class TokenStorageService {
+    constructor() {
         this.roles = [];
     }
-    TokenStorageService.prototype.signOut = function () {
+    signOut() {
         window.sessionStorage.clear();
-    };
-    TokenStorageService.prototype.saveToken = function (token) {
+    }
+    saveToken(token) {
         window.sessionStorage.removeItem(TOKEN_KEY);
         window.sessionStorage.setItem(TOKEN_KEY, token);
-    };
-    TokenStorageService.prototype.getToken = function () {
+    }
+    getToken() {
         return sessionStorage.getItem(TOKEN_KEY);
-    };
-    TokenStorageService.prototype.saveUsername = function (username) {
+    }
+    saveUsername(username) {
         window.sessionStorage.removeItem(USERNAME_KEY);
         window.sessionStorage.setItem(USERNAME_KEY, username);
-    };
-    TokenStorageService.prototype.getUsername = function () {
+    }
+    getUsername() {
         return sessionStorage.getItem(USERNAME_KEY);
-    };
-    TokenStorageService.prototype.saveAuthorities = function (authorities) {
+    }
+    saveAuthorities(authorities) {
         window.sessionStorage.removeItem(AUTHORITIES_KEY);
         window.sessionStorage.setItem(AUTHORITIES_KEY, JSON.stringify(authorities));
-    };
-    TokenStorageService.prototype.getAuthorities = function () {
-        var _this = this;
+    }
+    getAuthorities() {
         this.roles = [];
         if (sessionStorage.getItem(TOKEN_KEY)) {
-            JSON.parse(sessionStorage.getItem(AUTHORITIES_KEY)).forEach(function (authority) {
-                _this.roles.push(authority.authority);
+            JSON.parse(sessionStorage.getItem(AUTHORITIES_KEY)).forEach((authority) => {
+                this.roles.push(authority.authority);
             });
         }
         return this.roles;
-    };
-    TokenStorageService = __decorate([
-        core_1.Injectable({
-            providedIn: 'root'
-        }),
-        __metadata("design:paramtypes", [])
-    ], TokenStorageService);
-    return TokenStorageService;
-}());
+    }
+};
+TokenStorageService = __decorate([
+    core_1.Injectable({
+        providedIn: 'root'
+    }),
+    __metadata("design:paramtypes", [])
+], TokenStorageService);
 exports.TokenStorageService = TokenStorageService;
-
-
-/***/ }),
-
-/***/ "./app/auth/user/user.service.ts":
-/*!***************************************!*\
-  !*** ./app/auth/user/user.service.ts ***!
-  \***************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-var core_1 = __webpack_require__(/*! @angular/core */ "../../../node_modules/@angular/core/fesm5/core.js");
-var http_1 = __webpack_require__(/*! @angular/common/http */ "../../../node_modules/@angular/common/fesm5/http.js");
-var UserService = /** @class */ (function () {
-    function UserService(http) {
-        this.http = http;
-        this.userUrl = 'acs/test/user';
-        this.pmUrl = 'acs/test/pm';
-        this.adminUrl = 'acs/test/admin';
-    }
-    UserService.prototype.getUserBoard = function () {
-        console.log("user service");
-        return this.http.get(this.userUrl, { responseType: 'text' });
-    };
-    UserService.prototype.getPMBoard = function () {
-        return this.http.get(this.pmUrl, { responseType: 'text' });
-    };
-    UserService.prototype.getAdminBoard = function () {
-        return this.http.get(this.adminUrl, { responseType: 'text' });
-    };
-    UserService = __decorate([
-        core_1.Injectable({
-            providedIn: 'root'
-        }),
-        __metadata("design:paramtypes", [http_1.HttpClient])
-    ], UserService);
-    return UserService;
-}());
-exports.UserService = UserService;
-
-
-/***/ }),
-
-/***/ "./app/auth/user/user/user-routing.module.ts":
-/*!***************************************************!*\
-  !*** ./app/auth/user/user/user-routing.module.ts ***!
-  \***************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-var core_1 = __webpack_require__(/*! @angular/core */ "../../../node_modules/@angular/core/fesm5/core.js");
-var router_1 = __webpack_require__(/*! @angular/router */ "../../../node_modules/@angular/router/fesm5/router.js");
-var user_component_1 = __webpack_require__(/*! ./user.component */ "./app/auth/user/user/user.component.ts");
-var routes = [
-    {
-        path: '',
-        component: user_component_1.UserComponent,
-        data: {
-            title: 'Module user'
-        }
-    }
-];
-var UserRoutingModule = /** @class */ (function () {
-    function UserRoutingModule() {
-    }
-    UserRoutingModule = __decorate([
-        core_1.NgModule({
-            imports: [
-                router_1.RouterModule.forChild(routes)
-            ],
-            exports: [router_1.RouterModule]
-        })
-    ], UserRoutingModule);
-    return UserRoutingModule;
-}());
-exports.UserRoutingModule = UserRoutingModule;
-
-
-/***/ }),
-
-/***/ "./app/auth/user/user/user.component.ts":
-/*!**********************************************!*\
-  !*** ./app/auth/user/user/user.component.ts ***!
-  \**********************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-var core_1 = __webpack_require__(/*! @angular/core */ "../../../node_modules/@angular/core/fesm5/core.js");
-var user_service_1 = __webpack_require__(/*! ../user.service */ "./app/auth/user/user.service.ts");
-var UserComponent = /** @class */ (function () {
-    function UserComponent(userService) {
-        this.userService = userService;
-    }
-    UserComponent.prototype.ngOnInit = function () {
-        var _this = this;
-        this.userService.getUserBoard().subscribe(function (data) {
-            _this.board = data;
-            console.log("userService OK");
-        }, function (error) {
-            console.log("userService KO");
-            _this.errorMessage = error.status + ": " + JSON.parse(error.error).message;
-            console.log(_this.errorMessage);
-        });
-    };
-    UserComponent = __decorate([
-        core_1.Component({
-            selector: 'app-user',
-            template: "<h4>Content from Server</h4>\n              {{board}}\n              {{errorMessage}}"
-        }),
-        __metadata("design:paramtypes", [user_service_1.UserService])
-    ], UserComponent);
-    return UserComponent;
-}());
-exports.UserComponent = UserComponent;
-
-
-/***/ }),
-
-/***/ "./app/auth/user/user/user.module.ts":
-/*!*******************************************!*\
-  !*** ./app/auth/user/user/user.module.ts ***!
-  \*******************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-var core_1 = __webpack_require__(/*! @angular/core */ "../../../node_modules/@angular/core/fesm5/core.js");
-var common_1 = __webpack_require__(/*! @angular/common */ "../../../node_modules/@angular/common/fesm5/common.js");
-var forms_1 = __webpack_require__(/*! @angular/forms */ "../../../node_modules/@angular/forms/fesm5/forms.js");
-var user_component_1 = __webpack_require__(/*! ./user.component */ "./app/auth/user/user/user.component.ts");
-var user_routing_module_1 = __webpack_require__(/*! ./user-routing.module */ "./app/auth/user/user/user-routing.module.ts");
-var http_1 = __webpack_require__(/*! @angular/http */ "../../../node_modules/@angular/http/fesm5/http.js");
-var http_2 = __webpack_require__(/*! @angular/common/http */ "../../../node_modules/@angular/common/fesm5/http.js");
-var user_service_1 = __webpack_require__(/*! ../user.service */ "./app/auth/user/user.service.ts");
-var auth_interceptor_1 = __webpack_require__(/*! ../../auth-interceptor */ "./app/auth/auth-interceptor.ts");
-var UserModule = /** @class */ (function () {
-    function UserModule() {
-    }
-    UserModule = __decorate([
-        core_1.NgModule({
-            imports: [
-                common_1.CommonModule,
-                forms_1.FormsModule,
-                http_2.HttpClientModule,
-                user_routing_module_1.UserRoutingModule
-            ],
-            declarations: [user_component_1.UserComponent],
-            entryComponents: [],
-            providers: [http_1.Http, user_service_1.UserService, auth_interceptor_1.httpInterceptorProviders]
-        })
-    ], UserModule);
-    return UserModule;
-}());
-exports.UserModule = UserModule;
 
 
 /***/ }),
@@ -1113,19 +948,17 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var core_1 = __webpack_require__(/*! @angular/core */ "../../../node_modules/@angular/core/fesm5/core.js");
-var AppAsideComponent = /** @class */ (function () {
-    function AppAsideComponent() {
-    }
-    AppAsideComponent = __decorate([
-        core_1.Component({
-            selector: 'app-aside',
-            template: "<aside class=\"aside-menu\"></aside>"
-        }),
-        __metadata("design:paramtypes", [])
-    ], AppAsideComponent);
-    return AppAsideComponent;
-}());
+const core_1 = __webpack_require__(/*! @angular/core */ "../../../node_modules/@angular/core/fesm2015/core.js");
+let AppAsideComponent = class AppAsideComponent {
+    constructor() { }
+};
+AppAsideComponent = __decorate([
+    core_1.Component({
+        selector: 'app-aside',
+        template: `<aside class="aside-menu"></aside>`
+    }),
+    __metadata("design:paramtypes", [])
+], AppAsideComponent);
 exports.AppAsideComponent = AppAsideComponent;
 
 
@@ -1168,27 +1001,26 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var core_1 = __webpack_require__(/*! @angular/core */ "../../../node_modules/@angular/core/fesm5/core.js");
-var router_1 = __webpack_require__(/*! @angular/router */ "../../../node_modules/@angular/router/fesm5/router.js");
-__webpack_require__(/*! rxjs/operators */ "../../../node_modules/rxjs/_esm5/operators/index.js");
-var operators_1 = __webpack_require__(/*! rxjs/operators */ "../../../node_modules/rxjs/_esm5/operators/index.js");
-var AppBreadcrumbsComponent = /** @class */ (function () {
-    function AppBreadcrumbsComponent(router, route) {
-        var _this = this;
+const core_1 = __webpack_require__(/*! @angular/core */ "../../../node_modules/@angular/core/fesm2015/core.js");
+const router_1 = __webpack_require__(/*! @angular/router */ "../../../node_modules/@angular/router/fesm2015/router.js");
+__webpack_require__(/*! rxjs/operators */ "../../../node_modules/rxjs/_esm2015/operators/index.js");
+const operators_1 = __webpack_require__(/*! rxjs/operators */ "../../../node_modules/rxjs/_esm2015/operators/index.js");
+let AppBreadcrumbsComponent = class AppBreadcrumbsComponent {
+    constructor(router, route) {
         this.router = router;
         this.route = route;
-        this.router.events.pipe(operators_1.filter(function (event) { return event instanceof router_1.NavigationEnd; })).subscribe(function (event) {
-            _this.breadcrumbs = [];
-            var currentRoute = _this.route.root, url = '';
+        this.router.events.pipe(operators_1.filter(event => event instanceof router_1.NavigationEnd)).subscribe((event) => {
+            this.breadcrumbs = [];
+            let currentRoute = this.route.root, url = '';
             do {
-                var childrenRoutes = currentRoute.children;
+                const childrenRoutes = currentRoute.children;
                 currentRoute = null;
                 // tslint:disable-next-line:no-shadowed-variable
-                childrenRoutes.forEach(function (route) {
+                childrenRoutes.forEach(route => {
                     if (route.outlet === 'primary') {
-                        var routeSnapshot = route.snapshot;
-                        url += '/' + routeSnapshot.url.map(function (segment) { return segment.path; }).join('/');
-                        _this.breadcrumbs.push({
+                        const routeSnapshot = route.snapshot;
+                        url += '/' + routeSnapshot.url.map(segment => segment.path).join('/');
+                        this.breadcrumbs.push({
                             label: route.snapshot.data,
                             url: url
                         });
@@ -1198,16 +1030,23 @@ var AppBreadcrumbsComponent = /** @class */ (function () {
             } while (currentRoute);
         });
     }
-    AppBreadcrumbsComponent = __decorate([
-        core_1.Component({
-            selector: 'app-breadcrumbs',
-            template: "\n  <ng-template ngFor let-breadcrumb [ngForOf]=\"breadcrumbs\" let-last = last>\n    <li class=\"breadcrumb-item\"\n        *ngIf=\"breadcrumb.label.title&&breadcrumb.url.substring(breadcrumb.url.length-1) == '/'||breadcrumb.label.title&&last\"\n        [ngClass]=\"{active: last}\">\n      <a *ngIf=\"!last\" [routerLink]=\"breadcrumb.url\">{{breadcrumb.label.title}}</a>\n      <span *ngIf=\"last\" [routerLink]=\"breadcrumb.url\" style=\"margin-left: 20px;\">{{breadcrumb.label.title}}</span>\n    </li>\n  </ng-template>"
-        }),
-        __metadata("design:paramtypes", [router_1.Router,
-            router_1.ActivatedRoute])
-    ], AppBreadcrumbsComponent);
-    return AppBreadcrumbsComponent;
-}());
+};
+AppBreadcrumbsComponent = __decorate([
+    core_1.Component({
+        selector: 'app-breadcrumbs',
+        template: `
+  <ng-template ngFor let-breadcrumb [ngForOf]="breadcrumbs" let-last = last>
+    <li class="breadcrumb-item"
+        *ngIf="breadcrumb.label.title&&breadcrumb.url.substring(breadcrumb.url.length-1) == '/'||breadcrumb.label.title&&last"
+        [ngClass]="{active: last}">
+      <a *ngIf="!last" [routerLink]="breadcrumb.url">{{breadcrumb.label.title}}</a>
+      <span *ngIf="last" [routerLink]="breadcrumb.url" style="margin-left: 20px;">{{breadcrumb.label.title}}</span>
+    </li>
+  </ng-template>`
+    }),
+    __metadata("design:paramtypes", [router_1.Router,
+        router_1.ActivatedRoute])
+], AppBreadcrumbsComponent);
 exports.AppBreadcrumbsComponent = AppBreadcrumbsComponent;
 
 
@@ -1250,20 +1089,25 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var core_1 = __webpack_require__(/*! @angular/core */ "../../../node_modules/@angular/core/fesm5/core.js");
-var AppFooterComponent = /** @class */ (function () {
-    function AppFooterComponent() {
-    }
-    AppFooterComponent.prototype.ngOnInit = function () { };
-    AppFooterComponent = __decorate([
-        core_1.Component({
-            selector: 'app-footer',
-            template: "<footer class=\"app-footer\">\n    <div class=\"d-flex align-items-center\">\n        <span>\n          Th&egrave;me bas&eacute; sur :\n      <a href=\"http://coreui.io\" rel=\"noopener noreferrer\" target=\"_blank\"> creativeLabs </a>\n    </span>\n    </div>\n</footer>"
-        }),
-        __metadata("design:paramtypes", [])
-    ], AppFooterComponent);
-    return AppFooterComponent;
-}());
+const core_1 = __webpack_require__(/*! @angular/core */ "../../../node_modules/@angular/core/fesm2015/core.js");
+let AppFooterComponent = class AppFooterComponent {
+    constructor() { }
+    ngOnInit() { }
+};
+AppFooterComponent = __decorate([
+    core_1.Component({
+        selector: 'app-footer',
+        template: `<footer class="app-footer">
+    <div class="d-flex align-items-center">
+        <span>
+          Th&egrave;me bas&eacute; sur :
+      <a href="http://coreui.io" rel="noopener noreferrer" target="_blank"> creativeLabs </a>
+    </span>
+    </div>
+</footer>`
+    }),
+    __metadata("design:paramtypes", [])
+], AppFooterComponent);
 exports.AppFooterComponent = AppFooterComponent;
 
 
@@ -1306,58 +1150,68 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var core_1 = __webpack_require__(/*! @angular/core */ "../../../node_modules/@angular/core/fesm5/core.js");
-var material_1 = __webpack_require__(/*! @angular/material */ "../../../node_modules/@angular/material/esm5/material.es5.js");
-var modal_connexion_component_1 = __webpack_require__(/*! ./modal/modal-connexion.component */ "./app/coreui/components/app-header/modal/modal-connexion.component.ts");
-var token_storage_service_1 = __webpack_require__(/*! ../../../auth/token-storage.service */ "./app/auth/token-storage.service.ts");
-var auth_service_1 = __webpack_require__(/*! ../../../auth/auth.service */ "./app/auth/auth.service.ts");
-var AppHeaderComponent = /** @class */ (function () {
-    function AppHeaderComponent(dialog, token, authService) {
+const core_1 = __webpack_require__(/*! @angular/core */ "../../../node_modules/@angular/core/fesm2015/core.js");
+const material_1 = __webpack_require__(/*! @angular/material */ "../../../node_modules/@angular/material/esm2015/material.js");
+const modal_connexion_component_1 = __webpack_require__(/*! ./modal/modal-connexion.component */ "./app/coreui/components/app-header/modal/modal-connexion.component.ts");
+const token_storage_service_1 = __webpack_require__(/*! ../../../auth/token-storage.service */ "./app/auth/token-storage.service.ts");
+const auth_service_1 = __webpack_require__(/*! ../../../auth/auth.service */ "./app/auth/auth.service.ts");
+let AppHeaderComponent = class AppHeaderComponent {
+    constructor(dialog, token, authService) {
         this.dialog = dialog;
         this.token = token;
         this.authService = authService;
         this.testAuth = false;
     }
-    AppHeaderComponent.prototype.ngOnInit = function () {
-        var _this = this;
+    ngOnInit() {
         this.info = {
             token: this.token.getToken(),
             username: this.token.getUsername(),
             authorities: this.token.getAuthorities()
         };
-        console.log("token3 " + this.info.token);
         if (this.info.token != null) {
-            console.log("token :" + this.info.token);
-            this.authService.validateToken(this.info.token).subscribe(function (data) {
-                _this.testAuth = data;
-                console.log("data : " + data);
-                console.log("testAuth : " + _this.testAuth);
-                if (!_this.testAuth) {
+            this.authService.validateToken(this.info.token).subscribe(data => {
+                this.testAuth = data;
+                if (!this.testAuth) {
                     console.log("token expiré");
-                    _this.token.signOut();
+                    this.token.signOut();
                 }
             });
         }
-    };
-    AppHeaderComponent.prototype.signin = function () {
-        var dialogRef = this.dialog.open(modal_connexion_component_1.ModalConnexion, {
+    }
+    signin() {
+        const dialogRef = this.dialog.open(modal_connexion_component_1.ModalConnexion, {
             data: {}
         });
-    };
-    AppHeaderComponent.prototype.logout = function () {
+    }
+    logout() {
         this.token.signOut();
         window.location.reload();
-    };
-    AppHeaderComponent = __decorate([
-        core_1.Component({
-            selector: 'app-header',
-            template: "<header class=\"app-header navbar\">\n  <button class=\"navbar-toggler d-lg-none\" type=\"button\" appMobileSidebarToggler>\n    <span class=\"navbar-toggler-icon\"></span>\n  </button>\n    <a class=\"navbar-brand\" href=\"#\"></a>\n  <button class=\"navbar-toggler d-md-down-none mr-auto\" type=\"button\" appSidebarToggler>\n    <span class=\"navbar-toggler-icon\"></span>\n  </button>\n  <div  *ngIf=\"!info.token || !testAuth\" class=\"flex end\">\n    <button class=\"btn btn-success\" style=\"margin-right:15px\"\n        (click)=\"signin()\" title=\"Connexion\">Connexion</button>\n    </div>\n    <div  *ngIf=\"info.token && testAuth\" class=\"flex end\">\n    <button class=\"btn btn-success\" style=\"margin-right:15px\"\n        (click)=\"logout()\" title=\"D&eacute;connexion\">D&eacute;connexion</button>\n    </div>\n</header>"
-        }),
-        __metadata("design:paramtypes", [material_1.MatDialog, token_storage_service_1.TokenStorageService,
-            auth_service_1.AuthService])
-    ], AppHeaderComponent);
-    return AppHeaderComponent;
-}());
+    }
+};
+AppHeaderComponent = __decorate([
+    core_1.Component({
+        selector: 'app-header',
+        template: `<header class="app-header navbar">
+  <button class="navbar-toggler d-lg-none" type="button" appMobileSidebarToggler>
+    <span class="navbar-toggler-icon"></span>
+  </button>
+    <a class="navbar-brand" href="#"></a>
+  <button class="navbar-toggler d-md-down-none mr-auto" type="button" appSidebarToggler>
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div  *ngIf="!info.token || !testAuth" class="flex end">
+    <button class="btn btn-success" style="margin-right:15px"
+        (click)="signin()" title="Connexion">Connexion</button>
+    </div>
+    <div  *ngIf="info.token && testAuth" class="flex end">
+    <button class="btn btn-success" style="margin-right:15px"
+        (click)="logout()" title="D&eacute;connexion">D&eacute;connexion</button>
+    </div>
+</header>`
+    }),
+    __metadata("design:paramtypes", [material_1.MatDialog, token_storage_service_1.TokenStorageService,
+        auth_service_1.AuthService])
+], AppHeaderComponent);
 exports.AppHeaderComponent = AppHeaderComponent;
 
 
@@ -1400,18 +1254,18 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var core_1 = __webpack_require__(/*! @angular/core */ "../../../node_modules/@angular/core/fesm5/core.js");
-var material_1 = __webpack_require__(/*! @angular/material */ "../../../node_modules/@angular/material/esm5/material.es5.js");
-var ng_bootstrap_1 = __webpack_require__(/*! @ng-bootstrap/ng-bootstrap */ "../../../node_modules/@ng-bootstrap/ng-bootstrap/fesm5/ng-bootstrap.js");
-var auth_service_1 = __webpack_require__(/*! ../../../../auth/auth.service */ "./app/auth/auth.service.ts");
-var token_storage_service_1 = __webpack_require__(/*! ../../../../auth/token-storage.service */ "./app/auth/token-storage.service.ts");
-var login_info_1 = __webpack_require__(/*! ../../../../auth/login-info */ "./app/auth/login-info.ts");
-var ALERT = {
+const core_1 = __webpack_require__(/*! @angular/core */ "../../../node_modules/@angular/core/fesm2015/core.js");
+const material_1 = __webpack_require__(/*! @angular/material */ "../../../node_modules/@angular/material/esm2015/material.js");
+const ng_bootstrap_1 = __webpack_require__(/*! @ng-bootstrap/ng-bootstrap */ "../../../node_modules/@ng-bootstrap/ng-bootstrap/fesm2015/ng-bootstrap.js");
+const auth_service_1 = __webpack_require__(/*! ../../../../auth/auth.service */ "./app/auth/auth.service.ts");
+const token_storage_service_1 = __webpack_require__(/*! ../../../../auth/token-storage.service */ "./app/auth/token-storage.service.ts");
+const login_info_1 = __webpack_require__(/*! ../../../../auth/login-info */ "./app/auth/login-info.ts");
+const ALERT = {
     type: 'success',
     message: 'This is an success alert',
 };
-var ModalConnexion = /** @class */ (function () {
-    function ModalConnexion(authService, tokenStorage, alertConfig, dialogRef) {
+let ModalConnexion = class ModalConnexion {
+    constructor(authService, tokenStorage, alertConfig, dialogRef) {
         this.authService = authService;
         this.tokenStorage = tokenStorage;
         this.dialogRef = dialogRef;
@@ -1423,47 +1277,73 @@ var ModalConnexion = /** @class */ (function () {
         alertConfig.type = 'danger';
         alertConfig.dismissible = false;
     }
-    ModalConnexion.prototype.ngOnInit = function () {
+    ngOnInit() {
         if (this.tokenStorage.getToken()) {
             this.isLoggedIn = true;
             this.roles = this.tokenStorage.getAuthorities();
         }
-    };
-    ModalConnexion.prototype.onSubmit = function () {
-        var _this = this;
-        console.log("connexion");
+    }
+    onSubmit() {
         this.loginInfo = new login_info_1.AuthLoginInfo(this.form.username, this.form.password);
-        this.authService.attemptAuth(this.loginInfo).subscribe(function (data) {
-            _this.tokenStorage.saveToken(data.accessToken);
-            _this.tokenStorage.saveUsername(data.username);
-            _this.tokenStorage.saveAuthorities(data.authorities);
-            _this.isLoginFailed = false;
-            _this.isLoggedIn = true;
-            _this.roles = _this.tokenStorage.getAuthorities();
-            _this.reloadPage();
-        }, function (error) {
+        this.authService.attemptAuth(this.loginInfo).subscribe(data => {
+            this.tokenStorage.saveToken(data.accessToken);
+            this.tokenStorage.saveUsername(data.username);
+            this.tokenStorage.saveAuthorities(data.authorities);
+            this.isLoginFailed = false;
+            this.isLoggedIn = true;
+            this.roles = this.tokenStorage.getAuthorities();
+            this.reloadPage();
+        }, error => {
             console.log(error);
-            _this.errorMessage = error.error.message;
-            _this.isLoginFailed = true;
+            this.errorMessage = error.error.message;
+            this.isLoginFailed = true;
+            this.form.password = "";
         });
-    };
-    ModalConnexion.prototype.reloadPage = function () {
+    }
+    reloadPage() {
         window.location.reload();
-    };
-    ModalConnexion = __decorate([
-        core_1.Component({
-            selector: 'ref-modal-connexion',
-            template: "<div class=\"row\" style=\"justify-content: space-between;height: 40px;\">\n<h2 mat-dialog-title class=\"color-vert-stg row\">Connexion </h2>\n</div>\n<div *ngIf=\"isLoginFailed\">\n    <ngb-alert>\n        Erreur d'autentification\n  </ngb-alert>\n</div>\n<mat-dialog-content>\n    <div class=\"row\">\n        <div class=\"form-group column\" >\n            <div class=\"row\">\n                <mat-form-field>\n                    <input matInput placeholder=\"Identifiant de connexion\" id=\"nomconnexion\" name=\"nomconnexion\" [(ngModel)] = \"form.username\">\n                </mat-form-field>\n            </div>\n            <div class=\"row\">\n                <mat-form-field>\n                    <input matInput placeholder=\"Mot de passe\" type=\"password\" id=\"motdepasse\" name=\"motdepasse\" [(ngModel)] = \"form.password\">\n                </mat-form-field>\n            </div>\n        </div>\n\n    </div>\n</mat-dialog-content>\n<mat-dialog-actions>\n    <button class=\"btn btn-link\"(click)=\"dialogRef.close()\">Annuler</button>\n    <button class=\"btn btn-success\"(click)=\"onSubmit()\">Connexion</button>\n</mat-dialog-actions>",
-            providers: [
-                { provide: material_1.MAT_DATE_LOCALE, useValue: 'fr-FR' },
-                ng_bootstrap_1.NgbAlertConfig
-            ],
-        }),
-        __metadata("design:paramtypes", [auth_service_1.AuthService, token_storage_service_1.TokenStorageService,
-            ng_bootstrap_1.NgbAlertConfig, material_1.MatDialogRef])
-    ], ModalConnexion);
-    return ModalConnexion;
-}());
+    }
+};
+ModalConnexion = __decorate([
+    core_1.Component({
+        selector: 'ref-modal-connexion',
+        template: `<div class="row" style="justify-content: space-between;height: 40px;">
+<h2 mat-dialog-title class="color-vert-stg row">Connexion </h2>
+</div>
+<div *ngIf="isLoginFailed">
+    <ngb-alert>
+        Erreur d'autentification
+  </ngb-alert>
+</div>
+<mat-dialog-content>
+    <div class="row">
+        <div class="form-group column" >
+            <div class="row">
+                <mat-form-field>
+                    <input matInput placeholder="Identifiant de connexion" id="nomconnexion" name="nomconnexion" [(ngModel)] = "form.username">
+                </mat-form-field>
+            </div>
+            <div class="row">
+                <mat-form-field>
+                    <input matInput placeholder="Mot de passe" type="password" id="motdepasse" name="motdepasse" [(ngModel)] = "form.password">
+                </mat-form-field>
+            </div>
+        </div>
+
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button class="btn btn-link"(click)="dialogRef.close()">Annuler</button>
+    <button class="btn btn-success"(click)="onSubmit()">Connexion</button>
+</mat-dialog-actions>`,
+        providers: [
+            { provide: material_1.MAT_DATE_LOCALE, useValue: 'fr-FR' },
+            ng_bootstrap_1.NgbAlertConfig
+        ],
+    }),
+    __metadata("design:paramtypes", [auth_service_1.AuthService, token_storage_service_1.TokenStorageService,
+        ng_bootstrap_1.NgbAlertConfig, material_1.MatDialogRef])
+], ModalConnexion);
 exports.ModalConnexion = ModalConnexion;
 
 
@@ -1485,18 +1365,15 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var core_1 = __webpack_require__(/*! @angular/core */ "../../../node_modules/@angular/core/fesm5/core.js");
-var AppSidebarFooterComponent = /** @class */ (function () {
-    function AppSidebarFooterComponent() {
-    }
-    AppSidebarFooterComponent = __decorate([
-        core_1.Component({
-            selector: 'app-sidebar-footer',
-            template: ''
-        })
-    ], AppSidebarFooterComponent);
-    return AppSidebarFooterComponent;
-}());
+const core_1 = __webpack_require__(/*! @angular/core */ "../../../node_modules/@angular/core/fesm2015/core.js");
+let AppSidebarFooterComponent = class AppSidebarFooterComponent {
+};
+AppSidebarFooterComponent = __decorate([
+    core_1.Component({
+        selector: 'app-sidebar-footer',
+        template: ''
+    })
+], AppSidebarFooterComponent);
 exports.AppSidebarFooterComponent = AppSidebarFooterComponent;
 
 
@@ -1536,18 +1413,15 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var core_1 = __webpack_require__(/*! @angular/core */ "../../../node_modules/@angular/core/fesm5/core.js");
-var AppSidebarFormComponent = /** @class */ (function () {
-    function AppSidebarFormComponent() {
-    }
-    AppSidebarFormComponent = __decorate([
-        core_1.Component({
-            selector: 'app-sidebar-form',
-            template: ''
-        })
-    ], AppSidebarFormComponent);
-    return AppSidebarFormComponent;
-}());
+const core_1 = __webpack_require__(/*! @angular/core */ "../../../node_modules/@angular/core/fesm2015/core.js");
+let AppSidebarFormComponent = class AppSidebarFormComponent {
+};
+AppSidebarFormComponent = __decorate([
+    core_1.Component({
+        selector: 'app-sidebar-form',
+        template: ''
+    })
+], AppSidebarFormComponent);
 exports.AppSidebarFormComponent = AppSidebarFormComponent;
 
 
@@ -1590,31 +1464,30 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var core_1 = __webpack_require__(/*! @angular/core */ "../../../node_modules/@angular/core/fesm5/core.js");
-var router_1 = __webpack_require__(/*! @angular/router */ "../../../node_modules/@angular/router/fesm5/router.js");
-var AppSidebarHeaderComponent = /** @class */ (function () {
-    function AppSidebarHeaderComponent(router) {
+const core_1 = __webpack_require__(/*! @angular/core */ "../../../node_modules/@angular/core/fesm2015/core.js");
+const router_1 = __webpack_require__(/*! @angular/router */ "../../../node_modules/@angular/router/fesm2015/router.js");
+let AppSidebarHeaderComponent = class AppSidebarHeaderComponent {
+    constructor(router) {
         this.router = router;
     }
     // route_dashboard = false;
-    AppSidebarHeaderComponent.prototype.ngOnInit = function () {
+    ngOnInit() {
         // this.route_dashboard = (this.router.url === '/dashboard') ? true : false; 
-    };
+    }
     /**
      * Navigation accueil
      */
-    AppSidebarHeaderComponent.prototype.accueil = function () {
+    accueil() {
         this.router.navigate(['dashboard']);
-    };
-    AppSidebarHeaderComponent = __decorate([
-        core_1.Component({
-            selector: 'app-sidebar-header',
-            template: ''
-        }),
-        __metadata("design:paramtypes", [router_1.Router])
-    ], AppSidebarHeaderComponent);
-    return AppSidebarHeaderComponent;
-}());
+    }
+};
+AppSidebarHeaderComponent = __decorate([
+    core_1.Component({
+        selector: 'app-sidebar-header',
+        template: ''
+    }),
+    __metadata("design:paramtypes", [router_1.Router])
+], AppSidebarHeaderComponent);
 exports.AppSidebarHeaderComponent = AppSidebarHeaderComponent;
 
 
@@ -1654,18 +1527,16 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var core_1 = __webpack_require__(/*! @angular/core */ "../../../node_modules/@angular/core/fesm5/core.js");
-var AppSidebarMinimizerComponent = /** @class */ (function () {
-    function AppSidebarMinimizerComponent() {
-    }
-    AppSidebarMinimizerComponent = __decorate([
-        core_1.Component({
-            selector: 'app-sidebar-minimizer',
-            template: "<button class=\"sidebar-minimizer\" type=\"button\" appSidebarMinimizer appBrandMinimizer></button>\n"
-        })
-    ], AppSidebarMinimizerComponent);
-    return AppSidebarMinimizerComponent;
-}());
+const core_1 = __webpack_require__(/*! @angular/core */ "../../../node_modules/@angular/core/fesm2015/core.js");
+let AppSidebarMinimizerComponent = class AppSidebarMinimizerComponent {
+};
+AppSidebarMinimizerComponent = __decorate([
+    core_1.Component({
+        selector: 'app-sidebar-minimizer',
+        template: `<button class="sidebar-minimizer" type="button" appSidebarMinimizer appBrandMinimizer></button>
+`
+    })
+], AppSidebarMinimizerComponent);
 exports.AppSidebarMinimizerComponent = AppSidebarMinimizerComponent;
 
 
@@ -1708,151 +1579,213 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var core_1 = __webpack_require__(/*! @angular/core */ "../../../node_modules/@angular/core/fesm5/core.js");
+const core_1 = __webpack_require__(/*! @angular/core */ "../../../node_modules/@angular/core/fesm2015/core.js");
 // Import navigation elements
-var _nav_1 = __webpack_require__(/*! ./../../../_nav */ "./app/_nav.ts");
-var token_storage_service_1 = __webpack_require__(/*! ../../../auth/token-storage.service */ "./app/auth/token-storage.service.ts");
-var auth_service_1 = __webpack_require__(/*! ../../../auth/auth.service */ "./app/auth/auth.service.ts");
-var AppSidebarNavComponent = /** @class */ (function () {
-    function AppSidebarNavComponent(token, authService) {
+const _nav_1 = __webpack_require__(/*! ./../../../_nav */ "./app/_nav.ts");
+const token_storage_service_1 = __webpack_require__(/*! src/main/webapp/app/auth/token-storage.service */ "./app/auth/token-storage.service.ts");
+const auth_service_1 = __webpack_require__(/*! src/main/webapp/app/auth/auth.service */ "./app/auth/auth.service.ts");
+let AppSidebarNavComponent = class AppSidebarNavComponent {
+    constructor(token, authService) {
         this.token = token;
         this.authService = authService;
         this.testAuth = false;
+        this.superAdmin = false;
         this.navigation_user = _nav_1.navigation_user;
-        this.navigation_disconnect = _nav_1.navigation_disconnect;
+        this.navigation_super_admin = _nav_1.navigation_super_admin;
     }
-    AppSidebarNavComponent.prototype.isDivider = function (item) {
+    isDivider(item) {
         return item.divider ? true : false;
-    };
-    AppSidebarNavComponent.prototype.isTitle = function (item) {
+    }
+    isTitle(item) {
         return item.title ? true : false;
-    };
-    AppSidebarNavComponent.prototype.ngOnInit = function () {
-        var _this = this;
+    }
+    ngOnInit() {
         this.info = {
             token: this.token.getToken(),
             username: this.token.getUsername(),
             authorities: this.token.getAuthorities()
         };
+        this.info.authorities.forEach(function (role) {
+            if (role === "ROLE_SUPER_ADMIN") {
+                this.superAdmin = true;
+            }
+        }.bind(this));
         if (this.info.token != null) {
-            this.authService.validateToken(this.info.token).subscribe(function (data) {
-                _this.testAuth = data;
-                if (!_this.testAuth) {
+            this.authService.validateToken(this.info.token).subscribe(data => {
+                this.testAuth = data;
+                if (!this.testAuth) {
                     console.log("token expiré");
-                    _this.token.signOut();
+                    this.token.signOut();
                 }
             });
         }
-    };
-    AppSidebarNavComponent = __decorate([
-        core_1.Component({
-            selector: 'app-sidebar-nav',
-            template: "\n    <nav class=\"sidebar-nav\">\n      <ul *ngIf=\"info.token && testAuth\" class=\"nav\" >\n        <ng-template ngFor let-navitem [ngForOf]=\"navigation_user\">\n          <li *ngIf=\"isDivider(navitem)\" class=\"nav-divider\"></li>\n          <ng-template [ngIf]=\"isTitle(navitem)\">\n            <app-sidebar-nav-title [title]='navitem'></app-sidebar-nav-title>\n          </ng-template>\n          <ng-template [ngIf]=\"!isDivider(navitem)&&!isTitle(navitem)\">\n            <app-sidebar-nav-item [item]='navitem'></app-sidebar-nav-item>\n          </ng-template>\n        </ng-template>\n       </ul>\n       <ul *ngIf=\"!info.token || !testAuth\" class=\"nav\" >\n        <ng-template ngFor let-navitem [ngForOf]=\"navigation_disconnect\">\n          <li *ngIf=\"isDivider(navitem)\" class=\"nav-divider\"></li>\n          <ng-template [ngIf]=\"isTitle(navitem)\">\n            <app-sidebar-nav-title [title]='navitem'></app-sidebar-nav-title>\n          </ng-template>\n          <ng-template [ngIf]=\"!isDivider(navitem)&&!isTitle(navitem)\">\n            <app-sidebar-nav-item [item]='navitem'></app-sidebar-nav-item>\n          </ng-template>\n        </ng-template>\n      </ul>\n    </nav>"
-        }),
-        __metadata("design:paramtypes", [token_storage_service_1.TokenStorageService, auth_service_1.AuthService])
-    ], AppSidebarNavComponent);
-    return AppSidebarNavComponent;
-}());
+    }
+};
+AppSidebarNavComponent = __decorate([
+    core_1.Component({
+        selector: 'app-sidebar-nav',
+        template: `
+    <nav class="sidebar-nav">
+      <ul *ngIf="info.token && testAuth && !superAdmin" class="nav" >
+        <ng-template ngFor let-navitem [ngForOf]="navigation_user">
+          <li *ngIf="isDivider(navitem)" class="nav-divider"></li>
+          <ng-template [ngIf]="isTitle(navitem)">
+            <app-sidebar-nav-title [title]='navitem'></app-sidebar-nav-title>
+          </ng-template>
+          <ng-template [ngIf]="!isDivider(navitem)&&!isTitle(navitem)">
+            <app-sidebar-nav-item [item]='navitem'></app-sidebar-nav-item>
+          </ng-template>
+        </ng-template>
+       </ul>
+       <ul *ngIf="info.token && testAuth && superAdmin" class="nav" >
+        <ng-template ngFor let-navitem [ngForOf]="navigation_super_admin">
+          <li *ngIf="isDivider(navitem)" class="nav-divider"></li>
+          <ng-template [ngIf]="isTitle(navitem)">
+            <app-sidebar-nav-title [title]='navitem'></app-sidebar-nav-title>
+          </ng-template>
+          <ng-template [ngIf]="!isDivider(navitem)&&!isTitle(navitem)">
+            <app-sidebar-nav-item [item]='navitem'></app-sidebar-nav-item>
+          </ng-template>
+        </ng-template>
+      </ul>
+    </nav>`
+    }),
+    __metadata("design:paramtypes", [token_storage_service_1.TokenStorageService, auth_service_1.AuthService])
+], AppSidebarNavComponent);
 exports.AppSidebarNavComponent = AppSidebarNavComponent;
-var router_1 = __webpack_require__(/*! @angular/router */ "../../../node_modules/@angular/router/fesm5/router.js");
-var AppSidebarNavItemComponent = /** @class */ (function () {
-    function AppSidebarNavItemComponent(router) {
+const router_1 = __webpack_require__(/*! @angular/router */ "../../../node_modules/@angular/router/fesm2015/router.js");
+let AppSidebarNavItemComponent = class AppSidebarNavItemComponent {
+    constructor(router) {
         this.router = router;
     }
-    AppSidebarNavItemComponent.prototype.hasClass = function () {
+    hasClass() {
         return this.item.class ? true : false;
-    };
-    AppSidebarNavItemComponent.prototype.isDropdown = function () {
+    }
+    isDropdown() {
         return this.item.children ? true : false;
-    };
-    AppSidebarNavItemComponent.prototype.thisUrl = function () {
+    }
+    thisUrl() {
         return this.item.url;
-    };
-    AppSidebarNavItemComponent.prototype.isActive = function () {
+    }
+    isActive() {
         return this.router.isActive(this.thisUrl(), false);
-    };
-    __decorate([
-        core_1.Input(),
-        __metadata("design:type", Object)
-    ], AppSidebarNavItemComponent.prototype, "item", void 0);
-    AppSidebarNavItemComponent = __decorate([
-        core_1.Component({
-            selector: 'app-sidebar-nav-item',
-            template: "\n    <li *ngIf=\"!isDropdown(); else dropdown\" [ngClass]=\"hasClass() ? 'nav-item ' + item.class : 'nav-item'\">\n      <app-sidebar-nav-link [link]='item'></app-sidebar-nav-link>\n    </li>\n    <ng-template #dropdown>\n      <li [ngClass]=\"hasClass() ? 'nav-item nav-dropdown ' + item.class : 'nav-item nav-dropdown'\"\n          [class.open]=\"isActive()\"\n          routerLinkActive=\"open\"\n          appNavDropdown>\n        <app-sidebar-nav-dropdown [link]='item'></app-sidebar-nav-dropdown>\n      </li>\n    </ng-template>\n    "
-        }),
-        __metadata("design:paramtypes", [router_1.Router])
-    ], AppSidebarNavItemComponent);
-    return AppSidebarNavItemComponent;
-}());
+    }
+};
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", Object)
+], AppSidebarNavItemComponent.prototype, "item", void 0);
+AppSidebarNavItemComponent = __decorate([
+    core_1.Component({
+        selector: 'app-sidebar-nav-item',
+        template: `
+    <li *ngIf="!isDropdown(); else dropdown" [ngClass]="hasClass() ? 'nav-item ' + item.class : 'nav-item'">
+      <app-sidebar-nav-link [link]='item'></app-sidebar-nav-link>
+    </li>
+    <ng-template #dropdown>
+      <li [ngClass]="hasClass() ? 'nav-item nav-dropdown ' + item.class : 'nav-item nav-dropdown'"
+          [class.open]="isActive()"
+          routerLinkActive="open"
+          appNavDropdown>
+        <app-sidebar-nav-dropdown [link]='item'></app-sidebar-nav-dropdown>
+      </li>
+    </ng-template>
+    `
+    }),
+    __metadata("design:paramtypes", [router_1.Router])
+], AppSidebarNavItemComponent);
 exports.AppSidebarNavItemComponent = AppSidebarNavItemComponent;
-var AppSidebarNavLinkComponent = /** @class */ (function () {
-    function AppSidebarNavLinkComponent() {
-    }
-    AppSidebarNavLinkComponent.prototype.hasVariant = function () {
+let AppSidebarNavLinkComponent = class AppSidebarNavLinkComponent {
+    constructor() { }
+    hasVariant() {
         return this.link.variant ? true : false;
-    };
-    AppSidebarNavLinkComponent.prototype.isBadge = function () {
-        return this.link.badge ? true : false;
-    };
-    AppSidebarNavLinkComponent.prototype.isExternalLink = function () {
-        return this.link.url.substring(0, 4) === 'http' ? true : false;
-    };
-    AppSidebarNavLinkComponent.prototype.isIcon = function () {
-        return this.link.icon ? true : false;
-    };
-    __decorate([
-        core_1.Input(),
-        __metadata("design:type", Object)
-    ], AppSidebarNavLinkComponent.prototype, "link", void 0);
-    AppSidebarNavLinkComponent = __decorate([
-        core_1.Component({
-            selector: 'app-sidebar-nav-link',
-            template: "\n    <a *ngIf=\"!isExternalLink(); else external\"\n      [ngClass]=\"hasVariant() ? 'nav-link nav-link-' + link.variant : 'nav-link'\"\n      routerLinkActive=\"active\"\n      [routerLink]=\"[link.url]\">\n      <i *ngIf=\"isIcon()\" class=\"{{ link.icon }}\"></i>\n      {{ link.name }}\n      <span *ngIf=\"isBadge()\" [ngClass]=\"'badge badge-' + link.badge.variant\">{{ link.badge.text }}</span>\n    </a>\n    <ng-template #external>\n      <a [ngClass]=\"hasVariant() ? 'nav-link nav-link-' + link.variant : 'nav-link'\" href=\"{{link.url}}\">\n        <i *ngIf=\"isIcon()\" class=\"{{ link.icon }}\"></i>\n        {{ link.name }}\n        <span *ngIf=\"isBadge()\" [ngClass]=\"'badge badge-' + link.badge.variant\">{{ link.badge.text }}</span>\n      </a>\n    </ng-template>\n  "
-        }),
-        __metadata("design:paramtypes", [])
-    ], AppSidebarNavLinkComponent);
-    return AppSidebarNavLinkComponent;
-}());
-exports.AppSidebarNavLinkComponent = AppSidebarNavLinkComponent;
-var AppSidebarNavDropdownComponent = /** @class */ (function () {
-    function AppSidebarNavDropdownComponent() {
     }
-    AppSidebarNavDropdownComponent.prototype.isBadge = function () {
+    isBadge() {
         return this.link.badge ? true : false;
-    };
-    AppSidebarNavDropdownComponent.prototype.isIcon = function () {
+    }
+    isExternalLink() {
+        return this.link.url.substring(0, 4) === 'http' ? true : false;
+    }
+    isIcon() {
         return this.link.icon ? true : false;
-    };
-    __decorate([
-        core_1.Input(),
-        __metadata("design:type", Object)
-    ], AppSidebarNavDropdownComponent.prototype, "link", void 0);
-    AppSidebarNavDropdownComponent = __decorate([
-        core_1.Component({
-            selector: 'app-sidebar-nav-dropdown',
-            template: "\n    <a class=\"nav-link nav-dropdown-toggle\" appNavDropdownToggle>\n      <i *ngIf=\"isIcon()\" class=\"{{ link.icon }}\"></i>\n      {{ link.name }}\n      <span *ngIf=\"isBadge()\" [ngClass]=\"'badge badge-' + link.badge.variant\">{{ link.badge.text }}</span>\n    </a>\n    <ul class=\"nav-dropdown-items\">\n      <ng-template ngFor let-child [ngForOf]=\"link.children\">\n        <app-sidebar-nav-item [item]='child'></app-sidebar-nav-item>\n      </ng-template>\n    </ul>\n  "
-        }),
-        __metadata("design:paramtypes", [])
-    ], AppSidebarNavDropdownComponent);
-    return AppSidebarNavDropdownComponent;
-}());
+    }
+};
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", Object)
+], AppSidebarNavLinkComponent.prototype, "link", void 0);
+AppSidebarNavLinkComponent = __decorate([
+    core_1.Component({
+        selector: 'app-sidebar-nav-link',
+        template: `
+    <a *ngIf="!isExternalLink(); else external"
+      [ngClass]="hasVariant() ? 'nav-link nav-link-' + link.variant : 'nav-link'"
+      routerLinkActive="active"
+      [routerLink]="[link.url]">
+      <i *ngIf="isIcon()" class="{{ link.icon }}"></i>
+      {{ link.name }}
+      <span *ngIf="isBadge()" [ngClass]="'badge badge-' + link.badge.variant">{{ link.badge.text }}</span>
+    </a>
+    <ng-template #external>
+      <a [ngClass]="hasVariant() ? 'nav-link nav-link-' + link.variant : 'nav-link'" href="{{link.url}}">
+        <i *ngIf="isIcon()" class="{{ link.icon }}"></i>
+        {{ link.name }}
+        <span *ngIf="isBadge()" [ngClass]="'badge badge-' + link.badge.variant">{{ link.badge.text }}</span>
+      </a>
+    </ng-template>
+  `
+    }),
+    __metadata("design:paramtypes", [])
+], AppSidebarNavLinkComponent);
+exports.AppSidebarNavLinkComponent = AppSidebarNavLinkComponent;
+let AppSidebarNavDropdownComponent = class AppSidebarNavDropdownComponent {
+    constructor() { }
+    isBadge() {
+        return this.link.badge ? true : false;
+    }
+    isIcon() {
+        return this.link.icon ? true : false;
+    }
+};
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", Object)
+], AppSidebarNavDropdownComponent.prototype, "link", void 0);
+AppSidebarNavDropdownComponent = __decorate([
+    core_1.Component({
+        selector: 'app-sidebar-nav-dropdown',
+        template: `
+    <a class="nav-link nav-dropdown-toggle" appNavDropdownToggle>
+      <i *ngIf="isIcon()" class="{{ link.icon }}"></i>
+      {{ link.name }}
+      <span *ngIf="isBadge()" [ngClass]="'badge badge-' + link.badge.variant">{{ link.badge.text }}</span>
+    </a>
+    <ul class="nav-dropdown-items">
+      <ng-template ngFor let-child [ngForOf]="link.children">
+        <app-sidebar-nav-item [item]='child'></app-sidebar-nav-item>
+      </ng-template>
+    </ul>
+  `
+    }),
+    __metadata("design:paramtypes", [])
+], AppSidebarNavDropdownComponent);
 exports.AppSidebarNavDropdownComponent = AppSidebarNavDropdownComponent;
-var AppSidebarNavTitleComponent = /** @class */ (function () {
-    function AppSidebarNavTitleComponent(el, renderer) {
+let AppSidebarNavTitleComponent = class AppSidebarNavTitleComponent {
+    constructor(el, renderer) {
         this.el = el;
         this.renderer = renderer;
     }
-    AppSidebarNavTitleComponent.prototype.ngOnInit = function () {
-        var nativeElement = this.el.nativeElement;
-        var li = this.renderer.createElement('li');
-        var name = this.renderer.createText(this.title.name);
+    ngOnInit() {
+        const nativeElement = this.el.nativeElement;
+        const li = this.renderer.createElement('li');
+        const name = this.renderer.createText(this.title.name);
         this.renderer.addClass(li, 'nav-title');
         if (this.title.class) {
-            var classes = this.title.class;
+            const classes = this.title.class;
             this.renderer.addClass(li, classes);
         }
         if (this.title.wrapper) {
-            var wrapper = this.renderer.createElement(this.title.wrapper.element);
+            const wrapper = this.renderer.createElement(this.title.wrapper.element);
             this.renderer.appendChild(wrapper, name);
             this.renderer.appendChild(li, wrapper);
         }
@@ -1860,20 +1793,19 @@ var AppSidebarNavTitleComponent = /** @class */ (function () {
             this.renderer.appendChild(li, name);
         }
         this.renderer.appendChild(nativeElement, li);
-    };
-    __decorate([
-        core_1.Input(),
-        __metadata("design:type", Object)
-    ], AppSidebarNavTitleComponent.prototype, "title", void 0);
-    AppSidebarNavTitleComponent = __decorate([
-        core_1.Component({
-            selector: 'app-sidebar-nav-title',
-            template: ''
-        }),
-        __metadata("design:paramtypes", [core_1.ElementRef, core_1.Renderer2])
-    ], AppSidebarNavTitleComponent);
-    return AppSidebarNavTitleComponent;
-}());
+    }
+};
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", Object)
+], AppSidebarNavTitleComponent.prototype, "title", void 0);
+AppSidebarNavTitleComponent = __decorate([
+    core_1.Component({
+        selector: 'app-sidebar-nav-title',
+        template: ''
+    }),
+    __metadata("design:paramtypes", [core_1.ElementRef, core_1.Renderer2])
+], AppSidebarNavTitleComponent);
 exports.AppSidebarNavTitleComponent = AppSidebarNavTitleComponent;
 exports.APP_SIDEBAR_NAV = [
     AppSidebarNavComponent,
@@ -1920,18 +1852,22 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var core_1 = __webpack_require__(/*! @angular/core */ "../../../node_modules/@angular/core/fesm5/core.js");
-var AppSidebarComponent = /** @class */ (function () {
-    function AppSidebarComponent() {
-    }
-    AppSidebarComponent = __decorate([
-        core_1.Component({
-            selector: 'app-sidebar',
-            template: "<div class=\"sidebar\">\n  <app-sidebar-header></app-sidebar-header>\n  <app-sidebar-form></app-sidebar-form>\n  <app-sidebar-nav></app-sidebar-nav>\n  <app-sidebar-footer></app-sidebar-footer>\n  <!-- <app-sidebar-minimizer></app-sidebar-minimizer> -->\n</div>\n"
-        })
-    ], AppSidebarComponent);
-    return AppSidebarComponent;
-}());
+const core_1 = __webpack_require__(/*! @angular/core */ "../../../node_modules/@angular/core/fesm2015/core.js");
+let AppSidebarComponent = class AppSidebarComponent {
+};
+AppSidebarComponent = __decorate([
+    core_1.Component({
+        selector: 'app-sidebar',
+        template: `<div class="sidebar">
+  <app-sidebar-header></app-sidebar-header>
+  <app-sidebar-form></app-sidebar-form>
+  <app-sidebar-nav></app-sidebar-nav>
+  <app-sidebar-footer></app-sidebar-footer>
+  <!-- <app-sidebar-minimizer></app-sidebar-minimizer> -->
+</div>
+`
+    })
+], AppSidebarComponent);
 exports.AppSidebarComponent = AppSidebarComponent;
 
 
@@ -2034,34 +1970,46 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var core_1 = __webpack_require__(/*! @angular/core */ "../../../node_modules/@angular/core/fesm5/core.js");
-var FullLayoutComponent = /** @class */ (function () {
-    function FullLayoutComponent() {
-    }
-    FullLayoutComponent.prototype.afficher = function (message) {
+const core_1 = __webpack_require__(/*! @angular/core */ "../../../node_modules/@angular/core/fesm2015/core.js");
+let FullLayoutComponent = class FullLayoutComponent {
+    afficher(message) {
         document.getElementById('div').className = 'alert alert-success transition ';
         this.span = document.getElementById('span');
         this.span.innerText = message;
         this.span.className = 'color-bleu bold transition ';
-    };
-    FullLayoutComponent.prototype.afficherError = function (message) {
+    }
+    afficherError(message) {
         console.log(message);
         document.getElementById('div').className = 'alert alert-danger transition ';
         this.span = document.getElementById('span');
         this.span.innerText = message;
         this.span.className = 'bold transition ';
-    };
-    FullLayoutComponent.prototype.effacer = function () {
+    }
+    effacer() {
         document.getElementById('div').className += 'opacity';
-    };
-    FullLayoutComponent = __decorate([
-        core_1.Component({
-            selector: 'app-dashboard',
-            template: "<app-header></app-header>\n<div class=\"app-body\">\n    <app-sidebar></app-sidebar>\n    <!-- Main content -->\n    <main class=\"main\">\n        <!-- Breadcrumb \n        <ol class=\"breadcrumb\">\n            <app-breadcrumbs></app-breadcrumbs>\n        </ol>-->\n        <div id='div' style=\"position:absolute; left:50%;\"><span id='span'></span></div>\n        <div class=\"container-fluid\">\n            <router-outlet></router-outlet>\n        </div>\n    </main>\n</div>\n<app-footer></app-footer>"
-        })
-    ], FullLayoutComponent);
-    return FullLayoutComponent;
-}());
+    }
+};
+FullLayoutComponent = __decorate([
+    core_1.Component({
+        selector: 'app-dashboard',
+        template: `<app-header></app-header>
+<div class="app-body">
+    <app-sidebar></app-sidebar>
+    <!-- Main content -->
+    <main class="main">
+        <!-- Breadcrumb 
+        <ol class="breadcrumb">
+            <app-breadcrumbs></app-breadcrumbs>
+        </ol>-->
+        <div id='div' style="position:absolute; left:50%;"><span id='span'></span></div>
+        <div class="container-fluid">
+            <router-outlet></router-outlet>
+        </div>
+    </main>
+</div>
+<app-footer></app-footer>`
+    })
+], FullLayoutComponent);
 exports.FullLayoutComponent = FullLayoutComponent;
 
 
@@ -2086,31 +2034,29 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var core_1 = __webpack_require__(/*! @angular/core */ "../../../node_modules/@angular/core/fesm5/core.js");
+const core_1 = __webpack_require__(/*! @angular/core */ "../../../node_modules/@angular/core/fesm2015/core.js");
 /**
 * Allows the aside to be toggled via click.
 */
-var AsideToggleDirective = /** @class */ (function () {
-    function AsideToggleDirective() {
-    }
-    AsideToggleDirective.prototype.toggleOpen = function ($event) {
+let AsideToggleDirective = class AsideToggleDirective {
+    constructor() { }
+    toggleOpen($event) {
         $event.preventDefault();
         document.querySelector('body').classList.toggle('aside-menu-hidden');
-    };
-    __decorate([
-        core_1.HostListener('click', ['$event']),
-        __metadata("design:type", Function),
-        __metadata("design:paramtypes", [Object]),
-        __metadata("design:returntype", void 0)
-    ], AsideToggleDirective.prototype, "toggleOpen", null);
-    AsideToggleDirective = __decorate([
-        core_1.Directive({
-            selector: '[appAsideMenuToggler]',
-        }),
-        __metadata("design:paramtypes", [])
-    ], AsideToggleDirective);
-    return AsideToggleDirective;
-}());
+    }
+};
+__decorate([
+    core_1.HostListener('click', ['$event']),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", void 0)
+], AsideToggleDirective.prototype, "toggleOpen", null);
+AsideToggleDirective = __decorate([
+    core_1.Directive({
+        selector: '[appAsideMenuToggler]',
+    }),
+    __metadata("design:paramtypes", [])
+], AsideToggleDirective);
 exports.AsideToggleDirective = AsideToggleDirective;
 
 
@@ -2192,48 +2138,46 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var core_1 = __webpack_require__(/*! @angular/core */ "../../../node_modules/@angular/core/fesm5/core.js");
-var NavDropdownDirective = /** @class */ (function () {
-    function NavDropdownDirective(el) {
+const core_1 = __webpack_require__(/*! @angular/core */ "../../../node_modules/@angular/core/fesm2015/core.js");
+let NavDropdownDirective = class NavDropdownDirective {
+    constructor(el) {
         this.el = el;
     }
-    NavDropdownDirective.prototype.toggle = function () {
+    toggle() {
         this.el.nativeElement.classList.toggle('open');
-    };
-    NavDropdownDirective = __decorate([
-        core_1.Directive({
-            selector: '[appNavDropdown]'
-        }),
-        __metadata("design:paramtypes", [core_1.ElementRef])
-    ], NavDropdownDirective);
-    return NavDropdownDirective;
-}());
+    }
+};
+NavDropdownDirective = __decorate([
+    core_1.Directive({
+        selector: '[appNavDropdown]'
+    }),
+    __metadata("design:paramtypes", [core_1.ElementRef])
+], NavDropdownDirective);
 exports.NavDropdownDirective = NavDropdownDirective;
 /**
 * Allows the dropdown to be toggled via click.
 */
-var NavDropdownToggleDirective = /** @class */ (function () {
-    function NavDropdownToggleDirective(dropdown) {
+let NavDropdownToggleDirective = class NavDropdownToggleDirective {
+    constructor(dropdown) {
         this.dropdown = dropdown;
     }
-    NavDropdownToggleDirective.prototype.toggleOpen = function ($event) {
+    toggleOpen($event) {
         $event.preventDefault();
         this.dropdown.toggle();
-    };
-    __decorate([
-        core_1.HostListener('click', ['$event']),
-        __metadata("design:type", Function),
-        __metadata("design:paramtypes", [Object]),
-        __metadata("design:returntype", void 0)
-    ], NavDropdownToggleDirective.prototype, "toggleOpen", null);
-    NavDropdownToggleDirective = __decorate([
-        core_1.Directive({
-            selector: '[appNavDropdownToggle]'
-        }),
-        __metadata("design:paramtypes", [NavDropdownDirective])
-    ], NavDropdownToggleDirective);
-    return NavDropdownToggleDirective;
-}());
+    }
+};
+__decorate([
+    core_1.HostListener('click', ['$event']),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", void 0)
+], NavDropdownToggleDirective.prototype, "toggleOpen", null);
+NavDropdownToggleDirective = __decorate([
+    core_1.Directive({
+        selector: '[appNavDropdownToggle]'
+    }),
+    __metadata("design:paramtypes", [NavDropdownDirective])
+], NavDropdownToggleDirective);
 exports.NavDropdownToggleDirective = NavDropdownToggleDirective;
 exports.NAV_DROPDOWN_DIRECTIVES = [NavDropdownDirective, NavDropdownToggleDirective];
 
@@ -2277,31 +2221,30 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var core_1 = __webpack_require__(/*! @angular/core */ "../../../node_modules/@angular/core/fesm5/core.js");
-var ReplaceDirective = /** @class */ (function () {
-    function ReplaceDirective(el) {
+const core_1 = __webpack_require__(/*! @angular/core */ "../../../node_modules/@angular/core/fesm2015/core.js");
+let ReplaceDirective = class ReplaceDirective {
+    constructor(el) {
         this.el = el;
     }
     // wait for the component to render completely
-    ReplaceDirective.prototype.ngOnInit = function () {
-        var nativeElement = this.el.nativeElement;
-        var parentElement = nativeElement.parentElement;
+    ngOnInit() {
+        const nativeElement = this.el.nativeElement;
+        const parentElement = nativeElement.parentElement;
         // move all children out of the element
         while (nativeElement.firstChild) {
             parentElement.insertBefore(nativeElement.firstChild, nativeElement);
         }
         // remove the empty element(the host)
         parentElement.removeChild(nativeElement);
-    };
-    ReplaceDirective = __decorate([
-        core_1.Directive({
-            // tslint:disable-next-line:max-line-length
-            selector: '[appHostReplace], app-aside, app-breadcrumbs, app-footer, app-header, app-sidebar, app-sidebar-footer, app-sidebar-form, app-sidebar-header, app-sidebar-minimizer, app-sidebar-nav, app-sidebar-nav-dropdown, app-sidebar-nav-item, app-sidebar-nav-link, app-sidebar-nav-title'
-        }),
-        __metadata("design:paramtypes", [core_1.ElementRef])
-    ], ReplaceDirective);
-    return ReplaceDirective;
-}());
+    }
+};
+ReplaceDirective = __decorate([
+    core_1.Directive({
+        // tslint:disable-next-line:max-line-length
+        selector: '[appHostReplace], app-aside, app-breadcrumbs, app-footer, app-header, app-sidebar, app-sidebar-footer, app-sidebar-form, app-sidebar-header, app-sidebar-minimizer, app-sidebar-nav, app-sidebar-nav-dropdown, app-sidebar-nav-item, app-sidebar-nav-link, app-sidebar-nav-title'
+    }),
+    __metadata("design:paramtypes", [core_1.ElementRef])
+], ReplaceDirective);
 exports.ReplaceDirective = ReplaceDirective;
 
 
@@ -2344,115 +2287,106 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var core_1 = __webpack_require__(/*! @angular/core */ "../../../node_modules/@angular/core/fesm5/core.js");
+const core_1 = __webpack_require__(/*! @angular/core */ "../../../node_modules/@angular/core/fesm2015/core.js");
 /**
 * Allows the sidebar to be toggled via click.
 */
-var SidebarToggleDirective = /** @class */ (function () {
-    function SidebarToggleDirective() {
-    }
-    SidebarToggleDirective.prototype.toggleOpen = function ($event) {
+let SidebarToggleDirective = class SidebarToggleDirective {
+    constructor() { }
+    toggleOpen($event) {
         $event.preventDefault();
         document.querySelector('body').classList.toggle('sidebar-hidden');
-    };
-    __decorate([
-        core_1.HostListener('click', ['$event']),
-        __metadata("design:type", Function),
-        __metadata("design:paramtypes", [Object]),
-        __metadata("design:returntype", void 0)
-    ], SidebarToggleDirective.prototype, "toggleOpen", null);
-    SidebarToggleDirective = __decorate([
-        core_1.Directive({
-            selector: '[appSidebarToggler]'
-        }),
-        __metadata("design:paramtypes", [])
-    ], SidebarToggleDirective);
-    return SidebarToggleDirective;
-}());
-exports.SidebarToggleDirective = SidebarToggleDirective;
-var SidebarMinimizeDirective = /** @class */ (function () {
-    function SidebarMinimizeDirective() {
     }
-    SidebarMinimizeDirective.prototype.toggleOpen = function ($event) {
+};
+__decorate([
+    core_1.HostListener('click', ['$event']),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", void 0)
+], SidebarToggleDirective.prototype, "toggleOpen", null);
+SidebarToggleDirective = __decorate([
+    core_1.Directive({
+        selector: '[appSidebarToggler]'
+    }),
+    __metadata("design:paramtypes", [])
+], SidebarToggleDirective);
+exports.SidebarToggleDirective = SidebarToggleDirective;
+let SidebarMinimizeDirective = class SidebarMinimizeDirective {
+    constructor() { }
+    toggleOpen($event) {
         $event.preventDefault();
         document.querySelector('body').classList.toggle('sidebar-minimized');
-    };
-    __decorate([
-        core_1.HostListener('click', ['$event']),
-        __metadata("design:type", Function),
-        __metadata("design:paramtypes", [Object]),
-        __metadata("design:returntype", void 0)
-    ], SidebarMinimizeDirective.prototype, "toggleOpen", null);
-    SidebarMinimizeDirective = __decorate([
-        core_1.Directive({
-            selector: '[appSidebarMinimizer]'
-        }),
-        __metadata("design:paramtypes", [])
-    ], SidebarMinimizeDirective);
-    return SidebarMinimizeDirective;
-}());
-exports.SidebarMinimizeDirective = SidebarMinimizeDirective;
-var BrandMinimizeDirective = /** @class */ (function () {
-    function BrandMinimizeDirective() {
     }
-    BrandMinimizeDirective.prototype.toggleOpen = function ($event) {
+};
+__decorate([
+    core_1.HostListener('click', ['$event']),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", void 0)
+], SidebarMinimizeDirective.prototype, "toggleOpen", null);
+SidebarMinimizeDirective = __decorate([
+    core_1.Directive({
+        selector: '[appSidebarMinimizer]'
+    }),
+    __metadata("design:paramtypes", [])
+], SidebarMinimizeDirective);
+exports.SidebarMinimizeDirective = SidebarMinimizeDirective;
+let BrandMinimizeDirective = class BrandMinimizeDirective {
+    constructor() { }
+    toggleOpen($event) {
         $event.preventDefault();
         document.querySelector('body').classList.toggle('brand-minimized');
-    };
-    __decorate([
-        core_1.HostListener('click', ['$event']),
-        __metadata("design:type", Function),
-        __metadata("design:paramtypes", [Object]),
-        __metadata("design:returntype", void 0)
-    ], BrandMinimizeDirective.prototype, "toggleOpen", null);
-    BrandMinimizeDirective = __decorate([
-        core_1.Directive({
-            selector: '[appBrandMinimizer]'
-        }),
-        __metadata("design:paramtypes", [])
-    ], BrandMinimizeDirective);
-    return BrandMinimizeDirective;
-}());
-exports.BrandMinimizeDirective = BrandMinimizeDirective;
-var MobileSidebarToggleDirective = /** @class */ (function () {
-    function MobileSidebarToggleDirective() {
     }
+};
+__decorate([
+    core_1.HostListener('click', ['$event']),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", void 0)
+], BrandMinimizeDirective.prototype, "toggleOpen", null);
+BrandMinimizeDirective = __decorate([
+    core_1.Directive({
+        selector: '[appBrandMinimizer]'
+    }),
+    __metadata("design:paramtypes", [])
+], BrandMinimizeDirective);
+exports.BrandMinimizeDirective = BrandMinimizeDirective;
+let MobileSidebarToggleDirective = class MobileSidebarToggleDirective {
+    constructor() { }
     // Check if element has class
-    MobileSidebarToggleDirective.prototype.hasClass = function (target, elementClassName) {
+    hasClass(target, elementClassName) {
         return new RegExp('(\\s|^)' + elementClassName + '(\\s|$)').test(target.className);
-    };
-    MobileSidebarToggleDirective.prototype.toggleOpen = function ($event) {
+    }
+    toggleOpen($event) {
         $event.preventDefault();
         document.querySelector('body').classList.toggle('sidebar-mobile-show');
-    };
-    __decorate([
-        core_1.HostListener('click', ['$event']),
-        __metadata("design:type", Function),
-        __metadata("design:paramtypes", [Object]),
-        __metadata("design:returntype", void 0)
-    ], MobileSidebarToggleDirective.prototype, "toggleOpen", null);
-    MobileSidebarToggleDirective = __decorate([
-        core_1.Directive({
-            selector: '[appMobileSidebarToggler]'
-        }),
-        __metadata("design:paramtypes", [])
-    ], MobileSidebarToggleDirective);
-    return MobileSidebarToggleDirective;
-}());
+    }
+};
+__decorate([
+    core_1.HostListener('click', ['$event']),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", void 0)
+], MobileSidebarToggleDirective.prototype, "toggleOpen", null);
+MobileSidebarToggleDirective = __decorate([
+    core_1.Directive({
+        selector: '[appMobileSidebarToggler]'
+    }),
+    __metadata("design:paramtypes", [])
+], MobileSidebarToggleDirective);
 exports.MobileSidebarToggleDirective = MobileSidebarToggleDirective;
 /**
 * Allows the off-canvas sidebar to be closed via click.
 */
-var SidebarOffCanvasCloseDirective = /** @class */ (function () {
-    function SidebarOffCanvasCloseDirective() {
-    }
+let SidebarOffCanvasCloseDirective = class SidebarOffCanvasCloseDirective {
+    constructor() { }
     // Check if element has class
-    SidebarOffCanvasCloseDirective.prototype.hasClass = function (target, elementClassName) {
+    hasClass(target, elementClassName) {
         return new RegExp('(\\s|^)' + elementClassName + '(\\s|$)').test(target.className);
-    };
+    }
     // Toggle element class
-    SidebarOffCanvasCloseDirective.prototype.toggleClass = function (elem, elementClassName) {
-        var newClass = ' ' + elem.className.replace(/[\t\r\n]/g, ' ') + ' ';
+    toggleClass(elem, elementClassName) {
+        let newClass = ' ' + elem.className.replace(/[\t\r\n]/g, ' ') + ' ';
         if (this.hasClass(elem, elementClassName)) {
             while (newClass.indexOf(' ' + elementClassName + ' ') >= 0) {
                 newClass = newClass.replace(' ' + elementClassName + ' ', ' ');
@@ -2462,27 +2396,26 @@ var SidebarOffCanvasCloseDirective = /** @class */ (function () {
         else {
             elem.className += ' ' + elementClassName;
         }
-    };
-    SidebarOffCanvasCloseDirective.prototype.toggleOpen = function ($event) {
+    }
+    toggleOpen($event) {
         $event.preventDefault();
         if (this.hasClass(document.querySelector('body'), 'sidebar-off-canvas')) {
             this.toggleClass(document.querySelector('body'), 'sidebar-opened');
         }
-    };
-    __decorate([
-        core_1.HostListener('click', ['$event']),
-        __metadata("design:type", Function),
-        __metadata("design:paramtypes", [Object]),
-        __metadata("design:returntype", void 0)
-    ], SidebarOffCanvasCloseDirective.prototype, "toggleOpen", null);
-    SidebarOffCanvasCloseDirective = __decorate([
-        core_1.Directive({
-            selector: '[appSidebarClose]'
-        }),
-        __metadata("design:paramtypes", [])
-    ], SidebarOffCanvasCloseDirective);
-    return SidebarOffCanvasCloseDirective;
-}());
+    }
+};
+__decorate([
+    core_1.HostListener('click', ['$event']),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", void 0)
+], SidebarOffCanvasCloseDirective.prototype, "toggleOpen", null);
+SidebarOffCanvasCloseDirective = __decorate([
+    core_1.Directive({
+        selector: '[appSidebarClose]'
+    }),
+    __metadata("design:paramtypes", [])
+], SidebarOffCanvasCloseDirective);
 exports.SidebarOffCanvasCloseDirective = SidebarOffCanvasCloseDirective;
 exports.SIDEBAR_TOGGLE_DIRECTIVES = [
     SidebarToggleDirective,
@@ -2532,16 +2465,16 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var core_1 = __webpack_require__(/*! @angular/core */ "../../../node_modules/@angular/core/fesm5/core.js");
-var reservation_entity_1 = __webpack_require__(/*! ../../../shared/reservation/reservation.entity */ "./app/shared/reservation/reservation.entity.ts");
-var articleDispo_entity_1 = __webpack_require__(/*! ../../../shared/reservation/articleDispo.entity */ "./app/shared/reservation/articleDispo.entity.ts");
-var ArticleComponent = /** @class */ (function () {
-    function ArticleComponent() {
+const core_1 = __webpack_require__(/*! @angular/core */ "../../../node_modules/@angular/core/fesm2015/core.js");
+const reservation_entity_1 = __webpack_require__(/*! ../../../shared/reservation/reservation.entity */ "./app/shared/reservation/reservation.entity.ts");
+const articleDispo_entity_1 = __webpack_require__(/*! ../../../shared/reservation/articleDispo.entity */ "./app/shared/reservation/articleDispo.entity.ts");
+let ArticleComponent = class ArticleComponent {
+    constructor() {
         this.reservationUpdated = new core_1.EventEmitter();
         this.etatQ = 0;
         this.article = new articleDispo_entity_1.ArticleDispo();
     }
-    ArticleComponent.prototype.ngOnInit = function () {
+    ngOnInit() {
         if (this.reservationAdd.articleResaDto[this.indexAjout].articleId) {
             this.article.description = this.reservationAdd.articleResaDto[this.indexAjout].nom;
             this.article.type = this.reservationAdd.articleResaDto[this.indexAjout].type;
@@ -2550,11 +2483,11 @@ var ArticleComponent = /** @class */ (function () {
             this.changementArticle();
             this.getQuantiteMax();
         }
-    };
+    }
     // Changement Type d'article -> filtrage et création liste des articles dispo 
-    ArticleComponent.prototype.changementArticle = function () {
-        var typeChoisit = this.article.type;
-        var listeArticle = [];
+    changementArticle() {
+        const typeChoisit = this.article.type;
+        const listeArticle = [];
         this.listeArticlesDispo.forEach(function (articleDispo) {
             if (articleDispo.type == typeChoisit) {
                 listeArticle.push(articleDispo);
@@ -2567,9 +2500,9 @@ var ArticleComponent = /** @class */ (function () {
         if (this.quantmaxchargee == true) {
             this.quantmaxchargee = false;
         }
-    };
-    ArticleComponent.prototype.getQuantiteMax = function () {
-        var articlechoisit = this.article.id;
+    }
+    getQuantiteMax() {
+        const articlechoisit = this.article.id;
         var quantMax;
         this.reservationAdd.articleResaDto[this.indexAjout].articleId = articlechoisit;
         this.listeArticleSelect.forEach(function (articleDispo) {
@@ -2582,8 +2515,8 @@ var ArticleComponent = /** @class */ (function () {
             this.quantiteMax = "0";
         }
         this.quantmaxchargee = true;
-    };
-    ArticleComponent.prototype.saveEtat = function () {
+    }
+    saveEtat() {
         this.getQuantiteMax();
         if (!this.article.quantiteMax) {
             this.etatQ = 0;
@@ -2591,10 +2524,9 @@ var ArticleComponent = /** @class */ (function () {
         else {
             this.etatQ = this.article.quantiteMax;
         }
-        console.log("saveEtat", this.etatQ);
-    };
-    ArticleComponent.prototype.saveQuantite = function () {
-        var quantite = this.article.quantiteMax;
+    }
+    saveQuantite() {
+        const quantite = this.article.quantiteMax;
         if (quantite > parseInt(this.quantiteMax + this.etatQ)) {
             this.article.quantiteMax = parseInt(this.quantiteMax) + this.etatQ;
             this.reservationAdd.articleResaDto[this.indexAjout].quantite = parseInt(this.quantiteMax) + this.etatQ;
@@ -2608,14 +2540,12 @@ var ArticleComponent = /** @class */ (function () {
         }
         this.listeArticlesDispo.forEach(function (articleDispo) {
             if (this.reservationAdd.articleResaDto[this.indexAjout].articleId === articleDispo.id) {
-                console.log("etat", this.etatQ);
-                console.log("q", this.reservationAdd.articleResaDto[this.indexAjout].quantite);
                 articleDispo.quantiteMax = articleDispo.quantiteMax - this.reservationAdd.articleResaDto[this.indexAjout].quantite + this.etatQ;
                 this.quantiteMax = articleDispo.quantiteMax;
             }
         }.bind(this));
-    };
-    ArticleComponent.prototype.supprimerArticle = function () {
+    }
+    supprimerArticle() {
         this.listeArticlesDispo.forEach(function (articleDispo) {
             if (this.reservationAdd.articleResaDto[this.indexAjout].quantite && this.reservationAdd.articleResaDto[this.indexAjout].articleId === articleDispo.id) {
                 articleDispo.quantiteMax = articleDispo.quantiteMax + this.reservationAdd.articleResaDto[this.indexAjout].quantite;
@@ -2624,36 +2554,60 @@ var ArticleComponent = /** @class */ (function () {
         }.bind(this));
         this.reservationAdd.articleResaDto.splice(this.indexAjout, 1);
         this.reservationUpdated.emit(this.reservationAdd);
-    };
-    __decorate([
-        core_1.Input(),
-        __metadata("design:type", Array)
-    ], ArticleComponent.prototype, "listeArticlesDispo", void 0);
-    __decorate([
-        core_1.Input(),
-        __metadata("design:type", Array)
-    ], ArticleComponent.prototype, "typeDispo", void 0);
-    __decorate([
-        core_1.Input(),
-        __metadata("design:type", reservation_entity_1.Reservation)
-    ], ArticleComponent.prototype, "reservationAdd", void 0);
-    __decorate([
-        core_1.Input(),
-        __metadata("design:type", Number)
-    ], ArticleComponent.prototype, "indexAjout", void 0);
-    __decorate([
-        core_1.Output(),
-        __metadata("design:type", Object)
-    ], ArticleComponent.prototype, "reservationUpdated", void 0);
-    ArticleComponent = __decorate([
-        core_1.Component({
-            selector: 'ref-article',
-            template: "<div class=\"row\" style=\"align-items : baseline\">\n    <div class=\"column\">\n        <mat-form-field>\n            <mat-select placeholder=\"Type de mat&eacute;riel\" [(value)]=\"article.type\" (selectionChange)=\"changementArticle()\">\n            <mat-option *ngFor=\"let type of typeDispo\" [value]=\"type\">\n                {{type}}\n            </mat-option>\n            </mat-select>\n        </mat-form-field>\n    </div>\n    <div class=\"column\" *ngIf=\"typeArticleChargee\">\n        <mat-form-field>\n            <mat-select placeholder=\"Mat&eacute;riel\" [(value)]=\"article.id\" (selectionChange)=\"getQuantiteMax()\">\n            <mat-option *ngFor=\"let articleid of listeArticleSelect\" [value]=\"articleid.id\" >\n                  {{articleid.description}}\n            </mat-option>\n            </mat-select>\n        </mat-form-field>\n    </div>\n    <div class=\"column\" *ngIf=\"quantmaxchargee\">\n        <mat-form-field>\n            <input matInput placeholder=\"Quantit&eacute; (Reste : {{quantiteMax}})\" type=\"number\" min =\"0\" max=\"quantiteMax\" name=\"quantite\" [(ngModel)] = \"article.quantiteMax\" (click)=\"saveEtat()\" (focusout)=\"saveQuantite()\">\n        </mat-form-field>\n    </div>\n    <i (click)=\"supprimerArticle()\" class=\"fas fa-trash\" style=\"margin-left:15px; float:right\"></i>\n</div>",
-            providers: [],
-        })
-    ], ArticleComponent);
-    return ArticleComponent;
-}());
+    }
+};
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", Array)
+], ArticleComponent.prototype, "listeArticlesDispo", void 0);
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", Array)
+], ArticleComponent.prototype, "typeDispo", void 0);
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", reservation_entity_1.Reservation)
+], ArticleComponent.prototype, "reservationAdd", void 0);
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", Number)
+], ArticleComponent.prototype, "indexAjout", void 0);
+__decorate([
+    core_1.Output(),
+    __metadata("design:type", Object)
+], ArticleComponent.prototype, "reservationUpdated", void 0);
+ArticleComponent = __decorate([
+    core_1.Component({
+        selector: 'ref-article',
+        template: `<div class="row" style="align-items : baseline">
+    <div class="column">
+        <mat-form-field>
+            <mat-select placeholder="Type de mat&eacute;riel" [(value)]="article.type" (selectionChange)="changementArticle()">
+            <mat-option *ngFor="let type of typeDispo" [value]="type">
+                {{type}}
+            </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div class="column" *ngIf="typeArticleChargee">
+        <mat-form-field>
+            <mat-select placeholder="Mat&eacute;riel" [(value)]="article.id" (selectionChange)="getQuantiteMax()">
+            <mat-option *ngFor="let articleid of listeArticleSelect" [value]="articleid.id" >
+                  {{articleid.description}}
+            </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div class="column" *ngIf="quantmaxchargee">
+        <mat-form-field>
+            <input matInput placeholder="Quantit&eacute; (Reste : {{quantiteMax}})" type="number" min ="0" max="quantiteMax" name="quantite" [(ngModel)] = "article.quantiteMax" (click)="saveEtat()" (focusout)="saveQuantite()">
+        </mat-form-field>
+    </div>
+    <i (click)="supprimerArticle()" class="fas fa-trash" style="margin-left:15px; float:right"></i>
+</div>`,
+        providers: [],
+    })
+], ArticleComponent);
 exports.ArticleComponent = ArticleComponent;
 
 
@@ -2681,18 +2635,21 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var core_1 = __webpack_require__(/*! @angular/core */ "../../../node_modules/@angular/core/fesm5/core.js");
-var material_1 = __webpack_require__(/*! @angular/material */ "../../../node_modules/@angular/material/esm5/material.es5.js");
-var forms_1 = __webpack_require__(/*! @angular/forms */ "../../../node_modules/@angular/forms/fesm5/forms.js");
-var reservation_entity_1 = __webpack_require__(/*! ../../shared/reservation/reservation.entity */ "./app/shared/reservation/reservation.entity.ts");
-var reservation_service_1 = __webpack_require__(/*! ../../reservation/reservation.service */ "./app/reservation/reservation.service.ts");
-var common_1 = __webpack_require__(/*! @angular/common */ "../../../node_modules/@angular/common/fesm5/common.js");
-var reservationArticle_entity_1 = __webpack_require__(/*! ../../shared/reservation/reservationArticle.entity */ "./app/shared/reservation/reservationArticle.entity.ts");
-var ng_bootstrap_1 = __webpack_require__(/*! @ng-bootstrap/ng-bootstrap */ "../../../node_modules/@ng-bootstrap/ng-bootstrap/fesm5/ng-bootstrap.js");
-var token_storage_service_1 = __webpack_require__(/*! ../../auth/token-storage.service */ "./app/auth/token-storage.service.ts");
-var moment = __webpack_require__(/*! moment */ "../../../node_modules/moment/moment.js");
-var ModalAjoutComponent = /** @class */ (function () {
-    function ModalAjoutComponent(dialogRef, reservationService, data, adapter, alertConfig, datepipe, token) {
+const core_1 = __webpack_require__(/*! @angular/core */ "../../../node_modules/@angular/core/fesm2015/core.js");
+const material_1 = __webpack_require__(/*! @angular/material */ "../../../node_modules/@angular/material/esm2015/material.js");
+const forms_1 = __webpack_require__(/*! @angular/forms */ "../../../node_modules/@angular/forms/fesm2015/forms.js");
+const reservation_entity_1 = __webpack_require__(/*! ../../shared/reservation/reservation.entity */ "./app/shared/reservation/reservation.entity.ts");
+const reservation_service_1 = __webpack_require__(/*! ../../reservation/reservation.service */ "./app/reservation/reservation.service.ts");
+const common_1 = __webpack_require__(/*! @angular/common */ "../../../node_modules/@angular/common/fesm2015/common.js");
+const reservationArticle_entity_1 = __webpack_require__(/*! src/main/webapp/app/shared/reservation/reservationArticle.entity */ "./app/shared/reservation/reservationArticle.entity.ts");
+const ng_bootstrap_1 = __webpack_require__(/*! @ng-bootstrap/ng-bootstrap */ "../../../node_modules/@ng-bootstrap/ng-bootstrap/fesm2015/ng-bootstrap.js");
+const token_storage_service_1 = __webpack_require__(/*! src/main/webapp/app/auth/token-storage.service */ "./app/auth/token-storage.service.ts");
+const modalListeErreur_component_1 = __webpack_require__(/*! ./modal/modalListeErreur.component */ "./app/reservation/modal/modal/modalListeErreur.component.ts");
+const material_2 = __webpack_require__(/*! @angular/material */ "../../../node_modules/@angular/material/esm2015/material.js");
+const moment = __webpack_require__(/*! moment */ "../../../node_modules/moment/moment.js");
+let ModalAjoutComponent = class ModalAjoutComponent {
+    constructor(dialog, dialogRef, reservationService, data, adapter, alertConfig, datepipe, token) {
+        this.dialog = dialog;
         this.dialogRef = dialogRef;
         this.reservationService = reservationService;
         this.data = data;
@@ -2712,9 +2669,10 @@ var ModalAjoutComponent = /** @class */ (function () {
         alertConfig.type = 'danger';
         alertConfig.dismissible = false;
     }
-    ModalAjoutComponent.prototype.ngOnInit = function () {
+    ngOnInit() {
         //changement langue pour affichage chiffre datepicker
         this.adapter.setLocale('fr');
+        this.dateLimiteAsso = moment().add(3, 'months');
         if (this.data.reservation) {
             this.reservationAdd = this.data.reservation;
             this.dateEmprunt = moment(this.reservationAdd.dateEmprunt).format('DD/MM/YYYY');
@@ -2738,52 +2696,64 @@ var ModalAjoutComponent = /** @class */ (function () {
             this.titre = "Ajout d'une réservation";
             this.labelBouton = "Ajouter";
             this.modif = false;
+            this.reservationAdd.asso = false;
         }
         this.user = this.token.getUsername();
-    };
+    }
     // Changement de date, recherche des articles dispos
-    ModalAjoutComponent.prototype.dateChanged = function () {
-        var _this = this;
+    dateChanged() {
         if (this.reservationAdd.dateEmprunt && this.reservationAdd.dateRestitution) {
             if (this.listeArticlesDispo != null) {
-                console.log("vidage de la liste des articles");
                 this.reservationAdd.articleResaDto.splice(0, this.reservationAdd.articleResaDto.length);
                 this.ajoutArticle();
             }
-            var dateDFormat = (this.datepipe.transform(this.reservationAdd.dateEmprunt, 'dd/MM/yyyy'));
-            var dateFFormat = (this.datepipe.transform(this.reservationAdd.dateRestitution, 'dd/MM/yyyy'));
+            const dateDFormat = (this.datepipe.transform(this.reservationAdd.dateEmprunt, 'dd/MM/yyyy'));
+            const dateFFormat = (this.datepipe.transform(this.reservationAdd.dateRestitution, 'dd/MM/yyyy'));
             if (this.reservationAdd.dateEmprunt > this.reservationAdd.dateRestitution) {
                 this.dateFailed = true;
                 this.message = "Veuillez choisir une date de retour supérieure à la date d'emprunt";
             }
             else {
                 this.dateFailed = false;
-                this.reservationService.getArticlesDispo(dateDFormat, dateFFormat).subscribe(function (data) {
-                    var typeDispoInter = [];
-                    data.forEach(function (articleDispo) {
-                        if (!typeDispoInter.includes(articleDispo.type)) {
-                            typeDispoInter.push(articleDispo.type);
-                        }
+                if (moment(this.reservationAdd.dateEmprunt) > this.dateLimiteAsso && this.reservationAdd.asso) {
+                    this.reservationService.getArticlesDispo(dateDFormat, dateFFormat, true).subscribe(data => {
+                        const typeDispoInter = [];
+                        data.forEach(function (articleDispo) {
+                            if (!typeDispoInter.includes(articleDispo.type)) {
+                                typeDispoInter.push(articleDispo.type);
+                            }
+                        });
+                        this.typeDispo = typeDispoInter;
+                        this.listeArticlesDispo = data;
                     });
-                    _this.typeDispo = typeDispoInter;
-                    _this.listeArticlesDispo = data;
-                });
+                }
+                else {
+                    //cas normal
+                    this.reservationService.getArticlesDispo(dateDFormat, dateFFormat, false).subscribe(data => {
+                        const typeDispoInter = [];
+                        data.forEach(function (articleDispo) {
+                            if (!typeDispoInter.includes(articleDispo.type)) {
+                                typeDispoInter.push(articleDispo.type);
+                            }
+                        });
+                        this.typeDispo = typeDispoInter;
+                        this.listeArticlesDispo = data;
+                    });
+                }
             }
         }
-    };
-    ModalAjoutComponent.prototype.ajoutArticle = function () {
-        var newArticle = new reservationArticle_entity_1.ReservationArticle();
+    }
+    ajoutArticle() {
+        let newArticle = new reservationArticle_entity_1.ReservationArticle();
         newArticle.newArticle = true;
         this.reservationAdd.articleResaDto.push(Object.assign({}, newArticle));
-    };
-    ModalAjoutComponent.prototype.getReservationUpdate = function ($event) {
+    }
+    getReservationUpdate($event) {
         this.reservationAdd = $event;
-    };
-    ModalAjoutComponent.prototype.save = function () {
-        var _this = this;
+    }
+    save() {
         if (!this.dateFailed) {
-            console.log("Reservation", this.reservationAdd);
-            for (var i = 0; i < this.reservationAdd.articleResaDto.length; i++) {
+            for (let i = 0; i < this.reservationAdd.articleResaDto.length; i++) {
                 if (!this.reservationAdd.articleResaDto[i].quantite || this.reservationAdd.articleResaDto[i].quantite === 0) {
                     this.reservationAdd.articleResaDto.splice(i, 1);
                 }
@@ -2795,62 +2765,378 @@ var ModalAjoutComponent = /** @class */ (function () {
             else {
                 this.saveFailed = false;
                 this.reservationAdd.creerPar = this.user;
-                this.reservationService.validerArticles(this.reservationAdd).subscribe(function (data) {
-                    _this.valid = data;
-                    if (_this.valid) {
-                        _this.reservationService.saveReservation(_this.reservationAdd).subscribe(function (data) {
-                            _this.dialogRef.close();
-                            window.location.reload();
-                        }, function (error) {
-                            console.log(error);
-                            _this.message = "Erreur d'enregistrement de la réservation";
-                            _this.saveFailed = true;
+                this.reservationAdd.avalider = true;
+                this.reservationService.validerArticles(this.reservationAdd, false).subscribe(data => {
+                    this.valid = data;
+                    if (this.valid) {
+                        this.reservationService.saveReservation(this.reservationAdd).subscribe(data => {
+                            this.dialogRef.close();
+                        }, error => {
+                            this.message = "Erreur d'enregistrement de la réservation";
+                            this.saveFailed = true;
+                        });
+                    }
+                    else if (!this.valid && this.reservationAdd.asso) {
+                        this.reservationService.validerArticles(this.reservationAdd, true).subscribe(data => {
+                            this.valid = data;
+                            if (this.valid) {
+                                this.reservationService.validerArticlesAsso3Mois(this.reservationAdd).subscribe(data => {
+                                    this.listResaModifiees = data;
+                                    for (let j = 0; j < this.listResaModifiees.length; j++) {
+                                        this.reservationService.saveReservation(this.listResaModifiees[j].reservationDto).subscribe(data => {
+                                            if (j === this.listResaModifiees.length - 1) {
+                                                this.reservationService.saveReservation(this.reservationAdd).subscribe(data => {
+                                                    this.dialogRef.close();
+                                                    const dialogRef = this.dialog.open(modalListeErreur_component_1.ModalListErreurComponent, {
+                                                        width: '650px',
+                                                        data: { liste: this.listResaModifiees, reservation: this.reservationAdd }
+                                                    });
+                                                }, error => {
+                                                    this.message = "Erreur de modification des réservations";
+                                                    this.saveFailed = true;
+                                                });
+                                            }
+                                        }, error => {
+                                            this.message = "Erreur de modification des réservations";
+                                            this.saveFailed = true;
+                                        });
+                                    }
+                                });
+                            }
+                        }, error => {
+                            this.valid = false;
+                            this.message = "Erreur de validation de la réservation";
                         });
                     }
                     else {
-                        _this.valid = false;
-                        _this.message = "Les quantités désirées ne sont plus disponibles, veuillez recharger la page";
+                        this.valid = false;
+                        this.message = "Les quantités désirées ne sont plus disponibles, veuillez recharger la page";
                     }
-                }, function (error) {
+                }, error => {
                     console.log(error);
-                    _this.message = "Erreur de validation de la réservation";
-                    _this.valid = false;
+                    this.message = "Erreur de validation de la réservationEEEEEEE";
+                    this.valid = false;
                 });
             }
         }
         else {
             console.log("Date incorrecte");
         }
-    };
-    ModalAjoutComponent.prototype.supprimerArticle = function () {
+    }
+    supprimerArticle() {
         this.reservationAdd.articleResaDto.splice(this.indexModif, 1);
-    };
-    ModalAjoutComponent.prototype.supprimerReservation = function () {
-        var _this = this;
-        this.reservationService.supprimerReservation(this.reservationAdd).subscribe(function (data) {
-            _this.dialogRef.close();
-            window.location.reload();
-        }, function (error) {
+    }
+    supprimerReservation() {
+        this.reservationService.supprimerReservation(this.reservationAdd).subscribe(data => {
+            this.dialogRef.close();
+        }, error => {
             console.log(error);
-            _this.message = "Erreur de suppression de la réservation";
+            this.message = "Erreur de suppression de la réservation";
         });
-    };
-    ModalAjoutComponent = __decorate([
-        core_1.Component({
-            selector: 'ref-modal-ajout',
-            template: "<div class=\"row\" style=\"justify-content: space-between\">\n<h2 mat-dialog-title class=\"color-bleu row\">{{titre}} </h2>\n<mat-checkbox color=\"warn\" style=\"float:right;\" [(ngModel)] = \"reservationAdd.asso\">Association</mat-checkbox>\n</div>\n\n<ngb-alert *ngIf=\"!valid || saveFailed || dateFailed\">\n        {{message}}\n  </ngb-alert>\n<form (ngSubmit)=\"save()\" ngNativeValidate>\n    <mat-dialog-content>\n        <div class=\"row\">\n            <div class=\"form-group\" *ngIf=\"reservationAdd.asso\"> \n                <mat-form-field>\n                    <input matInput placeholder=\"Raison sociale\" id=\"rs\" name=\"rs\" [(ngModel)] = \"reservationAdd.nom\">\n                </mat-form-field>\n            </div>\n            <div class=\"form-group row\" *ngIf=\"!reservationAdd.asso\">\n                <div class=\"column\">\n                    <mat-form-field>\n                        <input matInput placeholder=\"Nom\" id=\"nom\" required name=\"nom\" [(ngModel)] = \"reservationAdd.nom\">\n                    </mat-form-field>\n                </div>\n                <div class=\"column\">\n                    <mat-form-field>\n                        <input matInput placeholder=\"Pr&eacute;nom\" id=\"prenom\" name=\"prenom\" [(ngModel)] = \"reservationAdd.prenom\">\n                    </mat-form-field>\n                </div>\n            </div>\n        </div>\n        <div class=\"row\" *ngIf=\"!modif\">\n            <mat-form-field>\n                <input matInput [matDatepicker]=\"dateDebut\" required placeholder=\"Date de d&eacute;but\" name=\"dateEmprunt\" [(ngModel)] = \"reservationAdd.dateEmprunt\" (dateChange)=\"dateChanged()\">\n                <mat-datepicker-toggle matSuffix [for]=\"dateDebut\"></mat-datepicker-toggle>\n                <mat-datepicker #dateDebut></mat-datepicker>\n            </mat-form-field>\n            <mat-form-field>\n                <input matInput [matDatepicker]=\"dateFin\" required placeholder=\"Date de fin\"  name=\"dateRestitution\" [(ngModel)] = \"reservationAdd.dateRestitution\" (dateChange)=\"dateChanged()\">\n                <mat-datepicker-toggle matSuffix [for]=\"dateFin\"></mat-datepicker-toggle>\n                <mat-datepicker #dateFin [startAt]=\"reservationAdd.dateEmprunt\"></mat-datepicker>\n            </mat-form-field>\n        </div>\n        <div class=\"row\" *ngIf=\"modif\">\n            <div class=\"column\">\n                <mat-form-field>\n                    <input matInput readonly placeholder=\"Date de d&eacute;but\" name=\"dateEmprunt\" [(ngModel)] = \"dateEmprunt\">\n                </mat-form-field>\n            </div>\n            <div class=\"column\">\n                <mat-form-field>\n                    <input matInput readonly placeholder=\"Date de fin\" name=\"dateRestitution\" [(ngModel)] = \"dateRestitution\">\n                </mat-form-field>\n            </div>\n        </div>\n        <div *ngIf=\"(typeDispo && typeDispo.length != 0)\">\n            <hr/>\n            <h5>S&eacute;lection du mat&eacute;riel</h5>\n            <div *ngFor=\"let articlechoisi of reservationAdd.articleResaDto; index as i\">\n                <ref-article  \n                    [listeArticlesDispo]=\"listeArticlesDispo\"\n                    [typeDispo]=\"typeDispo\" [reservationAdd]=\"reservationAdd\" [indexAjout]=\"i\"\n                    (reservationUpdated) = \"getReservationUpdate($event)\">  \n                </ref-article>\n            </div>  \n            <div class = \"row\" style=\"align-items:flex-start; justify-content:space-between\" >\n                <div class=\"column\">\n                    <button type=\"button\" class=\"btn btn-success\" (click)=\"ajoutArticle()\">Ajout article</button>\n                </div>\n            </div>\n        </div>\n        <hr/>\n        <div style=\"width:100%\">\n            <h5>Commentaires</h5>\n            <mat-form-field style=\"width:100%\">\n                <textarea matInput style=\"min-width: 100%\" [(ngModel)] = \"reservationAdd.commentaire\" [ngModelOptions]=\"{standalone: true}\"></textarea>\n            </mat-form-field>\n        </div>\n    </mat-dialog-content>\n    <mat-dialog-actions>\n        <button type=\"button\" class=\"btn btn-link\" (click)=\"dialogRef.close()\">Annuler</button>\n        <button type=\"button\" *ngIf=\"modif\" class=\"btn btn-success\" (click)=\"supprimerReservation()\">Supprimer</button>\n        <button type=\"submit\" class=\"btn btn-success\">{{labelBouton}}</button>\n    </mat-dialog-actions>\n</form>",
-            providers: [
-                { provide: material_1.MAT_DATE_LOCALE, useValue: 'fr-FR' },
-                ng_bootstrap_1.NgbAlertConfig
-            ],
-        }),
-        __param(2, core_1.Inject(material_1.MAT_DIALOG_DATA)),
-        __metadata("design:paramtypes", [material_1.MatDialogRef, reservation_service_1.ReservationService, Object, material_1.DateAdapter,
-            ng_bootstrap_1.NgbAlertConfig, common_1.DatePipe, token_storage_service_1.TokenStorageService])
-    ], ModalAjoutComponent);
-    return ModalAjoutComponent;
-}());
+    }
+};
+ModalAjoutComponent = __decorate([
+    core_1.Component({
+        selector: 'ref-modal-ajout',
+        template: `<div class="row" style="justify-content: space-between">
+<h2 mat-dialog-title class="color-bleu row">{{titre}} </h2>
+<mat-checkbox color="warn" style="float:right;" [(ngModel)] = "reservationAdd.asso">Association</mat-checkbox>
+</div>
+
+<ngb-alert *ngIf="!valid || saveFailed || dateFailed">
+        {{message}}
+  </ngb-alert>
+<form (ngSubmit)="save()" ngNativeValidate>
+    <mat-dialog-content>
+        <div class="row">
+            <div class="form-group" *ngIf="reservationAdd.asso"> 
+                <mat-form-field>
+                    <input matInput placeholder="Raison sociale" id="rs" name="rs" [(ngModel)] = "reservationAdd.nom">
+                </mat-form-field>
+            </div>
+            <div class="form-group row" *ngIf="!reservationAdd.asso">
+                <div class="column">
+                    <mat-form-field>
+                        <input matInput placeholder="Nom" id="nom" required name="nom" [(ngModel)] = "reservationAdd.nom">
+                    </mat-form-field>
+                </div>
+                <div class="column">
+                    <mat-form-field>
+                        <input matInput placeholder="Pr&eacute;nom" id="prenom" name="prenom" [(ngModel)] = "reservationAdd.prenom">
+                    </mat-form-field>
+                </div>
+            </div>
+        </div>
+        <div class="row" *ngIf="!modif">
+            <mat-form-field>
+                <input matInput [matDatepicker]="dateDebut" required placeholder="Date de d&eacute;but" name="dateEmprunt" [(ngModel)] = "reservationAdd.dateEmprunt" (dateChange)="dateChanged()">
+                <mat-datepicker-toggle matSuffix [for]="dateDebut"></mat-datepicker-toggle>
+                <mat-datepicker #dateDebut></mat-datepicker>
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput [matDatepicker]="dateFin" required placeholder="Date de fin"  name="dateRestitution" [(ngModel)] = "reservationAdd.dateRestitution" (dateChange)="dateChanged()">
+                <mat-datepicker-toggle matSuffix [for]="dateFin"></mat-datepicker-toggle>
+                <mat-datepicker #dateFin [startAt]="reservationAdd.dateEmprunt"></mat-datepicker>
+            </mat-form-field>
+        </div>
+        <div class="row" *ngIf="modif">
+            <div class="column">
+                <mat-form-field>
+                    <input matInput readonly placeholder="Date de d&eacute;but" name="dateEmprunt" [(ngModel)] = "dateEmprunt">
+                </mat-form-field>
+            </div>
+            <div class="column">
+                <mat-form-field>
+                    <input matInput readonly placeholder="Date de fin" name="dateRestitution" [(ngModel)] = "dateRestitution">
+                </mat-form-field>
+            </div>
+        </div>
+        <div *ngIf="(typeDispo && typeDispo.length != 0)">
+            <hr/>
+            <h5>S&eacute;lection du mat&eacute;riel</h5>
+            <div *ngFor="let articlechoisi of reservationAdd.articleResaDto; index as i">
+                <ref-article  
+                    [listeArticlesDispo]="listeArticlesDispo"
+                    [typeDispo]="typeDispo" [reservationAdd]="reservationAdd" [indexAjout]="i"
+                    (reservationUpdated) = "getReservationUpdate($event)">  
+                </ref-article>
+            </div>  
+            <div class = "row" style="align-items:flex-start; justify-content:space-between" >
+                <div class="column">
+                    <button type="button" class="btn btn-success" (click)="ajoutArticle()">Ajout article</button>
+                </div>
+            </div>
+        </div>
+        <hr/>
+        <div style="width:100%">
+            <h5>Commentaires</h5>
+            <mat-form-field style="width:100%">
+                <textarea matInput style="min-width: 100%" [(ngModel)] = "reservationAdd.commentaire" [ngModelOptions]="{standalone: true}"></textarea>
+            </mat-form-field>
+        </div>
+    </mat-dialog-content>
+    <mat-dialog-actions>
+        <button type="button" class="btn btn-link" (click)="dialogRef.close()">Annuler</button>
+        <button type="button" *ngIf="modif" class="btn btn-success" (click)="supprimerReservation()">Supprimer</button>
+        <button type="submit" class="btn btn-success">{{labelBouton}}</button>
+    </mat-dialog-actions>
+</form>`,
+        providers: [
+            { provide: material_1.MAT_DATE_LOCALE, useValue: 'fr-FR' },
+            ng_bootstrap_1.NgbAlertConfig
+        ],
+    }),
+    __param(3, core_1.Inject(material_1.MAT_DIALOG_DATA)),
+    __metadata("design:paramtypes", [material_2.MatDialog, material_1.MatDialogRef, reservation_service_1.ReservationService, Object, material_1.DateAdapter,
+        ng_bootstrap_1.NgbAlertConfig, common_1.DatePipe, token_storage_service_1.TokenStorageService])
+], ModalAjoutComponent);
 exports.ModalAjoutComponent = ModalAjoutComponent;
+
+
+/***/ }),
+
+/***/ "./app/reservation/modal/modal-consultation-reservation.component.ts":
+/*!***************************************************************************!*\
+  !*** ./app/reservation/modal/modal-consultation-reservation.component.ts ***!
+  \***************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const core_1 = __webpack_require__(/*! @angular/core */ "../../../node_modules/@angular/core/fesm2015/core.js");
+const material_1 = __webpack_require__(/*! @angular/material */ "../../../node_modules/@angular/material/esm2015/material.js");
+const reservation_service_1 = __webpack_require__(/*! src/main/webapp/app/reservation/reservation.service */ "./app/reservation/reservation.service.ts");
+const common_1 = __webpack_require__(/*! @angular/common */ "../../../node_modules/@angular/common/fesm2015/common.js");
+const token_storage_service_1 = __webpack_require__(/*! src/main/webapp/app/auth/token-storage.service */ "./app/auth/token-storage.service.ts");
+const moment = __webpack_require__(/*! moment */ "../../../node_modules/moment/moment.js");
+const core_2 = __webpack_require__(/*! @angular/core */ "../../../node_modules/@angular/core/fesm2015/core.js");
+let ModalConsultationReservationComponent = class ModalConsultationReservationComponent {
+    constructor(dialogRef, reservationService, data, adapter, datepipe, token) {
+        this.dialogRef = dialogRef;
+        this.reservationService = reservationService;
+        this.data = data;
+        this.adapter = adapter;
+        this.datepipe = datepipe;
+        this.token = token;
+    }
+    ngOnInit() {
+        //changement langue pour affichage chiffre datepicker
+        this.adapter.setLocale('fr');
+        this.reservationAdd = this.data.reservation;
+        this.dateEmprunt = moment(this.reservationAdd.dateEmprunt).format('DD/MM/YYYY');
+        this.dateRestitution = moment(this.reservationAdd.dateRestitution).format('DD/MM/YYYY');
+    }
+};
+ModalConsultationReservationComponent = __decorate([
+    core_1.Component({
+        encapsulation: core_2.ViewEncapsulation.None,
+        selector: 'ref-modal-consultation-reservation',
+        template: `<div class="row" style="justify-content: space-between">
+<h2 mat-dialog-title class="color-bleu row">Informations R&eacute;servation</h2>
+<mat-checkbox disabled="disabled" color="warn" style="float:right;" [(ngModel)] = "reservationAdd.asso">Association</mat-checkbox>
+</div>
+
+<mat-dialog-content>
+    <div class="row">
+            <div class="form-group" *ngIf="reservationAdd.asso"> 
+                <mat-form-field>
+                    <input matInput readonly placeholder="Raison sociale" id="rs" name="rs" [(ngModel)] = "reservationAdd.nom">
+                </mat-form-field>
+            </div>
+            <div class="form-group row" *ngIf="!reservationAdd.asso">
+                <div class="column">
+                    <mat-form-field>
+                        <input matInput readonly placeholder="Nom" id="nom" required name="nom" [(ngModel)] = "reservationAdd.nom">
+                    </mat-form-field>
+                </div>
+                <div class="column" *ngIf="reservationAdd.prenom!=null">
+                    <mat-form-field>
+                        <input matInput readonly placeholder="Pr&eacute;nom" id="prenom" name="prenom" [(ngModel)] = "reservationAdd.prenom">
+                    </mat-form-field>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="column">
+                <mat-form-field>
+                    <input matInput readonly placeholder="Date de d&eacute;but" name="dateEmprunt" [(ngModel)] = "dateEmprunt">
+                </mat-form-field>
+            </div>
+            <div class="column">
+                <mat-form-field>
+                    <input matInput readonly placeholder="Date de fin" name="dateRestitution" [(ngModel)] = "dateRestitution">
+                </mat-form-field>
+            </div>
+        </div>
+        <div>
+            <hr/>
+            <h5>S&eacute;lection du mat&eacute;riel</h5>
+            <div class ="row" *ngFor="let articlechoisi of reservationAdd.articleResaDto; index as i">
+                <mat-form-field>
+                    <input matInput readonly placeholder="Type" [(ngModel)] = "articlechoisi.type">
+                </mat-form-field>
+                <mat-form-field>
+                    <input matInput readonly placeholder="Nom" [(ngModel)] = "articlechoisi.nom">
+                </mat-form-field>
+                <mat-form-field>
+                    <input matInput readonly placeholder="Quantite" [(ngModel)] = "articlechoisi.quantite">
+                </mat-form-field>
+            </div>  
+        </div>
+        <hr/>
+        <div style="width:100%">
+            <h5>Commentaires</h5>
+            <mat-form-field style="width:100%">
+                <textarea matInput readonly style="min-width: 100%" [(ngModel)] = "reservationAdd.commentaire" [ngModelOptions]="{standalone: true}"></textarea>
+            </mat-form-field>
+        </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button type="button" class="btn btn-link" (click)="dialogRef.close()">Fermer</button>
+</mat-dialog-actions>`,
+        providers: [
+            { provide: material_1.MAT_DATE_LOCALE, useValue: 'fr-FR' }
+        ],
+    }),
+    __param(2, core_1.Inject(material_1.MAT_DIALOG_DATA)),
+    __metadata("design:paramtypes", [material_1.MatDialogRef, reservation_service_1.ReservationService, Object, material_1.DateAdapter,
+        common_1.DatePipe, token_storage_service_1.TokenStorageService])
+], ModalConsultationReservationComponent);
+exports.ModalConsultationReservationComponent = ModalConsultationReservationComponent;
+
+
+/***/ }),
+
+/***/ "./app/reservation/modal/modal/modalListeErreur.component.ts":
+/*!*******************************************************************!*\
+  !*** ./app/reservation/modal/modal/modalListeErreur.component.ts ***!
+  \*******************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const core_1 = __webpack_require__(/*! @angular/core */ "../../../node_modules/@angular/core/fesm2015/core.js");
+const material_1 = __webpack_require__(/*! @angular/material */ "../../../node_modules/@angular/material/esm2015/material.js");
+const ng_bootstrap_1 = __webpack_require__(/*! @ng-bootstrap/ng-bootstrap */ "../../../node_modules/@ng-bootstrap/ng-bootstrap/fesm2015/ng-bootstrap.js");
+const material_2 = __webpack_require__(/*! @angular/material */ "../../../node_modules/@angular/material/esm2015/material.js");
+const core_2 = __webpack_require__(/*! @angular/core */ "../../../node_modules/@angular/core/fesm2015/core.js");
+let ModalListErreurComponent = class ModalListErreurComponent {
+    constructor(dialog, dialogRef, data, adapter, alertConfig) {
+        this.dialog = dialog;
+        this.dialogRef = dialogRef;
+        this.data = data;
+        this.adapter = adapter;
+        this.alertConfig = alertConfig;
+        this.saveFailed = false;
+        this.listResaModifiee = [];
+        alertConfig.type = 'danger';
+        alertConfig.dismissible = false;
+    }
+    ngOnInit() {
+        if (this.data.liste) {
+            this.listResaModifiee = this.data.liste;
+        }
+        else {
+            this.saveFailed = true;
+            this.message = "Erreur de récupération des réservations modifiées";
+        }
+    }
+    fermer() {
+        this.dialogRef.close();
+    }
+};
+ModalListErreurComponent = __decorate([
+    core_1.Component({
+        encapsulation: core_2.ViewEncapsulation.None,
+        selector: 'modal-list-erreur',
+        template: `<div class="row" style="justify-content: space-between">
+<h2 mat-dialog-title class="color-bleu row">R&eacute;servations modifi&eacute;es</h2>
+</div>
+<mat-list *ngFor="let ligne of listResaModifiee">
+    <mat-list-item>{{ligne.messageErreur}}</mat-list-item>
+    <mat-divider></mat-divider>
+</mat-list>
+<mat-dialog-actions>
+    <button type="button" class="btn btn-link" (click)="fermer()">Fermer</button>
+</mat-dialog-actions>`,
+        providers: [
+            { provide: material_1.MAT_DATE_LOCALE, useValue: 'fr-FR' },
+            ng_bootstrap_1.NgbAlertConfig
+        ],
+    }),
+    __param(2, core_1.Inject(material_1.MAT_DIALOG_DATA)),
+    __metadata("design:paramtypes", [material_2.MatDialog, material_1.MatDialogRef, Object, material_1.DateAdapter,
+        ng_bootstrap_1.NgbAlertConfig])
+], ModalListErreurComponent);
+exports.ModalListErreurComponent = ModalListErreurComponent;
 
 
 /***/ }),
@@ -2871,11 +3157,11 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var core_1 = __webpack_require__(/*! @angular/core */ "../../../node_modules/@angular/core/fesm5/core.js");
-var router_1 = __webpack_require__(/*! @angular/router */ "../../../node_modules/@angular/router/fesm5/router.js");
-var reservation_component_1 = __webpack_require__(/*! ./reservation.component */ "./app/reservation/reservation.component.ts");
-var route_guard_1 = __webpack_require__(/*! ../auth/route.guard */ "./app/auth/route.guard.ts");
-var routes = [
+const core_1 = __webpack_require__(/*! @angular/core */ "../../../node_modules/@angular/core/fesm2015/core.js");
+const router_1 = __webpack_require__(/*! @angular/router */ "../../../node_modules/@angular/router/fesm2015/router.js");
+const reservation_component_1 = __webpack_require__(/*! ./reservation.component */ "./app/reservation/reservation.component.ts");
+const route_guard_1 = __webpack_require__(/*! ../auth/route.guard */ "./app/auth/route.guard.ts");
+const routes = [
     {
         path: '',
         component: reservation_component_1.ReservationComponent,
@@ -2885,19 +3171,16 @@ var routes = [
         }
     }
 ];
-var ReservationRoutingModule = /** @class */ (function () {
-    function ReservationRoutingModule() {
-    }
-    ReservationRoutingModule = __decorate([
-        core_1.NgModule({
-            imports: [
-                router_1.RouterModule.forChild(routes)
-            ],
-            exports: [router_1.RouterModule]
-        })
-    ], ReservationRoutingModule);
-    return ReservationRoutingModule;
-}());
+let ReservationRoutingModule = class ReservationRoutingModule {
+};
+ReservationRoutingModule = __decorate([
+    core_1.NgModule({
+        imports: [
+            router_1.RouterModule.forChild(routes)
+        ],
+        exports: [router_1.RouterModule]
+    })
+], ReservationRoutingModule);
 exports.ReservationRoutingModule = ReservationRoutingModule;
 
 
@@ -2922,28 +3205,54 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var core_1 = __webpack_require__(/*! @angular/core */ "../../../node_modules/@angular/core/fesm5/core.js");
+const core_1 = __webpack_require__(/*! @angular/core */ "../../../node_modules/@angular/core/fesm2015/core.js");
 __webpack_require__(/*! dhtmlx-scheduler */ "../../../node_modules/dhtmlx-scheduler/codebase/dhtmlxscheduler.js");
-var reservation_service_1 = __webpack_require__(/*! ./reservation.service */ "./app/reservation/reservation.service.ts");
-var material_1 = __webpack_require__(/*! @angular/material */ "../../../node_modules/@angular/material/esm5/material.es5.js");
-var modal_ajout_component_1 = __webpack_require__(/*! ./modal/modal-ajout.component */ "./app/reservation/modal/modal-ajout.component.ts");
-var reservation_entity_1 = __webpack_require__(/*! ../shared/reservation/reservation.entity */ "./app/shared/reservation/reservation.entity.ts");
-var common_1 = __webpack_require__(/*! @angular/common */ "../../../node_modules/@angular/common/fesm5/common.js");
-var ReservationComponent = /** @class */ (function () {
-    function ReservationComponent(dialog, reservationService, datepipe) {
+const reservation_service_1 = __webpack_require__(/*! ./reservation.service */ "./app/reservation/reservation.service.ts");
+const material_1 = __webpack_require__(/*! @angular/material */ "../../../node_modules/@angular/material/esm2015/material.js");
+const modal_ajout_component_1 = __webpack_require__(/*! ./modal/modal-ajout.component */ "./app/reservation/modal/modal-ajout.component.ts");
+const modal_consultation_reservation_component_1 = __webpack_require__(/*! ./modal/modal-consultation-reservation.component */ "./app/reservation/modal/modal-consultation-reservation.component.ts");
+const reservation_entity_1 = __webpack_require__(/*! src/main/webapp/app/shared/reservation/reservation.entity */ "./app/shared/reservation/reservation.entity.ts");
+const common_1 = __webpack_require__(/*! @angular/common */ "../../../node_modules/@angular/common/fesm2015/common.js");
+const token_storage_service_1 = __webpack_require__(/*! ../auth/token-storage.service */ "./app/auth/token-storage.service.ts");
+const user_service_1 = __webpack_require__(/*! ../user/user.service */ "./app/user/user.service.ts");
+const userFonctionnel_entity_1 = __webpack_require__(/*! ../shared/user/userFonctionnel.entity */ "./app/shared/user/userFonctionnel.entity.ts");
+let ReservationComponent = class ReservationComponent {
+    constructor(dialog, reservationService, datepipe, token, userService, _elementRef) {
         this.dialog = dialog;
         this.reservationService = reservationService;
         this.datepipe = datepipe;
+        this.token = token;
+        this.userService = userService;
+        this._elementRef = _elementRef;
+        this.user = new userFonctionnel_entity_1.UserFonctionnel();
+        this.saveFailed = false;
     }
-    ReservationComponent.prototype.ngOnInit = function () {
+    ngOnInit() {
+        this.username = this.token.getUsername();
+        this.userService.getUser(this.username).subscribe(data => {
+            this.user = data;
+            this.user.administrateur = false;
+            this.user.superAdministrateur = false;
+            this.user.roles.forEach(function (role) {
+                if (role === "ROLE_ADMIN") {
+                    this.user.administrateur = true;
+                }
+                else if (role === "ROLE_SUPER_ADMIN") {
+                    this.user.superAdministrateur = true;
+                }
+            }.bind(this));
+        }, error => {
+            this.message = "Erreur de récupération de l'utilisateur";
+            this.saveFailed = true;
+        });
         // Changement langue de anglais vers français
-        var sld = {
+        const sld = {
             month_full: ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"],
             month_short: ["Jan", "Fév", "Mar", "Avr", "Mai", "Juin", "Juil", "Aoû", "Sep", "Oct", "Nov", "Déc"],
             day_full: ["Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"],
             day_short: ["Dim", "Lun", "Mar", "Mer", "Jeu", "Ven", "Sam"]
         };
-        var sll = {
+        const sll = {
             dhx_cal_today_button: "Aujourd'hui",
             day_tab: "Jour",
             week_tab: "Semaine",
@@ -2960,7 +3269,7 @@ var ReservationComponent = /** @class */ (function () {
             section_time: "Période",
             unit_tab: ""
         };
-        var locale = {
+        const locale = {
             date: sld,
             labels: sll
         };
@@ -2976,22 +3285,45 @@ var ReservationComponent = /** @class */ (function () {
         // Custom modal for add/update event
         // bind(this) permet de conserver le this comme etant le component et non la fonction
         scheduler.showLightbox = function (id) {
-            var _this = this;
             var lightbox_event = scheduler.getEvent(id);
             scheduler.startLightbox(id, null);
             scheduler.hideCover();
-            if (id > 1000000000000) {
+            if (id > 1000000000000 && this.user.administrateur) {
                 var reservation = new reservation_entity_1.Reservation();
                 reservation.dateEmprunt = lightbox_event.start_date;
-                var dialogRef = this.dialog.open(modal_ajout_component_1.ModalAjoutComponent, {
+                const dialogRef = this.dialog.open(modal_ajout_component_1.ModalAjoutComponent, {
+                    width: '650px',
                     data: { reservation: reservation }
+                });
+                dialogRef.afterClosed().subscribe(result => {
+                    scheduler.clearAll();
+                    this.chargedResas();
+                });
+            }
+            else if (this.user.administrateur) {
+                this.reservationService.getReservationById(id).subscribe(data => {
+                    var reservation = data;
+                    const dialogRef = this.dialog.open(modal_ajout_component_1.ModalAjoutComponent, {
+                        width: '650px',
+                        data: { reservation: reservation }
+                    });
+                    // rechargement du scheduler une fois la popup fermée
+                    dialogRef.afterClosed().subscribe(result => {
+                        scheduler.clearAll();
+                        this.chargedResas();
+                    });
                 });
             }
             else {
-                this.reservationService.getReservationById(id).subscribe(function (data) {
+                this.reservationService.getReservationById(id).subscribe(data => {
                     var reservation = data;
-                    var dialogRef = _this.dialog.open(modal_ajout_component_1.ModalAjoutComponent, {
+                    const dialogRef = this.dialog.open(modal_consultation_reservation_component_1.ModalConsultationReservationComponent, {
+                        width: '650px',
                         data: { reservation: reservation }
+                    });
+                    dialogRef.afterClosed().subscribe(result => {
+                        scheduler.clearAll();
+                        this.chargedResas();
                     });
                 });
             }
@@ -3000,34 +3332,48 @@ var ReservationComponent = /** @class */ (function () {
         scheduler.attachEvent("onViewChange", function () {
             this.chargedResas();
         }.bind(this));
-    };
-    ReservationComponent.prototype.chargedResas = function () {
-        var _this = this;
-        this.reservationService.getReservation(this.datepipe.transform(scheduler.getState().min_date, 'dd/MM/yyyy'), this.datepipe.transform(scheduler.getState().max_date, 'dd/MM/yyyy')).subscribe(function (data) {
-            _this.reservationService.transformedReservationToSchedulerEvent(data).then(function (data) {
+    }
+    chargedResas() {
+        this.reservationService.getReservation(this.datepipe.transform(scheduler.getState().min_date, 'dd/MM/yyyy'), this.datepipe.transform(scheduler.getState().max_date, 'dd/MM/yyyy')).subscribe(data => {
+            this.reservationService.transformedReservationToSchedulerEvent(data).then((data) => {
                 scheduler.parse(data, "json");
             });
         });
-    };
-    ReservationComponent.prototype.addResa = function () {
-        var dialogRef = this.dialog.open(modal_ajout_component_1.ModalAjoutComponent, {
+    }
+    addResa() {
+        const dialogRef = this.dialog.open(modal_ajout_component_1.ModalAjoutComponent, {
+            width: '650px',
             data: {}
         });
-    };
-    __decorate([
-        core_1.ViewChild("scheduler_here"),
-        __metadata("design:type", core_1.ElementRef)
-    ], ReservationComponent.prototype, "schedulerContainer", void 0);
-    ReservationComponent = __decorate([
-        core_1.Component({
-            selector: 'ref-reservations',
-            template: "<button class=\"btn btn-success\"(click)=\"addResa()\">Ajouter une r&eacute;servation</button>\n<div #scheduler_here class=\"dhx_cal_container\" style=\"width: 100%; height:80vh; margin-top:60px;\">\n   <div class=\"dhx_cal_navline\">\n       <div class=\"dhx_cal_prev_button\">&nbsp;</div>\n       <div class=\"dhx_cal_next_button\">&nbsp;</div>\n       <div class=\"dhx_cal_today_button\"></div>\n       <div class=\"dhx_cal_date\"></div>\n       <div class=\"dhx_cal_tab\" name=\"day_tab\"></div>\n       <div class=\"dhx_cal_tab\" name=\"week_tab\"></div>\n       <div class=\"dhx_cal_tab\" name=\"month_tab\"></div>\n   </div>\n   <div class=\"dhx_cal_header\"></div>\n   <div class=\"dhx_cal_data\"></div>\n</div>",
-            providers: []
-        }),
-        __metadata("design:paramtypes", [material_1.MatDialog, reservation_service_1.ReservationService, common_1.DatePipe])
-    ], ReservationComponent);
-    return ReservationComponent;
-}());
+    }
+};
+__decorate([
+    core_1.ViewChild("scheduler_here"),
+    __metadata("design:type", core_1.ElementRef)
+], ReservationComponent.prototype, "schedulerContainer", void 0);
+ReservationComponent = __decorate([
+    core_1.Component({
+        encapsulation: core_1.ViewEncapsulation.None,
+        selector: 'ref-reservations',
+        template: `<button class="btn btn-success"(click)="addResa()">Ajouter une r&eacute;servation</button>
+<div #scheduler_here class="dhx_cal_container" style="width: 100%; height:80vh; margin-top:60px;">
+   <div class="dhx_cal_navline">
+       <div class="dhx_cal_prev_button">&nbsp;</div>
+       <div class="dhx_cal_next_button">&nbsp;</div>
+       <div class="dhx_cal_today_button"></div>
+       <div class="dhx_cal_date"></div>
+       <div class="dhx_cal_tab" name="day_tab"></div>
+       <div class="dhx_cal_tab" name="week_tab"></div>
+       <div class="dhx_cal_tab" name="month_tab"></div>
+   </div>
+   <div class="dhx_cal_header"></div>
+   <div class="dhx_cal_data"></div>
+</div>`,
+        providers: []
+    }),
+    __metadata("design:paramtypes", [material_1.MatDialog, reservation_service_1.ReservationService, common_1.DatePipe,
+        token_storage_service_1.TokenStorageService, user_service_1.UserService, core_1.ElementRef])
+], ReservationComponent);
 exports.ReservationComponent = ReservationComponent;
 
 
@@ -3049,47 +3395,47 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var core_1 = __webpack_require__(/*! @angular/core */ "../../../node_modules/@angular/core/fesm5/core.js");
-var common_1 = __webpack_require__(/*! @angular/common */ "../../../node_modules/@angular/common/fesm5/common.js");
-var forms_1 = __webpack_require__(/*! @angular/forms */ "../../../node_modules/@angular/forms/fesm5/forms.js");
-var reservation_routing_module_1 = __webpack_require__(/*! ./reservation-routing.module */ "./app/reservation/reservation-routing.module.ts");
-var reservation_component_1 = __webpack_require__(/*! ./reservation.component */ "./app/reservation/reservation.component.ts");
-var reservation_service_1 = __webpack_require__(/*! ./reservation.service */ "./app/reservation/reservation.service.ts");
-var http_1 = __webpack_require__(/*! @angular/http */ "../../../node_modules/@angular/http/fesm5/http.js");
-var http_2 = __webpack_require__(/*! @angular/common/http */ "../../../node_modules/@angular/common/fesm5/http.js");
-var auth_interceptor_1 = __webpack_require__(/*! ../auth/auth-interceptor */ "./app/auth/auth-interceptor.ts");
-var modal_ajout_component_1 = __webpack_require__(/*! ./modal/modal-ajout.component */ "./app/reservation/modal/modal-ajout.component.ts");
-var material_1 = __webpack_require__(/*! @angular/material */ "../../../node_modules/@angular/material/esm5/material.es5.js");
-var datepicker_1 = __webpack_require__(/*! @angular/material/datepicker */ "../../../node_modules/@angular/material/esm5/datepicker.es5.js");
-var ng_bootstrap_1 = __webpack_require__(/*! @ng-bootstrap/ng-bootstrap */ "../../../node_modules/@ng-bootstrap/ng-bootstrap/fesm5/ng-bootstrap.js");
-var article_component_1 = __webpack_require__(/*! ./modal/articleComponent/article.component */ "./app/reservation/modal/articleComponent/article.component.ts");
-var common_2 = __webpack_require__(/*! @angular/common */ "../../../node_modules/@angular/common/fesm5/common.js");
-var ReservationModule = /** @class */ (function () {
-    function ReservationModule() {
-    }
-    ReservationModule = __decorate([
-        core_1.NgModule({
-            imports: [
-                common_1.CommonModule,
-                forms_1.FormsModule,
-                http_2.HttpClientModule,
-                reservation_routing_module_1.ReservationRoutingModule,
-                material_1.MatDialogModule,
-                material_1.MatFormFieldModule,
-                material_1.MatNativeDateModule,
-                material_1.MatInputModule,
-                material_1.MatCheckboxModule,
-                material_1.MatSelectModule,
-                datepicker_1.MatDatepickerModule,
-                ng_bootstrap_1.NgbModule
-            ],
-            declarations: [reservation_component_1.ReservationComponent, modal_ajout_component_1.ModalAjoutComponent, article_component_1.ArticleComponent],
-            entryComponents: [modal_ajout_component_1.ModalAjoutComponent],
-            providers: [reservation_service_1.ReservationService, http_1.Http, common_2.DatePipe, auth_interceptor_1.httpInterceptorProviders]
-        })
-    ], ReservationModule);
-    return ReservationModule;
-}());
+const core_1 = __webpack_require__(/*! @angular/core */ "../../../node_modules/@angular/core/fesm2015/core.js");
+const common_1 = __webpack_require__(/*! @angular/common */ "../../../node_modules/@angular/common/fesm2015/common.js");
+const forms_1 = __webpack_require__(/*! @angular/forms */ "../../../node_modules/@angular/forms/fesm2015/forms.js");
+const reservation_routing_module_1 = __webpack_require__(/*! ./reservation-routing.module */ "./app/reservation/reservation-routing.module.ts");
+const reservation_component_1 = __webpack_require__(/*! ./reservation.component */ "./app/reservation/reservation.component.ts");
+const reservation_service_1 = __webpack_require__(/*! ./reservation.service */ "./app/reservation/reservation.service.ts");
+const http_1 = __webpack_require__(/*! @angular/http */ "../../../node_modules/@angular/http/fesm2015/http.js");
+const http_2 = __webpack_require__(/*! @angular/common/http */ "../../../node_modules/@angular/common/fesm2015/http.js");
+const auth_interceptor_1 = __webpack_require__(/*! ../auth/auth-interceptor */ "./app/auth/auth-interceptor.ts");
+const modal_ajout_component_1 = __webpack_require__(/*! ./modal/modal-ajout.component */ "./app/reservation/modal/modal-ajout.component.ts");
+const modalListeErreur_component_1 = __webpack_require__(/*! ./modal/modal/modalListeErreur.component */ "./app/reservation/modal/modal/modalListeErreur.component.ts");
+const modal_consultation_reservation_component_1 = __webpack_require__(/*! ./modal/modal-consultation-reservation.component */ "./app/reservation/modal/modal-consultation-reservation.component.ts");
+const material_1 = __webpack_require__(/*! @angular/material */ "../../../node_modules/@angular/material/esm2015/material.js");
+const datepicker_1 = __webpack_require__(/*! @angular/material/datepicker */ "../../../node_modules/@angular/material/esm2015/datepicker.js");
+const ng_bootstrap_1 = __webpack_require__(/*! @ng-bootstrap/ng-bootstrap */ "../../../node_modules/@ng-bootstrap/ng-bootstrap/fesm2015/ng-bootstrap.js");
+const article_component_1 = __webpack_require__(/*! ./modal/articleComponent/article.component */ "./app/reservation/modal/articleComponent/article.component.ts");
+const common_2 = __webpack_require__(/*! @angular/common */ "../../../node_modules/@angular/common/fesm2015/common.js");
+let ReservationModule = class ReservationModule {
+};
+ReservationModule = __decorate([
+    core_1.NgModule({
+        imports: [
+            common_1.CommonModule,
+            forms_1.FormsModule,
+            http_2.HttpClientModule,
+            reservation_routing_module_1.ReservationRoutingModule,
+            material_1.MatDialogModule,
+            material_1.MatFormFieldModule,
+            material_1.MatNativeDateModule,
+            material_1.MatInputModule,
+            material_1.MatCheckboxModule,
+            material_1.MatSelectModule,
+            material_1.MatListModule,
+            datepicker_1.MatDatepickerModule,
+            ng_bootstrap_1.NgbModule
+        ],
+        declarations: [reservation_component_1.ReservationComponent, modal_ajout_component_1.ModalAjoutComponent, article_component_1.ArticleComponent, modal_consultation_reservation_component_1.ModalConsultationReservationComponent, modalListeErreur_component_1.ModalListErreurComponent],
+        entryComponents: [modal_ajout_component_1.ModalAjoutComponent, modal_consultation_reservation_component_1.ModalConsultationReservationComponent, modalListeErreur_component_1.ModalListErreurComponent],
+        providers: [reservation_service_1.ReservationService, http_1.Http, common_2.DatePipe, auth_interceptor_1.httpInterceptorProviders]
+    })
+], ReservationModule);
 exports.ReservationModule = ReservationModule;
 
 
@@ -3114,32 +3460,35 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var core_1 = __webpack_require__(/*! @angular/core */ "../../../node_modules/@angular/core/fesm5/core.js");
-var http_1 = __webpack_require__(/*! @angular/common/http */ "../../../node_modules/@angular/common/fesm5/http.js");
-var event_1 = __webpack_require__(/*! ../shared/reservation/event */ "./app/shared/reservation/event.ts");
-var common_1 = __webpack_require__(/*! @angular/common */ "../../../node_modules/@angular/common/fesm5/common.js");
-var httpOptions = {
+const core_1 = __webpack_require__(/*! @angular/core */ "../../../node_modules/@angular/core/fesm2015/core.js");
+const http_1 = __webpack_require__(/*! @angular/common/http */ "../../../node_modules/@angular/common/fesm2015/http.js");
+const event_1 = __webpack_require__(/*! ../shared/reservation/event */ "./app/shared/reservation/event.ts");
+const common_1 = __webpack_require__(/*! @angular/common */ "../../../node_modules/@angular/common/fesm2015/common.js");
+const reservationValidation_entity_1 = __webpack_require__(/*! ../shared/reservation/reservationValidation.entity */ "./app/shared/reservation/reservationValidation.entity.ts");
+const httpOptions = {
     headers: new http_1.HttpHeaders({ 'Content-Type': 'application/json' })
 };
-var ReservationService = /** @class */ (function () {
-    function ReservationService(httpClient, datepipe) {
+let ReservationService = class ReservationService {
+    constructor(httpClient, datepipe) {
         this.httpClient = httpClient;
         this.datepipe = datepipe;
-        this.reservationUrl = 'acs/reservations/';
-        this.validReservationUrl = 'acs/articles/validate';
-        this.getReservationByIdUrl = 'acs/reservations/id';
-        this.deleteReservation = 'acs/reservations/delete';
+        this.reservationUrl = 'reservations/';
+        this.validReservationUrl = 'articles/validate';
+        this.getReservationByIdUrl = 'reservations/id';
+        this.deleteReservation = 'reservations/delete';
+        this.validResaAsso = 'articles/validateAsso';
+        this.reservationValidation = new reservationValidation_entity_1.ReservationValidation();
     }
-    ReservationService.prototype.getReservation = function (dateDebut, dateFin) {
-        var params = new http_1.HttpParams();
+    getReservation(dateDebut, dateFin) {
+        let params = new http_1.HttpParams();
         params = params.append('debut', dateDebut);
         params = params.append('fin', dateFin);
         return this.httpClient.get(this.reservationUrl, { params: params });
-    };
-    ReservationService.prototype.transformedReservationToSchedulerEvent = function (reservations) {
-        var eventList = [];
+    }
+    transformedReservationToSchedulerEvent(reservations) {
+        let eventList = [];
         reservations.forEach(function (resa) {
-            var evt = new event_1.Event();
+            let evt = new event_1.Event();
             evt.id = resa.id;
             evt.start_date = this.datepipe.transform(resa.dateEmprunt, 'MM-dd-yyyy HH:mm').toString();
             evt.end_date = this.datepipe.transform(resa.dateRestitution, 'MM-dd-yyyy HH:mm').toString();
@@ -3150,35 +3499,40 @@ var ReservationService = /** @class */ (function () {
             eventList.push(evt);
         }.bind(this));
         return Promise.resolve(eventList);
-    };
+    }
     /** appel permettant de récupérer la liste des articles disponibles entre 2 dates et leur nombre */
-    ReservationService.prototype.getArticlesDispo = function (dateDebut, dateFin) {
-        var params = new http_1.HttpParams();
+    getArticlesDispo(dateDebut, dateFin, asso) {
+        let params = new http_1.HttpParams();
         params = params.append('debut', dateDebut);
         params = params.append('fin', dateFin);
-        return this.httpClient.get("acs/articles/articledispo", { params: params });
-    };
-    ReservationService.prototype.saveReservation = function (reservation) {
+        params = params.append('asso', asso);
+        return this.httpClient.get(`articles/articledispo`, { params: params });
+    }
+    saveReservation(reservation) {
         return this.httpClient.post(this.reservationUrl, reservation, httpOptions);
-    };
+    }
     //méthode de validation de la réservation (accès concurrent)
-    ReservationService.prototype.validerArticles = function (reservation) {
-        return this.httpClient.post(this.validReservationUrl, reservation, httpOptions);
-    };
-    ReservationService.prototype.getReservationById = function (id) {
-        var params = new http_1.HttpParams();
+    validerArticles(reservation, asso) {
+        this.reservationValidation.reservationDto = reservation;
+        this.reservationValidation.asso = asso;
+        return this.httpClient.post(this.validReservationUrl, this.reservationValidation, httpOptions);
+    }
+    validerArticlesAsso3Mois(reservation) {
+        return this.httpClient.post(this.validResaAsso, reservation, httpOptions);
+    }
+    getReservationById(id) {
+        let params = new http_1.HttpParams();
         params = params.append('id', id);
         return this.httpClient.get(this.getReservationByIdUrl, { params: params });
-    };
-    ReservationService.prototype.supprimerReservation = function (reservation) {
+    }
+    supprimerReservation(reservation) {
         return this.httpClient.post(this.deleteReservation, reservation, httpOptions);
-    };
-    ReservationService = __decorate([
-        core_1.Injectable(),
-        __metadata("design:paramtypes", [http_1.HttpClient, common_1.DatePipe])
-    ], ReservationService);
-    return ReservationService;
-}());
+    }
+};
+ReservationService = __decorate([
+    core_1.Injectable(),
+    __metadata("design:paramtypes", [http_1.HttpClient, common_1.DatePipe])
+], ReservationService);
 exports.ReservationService = ReservationService;
 
 
@@ -3194,11 +3548,8 @@ exports.ReservationService = ReservationService;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var ArticleDispo = /** @class */ (function () {
-    function ArticleDispo() {
-    }
-    return ArticleDispo;
-}());
+class ArticleDispo {
+}
 exports.ArticleDispo = ArticleDispo;
 
 
@@ -3214,11 +3565,8 @@ exports.ArticleDispo = ArticleDispo;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var Event = /** @class */ (function () {
-    function Event() {
-    }
-    return Event;
-}());
+class Event {
+}
 exports.Event = Event;
 
 
@@ -3234,12 +3582,11 @@ exports.Event = Event;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var Reservation = /** @class */ (function () {
-    function Reservation() {
+class Reservation {
+    constructor() {
         this.articleResaDto = new Array();
     }
-    return Reservation;
-}());
+}
 exports.Reservation = Reservation;
 
 
@@ -3255,12 +3602,681 @@ exports.Reservation = Reservation;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var ReservationArticle = /** @class */ (function () {
-    function ReservationArticle() {
-    }
-    return ReservationArticle;
-}());
+class ReservationArticle {
+}
 exports.ReservationArticle = ReservationArticle;
+
+
+/***/ }),
+
+/***/ "./app/shared/reservation/reservationValidation.entity.ts":
+/*!****************************************************************!*\
+  !*** ./app/shared/reservation/reservationValidation.entity.ts ***!
+  \****************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+class ReservationValidation {
+}
+exports.ReservationValidation = ReservationValidation;
+
+
+/***/ }),
+
+/***/ "./app/shared/user/user.entity.ts":
+/*!****************************************!*\
+  !*** ./app/shared/user/user.entity.ts ***!
+  \****************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+class User {
+}
+exports.User = User;
+
+
+/***/ }),
+
+/***/ "./app/shared/user/userFonctionnel.entity.ts":
+/*!***************************************************!*\
+  !*** ./app/shared/user/userFonctionnel.entity.ts ***!
+  \***************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+class UserFonctionnel {
+    constructor() {
+        this.roles = new Array();
+    }
+}
+exports.UserFonctionnel = UserFonctionnel;
+
+
+/***/ }),
+
+/***/ "./app/user/modal/modal-add-user.component.ts":
+/*!****************************************************!*\
+  !*** ./app/user/modal/modal-add-user.component.ts ***!
+  \****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const core_1 = __webpack_require__(/*! @angular/core */ "../../../node_modules/@angular/core/fesm2015/core.js");
+const material_1 = __webpack_require__(/*! @angular/material */ "../../../node_modules/@angular/material/esm2015/material.js");
+const ng_bootstrap_1 = __webpack_require__(/*! @ng-bootstrap/ng-bootstrap */ "../../../node_modules/@ng-bootstrap/ng-bootstrap/fesm2015/ng-bootstrap.js");
+const user_service_1 = __webpack_require__(/*! ./../user.service */ "./app/user/user.service.ts");
+const userFonctionnel_entity_1 = __webpack_require__(/*! ../../shared/user/userFonctionnel.entity */ "./app/shared/user/userFonctionnel.entity.ts");
+const user_entity_1 = __webpack_require__(/*! ../../shared/user/user.entity */ "./app/shared/user/user.entity.ts");
+const core_2 = __webpack_require__(/*! @angular/core */ "../../../node_modules/@angular/core/fesm2015/core.js");
+let ModalAddUserComponent = class ModalAddUserComponent {
+    constructor(dialogRef, data, userService, adapter, alertConfig) {
+        this.dialogRef = dialogRef;
+        this.data = data;
+        this.userService = userService;
+        this.adapter = adapter;
+        this.alertConfig = alertConfig;
+        this.userWellFormed = new user_entity_1.User();
+        this.userAdd = new userFonctionnel_entity_1.UserFonctionnel();
+        alertConfig.type = 'danger';
+        alertConfig.dismissible = false;
+    }
+    ngOnInit() {
+    }
+    save() {
+        this.saveFailed = false;
+        if (this.userAdd.password === this.userAdd.passwordConfirm) {
+            if (this.userAdd.password.length >= 8) {
+                if (this.userAdd.administrateur) {
+                    this.userWellFormed.role = new Array("ROLE_ADMIN", "ROLE_USER");
+                }
+                else {
+                    this.userWellFormed.role = new Array("ROLE_USER");
+                }
+                this.userWellFormed.password = this.userAdd.password;
+                this.userWellFormed.username = this.userAdd.username;
+                this.userWellFormed.email = this.userAdd.username.concat("@acs.Com");
+                this.userService.addUser(this.userWellFormed).subscribe(data => {
+                    this.dialogRef.close();
+                    window.location.reload();
+                }, error => {
+                    this.message = "Erreur de création de l'utilisateur";
+                    this.saveFailed = true;
+                });
+            }
+            else {
+                this.message = "Au moins 8 caractères sont requis dans votre mot de passe";
+                this.saveFailed = true;
+            }
+        }
+        else {
+            this.message = "Le mot de passe doit être égal au mot de passe de confirmation";
+            this.saveFailed = true;
+        }
+    }
+};
+ModalAddUserComponent = __decorate([
+    core_1.Component({
+        encapsulation: core_2.ViewEncapsulation.None,
+        selector: 'ref-modal-add-user',
+        template: `<div class="row" style="justify-content: space-between">
+<h2 mat-dialog-title class="color-bleu row">Ajout d'un utilisateur </h2>
+</div>
+
+<ngb-alert *ngIf="saveFailed">
+        {{message}}
+  </ngb-alert>
+<form (ngSubmit)="save()" ngNativeValidate>
+    <mat-dialog-content style="width:100%">
+        <div class="row">
+            <div class="form-group" style="width:100%"> 
+                <mat-form-field style="width:100%">
+                    <input matInput required placeholder="Identifiant" id="username" name="username" [(ngModel)] = "userAdd.username">
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group" style="width:100%"> 
+                <mat-form-field style="width:100%">
+                    <input matInput required placeholder="Mot de passe" type="password" id="password" name="password" [(ngModel)] = "userAdd.password">
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group" style="width:100%"> 
+                <mat-form-field style="width:100%">
+                    <input matInput required placeholder="Confirmation du mot de passe" type="password" id="passwordConfirm" name="passwordConfirm" [(ngModel)] = "userAdd.passwordConfirm">
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group"> 
+                <mat-checkbox color="warn" style="float:right;" name="administrateur" [(ngModel)] = "userAdd.administrateur">Administrateur</mat-checkbox>
+            </div>
+        </div>  
+    </mat-dialog-content>
+    <mat-dialog-actions>
+        <button type="button" class="btn btn-link" (click)="dialogRef.close()">Annuler</button>
+        <button type="submit" class="btn btn-success">Cr&eacute;er</button>
+    </mat-dialog-actions>
+</form>`,
+        providers: [
+            { provide: material_1.MAT_DATE_LOCALE, useValue: 'fr-FR' },
+            ng_bootstrap_1.NgbAlertConfig
+        ],
+    }),
+    __param(1, core_1.Inject(material_1.MAT_DIALOG_DATA)),
+    __metadata("design:paramtypes", [material_1.MatDialogRef, Object, user_service_1.UserService, material_1.DateAdapter,
+        ng_bootstrap_1.NgbAlertConfig])
+], ModalAddUserComponent);
+exports.ModalAddUserComponent = ModalAddUserComponent;
+
+
+/***/ }),
+
+/***/ "./app/user/modal/modal-delete-user.component.ts":
+/*!*******************************************************!*\
+  !*** ./app/user/modal/modal-delete-user.component.ts ***!
+  \*******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const core_1 = __webpack_require__(/*! @angular/core */ "../../../node_modules/@angular/core/fesm2015/core.js");
+const material_1 = __webpack_require__(/*! @angular/material */ "../../../node_modules/@angular/material/esm2015/material.js");
+const ng_bootstrap_1 = __webpack_require__(/*! @ng-bootstrap/ng-bootstrap */ "../../../node_modules/@ng-bootstrap/ng-bootstrap/fesm2015/ng-bootstrap.js");
+const user_service_1 = __webpack_require__(/*! ./../user.service */ "./app/user/user.service.ts");
+const userFonctionnel_entity_1 = __webpack_require__(/*! ../../shared/user/userFonctionnel.entity */ "./app/shared/user/userFonctionnel.entity.ts");
+const core_2 = __webpack_require__(/*! @angular/core */ "../../../node_modules/@angular/core/fesm2015/core.js");
+let ModalDeleteUserComponent = class ModalDeleteUserComponent {
+    constructor(dialogRef, data, userService, adapter, alertConfig) {
+        this.dialogRef = dialogRef;
+        this.data = data;
+        this.userService = userService;
+        this.adapter = adapter;
+        this.alertConfig = alertConfig;
+        this.userAdd = new userFonctionnel_entity_1.UserFonctionnel();
+        alertConfig.type = 'danger';
+        alertConfig.dismissible = false;
+    }
+    ngOnInit() {
+        this.userAdd = this.data.user;
+    }
+    deleteUserA() {
+        this.userService.deleteUserA(this.userAdd).subscribe(data => {
+            this.dialogRef.close();
+            window.location.reload();
+        }, error => {
+            this.message = "Erreur d'enregistrement de l'utilisateur";
+            this.saveFailed = true;
+        });
+        ;
+    }
+};
+ModalDeleteUserComponent = __decorate([
+    core_1.Component({
+        encapsulation: core_2.ViewEncapsulation.None,
+        selector: 'ref-modal-delete-user',
+        template: `<div class="row" style="justify-content: space-between">
+<h2 mat-dialog-title class="color-bleu row">Suppression d'un utilisateur</h2>
+</div>
+
+<ngb-alert *ngIf="saveFailed">
+        {{message}}
+</ngb-alert>
+  
+<mat-dialog-content>
+    <p>&Ecirc;tes vous s&ucirc;r de vouloir supprimer l'utilisateur {{userAdd.username}}?</p>
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button type="button" class="btn btn-link" (click)="dialogRef.close()">Annuler</button>
+    <button type="button" class="btn btn-success" (click)="deleteUserA()">Supprimer</button>
+</mat-dialog-actions>`,
+        providers: [
+            { provide: material_1.MAT_DATE_LOCALE, useValue: 'fr-FR' },
+            ng_bootstrap_1.NgbAlertConfig
+        ],
+    }),
+    __param(1, core_1.Inject(material_1.MAT_DIALOG_DATA)),
+    __metadata("design:paramtypes", [material_1.MatDialogRef, Object, user_service_1.UserService, material_1.DateAdapter,
+        ng_bootstrap_1.NgbAlertConfig])
+], ModalDeleteUserComponent);
+exports.ModalDeleteUserComponent = ModalDeleteUserComponent;
+
+
+/***/ }),
+
+/***/ "./app/user/modal/modal-modif-user.component.ts":
+/*!******************************************************!*\
+  !*** ./app/user/modal/modal-modif-user.component.ts ***!
+  \******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const core_1 = __webpack_require__(/*! @angular/core */ "../../../node_modules/@angular/core/fesm2015/core.js");
+const material_1 = __webpack_require__(/*! @angular/material */ "../../../node_modules/@angular/material/esm2015/material.js");
+const ng_bootstrap_1 = __webpack_require__(/*! @ng-bootstrap/ng-bootstrap */ "../../../node_modules/@ng-bootstrap/ng-bootstrap/fesm2015/ng-bootstrap.js");
+const user_service_1 = __webpack_require__(/*! ./../user.service */ "./app/user/user.service.ts");
+const userFonctionnel_entity_1 = __webpack_require__(/*! ../../shared/user/userFonctionnel.entity */ "./app/shared/user/userFonctionnel.entity.ts");
+const core_2 = __webpack_require__(/*! @angular/core */ "../../../node_modules/@angular/core/fesm2015/core.js");
+let ModalModifUserComponent = class ModalModifUserComponent {
+    constructor(dialogRef, data, userService, adapter, alertConfig) {
+        this.dialogRef = dialogRef;
+        this.data = data;
+        this.userService = userService;
+        this.adapter = adapter;
+        this.alertConfig = alertConfig;
+        this.saveFailed = false;
+        this.userAdd = new userFonctionnel_entity_1.UserFonctionnel();
+        alertConfig.type = 'danger';
+        alertConfig.dismissible = false;
+    }
+    ngOnInit() {
+        if (this.data.user) {
+            this.creation = false;
+            this.titre = "Modification d'un utilisateur";
+            this.userAdd = this.data.user;
+            this.labelBouton = "Modifier";
+        }
+        else {
+            this.message = "Erreur de récupération de l'utilisateur";
+            this.saveFailed = true;
+        }
+    }
+    save() {
+        this.userAdd.roles = null;
+        if (this.userAdd.administrateur) {
+            this.userAdd.roles = new Array("ROLE_ADMIN", "ROLE_USER");
+        }
+        else {
+            this.userAdd.roles = new Array("ROLE_USER");
+        }
+        this.userService.saveUser(this.userAdd).subscribe(data => {
+            this.dialogRef.close();
+            window.location.reload();
+        }, error => {
+            this.message = "Erreur d'enregistrement de l'utilisateur";
+            this.saveFailed = true;
+        });
+    }
+};
+ModalModifUserComponent = __decorate([
+    core_1.Component({
+        encapsulation: core_2.ViewEncapsulation.None,
+        selector: 'ref-modal-modif-user',
+        template: `<div class="row" style="justify-content: space-between">
+<h2 mat-dialog-title class="color-bleu row">{{titre}} </h2>
+</div>
+
+<ngb-alert *ngIf="saveFailed">
+        {{message}}
+  </ngb-alert>
+<form (ngSubmit)="save()" ngNativeValidate>
+    <mat-dialog-content>
+        <div class="row">
+            <div class="form-group"> 
+                <mat-form-field>
+                    <input matInput readonly placeholder="Identifiant" id="username" name="username" [(ngModel)] = "userAdd.username">
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group"> 
+                <mat-checkbox color="warn" style="float:right;" name="administrateur" [(ngModel)] = "userAdd.administrateur">Administrateur</mat-checkbox>
+            </div>
+        </div>  
+    </mat-dialog-content>
+    <mat-dialog-actions>
+        <button type="button" class="btn btn-link" (click)="dialogRef.close()">Annuler</button>
+        <button type="submit" class="btn btn-success">{{labelBouton}}</button>
+    </mat-dialog-actions>
+</form>`,
+        providers: [
+            { provide: material_1.MAT_DATE_LOCALE, useValue: 'fr-FR' },
+            ng_bootstrap_1.NgbAlertConfig
+        ],
+    }),
+    __param(1, core_1.Inject(material_1.MAT_DIALOG_DATA)),
+    __metadata("design:paramtypes", [material_1.MatDialogRef, Object, user_service_1.UserService, material_1.DateAdapter,
+        ng_bootstrap_1.NgbAlertConfig])
+], ModalModifUserComponent);
+exports.ModalModifUserComponent = ModalModifUserComponent;
+
+
+/***/ }),
+
+/***/ "./app/user/user-routing.module.ts":
+/*!*****************************************!*\
+  !*** ./app/user/user-routing.module.ts ***!
+  \*****************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const core_1 = __webpack_require__(/*! @angular/core */ "../../../node_modules/@angular/core/fesm2015/core.js");
+const router_1 = __webpack_require__(/*! @angular/router */ "../../../node_modules/@angular/router/fesm2015/router.js");
+const user_component_1 = __webpack_require__(/*! ./user.component */ "./app/user/user.component.ts");
+const route_guard_1 = __webpack_require__(/*! ../auth/route.guard */ "./app/auth/route.guard.ts");
+const routes = [
+    {
+        path: '',
+        component: user_component_1.UserComponent,
+        canActivate: [route_guard_1.RouteGuard],
+        data: {
+            title: 'Module user'
+        }
+    }
+];
+let UserRoutingModule = class UserRoutingModule {
+};
+UserRoutingModule = __decorate([
+    core_1.NgModule({
+        imports: [
+            router_1.RouterModule.forChild(routes)
+        ],
+        exports: [router_1.RouterModule]
+    })
+], UserRoutingModule);
+exports.UserRoutingModule = UserRoutingModule;
+
+
+/***/ }),
+
+/***/ "./app/user/user.component.ts":
+/*!************************************!*\
+  !*** ./app/user/user.component.ts ***!
+  \************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const core_1 = __webpack_require__(/*! @angular/core */ "../../../node_modules/@angular/core/fesm2015/core.js");
+const user_service_1 = __webpack_require__(/*! ./user.service */ "./app/user/user.service.ts");
+const material_1 = __webpack_require__(/*! @angular/material */ "../../../node_modules/@angular/material/esm2015/material.js");
+const token_storage_service_1 = __webpack_require__(/*! ../auth/token-storage.service */ "./app/auth/token-storage.service.ts");
+const router_1 = __webpack_require__(/*! @angular/router */ "../../../node_modules/@angular/router/fesm2015/router.js");
+const modal_modif_user_component_1 = __webpack_require__(/*! ./modal/modal-modif-user.component */ "./app/user/modal/modal-modif-user.component.ts");
+const modal_delete_user_component_1 = __webpack_require__(/*! ./modal/modal-delete-user.component */ "./app/user/modal/modal-delete-user.component.ts");
+const modal_add_user_component_1 = __webpack_require__(/*! ./modal/modal-add-user.component */ "./app/user/modal/modal-add-user.component.ts");
+let UserComponent = class UserComponent {
+    constructor(userService, dialog, router, token) {
+        this.userService = userService;
+        this.dialog = dialog;
+        this.router = router;
+        this.token = token;
+        this.users = [];
+        this.superAdministrateur = false;
+    }
+    ngOnInit() {
+        this.token.getAuthorities().forEach(function (role) {
+            if (role === "ROLE_SUPER_ADMIN") {
+                this.superAdministrateur = true;
+            }
+        }.bind(this));
+        if (this.superAdministrateur) {
+            this.userService.getUsers().subscribe(data => {
+                this.users = data;
+                data.forEach(function (user) {
+                    user.administrateur = false;
+                    user.roles.forEach(function (role) {
+                        if (role === "ROLE_ADMIN") {
+                            user.administrateur = true;
+                        }
+                        else if (role === "ROLE_SUPER_ADMIN") {
+                            user.superAdministrateur = true;
+                        }
+                    });
+                });
+            }, error => {
+                console.log("userService KO");
+            });
+        }
+        else {
+            this.router.navigate(['/dashboard']);
+        }
+    }
+    updateUser(index) {
+        const dialogRef = this.dialog.open(modal_modif_user_component_1.ModalModifUserComponent, {
+            data: { user: this.users[index] }
+        });
+    }
+    deleteUser(index) {
+        const dialogRef = this.dialog.open(modal_delete_user_component_1.ModalDeleteUserComponent, {
+            data: { user: this.users[index] }
+        });
+    }
+    addUser() {
+        const dialogRef = this.dialog.open(modal_add_user_component_1.ModalAddUserComponent, {
+            width: '500px',
+            data: {}
+        });
+    }
+};
+UserComponent = __decorate([
+    core_1.Component({
+        encapsulation: core_1.ViewEncapsulation.None,
+        selector: 'app-user',
+        template: `<div style="display:flex; flex-direction:row; justify-content:space-between; align-items:center;">
+    <h4>Gestion des utilisateurs</h4>
+    <button class="btn btn-success" (click)="addUser()">Ajouter un utilisateur</button>
+</div>
+<div style="display:flex; flex-direction:row; flex-wrap:wrap">
+<mat-card *ngFor="let user of users; index as i" style="width:350px; display:flex; margin-bottom: 15px; margin-right : 10px;">
+  <mat-card-header style="width:100%; display: flex; align-items:center;">
+    <div mat-card-avatar><i class="fas fa-user" style="font-size:40px"></i></div>
+    <mat-card-title>{{user.username}}</mat-card-title>
+    <mat-card-subtitle style="margin:0" *ngIf="user.administrateur && user.superAdministrateur">Super Administrateur</mat-card-subtitle>
+    <mat-card-subtitle style="margin:0" *ngIf="user.administrateur && !user.superAdministrateur">Administrateur</mat-card-subtitle>
+    <mat-card-subtitle style="margin:0" *ngIf="!user.administrateur && !user.superAdministrateur">Utilisateur</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-actions style="margin-left: 30px; display: flex; flex-direction: column; padding-top: 0px; align-self: flex-end;">
+    <button style = "margin: 0px;" class="btn btn-success"(click)="updateUser(i)">Modifier</button>
+    <button class="btn btn-success"(click)="deleteUser(i)">Supprimer</button>
+  </mat-card-actions>
+</mat-card>
+</div>`
+    }),
+    __metadata("design:paramtypes", [user_service_1.UserService, material_1.MatDialog, router_1.Router, token_storage_service_1.TokenStorageService])
+], UserComponent);
+exports.UserComponent = UserComponent;
+
+
+/***/ }),
+
+/***/ "./app/user/user.module.ts":
+/*!*********************************!*\
+  !*** ./app/user/user.module.ts ***!
+  \*********************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const core_1 = __webpack_require__(/*! @angular/core */ "../../../node_modules/@angular/core/fesm2015/core.js");
+const common_1 = __webpack_require__(/*! @angular/common */ "../../../node_modules/@angular/common/fesm2015/common.js");
+const forms_1 = __webpack_require__(/*! @angular/forms */ "../../../node_modules/@angular/forms/fesm2015/forms.js");
+const card_1 = __webpack_require__(/*! @angular/material/card */ "../../../node_modules/@angular/material/esm2015/card.js");
+const user_component_1 = __webpack_require__(/*! ./user.component */ "./app/user/user.component.ts");
+const user_routing_module_1 = __webpack_require__(/*! ./user-routing.module */ "./app/user/user-routing.module.ts");
+const modal_modif_user_component_1 = __webpack_require__(/*! ./modal/modal-modif-user.component */ "./app/user/modal/modal-modif-user.component.ts");
+const modal_delete_user_component_1 = __webpack_require__(/*! ./modal/modal-delete-user.component */ "./app/user/modal/modal-delete-user.component.ts");
+const modal_add_user_component_1 = __webpack_require__(/*! ./modal/modal-add-user.component */ "./app/user/modal/modal-add-user.component.ts");
+const ng_bootstrap_1 = __webpack_require__(/*! @ng-bootstrap/ng-bootstrap */ "../../../node_modules/@ng-bootstrap/ng-bootstrap/fesm2015/ng-bootstrap.js");
+const http_1 = __webpack_require__(/*! @angular/http */ "../../../node_modules/@angular/http/fesm2015/http.js");
+const http_2 = __webpack_require__(/*! @angular/common/http */ "../../../node_modules/@angular/common/fesm2015/http.js");
+const material_1 = __webpack_require__(/*! @angular/material */ "../../../node_modules/@angular/material/esm2015/material.js");
+const user_service_1 = __webpack_require__(/*! ./user.service */ "./app/user/user.service.ts");
+const auth_interceptor_1 = __webpack_require__(/*! src/main/webapp/app/auth/auth-interceptor */ "./app/auth/auth-interceptor.ts");
+let UserModule = class UserModule {
+};
+UserModule = __decorate([
+    core_1.NgModule({
+        imports: [
+            common_1.CommonModule,
+            forms_1.FormsModule,
+            http_2.HttpClientModule,
+            user_routing_module_1.UserRoutingModule,
+            card_1.MatCardModule,
+            material_1.MatDialogModule,
+            material_1.MatFormFieldModule,
+            material_1.MatNativeDateModule,
+            material_1.MatInputModule,
+            material_1.MatCheckboxModule,
+            material_1.MatSelectModule,
+            ng_bootstrap_1.NgbModule
+        ],
+        declarations: [user_component_1.UserComponent, modal_modif_user_component_1.ModalModifUserComponent, modal_delete_user_component_1.ModalDeleteUserComponent, modal_add_user_component_1.ModalAddUserComponent],
+        entryComponents: [modal_modif_user_component_1.ModalModifUserComponent, modal_delete_user_component_1.ModalDeleteUserComponent, modal_add_user_component_1.ModalAddUserComponent],
+        providers: [http_1.Http, user_service_1.UserService, auth_interceptor_1.httpInterceptorProviders]
+    })
+], UserModule);
+exports.UserModule = UserModule;
+
+
+/***/ }),
+
+/***/ "./app/user/user.service.ts":
+/*!**********************************!*\
+  !*** ./app/user/user.service.ts ***!
+  \**********************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const core_1 = __webpack_require__(/*! @angular/core */ "../../../node_modules/@angular/core/fesm2015/core.js");
+const http_1 = __webpack_require__(/*! @angular/common/http */ "../../../node_modules/@angular/common/fesm2015/http.js");
+const httpOptions = {
+    headers: new http_1.HttpHeaders({ 'Content-Type': 'application/json' })
+};
+let UserService = class UserService {
+    constructor(http) {
+        this.http = http;
+        this.listUsers = 'users/';
+        this.saveUSer = 'users/';
+        this.deleteUserURL = 'users/delete';
+        this.addUserURL = 'auth/signup';
+        this.getUserURL = 'users/getuser';
+        this.checkPasswordURL = 'auth/checkpassword';
+        this.changePasswordURL = 'auth/changepassword';
+    }
+    getUsers() {
+        return this.http.get(this.listUsers);
+    }
+    saveUser(user) {
+        return this.http.post(this.saveUSer, user, httpOptions);
+    }
+    deleteUserA(user) {
+        return this.http.post(this.deleteUserURL, user, httpOptions);
+    }
+    addUser(user) {
+        return this.http.post(this.addUserURL, user, httpOptions);
+    }
+    getUser(username) {
+        let params = new http_1.HttpParams();
+        params = params.append('username', username);
+        return this.http.get(this.getUserURL, { params: params });
+    }
+    checkPassword(user) {
+        return this.http.post(this.checkPasswordURL, user, httpOptions);
+    }
+    changePassword(user) {
+        return this.http.post(this.changePasswordURL, user, httpOptions);
+    }
+};
+UserService = __decorate([
+    core_1.Injectable(),
+    __metadata("design:paramtypes", [http_1.HttpClient])
+], UserService);
+exports.UserService = UserService;
 
 
 /***/ }),

@@ -11,7 +11,7 @@ const httpOptions = {
 @Injectable()
 export class StockService {
     
-    private listArticles = 'acs/articles/';
+    private listArticles = 'articles/';
     
     constructor(private http: HttpClient) { }
     

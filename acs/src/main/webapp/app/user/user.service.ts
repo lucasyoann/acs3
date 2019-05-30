@@ -14,13 +14,13 @@ const httpOptions = {
 @Injectable()
 export class UserService {
     
-    private listUsers = 'acs/users/';
-    private saveUSer = 'acs/users/'
-    private deleteUserURL = 'acs/users/delete';
-    private addUserURL = 'acs/auth/signup';
-    private getUserURL = 'acs/users/getuser';
-    private checkPasswordURL = 'acs/auth/checkpassword';
-    private changePasswordURL = 'acs/auth/changepassword';
+    private listUsers = 'users/';
+    private saveUSer = 'users/'
+    private deleteUserURL = 'users/delete';
+    private addUserURL = 'auth/signup';
+    private getUserURL = 'users/getuser';
+    private checkPasswordURL = 'auth/checkpassword';
+    private changePasswordURL = 'auth/changepassword';
     
     constructor(private http: HttpClient) { }
     

@@ -15,9 +15,9 @@ const httpOptions = {
 })
 export class AuthService {
  
-  private loginUrl = 'acs/auth/signin';
-  private valToken = 'acs/auth/validate';
-  private signout = 'acs/auth/signout';
+  private loginUrl = 'auth/signin';
+  private valToken = 'auth/validate';
+  private signout = 'auth/signout';
  
   constructor(private http: HttpClient) {
   }

@@ -1,4 +1,10 @@
-/target/
+/target/classes/
+/target/acs-0.0.1-SNAPSHOT/
+/target/generated-sources/
+/target/generated-test-sources/
+/target/maven-archiver/
+/target/maven-status/
+/target/test-classes/
 webapp/dist/
 !.mvn/wrapper/maven-wrapper.jar
 

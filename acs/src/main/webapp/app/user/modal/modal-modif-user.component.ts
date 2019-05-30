@@ -6,10 +6,38 @@ import {UserService} from './../user.service';
 
 import { MatDialog } from '@angular/material';
 import { UserFonctionnel } from '../../shared/user/userFonctionnel.entity';
+import { ViewEncapsulation } from "@angular/core";
 
 @Component( {
+    encapsulation: ViewEncapsulation.None,
     selector: 'ref-modal-modif-user',
-    templateUrl: './modal-modif-user.component.html',
+    template: `<div class="row" style="justify-content: space-between">
+<h2 mat-dialog-title class="color-bleu row">{{titre}} </h2>
+</div>
+
+<ngb-alert *ngIf="saveFailed">
+        {{message}}
+  </ngb-alert>
+<form (ngSubmit)="save()" ngNativeValidate>
+    <mat-dialog-content>
+        <div class="row">
+            <div class="form-group"> 
+                <mat-form-field>
+                    <input matInput readonly placeholder="Identifiant" id="username" name="username" [(ngModel)] = "userAdd.username">
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group"> 
+                <mat-checkbox color="warn" style="float:right;" name="administrateur" [(ngModel)] = "userAdd.administrateur">Administrateur</mat-checkbox>
+            </div>
+        </div>  
+    </mat-dialog-content>
+    <mat-dialog-actions>
+        <button type="button" class="btn btn-link" (click)="dialogRef.close()">Annuler</button>
+        <button type="submit" class="btn btn-success">{{labelBouton}}</button>
+    </mat-dialog-actions>
+</form>`,
     providers: [
                 {provide: MAT_DATE_LOCALE, useValue: 'fr-FR'},
                 NgbAlertConfig

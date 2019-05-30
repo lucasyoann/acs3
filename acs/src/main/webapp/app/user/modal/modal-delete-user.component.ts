@@ -6,10 +6,26 @@ import {UserService} from './../user.service';
 
 import { MatDialog } from '@angular/material';
 import { UserFonctionnel } from '../../shared/user/userFonctionnel.entity';
+import { ViewEncapsulation } from "@angular/core";
 
 @Component( {
+    encapsulation: ViewEncapsulation.None,
     selector: 'ref-modal-delete-user',
-    templateUrl: './modal-delete-user.component.html',
+    template: `<div class="row" style="justify-content: space-between">
+<h2 mat-dialog-title class="color-bleu row">Suppression d'un utilisateur</h2>
+</div>
+
+<ngb-alert *ngIf="saveFailed">
+        {{message}}
+</ngb-alert>
+  
+<mat-dialog-content>
+    <p>&Ecirc;tes vous s&ucirc;r de vouloir supprimer l'utilisateur {{userAdd.username}}?</p>
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button type="button" class="btn btn-link" (click)="dialogRef.close()">Annuler</button>
+    <button type="button" class="btn btn-success" (click)="deleteUserA()">Supprimer</button>
+</mat-dialog-actions>` ,
     providers: [
                 {provide: MAT_DATE_LOCALE, useValue: 'fr-FR'},
                 NgbAlertConfig

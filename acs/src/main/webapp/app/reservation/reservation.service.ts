@@ -17,11 +17,11 @@ const httpOptions = {
 @Injectable()
 export class ReservationService {
     
-    private reservationUrl = 'acs/reservations/';
-    private validReservationUrl = 'acs/articles/validate';
-    private getReservationByIdUrl = 'acs/reservations/id';
-    private deleteReservation = 'acs/reservations/delete';
-    private validResaAsso = 'acs/articles/validateAsso';
+    private reservationUrl = 'reservations/';
+    private validReservationUrl = 'articles/validate';
+    private getReservationByIdUrl = 'reservations/id';
+    private deleteReservation = 'reservations/delete';
+    private validResaAsso = 'articles/validateAsso';
     
     reservationValidation : ReservationValidation=new ReservationValidation();
     
@@ -60,7 +60,7 @@ export class ReservationService {
         params = params.append('debut', dateDebut);
         params = params.append('fin', dateFin);
         params = params.append('asso',asso);
-        return this.httpClient.get( `acs/articles/articledispo`, { params: params }) as Observable<ArticleDispo[]>;
+        return this.httpClient.get( `articles/articledispo`, { params: params }) as Observable<ArticleDispo[]>;
     }
     
     saveReservation(reservation: Reservation){
