@@ -1,15 +1,15 @@
 import { Component, ElementRef, Input, OnInit, Renderer2 } from '@angular/core';
 
 // Import navigation elements
-import { navigation_user, navigation_disconnect } from './../../../_nav';
-import { TokenStorageService } from '../../../auth/token-storage.service';
-import {AuthService} from '../../../auth/auth.service';
+import { navigation_user, navigation_super_admin } from './../../../_nav';
+import { TokenStorageService } from 'src/main/webapp/app/auth/token-storage.service';
+import {AuthService} from 'src/main/webapp/app/auth/auth.service';
 
 @Component({
   selector: 'app-sidebar-nav',
   template: `
     <nav class="sidebar-nav">
-      <ul *ngIf="info.token && testAuth" class="nav" >
+      <ul *ngIf="info.token && testAuth && !superAdmin" class="nav" >
         <ng-template ngFor let-navitem [ngForOf]="navigation_user">
           <li *ngIf="isDivider(navitem)" class="nav-divider"></li>
           <ng-template [ngIf]="isTitle(navitem)">
@@ -20,8 +20,8 @@ import {AuthService} from '../../../auth/auth.service';
           </ng-template>
         </ng-template>
        </ul>
-       <ul *ngIf="!info.token || !testAuth" class="nav" >
-        <ng-template ngFor let-navitem [ngForOf]="navigation_disconnect">
+       <ul *ngIf="info.token && testAuth && superAdmin" class="nav" >
+        <ng-template ngFor let-navitem [ngForOf]="navigation_super_admin">
           <li *ngIf="isDivider(navitem)" class="nav-divider"></li>
           <ng-template [ngIf]="isTitle(navitem)">
             <app-sidebar-nav-title [title]='navitem'></app-sidebar-nav-title>
@@ -37,10 +37,11 @@ export class AppSidebarNavComponent {
 
     info: any; 
     testAuth: boolean= false;
+    superAdmin:boolean = false;
   
     public navigation_user = navigation_user;
   
-    public navigation_disconnect = navigation_disconnect;
+    public navigation_super_admin = navigation_super_admin;
 
     public isDivider(item : any) {
         return item.divider ? true : false;
@@ -59,6 +60,11 @@ export class AppSidebarNavComponent {
               authorities: this.token.getAuthorities()
       
       };
+        this.info.authorities.forEach(function(role:string){
+            if(role==="ROLE_SUPER_ADMIN"){
+                this.superAdmin=true
+            }
+        }.bind(this));
         if(this.info.token !=null){
             this.authService.validateToken(this.info.token).subscribe(data =>{
                 this.testAuth = data;

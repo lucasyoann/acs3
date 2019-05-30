@@ -80,7 +80,6 @@ export class ModalConnexion implements OnInit {
       }
     
     onSubmit() {
-        console.log("connexion");
         this.loginInfo = new AuthLoginInfo(
           this.form.username,
           this.form.password);
@@ -99,6 +98,7 @@ export class ModalConnexion implements OnInit {
             console.log(error);
             this.errorMessage = error.error.message;
             this.isLoginFailed = true;
+            this.form.password="";
           }
         );
       }

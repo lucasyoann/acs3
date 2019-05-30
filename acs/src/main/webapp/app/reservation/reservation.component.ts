@@ -4,10 +4,14 @@ import "dhtmlx-scheduler";
 import { ReservationService } from './reservation.service';
 import { MatDialog } from '@angular/material';
 import { ModalAjoutComponent } from './modal/modal-ajout.component';
-import { Reservation } from "../shared/reservation/reservation.entity";
-import { DatePipe } from '@angular/common'
-
-@Component({
+import { ModalConsultationReservationComponent } from './modal/modal-consultation-reservation.component';
+import { Reservation } from "src/main/webapp/app/shared/reservation/reservation.entity";
+import { DatePipe } from '@angular/common';
+import { TokenStorageService } from '../auth/token-storage.service';
+import {UserService} from '../user/user.service';
+import {UserFonctionnel} from '../shared/user/userFonctionnel.entity';
+@Component( {
+    encapsulation: ViewEncapsulation.None,
     selector: 'ref-reservations',
     template: `<button class="btn btn-success"(click)="addResa()">Ajouter une r&eacute;servation</button>
 <div #scheduler_here class="dhx_cal_container" style="width: 100%; height:80vh; margin-top:60px;">
@@ -27,10 +31,37 @@ import { DatePipe } from '@angular/common'
 })
 export class ReservationComponent implements OnInit {
     @ViewChild("scheduler_here") schedulerContainer: ElementRef;
+    username:string;
+    user : UserFonctionnel=new UserFonctionnel();
+    saveFailed : boolean =false;
+    message : string;
     
-    constructor(public dialog: MatDialog, private reservationService:ReservationService, public datepipe: DatePipe){}
+    
+    constructor(public dialog: MatDialog, private reservationService:ReservationService, public datepipe: DatePipe,
+            private token : TokenStorageService,private userService: UserService, private _elementRef : ElementRef){}
        
     ngOnInit() { 
+        
+        this.username=this.token.getUsername();
+        this.userService.getUser(this.username).subscribe(
+                data=>{
+                    this.user=data;
+                    this.user.administrateur=false;
+                    this.user.superAdministrateur =false;
+                    this.user.roles.forEach(function(role : string){
+                        if(role==="ROLE_ADMIN"){
+                            this.user.administrateur=true;
+                        }else if(role==="ROLE_SUPER_ADMIN"){
+                            this.user.superAdministrateur=true;
+                        }
+                    }.bind(this));  
+                },
+                error=>{
+                    this.message="Erreur de récupération de l'utilisateur";
+                    this.saveFailed=true;
+                }
+        
+        );
         
         // Changement langue de anglais vers français
         const sld: SchedulerLocaleDate = {
@@ -71,29 +102,52 @@ export class ReservationComponent implements OnInit {
         scheduler.config.drag_create = false;
         
        this.chargedResas();
-        
+
         // Custom modal for add/update event
         // bind(this) permet de conserver le this comme etant le component et non la fonction
         scheduler.showLightbox = function(id : any) {
             var lightbox_event = scheduler.getEvent(id);
-         
+            
             scheduler.startLightbox(id, null); 
             scheduler.hideCover();
-            if( id> 1000000000000){
+            if( id> 1000000000000 && this.user.administrateur){
                 var reservation = new Reservation();
                 reservation.dateEmprunt = lightbox_event.start_date;
                 const dialogRef = this.dialog.open(ModalAjoutComponent, {
+                    width: '650px',
                     data: {reservation: reservation}
                 });
-            }else{
-                this.reservationService.getReservationById(id).subscribe((data : Reservation) =>{
+                dialogRef.afterClosed().subscribe(result => {
+                    scheduler.clearAll();
+                    this.chargedResas();
+                });
+            }else if (this.user.administrateur){
+                this.reservationService.getReservationById(id).subscribe(data=>{
                     var reservation=data;
                     const dialogRef = this.dialog.open(ModalAjoutComponent, {
+                        width: '650px',
                         data: {reservation: reservation}
+                    });
+                    // rechargement du scheduler une fois la popup fermée
+                    dialogRef.afterClosed().subscribe(result => {
+                        scheduler.clearAll();
+                        this.chargedResas();
+                    });
+                });
+            }else{
+                this.reservationService.getReservationById(id).subscribe(data=>{
+                    var reservation=data;
+                    const dialogRef = this.dialog.open(ModalConsultationReservationComponent, {
+                        width: '650px',
+                        data: {reservation: reservation}
+                    });
+                    dialogRef.afterClosed().subscribe(result => {
+                        scheduler.clearAll();
+                        this.chargedResas();
                     });
                 });
             }
-           
+            
         }.bind(this);
         
         //Event permettant de gerer le changement de mois pour la recuperation des resas visibles
@@ -113,6 +167,7 @@ export class ReservationComponent implements OnInit {
     
     addResa(){
         const dialogRef = this.dialog.open(ModalAjoutComponent, {
+            width: '650px',
             data: {}
         });
     }

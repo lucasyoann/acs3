@@ -16,7 +16,6 @@ const httpOptions = {
 export class AuthService {
  
   private loginUrl = 'acs/auth/signin';
-  private signupUrl = 'acs/auth/signup';
   private valToken = 'acs/auth/validate';
   private signout = 'acs/auth/signout';
  
@@ -33,8 +32,5 @@ export class AuthService {
       return this.http.get( this.valToken, { params: params }) as Observable<boolean>;
   }
  
-  signUp(info: SignUpInfo): Observable<string> {
-    return this.http.post<string>(this.signupUrl, info, httpOptions);
-  }
   
 }

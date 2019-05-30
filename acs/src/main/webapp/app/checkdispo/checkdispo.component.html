@@ -1,0 +1,43 @@
+<ngb-alert *ngIf="searchFailed">
+    	{{message}}
+  </ngb-alert>
+<div style="background-color:white;border-radius:5px;margin:15px 0;">
+	<h2 mat-dialog-title class="color-bleu" style="margin:10px 20px;padding-top:10px">V&eacute;rification des disponibilit&eacute;s</h2>
+	<div class="row" style="justify-content:flex-start; align-items:center">
+    	<mat-form-field style="margin-right:20px; margin-left:20px;">
+	  		<input matInput [matDatepicker]="dateDebut" required placeholder="Date de d&eacute;but" [(ngModel)] = "dateDebutText">
+	  		<mat-datepicker-toggle matSuffix [for]="dateDebut"></mat-datepicker-toggle>
+				<mat-datepicker #dateDebut></mat-datepicker>
+		</mat-form-field>
+		<mat-form-field style="margin-left:20px; margin-right:20px;">
+			<input matInput [matDatepicker]="dateFin" required placeholder="Date de fin" [(ngModel)] = "dateFinText">
+			<mat-datepicker-toggle matSuffix [for]="dateFin"></mat-datepicker-toggle>
+				<mat-datepicker #dateFin [startAt]="dateDebutText">></mat-datepicker>
+		</mat-form-field>
+		<mat-checkbox style="margin-left:20px; margin-right:20px;" color="warn" [(ngModel)] = "asso">Association</mat-checkbox>
+		<mat-dialog-actions style="margin-left:20px; margin-right:20px;">
+			<button type="button" class="btn btn-success" (click)="rechercherDisponibilite()">Rechercher</button>
+		</mat-dialog-actions>
+	</div>
+	<table  *ngIf="listArticlesDispo && listArticlesDispo.length>0" mat-table [dataSource]="listArticlesDispo" matSort (matSortChange)="sortData($event)" style="width:100%; border-top:1px solid rgba(0, 0, 0, 0.1)">
+
+  	<!--- Note that these columns can be defined in any order.
+        The actual rendered columns are set as a property on the row definition" -->
+  	<ng-container matColumnDef="type">
+    	<th mat-header-cell *matHeaderCellDef mat-sort-header="type"> Type </th>
+    	<td mat-cell *matCellDef="let element"> {{element.type}} </td>
+  	</ng-container>
+  	<ng-container matColumnDef="description">
+    	<th mat-header-cell *matHeaderCellDef mat-sort-header="description"> Description </th>
+    	<td mat-cell *matCellDef="let element"> {{element.description}} </td>
+  	</ng-container>
+  	<ng-container matColumnDef="quantite">
+    	<th mat-header-cell *matHeaderCellDef mat-sort-header="quantite"> Quantit&eacute; disponible </th>
+    	<td mat-cell *matCellDef="let element"> {{element.quantiteMax}} </td>
+  	</ng-container>
+
+
+	<tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  	<tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+	</table>
+</div>

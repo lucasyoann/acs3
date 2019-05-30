@@ -4,12 +4,16 @@ import {FormControl} from '@angular/forms';
 import { Reservation } from "../../shared/reservation/reservation.entity";
 import { ReservationService } from "../../reservation/reservation.service";
 import { DatePipe } from "@angular/common";
-import { ReservationArticle } from "../../shared/reservation/reservationArticle.entity";
-import { ArticleDispo } from "../../shared/reservation/articleDispo.entity";
+import { ReservationArticle } from "src/main/webapp/app/shared/reservation/reservationArticle.entity";
+import { ReservationModifiee } from "../../shared/reservation/reservationModifiee.entity";
+import { ArticleDispo } from "src/main/webapp/app/shared/reservation/articleDispo.entity";
 import {NgbAlertConfig} from '@ng-bootstrap/ng-bootstrap';
-import { TokenStorageService } from '../../auth/token-storage.service';
+import { TokenStorageService } from 'src/main/webapp/app/auth/token-storage.service';
+import {ModalListErreurComponent} from './modal/modalListeErreur.component';
 import { formatDate } from "@angular/common";
+import { MatDialog } from '@angular/material';
 import * as moment from 'moment';
+import { Moment } from "moment";
 
 @Component( {
     selector: 'ref-modal-ajout',
@@ -123,16 +127,24 @@ export class ModalAjoutComponent implements OnInit {
     article: ReservationArticle = new ReservationArticle();
     user:string;
     indexModif:number;
+    listResaModifiees: ReservationModifiee[];
     
     dateEmprunt: string;
     dateRestitution: string;
+    
+    dateLimiteAsso :Moment;
     
     listeArticlesDispo: ArticleDispo[];
     listeResaArticleAjoutes : ReservationArticle[]=[];
     
     
+<<<<<<< HEAD
     constructor(public dialogRef: MatDialogRef<ModalAjoutComponent>,private reservationService:ReservationService,
             @Inject(MAT_DIALOG_DATA) public data : any, private adapter: DateAdapter<any>,
+=======
+    constructor(public dialog: MatDialog, public dialogRef: MatDialogRef<ModalAjoutComponent>,private reservationService:ReservationService,
+            @Inject(MAT_DIALOG_DATA) public data, private adapter: DateAdapter<any>,
+>>>>>>> b851bda23c24d2fd4f09dcf6d4115a4f5c770e2c
             public alertConfig: NgbAlertConfig, public datepipe: DatePipe, private token : TokenStorageService, ) {
         alertConfig.type = 'danger';
         alertConfig.dismissible = false;
@@ -141,7 +153,7 @@ export class ModalAjoutComponent implements OnInit {
     ngOnInit() {
         //changement langue pour affichage chiffre datepicker
         this.adapter.setLocale('fr');
-
+        this.dateLimiteAsso=moment().add(3, 'months');
         if(this.data.reservation){
             this.reservationAdd = this.data.reservation;
             this.dateEmprunt = moment(this.reservationAdd.dateEmprunt).format('DD/MM/YYYY');
@@ -165,6 +177,7 @@ export class ModalAjoutComponent implements OnInit {
             this.titre = "Ajout d'une réservation";
             this.labelBouton = "Ajouter";
             this.modif=false;
+            this.reservationAdd.asso=false;
         }
 
         this.user=this.token.getUsername();
@@ -176,7 +189,7 @@ export class ModalAjoutComponent implements OnInit {
 
         if( this.reservationAdd.dateEmprunt && this.reservationAdd.dateRestitution){
             if(this.listeArticlesDispo!=null){
-                console.log("vidage de la liste des articles");
+                
                 this.reservationAdd.articleResaDto.splice(0, this.reservationAdd.articleResaDto.length);
                 this.ajoutArticle();
             }
@@ -187,17 +200,32 @@ export class ModalAjoutComponent implements OnInit {
                 this.message = "Veuillez choisir une date de retour supérieure à la date d'emprunt";
             }else{
                 this.dateFailed=false;
+                if(moment(this.reservationAdd.dateEmprunt)>this.dateLimiteAsso && this.reservationAdd.asso){
+                    this.reservationService.getArticlesDispo( dateDFormat, dateFFormat,true).subscribe(data =>{
+                        const typeDispoInter: string[] =[];
+                        data.forEach(function (articleDispo) {
+                            if(!typeDispoInter.includes(articleDispo.type)){
+                                typeDispoInter.push(articleDispo.type);
+                            }
+                        }); 
+                       this.typeDispo = typeDispoInter;
+                       this.listeArticlesDispo = data;
+                    });
+                }else{
+                    //cas normal
+                    
+                    this.reservationService.getArticlesDispo( dateDFormat, dateFFormat,false).subscribe(data =>{
+                        const typeDispoInter: string[] =[];
+                        data.forEach(function (articleDispo) {
+                            if(!typeDispoInter.includes(articleDispo.type)){
+                                typeDispoInter.push(articleDispo.type);
+                            }
+                        }); 
+                       this.typeDispo = typeDispoInter;
+                       this.listeArticlesDispo = data;
+                    });
+                }
                 
-                this.reservationService.getArticlesDispo( dateDFormat, dateFFormat).subscribe(data =>{
-                    const typeDispoInter: string[] =[];
-                    data.forEach(function (articleDispo) {
-                        if(!typeDispoInter.includes(articleDispo.type)){
-                            typeDispoInter.push(articleDispo.type);
-                        }
-                    }); 
-                   this.typeDispo = typeDispoInter;
-                   this.listeArticlesDispo = data;
-                });
             }
             
         }
@@ -217,7 +245,6 @@ export class ModalAjoutComponent implements OnInit {
     save(){
         
         if(!this.dateFailed){
-            console.log("Reservation",this.reservationAdd);
             for(let i =0; i<this.reservationAdd.articleResaDto.length; i++){
                 if(!this.reservationAdd.articleResaDto[i].quantite || this.reservationAdd.articleResaDto[i].quantite===0){
                     this.reservationAdd.articleResaDto.splice(i,1);
@@ -230,21 +257,67 @@ export class ModalAjoutComponent implements OnInit {
             }else{
                 this.saveFailed=false;
                 this.reservationAdd.creerPar=this.user;
-                this.reservationService.validerArticles(this.reservationAdd).subscribe(
+                this.reservationAdd.avalider=true;
+                this.reservationService.validerArticles(this.reservationAdd,false).subscribe(
                         data=>{
+                                
                                 this.valid=data;
                                 if(this.valid){
                                     this.reservationService.saveReservation(this.reservationAdd).subscribe(
                                             data=>{
                                                 this.dialogRef.close();
-                                                window.location.reload();
                                             },
                                             error => {
-                                                console.log(error);
                                                 this.message="Erreur d'enregistrement de la réservation";
                                                 this.saveFailed=true;
                                             }
                                         );
+                                }else if (!this.valid && this.reservationAdd.asso){
+                                    this.reservationService.validerArticles(this.reservationAdd,true).subscribe(
+                                            data=>{
+                                                this.valid=data;
+                                                if(this.valid){
+                                                    this.reservationService.validerArticlesAsso3Mois(this.reservationAdd).subscribe(
+                                                            data=>{
+                                                                this.listResaModifiees=data;
+
+                                                                for(let j =0; j<this.listResaModifiees.length; j++){
+                                                                    this.reservationService.saveReservation(this.listResaModifiees[j].reservationDto).subscribe(
+                                                                        data=>{
+                                                                                if(j===this.listResaModifiees.length-1){
+                                                                                    this.reservationService.saveReservation(this.reservationAdd).subscribe(
+                                                                                            data =>{
+                                                                                                this.dialogRef.close();
+                                                                                                const dialogRef = this.dialog.open(ModalListErreurComponent, {
+                                                                                                    width: '650px',
+                                                                                                    data: {liste: this.listResaModifiees, reservation : this.reservationAdd}
+                                                                                                });
+                                                                                            },
+                                                                                            error=>{
+                                                                                                this.message="Erreur de modification des réservations";
+                                                                                                this.saveFailed=true;
+                                                                                            });
+                                                                                }
+                                                                                
+                                                                            
+                                                                        },
+                                                                        error=>{
+                                                                            this.message="Erreur de modification des réservations";
+                                                                            this.saveFailed=true;
+                                                                        });
+                                                                
+                                                                }
+                                                            
+                                                                
+                                                            }
+                                                    );
+                                                }
+                                            },
+                                            error =>{
+                                                this.valid=false;
+                                                this.message="Erreur de validation de la réservation";
+                                            }
+                                    );
                                 }else{
                                     this.valid=false;
                                     this.message="Les quantités désirées ne sont plus disponibles, veuillez recharger la page";
@@ -253,7 +326,7 @@ export class ModalAjoutComponent implements OnInit {
                             },
                         error=>{
                             console.log(error);
-                            this.message="Erreur de validation de la réservation";
+                            this.message="Erreur de validation de la réservationEEEEEEE";
                             this.valid=false;
                         });
                     
@@ -270,7 +343,6 @@ export class ModalAjoutComponent implements OnInit {
         this.reservationService.supprimerReservation(this.reservationAdd).subscribe(
                 data=>{
                     this.dialogRef.close();
-                    window.location.reload();
                 },
                 error => {
                     console.log(error);

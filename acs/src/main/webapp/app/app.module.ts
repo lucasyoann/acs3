@@ -76,7 +76,8 @@ defineLocale('fr', frLocale);
 import { MatDialogModule, MatFormFieldModule, MatNativeDateModule, MatInputModule,MatCheckboxModule, MatSelectModule } from '@angular/material';
 
 import { ReservationModule } from './reservation/reservation.module';
-import { UserModule } from './auth/user/user/user.module';
+import { UserModule } from './user/user.module';
+import { MyProfileModule } from './myProfile/myProfile.module';
 import { ModalConnexion } from './coreui/components/app-header/modal/modal-connexion.component';
 
 @NgModule({

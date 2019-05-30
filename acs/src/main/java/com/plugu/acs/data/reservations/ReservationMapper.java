@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.TimeZone;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -46,6 +47,7 @@ public class ReservationMapper {
 		reservationDto.setAsso(reservation.getAsso());
 		reservationDto.setActive(reservation.getActive());
 		reservationDto.setCommentaire(reservation.getCommentaire());
+		reservationDto.setAvalider(reservation.getAvalider());
 		for(ReservationArticle reservationArticle : reservation.getReservationArticles()) {
 			listArticlesDto.add(articleMapper.articleToArticleDTO(reservationArticle.getArticle()));
 		}
@@ -76,14 +78,15 @@ public class ReservationMapper {
 		Date dateEmprunt = reservationDto.getDateEmprunt();
 		Calendar cal = Calendar.getInstance();  
         cal.setTime(dateEmprunt);  
-        cal.set(Calendar.HOUR_OF_DAY, 13);  
+        cal.set(Calendar.HOUR_OF_DAY, 12);  
         cal.set(Calendar.MINUTE, 1);  
         cal.set(Calendar.SECOND, 1);
+        cal.setTimeZone(TimeZone.getTimeZone("CET"));
         dateEmprunt = cal.getTime();
         
         Date dateRestitution = reservationDto.getDateRestitution();
         cal.setTime(dateRestitution);
-        cal.set(Calendar.HOUR_OF_DAY, 12);  
+        cal.set(Calendar.HOUR_OF_DAY, 11);  
         cal.set(Calendar.MINUTE, 59);  
         cal.set(Calendar.SECOND, 58);
         dateRestitution = cal.getTime();
@@ -91,6 +94,7 @@ public class ReservationMapper {
 		reservation.setDateEmprunt(dateEmprunt);
 		reservation.setDateRestitution(dateRestitution);
 		reservation.setCreerPar(reservationDto.getCreerPar());
+		reservation.setAvalider(reservationDto.getAvalider());
 		
 		reservation.setValidePar(reservationDto.getValidePar());
 		reservation.setNom(reservationDto.getNom());

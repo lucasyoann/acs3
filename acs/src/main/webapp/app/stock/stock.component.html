@@ -1,0 +1,39 @@
+<ngb-alert *ngIf="saveFailed">
+    	{{message}}
+  </ngb-alert>
+<div style="background-color:white;border-radius:5px;margin:15px 0;">
+	<div style="display:flex; flex-direction:row; justify-content:space-between; align-items:center;">
+		<h2 mat-dialog-title class="color-bleu" style="margin:10px 20px;padding-top:10px">Gestion des stocks</h2>
+		<button type="button" style="margin-right:10px" class="btn btn-success" (click)="modifierArticle(element)">Cr&eacute;er un Article</button>
+	</div>
+	
+	<table mat-table *ngIf="listArticle && listArticle.length>0" [dataSource]="listArticle" matSort (matSortChange)="sortData($event)" style="width:100%; border-top:1px solid rgba(0, 0, 0, 0.1)">
+
+  	<!--- Note that these columns can be defined in any order.
+        The actual rendered columns are set as a property on the row definition" -->
+  	<ng-container matColumnDef="type">
+    	<th mat-header-cell *matHeaderCellDef mat-sort-header="type"> Type </th>
+    	<td mat-cell *matCellDef="let element"> {{element.type}} </td>
+  	</ng-container>
+  	<ng-container matColumnDef="intitule">
+    	<th mat-header-cell *matHeaderCellDef mat-sort-header="intitule"> Initul&eacute; </th>
+    	<td mat-cell *matCellDef="let element"> {{element.intitule}} </td>
+  	</ng-container>
+  	<ng-container matColumnDef="description">
+    	<th mat-header-cell *matHeaderCellDef mat-sort-header="description"> Description </th>
+    	<td mat-cell *matCellDef="let element"> {{element.description}} </td>
+  	</ng-container>
+  	<ng-container matColumnDef="quantite">
+    	<th mat-header-cell *matHeaderCellDef mat-sort-header="quantite"> Quantit&eacute; </th>
+    	<td mat-cell *matCellDef="let element"> {{element.quantite}} </td>
+  	</ng-container>
+  	<ng-container matColumnDef="modifier">
+    	<th mat-header-cell *matHeaderCellDef> Modifier </th>
+    	<td mat-cell *matCellDef="let element"> <button type="button" class="btn btn-success" (click)="modifierArticle(element)">Modifier</button> </td>
+  	</ng-container>
+
+
+	<tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  	<tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+	</table>
+</div>

@@ -1,6 +1,7 @@
 <div class="row" style="justify-content: space-between">
 <h2 mat-dialog-title class="color-bleu row">{{titre}} </h2>
-<mat-checkbox color="warn" style="float:right;" [(ngModel)] = "reservationAdd.asso">Association</mat-checkbox>
+<mat-checkbox *ngIf="modif" disabled="disabled" color="warn" style="float:right;" [(ngModel)] = "reservationAdd.asso">Association</mat-checkbox>
+<mat-checkbox *ngIf="!modif" color="warn" (change)="dateChanged()" style="float:right;" [(ngModel)] = "reservationAdd.asso">Association</mat-checkbox>
 </div>
 
 <ngb-alert *ngIf="!valid || saveFailed || dateFailed">
@@ -11,7 +12,7 @@
 		<div class="row">
     		<div class="form-group" *ngIf="reservationAdd.asso"> 
 	        	<mat-form-field>
-		  			<input matInput placeholder="Raison sociale" id="rs" name="rs" [(ngModel)] = "reservationAdd.nom">
+		  			<input matInput placeholder="Raison sociale" id="rs" required name="rs" [(ngModel)] = "reservationAdd.nom">
 				</mat-form-field>
 	    	</div>
 	    	<div class="form-group row" *ngIf="!reservationAdd.asso">

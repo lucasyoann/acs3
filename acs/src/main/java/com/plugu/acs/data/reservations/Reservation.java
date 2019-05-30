@@ -56,6 +56,8 @@ public class Reservation {
 	
 	@Column(name="COMMENTAIRE")
 	private String commentaire;
+	@Column(name="A_VALIDER")
+	private Boolean avalider;
 	
 	@OneToMany(mappedBy = "primaryKey.reservation",
 			cascade= CascadeType.ALL)
@@ -169,12 +171,21 @@ public class Reservation {
 		this.commentaire = commentaire;
 	}
 
+	public Boolean getAvalider() {
+		return avalider;
+	}
+
+	public void setAvalider(Boolean avalider) {
+		this.avalider = avalider;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((active == null) ? 0 : active.hashCode());
 		result = prime * result + ((asso == null) ? 0 : asso.hashCode());
+		result = prime * result + ((avalider == null) ? 0 : avalider.hashCode());
 		result = prime * result + ((commentaire == null) ? 0 : commentaire.hashCode());
 		result = prime * result + ((creerLe == null) ? 0 : creerLe.hashCode());
 		result = prime * result + ((creerPar == null) ? 0 : creerPar.hashCode());
@@ -207,6 +218,11 @@ public class Reservation {
 			if (other.asso != null)
 				return false;
 		} else if (!asso.equals(other.asso))
+			return false;
+		if (avalider == null) {
+			if (other.avalider != null)
+				return false;
+		} else if (!avalider.equals(other.avalider))
 			return false;
 		if (commentaire == null) {
 			if (other.commentaire != null)
@@ -261,6 +277,8 @@ public class Reservation {
 		} else if (!validePar.equals(other.validePar))
 			return false;
 		return true;
-	}	
+	}
+
+	
 	
 }

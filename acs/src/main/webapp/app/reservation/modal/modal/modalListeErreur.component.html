@@ -1,0 +1,10 @@
+<div class="row" style="justify-content: space-between">
+<h2 mat-dialog-title class="color-bleu row">R&eacute;servations modifi&eacute;es</h2>
+</div>
+<mat-list *ngFor="let ligne of listResaModifiee">
+	<mat-list-item>{{ligne.messageErreur}}</mat-list-item>
+ 	<mat-divider></mat-divider>
+</mat-list>
+<mat-dialog-actions>
+	<button type="button" class="btn btn-link" (click)="fermer()">Fermer</button>
+</mat-dialog-actions>

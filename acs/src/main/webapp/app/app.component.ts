@@ -18,8 +18,8 @@ export class AppComponent implements OnInit {
         if (role === 'ROLE_ADMIN') {
           this.authority = 'admin';
           return false;
-        } else if (role === 'ROLE_PM') {
-          this.authority = 'pm';
+        } else if (role === 'ROLE_SUPER_ADMIN') {
+          this.authority = 'superAdmin';
           return false;
         }
         this.authority = 'user';
